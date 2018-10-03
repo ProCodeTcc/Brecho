@@ -5,7 +5,7 @@
 
 /******************* Index ************************/
 
-    *{
+     *{
         margin: 0px;
         padding: 0px;
         font-family: arial;
@@ -85,22 +85,12 @@
         width: 140px;
         height: 100px;
         float: right;
-/*        background-color: aquamarine;*/
     }
-/*
-
-    .logo img{
-        width: 250px;
-        height: 120px;
-    }
-*/
-
 
     .menu_lado_direito{
         width: 40%;
         height: 50%;
         float: left;
-/*        background-color: aqua;*/
         margin-top: 40px;
     }
 
@@ -108,8 +98,6 @@
         width: 75%;
         height: 50px;
         float: right;
-/*        padding-top: 20px;*/
-       /* background-color: rebeccapurple; */
     }
 
     .login{
@@ -117,14 +105,11 @@
         height: 45px;
         float: left;
         margin-left: 8px;
-/*        border-radius: 10px;*/
         color: black;
-/*        background-color: fuchsia;*/
     }
 
     .login:hover{
         border-bottom: solid 3px #ff9900;
-/*        background-color: #ff9900;*/
     }
 
     .icone_login{
@@ -132,8 +117,6 @@
         height: 35px;
         padding-top: 5px;
         float: left;
-       /* background-color: forestgreen; */
-
     }
 
     .icone_login img{
@@ -151,7 +134,6 @@
         font-weight: bold;
         font-size: 15px;
         color: black;
-        /* background-color: red; */
     }
 
     .login:hover>.sub_login{
@@ -199,7 +181,6 @@
         margin-left: auto;
         margin-right: auto;
         border-radius: 5px;
-/*        background-color: aqua;*/
 
     }
 
@@ -227,11 +208,9 @@
         height: 500px;
         margin-left: auto;
         margin-right: auto;
-/*        background-color: aqua;*/
     }
 
      .btn_slide{
-/*        background-color: #c3c2c0;*/
         width: 50px;
         height: 110px;
         float: left;
@@ -247,7 +226,6 @@
     .btn_slide:hover{
         color: black;
     }
-
 
      .slide{
         width: 1180px;
@@ -275,8 +253,6 @@
     .produto_full{
         width: 100%;
         min-height: 0px;
-/*        overflow: auto;*/
-/*        background-color: fuchsia;*/
     }
 
     .linha{
@@ -295,7 +271,6 @@
     .caixa_produto{
         width: 1100px;
         min-height: 800px;
-    /*    background-color: aqua;*/
         margin-left: auto;
         margin-right: auto;
         overflow: auto;
@@ -305,7 +280,6 @@
     .produto{
         width: 300px;
         height: 450px;
-    /*    background-color: fuchsia;*/
         margin-left: 40px;
         margin-bottom: 20px;
         float: left;
@@ -320,7 +294,6 @@
     .imagem_produto{
         width: 100%;
         height: 300px;
-    /*    background-color: darksalmon;*/
 
     }
 
@@ -375,14 +348,12 @@
     .opcoes{
         width: 100%;
         height: 50px;
-    /*    background-color: aqua;*/
         text-align: center;
     }
 
     .comprar_produto{
         width: 145px;
         height: 35px;
-    /*    background-color: fuchsia;*/
         float: left;
         margin-left: 70px;
         padding-top: 5px;
@@ -394,7 +365,6 @@
 
     .comprar_produto:hover{
         cursor: pointer;
-        /* background-color: #ff9900; */
         background-color: rgba(255, 153, 0, 0.7);
     }
 
@@ -402,8 +372,6 @@
         width: 40px;
         height: 40px;
         float: right;
-    /*    margin-left: 40px;*/
-    /*    border-radius: 50px;*/
         border: solid 3px darkorange;
         border-radius: 40px;
         margin-right: 20px;
@@ -418,7 +386,6 @@
 
     .carrinho_produto:hover{
         cursor: pointer;
-        /* background-color: #ff9900; */
         background-color: rgba(255, 153, 0, 0.7);
     }
 
@@ -473,7 +440,6 @@
     .caixa_botao{
         width: 150px;
         height: 50px;
-    /*    background-color: yellow;*/
         margin-left: auto;
         margin-right: auto;
 
@@ -512,6 +478,10 @@
 
 /********************* Login **********************/
 
+     .menu_responsivo{
+       display: none;
+    }
+    
     .menu_principal_logo{
         width: 100%;
         height: 110px;
@@ -521,11 +491,9 @@
     .logo_centro{
         width: 140px;
         height: 100px;
-/*        background-color: aqua;*/
         margin-left: auto;
         margin-right: auto;
     }
-
 
     .fundo_login{
         width: 100%;
@@ -537,7 +505,6 @@
     .login_centro{
         width: 1000px;
         height: 100%;
-/*        background-color: aquamarine;*/
         margin-left: auto;
         margin-right: auto;
         margin-top: 100px;
@@ -546,7 +513,6 @@
     .dados{
         width: 49%;
         height: 100%;
-/*        background-color: red;*/
         float: left;
 
     }
@@ -579,7 +545,6 @@
     .titulo_login{
         width: 100%;
         height: 40px;
-/*        background-color: forestgreen;*/
         text-align: center;
         font-size: 20px;
         padding-top: 10px;
@@ -589,16 +554,12 @@
     .caixa_campos{
         width: 100%;
         height: 300px;
-/*        background-color: yellow;*/
-/*        margin-top: 20%;*/
         text-align: center;
     }
 
     .caixa_campos_direita{
         width: 100%;
         height: 260px;
-/*        background-color: yellow;*/
-/*        margin-top: 20%;*/
         padding-top: 40px;
         text-align: center;
     }
@@ -608,7 +569,6 @@
         height: 40px;
         margin-top: 10px;
         margin-bottom: 10px;
-/*        background-color: fuchsia;*/
         text-align: center;
     }
 
@@ -617,7 +577,6 @@
         min-height: 40px;
         margin-top: 10px;
         margin-bottom: 10px;
-/*        background-color: fuchsia;*/
         text-align: center;
         margin-top: 50px;
     }
@@ -639,7 +598,6 @@
     .caixa_carrinho{
         width: 1100px;
         min-height: 350px;
-/*        background-color: aquamarine;*/
         margin-left: auto;
         margin-right: auto;
         overflow: auto;
@@ -648,10 +606,7 @@
     .carrinho_esquerda{
         width: 70%;
         min-height: 350px;
-/*        border: solid 1px #cecece;*/
         float: left;
-
-
     }
 
     .itens_carrinho{
@@ -659,14 +614,11 @@
         min-height: 350px;
         border: solid 1px #cecece;
         border-radius: 5px;
-/*        background-color: aqua;*/
     }
 
     .titulo_carrinho{
         width: 100%;
         height: 50px;
-/*        background-color: red;*/
-
     }
 
     .produto_carrinho{
@@ -729,7 +681,6 @@
     .linha_valor_total{
         width: 100%;
         height: 50px;
-/*        background-color: aqua;*/
         padding-top: 50px;
         font-size: 40px;
         text-align: center;
@@ -1821,7 +1772,7 @@
     border: solid 1px #398439;
     cursor: pointer;
 
-}
+    }
 
     .radio_sexo{
 
@@ -2252,6 +2203,8 @@
     }
 }
 
+
+
 @media screen and (min-device-width:300px) and (max-device-width:720px){
 
      *{
@@ -2259,18 +2212,21 @@
         padding: 0px;
         font-family: arial;
     }
+    
+    a:link{
+        text-decoration: none;
+    }
 
+/******************* Index ************************/
+    
     .menu_paginas{
-        width: 100%;
-        height: 50px;
-        background-color: #2a2a2a;
         display: none;
     }
 
     .menu_principal{
         width: 100%;
-        height: 200px;
-        background-color: #ff9900;
+        height: 220px;
+        background-color: rgba(255, 153, 0, 0.75);
     }
 
     .menu_principal_site{
@@ -2290,19 +2246,30 @@
     .menu_responsivo{
         width: 160px;
         height: 160px;
-        background-color: aqua;
+        background-color: #ffffff;
         float: left;
         margin-top: 20px;
         margin-left: 30px;
-
-
+        margin-right: 30px;
+        border-radius: 10px;
+        border: solid 5px #ff9900;
+    }
+    
+    .menu_responsivo img{
+        width: 140px;
+        height: 160px;
+        margin-left: 10px;
     }
 
     .logo{
         width: 50%;
         height: 100%;
         float: right;
-        background-color: red;
+    }
+    
+    .logo img{
+        width: 90%;
+        height: 90%;
     }
 
     .menu_lado_direito{
@@ -2312,9 +2279,8 @@
     }
 
     .login_carrinho{
-        width: 90%;
+        width: 100%;
         height: 100%;
-        margin-left: 20px;
 
     }
 
@@ -2326,11 +2292,15 @@
     }
 
     .icone_login{
-        width: 100px;
-        height: 100px;
+        width: 115px;
+        height: 115px;
         float: left;
-        background-color: #ff9900;
-        border-radius: 20px;
+        background-color: #ffffff;
+        border: solid 5px #ff9900;
+        border-radius: 100px;
+        padding-top: 20px;
+        padding-left: 15px;
+        outline: 0px;
 
     }
 
@@ -2341,56 +2311,30 @@
         margin-left: 8px;
     }
 
-    .texto_login{
-        width: 89px;
-        height: 40px;
-        padding-top: 20px;
-        padding-left: 5px;
-        float: left;
-        font-weight: bold;
-        font-size: 20px;
+    .texto_perfil{
         display: none;
-
+    }
+    
+    .texto_login{
+        display: none;
     }
 
     .menu_categoria{
-        width: 100%;
-        height: 50px;
-        background-color: rgba(230, 230, 230, 0.91);
         display: none;
-
-
     }
 
     .menu{
-      width:1100px;
-      height:40px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 10px;
-        border-radius: 5px;
-        display: none;
-
+        background-color: fuchsia;
     }
 
     .slider{
-        width: 100%;
-        height: 500px;
-/*        background-color: lightgreen;*/
-        background-image: url(../imagens/slider.jpg);
-        background-size: cover;
-    }
-
-    .slider img{
-        min-width: 100%;
-        height: 500px;
+        display: none;
     }
 
     .produto_full{
         width: 100%;
         min-height:0px;
         overflow: auto;
-/*        background-color: fuchsia;*/
     }
 
     .linha{
@@ -2398,22 +2342,17 @@
         min-height: 100px;
         border-bottom: solid 10px darkorange;
         margin-top: 10px;
-/*        margin-bottom: 10px;*/
         font-family: 'Eras ITC' , sans-serif;
         font-size: 80px;
         font-weight: 600;
         text-align: center;
-/*        background-color: firebrick;*/
-
     }
 
     .caixa_produto{
         width: 70%;
         min-height: 0px;
-/*        overflow: auto;*/
         margin-left: auto;
         margin-right: auto;
-/*        background-color: aqua;*/
     }
 
     .produto{
@@ -2421,7 +2360,6 @@
         height: 982px;
         margin-top: 40px;
         margin-bottom: 20px;
-
     }
 
     .imagem_produto{
@@ -2438,13 +2376,14 @@
         width: 100%;
         height: 327px;
         padding-top: 5px;
+        color: black;
     }
 
     .titulo_produto{
         width: 100%;
         min-height: 30px;
         max-height: 50px;
-        font-size: 40px;
+        font-size: 50px;
         font-weight: bold;
         white-space: nowrap;
         overflow: hidden;
@@ -2505,13 +2444,8 @@
 
     }
 
-    .comprar_produto:hover{
-        cursor: pointer;
-        background-color: #ff9900;
-    }
-
     .carrinho_produto{
-        width: 160px;
+        width: 120px;
         height: 90px;
         float: right;
         border: solid 3px darkorange;
@@ -2527,12 +2461,6 @@
 
     }
 
-    .carrinho_produto:hover{
-        cursor: pointer;
-        background-color: #ff9900;
-    }
-
-
     .enquete_full{
         width: 100%;
         min-height: 500px;
@@ -2545,17 +2473,13 @@
         min-height: 500px;
         margin-left: auto;
         margin-right: auto;
-/*        margin-bottom: 10px;*/
         overflow: auto;
-/*        background-color: yellow;*/
     }
 
     .enquete_pesquisa{
         width: 100%;
         min-height: 0px;
         float: left;
-/*        overflow: auto;*/
-/*        background-color: green;*/
     }
 
     .pergunta_enquete{
@@ -2565,38 +2489,31 @@
         word-wrap: break-word;
         padding-top: 20px;
         font-size: 30px;
-/*        background-color: palevioletred;*/
-/*        margin-left: 20px;*/
     }
+    
     .resposta_enquete{
         width: 96%;
         min-height: 160px;
         font-size: 40px;
         margin-left: 20px;
-/*        background-color: aqua;*/
     }
-
 
     .resposta{
         width: 500px;
         height: 60px;
-/*        background-color: fuchsia;*/
     }
 
     .radio{
         width: 50px;
         height: 50px;
-        outline: inherit;
     }
 
     .caixa_botao{
         width: 250px;
         height: 95px;
         padding-top: 5px;
-/*        background-color: blue;*/
         margin-left: auto;
         margin-right: auto;
-
     }
 
     .enviar_resposta{
@@ -2608,12 +2525,6 @@
         outline: inherit;
         font-size: 40px;
         font-weight: bold;
-
-    }
-
-    .enviar_resposta:hover{
-        cursor: pointer;
-        background-color: #ff9900;
     }
 
     .enquete_foto{
@@ -2621,8 +2532,6 @@
         min-height: 500px;
         float: left;
         display: none;
-/*        background-color: crimson;*/
-/*        opacity: 0.5;*/
     }
 
     .enquete_foto img{
@@ -2632,12 +2541,281 @@
 
     footer{
         width: 100%;
-        height: 300px;
+        min-height: 120px;
         background-color: #2a2a2a;
+        padding-bottom: 50px;
+    }
 
+   .footer_centro{
+        width: 900px;
+        min-height: 0px;
+        margin-left: auto;
+        margin-right: auto;
+       padding-top: 50px;
+    }
+
+    .caixa_rodape{
+        display: none;
+    }
+
+    .rodape_final{
+        width: 100%;
+        height: 50px;
+        float: left;
+        text-align: center;
+        font-size: 40px;
+        color: #ffffff;
+        
+    }
+
+    .link_rodape{
+        color: #888;
+    }
+
+/**************************************************/
+
+/********************* Login **********************/
+
+    .menu_principal_logo{
+        width: 100%;
+        height: 220px;
+        background-color: rgba(255, 153, 0, 0.75);
+    }
+
+    .logo_centro{
+        width: 280px;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .logo_centro img{
+        width: 300px;
+        height: 90%;
+    }
+
+    .fundo_login{
+        width: 100%;
+        min-height: 400px;
+        margin-top: 10px;
+        margin-bottom: 100px;
+        overflow: auto;
+    }
+
+    .login_centro{
+        width: 100%;
+        min-height: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+    }
+
+    .dados{
+        width: 90%;
+        min-height: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+
+    .divisao{
+        display: none;
+    }
+
+    .titulo_login{
+        width: 100%;
+        min-height: 40px;
+        text-align: center;
+        font-size: 60px;
+        padding-top: 10px;
+        font-weight: bold;
+    }
+
+    .caixa_campos{
+        width: 100%;
+        height: 300px;
+        text-align: center;
+        font-size: 40px;
+        margin-top: 10px;
+    }
+
+    .caixa_campos_direita{
+        width: 100%;
+        height: 260px;
+        padding-top: 40px;
+        text-align: center;
+        font-size: 40px;
+    }
+
+    .campos{
+        width: 100%;
+        height: 80px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .campos_direita{
+        width: 100%;
+        min-height: 40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        margin-top: 50px;
+        
+        
+    }
+
+    .campos_login{
+        width: 90%;
+        height: 70px;
+        color: #2a2f41;
+        border: 1px solid #a2a2a2;
+        outline-color: darkorange;
+        font-size: 40px;
+
+    }
+    
+     .botao_login{
+        width: 400px;
+        height: 100px;
+        background-color: #ff691e;
+        border: 0px;
+        color: #fff;
+        font-family: sans-serif;
+        font-size: 40px;
+        font-weight: bold;
+        outline: 0;
     }
 
 
+/**************************************************/
 
+/******************** Carrinho ********************/
 
+    .caixa_carrinho{
+        width: 100%;
+        min-height: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+    }
+
+    .carrinho_esquerda{
+        width: 900px;
+        min-height: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+
+    .itens_carrinho{
+        width: 100%;
+        height: 1170px;
+        border: solid 1px #cecece;
+        border-radius: 5px;
+        overflow: auto;
+       
+    }
+
+    .titulo_carrinho{
+        width: 100%;
+        height: 50px;
+        background-color: fuchsia;
+    }
+
+    .produto_carrinho{
+        width: 100%;
+        height: 380px;
+        border-bottom: solid 2px #ff9900;
+        margin-bottom: 10px;
+        background-color: aqua;
+        display: none;
+    }
+
+    .foto_carrinho{
+        width: 300px;
+        height: 350px;
+        float: left;
+        margin-left: 10px;
+    }
+    
+    .foto_carrinho img{
+        width: 300px;
+        height: 350px;
+    }
+/*
+
+    .informacao_carrinho{
+        width: 570px;
+        height: 100%;
+        float: left;
+        margin-left: 5px;
+    }
+
+    .informacao_linha{
+        width: 100%;
+        height: 65px;
+        margin-top: 1px;
+        padding-top: 14px;
+        font-size: 30px;
+    }
+
+    
+    .total_carrinho{
+        width: 328px;
+        height: 350px;
+        background-color: #ff8400;
+        float: left;
+    }
+
+    .caixa_total_carrinho{
+        width: 100%;
+        height: 200px;
+        background-color: rgba(206, 206, 206, 0.33);
+        border-radius: 10px;
+        border: solid 1px #cecece;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .linha_titilo_total{
+        width: 100%;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .linha_valor_total{
+        width: 100%;
+        height: 50px;
+        padding-top: 50px;
+        font-size: 40px;
+        text-align: center;
+
+    }
+    
+    .botao_cadastro{
+
+        width: 150px;
+        height: 40px;
+        background-color: #5cb85c;
+        border: solid 1px #4cae4c;
+        color: white;
+        border-radius: 3px;
+        font-size: 14px;
+        line-height: 35px;
+        padding-left: 5px;
+    }
+*/
+
+   
+    }
+
+/**************************************************/
+
+    
+    
+    
 }

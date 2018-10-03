@@ -8,7 +8,7 @@
         <header>
             <div class="menu_principal_logo">
                 <div class="menu_responsivo">
-
+                    <img src="icones/menu_responsivo.png">
                 </div>
                 <a href="../index.php">
                     <div class="logo_centro">
