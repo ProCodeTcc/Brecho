@@ -58,7 +58,7 @@
                 <div class="menu_principal_site">
                     <div class="menu_lado_esquerdo">
                         <div class="menu_responsivo">
-                        
+                            <img src="view/icones/menu_responsivo.png">
                         </div>
                         <a href="index.php">
                             <div class="logo">
