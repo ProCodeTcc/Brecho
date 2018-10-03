@@ -199,7 +199,26 @@
 				switch($modo){
 					case 'inserirLayout1':
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->inserirLayout();
+						$controllerSobre->inserirLayout1();
+					break;
+					
+					case 'buscarLayout1':
+						$id = $_POST['id'];
+						
+						$controllerSobre = new controllerSobre();
+						$listLayout = $controllerSobre->buscarLayout1($id);
+						
+						echo $listLayout;
+					break;
+					
+					case 'atualizarLayout1':
+						$controllerSobre = new controllerSobre();
+						$controllerSobre->atualizarLayout1();
+					break;
+						
+					case 'inserirLayout2':
+						$controllerSobre = new controllerSobre();
+						$controllerSobre->inserirLayout2();
 					break;
 				}
 		break;

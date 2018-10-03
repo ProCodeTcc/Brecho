@@ -29,25 +29,42 @@
 			});
 		}
 		
-		function listarLayout1(){
+		function listar(){
 			$.ajax({
 				type: 'POST',
-				url: 'dados_layout1.php',
+				url: 'dados.php',
 				success: function(dados){
-					$('#consulta_layout1').html(dados);
+					$('#consulta').html(dados);
+				}
+			});
+		}
+		
+		function buscarLayout1(idItem){
+			$.ajax({
+				type: 'POST',
+				url: 'frm_layout1.php',
+				data: {id:idItem},
+				success: function(dados){
+					$('.modal').html(dados);
+				}
+			});
+		}
+		
+		function buscarLayout2(idItem){
+			$.ajax({
+				type: 'POST',
+				url: 'frm_layout2.php',
+				data: {id:idItem},
+				success: function(dados){
+					$('.modal').html(dados);
 				}
 			});
 		}
 		
 		$(document).ready(function(){
+			listar();
 			$('#adicionar').click(function(){
 				$('.container_modal').fadeIn(400);
-			});
-			
-			$('#showLayout1').click(function(){
-				$('#dados').hide();
-				$('#dados_layout1').show();
-				listarLayout1();
 			});
 			
 			$('#voltar').click(function(){
@@ -131,48 +148,7 @@
 						<div class="users_view_itens" id="showLayout1">L1</div>
                     </div>
 
-                    <div id="consulta">
-						
-						
-						<div class="sobre_linha">
-							<div class="sobre">
-								<div class="sobre_imagem">
-									<img src="../imagens/enquete.png">
-								</div>
-								
-								<article>
-									<p class="sobre_titulo">bla bla bla</p>
-									<p class="sobre_descricao">Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
-								</article>
-								
-								<div class="acoes">
-									<img src="../imagens/visualizar.png">
-									<img src="../imagens/ativar.png">
-									<img src="../imagens/delete16.png">
-								</div>
-							</div>
-							
-							<div class="sobre">
-								<div class="sobre_imagem">
-									<img src="../imagens/enquete.png">
-								</div>
-								
-								<article>
-									<p class="sobre_titulo">bla bla bla</p>
-									<p class="sobre_descricao">Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI</p>
-								</article>
-								
-								<div class="acoes">
-									<img src="../imagens/visualizar.png">
-									<img src="../imagens/ativar.png">
-									<img src="../imagens/delete16.png">
-								</div>
-							</div>
-						
-						</div>
-						
-						<div class="quebrar_linha"></div>
-						
+                    <div id="consulta">						
 						
                     </div>
                 </div>

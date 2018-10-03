@@ -10,8 +10,23 @@
 		});
 	}
 	
+	function adicionarLayout2(){
+		$.ajax({
+			type: 'POST',
+			url: 'frm_layout2.php',
+			success: function(dados){
+				$('.modal').show();
+				$('.modal').html(dados);
+			}
+		});
+	}
+	
 	$(document).ready(function(){
 		$('#layout_1').click(function(){
+			$('.modal').hide();
+		});
+		
+		$('#layout_2').click(function(){
 			$('.modal').hide();
 		});
 	});
@@ -23,6 +38,6 @@
 	</div>
 	
 	<div id="layout_2">
-		<img src="../imagens/layout2.jpg">
+		<img src="../imagens/layout2.jpg" onClick="adicionarLayout2();">
 	</div>
 </div>

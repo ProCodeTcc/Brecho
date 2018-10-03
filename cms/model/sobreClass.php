@@ -7,6 +7,7 @@
 		private $idLayout;
 		private $titulo;
 		private $descricao;
+		private $descricao2;
 		private $imagem;
 		
 		public function setId($idLayout){
@@ -31,6 +32,14 @@
 		
 		public function getDescricao(){
 			return $this->descricao;
+		}
+		
+		public function setDescricao2($descricao2){
+			$this->descricao2 = $descricao2;
+		}
+		
+		public function getDescricao2(){
+			return $this->descricao2;
 		}
 		
 		public function setImagem($imagem){

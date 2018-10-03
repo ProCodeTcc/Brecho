@@ -651,7 +651,7 @@ footer{
 	width: 200px;
 	height: auto;
 	margin: auto;
-	margin-top: 50px;
+	margin-top: 10px;
 }
 
 #visualizar_sobre{
@@ -672,6 +672,13 @@ footer{
 }
 
 .sobre_layout #txtdesc{
+	overflow-y: hidden;
+	resize: none;
+	height: 100px;
+	width: 300px;
+}
+
+.sobre_layout #txtdesc2{
 	overflow-y: hidden;
 	resize: none;
 	height: 100px;
