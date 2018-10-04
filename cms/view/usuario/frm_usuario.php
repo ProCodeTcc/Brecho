@@ -121,21 +121,21 @@
         </div>
     </form>
 
-    <form class="frm_cadastro" data-id="<?php echo($id)?>" id="frmUsuario" method="post" name="frmUsuario" action="usuario_view.php">
-        <div class="form_row">
+    <form class="frm_usuario" data-id="<?php echo($id)?>" id="frmUsuario" method="post" name="frmUsuario" action="usuario_view.php">
+        <div class="form_linha">
             <label class="lbl_cadastro">Nome:</label>
-            <input type="text" class="cadastro_input" id="txtnome" name="txtnome" required>
+            <input type="text" class="cadastro_input" id="txtnome" name="txtnome" placeholder="Insira um nome" required>
             <input type="hidden" name="txtimagem" id="txtimagem">
         </div>
 
-        <div class="form_row">
+        <div class="form_linha">
             <label class="lbl_cadastro">Usuário:</label>
-            <input type="text" class="cadastro_input" id="txtusuario" name="txtusuario" required>
+            <input type="text" class="cadastro_input" id="txtusuario" name="txtusuario" placeholder="Insira um usuário" required>
         </div>
 
-        <div class="form_row">
+        <div class="form_linha">
             <label class="lbl_cadastro">Nivel:</label>
-            <select class="select_cadastro" id="txtnivel" name="txtnivel">
+            <select class="cadastro_select" id="txtnivel" name="txtnivel">
             
         <?php
             $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
@@ -156,13 +156,13 @@
             </select>
         </div>
 
-        <div class="form_row">
+        <div class="form_linha">
             <label class="lbl_cadastro">Senha:</label>
-            <input type="password" class="cadastro_input" name="txtsenha" id="txtsenha" required>
+            <input type="password" class="cadastro_input" name="txtsenha" id="txtsenha" placeholder="Insira uma senha" required>
         </div>
 
-        <div class="form_row">
-            <button class="page_btn" type="submit">CADASTRAR</button>
+        <div class="form_linha" id="btn_linha">
+            <button class="sub_btn" type="submit">CADASTRAR</button>
         </div>
     </form>
 </div>

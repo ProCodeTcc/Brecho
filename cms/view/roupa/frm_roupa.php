@@ -11,32 +11,32 @@
     <form class="frm_roupa" id="frmRoupa" method="post" name="frmRoupa" enctype="multipart/form-data" name="frmImagem" action="usuario_view.php">
         <div id="roupas_col1">
 			<div class="form_linha">
-				<label>Nome: </label>
-				<input type="text" name="txtnome" id="txtnome">
+				<label class="lbl_cadastro">Nome: </label>
+				<input type="text" class="cadastro_input" name="txtnome" id="txtnome">
 			</div>
 			
 			<div class="form_linha">
-				<label>Descrição: </label>
-				<textarea name="txtdesc" id="txtdesc"></textarea>
+				<label class="lbl_cadastro">Descrição: </label>
+				<textarea name="txtdesc" class="cadastro_text" id="txtdesc"></textarea>
 			</div>
 			
 			<div class="form_linha">
-				<label>Tipo: </label>
-				<select name="txttipo" id="txttipo">
+				<label class="lbl_cadastro">Tipo: </label>
+				<select name="txttipo" class="cadastro_select" id="txttipo">
 					<option>tipo</option>
 				</select>
 			</div>
 			
 			<div class="form_linha">
-				<label>Categoria: </label>
-				<select name="txtcategoria" id="txtcategoria">
+				<label class="lbl_cadastro">Categoria: </label>
+				<select name="txtcategoria" class="cadastro_select" id="txtcategoria">
 					<option>categoria</option>
 				</select>
 			</div>
 			
 			<div class="form_linha">
-				<label>Marca: </label>
-				<select name="txtmarca" id="txtmarca">
+				<label class="lbl_cadastro">Marca: </label>
+				<select name="txtmarca" class="cadastro_select" id="txtmarca">
 					<option>marca</option>
 				</select>
 			</div>
@@ -44,14 +44,14 @@
 		
 		<div id="roupas_col2">
 			<div class="form_linha">
-				<label>Cor: </label>
-				<select name="txtcor" id="txtcor">
+				<label class="lbl_cadastro">Cor: </label>
+				<select name="txtcor" class="cadastro_select" id="txtcor">
 					<option>cor</option>
 				</select>
 			</div>
 			
 			<div class="form_linha">
-				<label>Fotos: </label>
+				<label class="lbl_cadastro">Fotos: </label>
 				
 				<img src="#">
 				<img src="#">
@@ -59,11 +59,11 @@
 			</div>
 			
 			<div class="form_linha">
-				<label>Valor: </label>
-				<input type="text" name="txtnome" id="txtnome">
+				<label class="lbl_cadastro">Valor: </label>
+				<input type="text" class="cadastro_input" name="txtnome" id="txtnome">
 			</div>
 		</div>
     </form>
 	
-	<input type="submit" class="page_btn" value="ENVIAR">
+	<input type="submit" class="sub_btn" value="ENVIAR">
 </div>

@@ -9,6 +9,8 @@
 		private $descricao;
 		private $descricao2;
 		private $imagem;
+		private $layout;
+		private $status;
 		
 		public function setId($idLayout){
 			$this->idLayout = $idLayout;
@@ -48,6 +50,22 @@
 		
 		public function getImagem(){
 			return $this->imagem;
+		}
+		
+		public function setLayout($layout){
+			$this->layout = $layout;
+		}
+		
+		public function getLayout(){
+			return $this->layout;
+		}
+		
+		public function setStatus($status){
+			$this->status = $status;
+		}
+		
+		public function getStatus(){
+			return $this->status;
 		}
 	}
 ?>

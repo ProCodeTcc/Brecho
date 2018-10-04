@@ -98,8 +98,8 @@
 
 <div class="form_container">
     <img class="fechar" src="../imagens/fechar.png">
-    <form class="frm_cadastro" data-id="<?php echo($id) ?>" method="post" name="frmEnquete" id="frm_enquete" action="enquete_view.php">
-        <div class="form_row">
+    <form class="frm_enquete" data-id="<?php echo($id) ?>" method="post" name="frmEnquete" id="frm_enquete" action="enquete_view.php">
+        <div class="form_linha">
             <label class="lbl_cadastro">
                 Pergunta:
             </label>
@@ -107,12 +107,12 @@
             <input type="text" class="cadastro_input" name="txtpergunta" id="txtpergunta">
         </div>
 
-        <div class="form_row">
+        <div class="form_linha">
             <label class="lbl_cadastro">
                 Tema:
             </label>
 
-            <select class='select_cadastro' name="txttema" id="txttema">
+            <select class='cadastro_select' name="txttema" id="txttema">
 
                 <?php
                     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
@@ -135,7 +135,7 @@
             </select>
         </div>
 
-        <div class="form_row">
+        <div class="form_linha">
                 <label class="lbl_cadastro">
                     Alternativa A:
                 </label>
@@ -161,24 +161,24 @@
                 <input type="text" class="cadastro_input" name="txtaltd" id="alternativa_d">
         </div>
 
-        <div class="form_row">
+        <div class="form_linha" id="lbl_data">
             <label class="lbl_cadastro">
-                Data de Início:
+                Início:
             </label>
 
-            <input type="date" class="cadastro_input" name="dtinicio" id="dtinicio">
-        </div>
-
-        <div class="form_row">
-            <label class="lbl_cadastro">
-                Data de Término:
+             <label class="lbl_cadastro">
+                Término:
             </label>
-
-            <input type="date" class="cadastro_input" name="dttermino" id="dttermino">
         </div>
 
-        <div class="form_row">
-            <input type="submit" class="page_btn" value="CADASTRAR">
+        <div class="form_linha" id="input_data">
+			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio">
+			
+			<input type="date" class="cadastro_input" name="dttermino" id="dttermino">
+        </div>
+
+        <div class="form_linha" id="btn_linha">
+            <input type="submit" class="sub_btn" value="CADASTRAR">
         <div> 
     </form>
 </div>

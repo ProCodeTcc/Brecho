@@ -78,8 +78,8 @@
 
 <div class="form_container">
     <img class="fechar" src="../imagens/fechar.png">
-    <form class="frm_cadastro" method="post" data-id="<?php echo($id) ?>" name="frmNivel" id="frm_nivel" action="nivel_view.php">
-        <div class="form_row">
+    <form class="frm_nivel" method="post" data-id="<?php echo($id) ?>" name="frmNivel" id="frm_nivel" action="nivel_view.php">
+        <div class="form_linha">
             <label class="lbl_cadastro">
                 Nome:
             </label>
@@ -87,8 +87,8 @@
             <input type="text" class="cadastro_input" name="txtnome" id="txtnome">
         </div>
 
-            <div class="form_row">
-                <input type="submit" class="page_btn" value="CADASTRAR">
+            <div class="form_linha" id="btn_linha">
+                <input type="submit" class="sub_btn" value="CADASTRAR">
             <div>
             
         </div>

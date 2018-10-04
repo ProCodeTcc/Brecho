@@ -3,12 +3,17 @@
 		$('.editar').click(function(){
 			$('.container_modal').fadeIn(400);
 		});
+		
+		$('.visualizar').click(function(){
+			$('#dados').hide();
+			$('#preview').show();
+		});
 	});
 </script>
 
 <div class="sobre_linha">
 	
-	<div class="sobre">
+	<div class="sobre_col1">
 	<?php
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
 		require_once($diretorio.'controller/controllerSobre.php');
@@ -18,24 +23,42 @@
 		while($cont < count($rsLayout)){
 	?>
 		
-		<div class="sobre_imagem">
-			<img src="<?php echo($rsLayout[$cont]->getImagem()) ?>">
-		</div>
+		<div class="sobre_col1_item">
+			<div class="sobre_imagem">
+				<img src="<?php echo($rsLayout[$cont]->getImagem()) ?>">
+			</div>
 
-		<article>
-			<p class="sobre_titulo"><?php echo($rsLayout[$cont]->getTitulo()) ?></p>
-			<p class="sobre_descricao"><?php echo($rsLayout[$cont]->getDescricao()) ?></p>
-		</article>
+			<article>
+				<p class="sobre_titulo"><?php echo($rsLayout[$cont]->getTitulo()) ?></p>
+				<p class="sobre_descricao"><?php echo($rsLayout[$cont]->getDescricao()) ?>...</p>
+			</article>
 
-		<div class="acoes">
-			<img src="../imagens/addconteudo.png">
-			<img src="../imagens/delconteudo.png">
-			<span class="editar" onClick="buscarLayout1(<?php echo($rsLayout[$cont]->getId()) ?>)">
-				<img src="../imagens/pencil.png">
-			</span>
-			<img src="../imagens/visualizar.png">
-			<img src="../imagens/ativar.png">
-			<img src="../imagens/delete16.png">
+			<div class="acoes">
+				<span class="editar" onClick="buscar(<?php echo($rsLayout[$cont]->getId()) ?>)">
+					<img src="../imagens/pencil.png">
+				</span>
+
+				<span class="visualizar" onClick="visualizarLayout1(<?php echo($rsLayout[$cont]->getId()) ?>)">
+					<img src="../imagens/visualizar.png">
+				</span>
+
+				<span onClick="status(<?php echo($rsLayout[$cont]->getStatus()) ?>, <?php echo($rsLayout[$cont]->getId()) ?>, <?php echo($rsLayout[$cont]->getLayout()) ?>)">
+					<?php
+						$status = $rsLayout[$cont]->getStatus();
+						if($status == 1){
+							$img = 'ativar.png';
+						}else{
+							$img = 'desativar.png';
+						}
+					?>
+
+					<img src="../imagens/<?php echo($img) ?>"
+				</span>
+
+				<span onClick="excluir(<?php echo($rsLayout[$cont]->getId()) ?>)">
+					<img src="../imagens/delete16.png">
+				</span>
+			</div>
 		</div>
 	<?php 
 		$cont ++;
@@ -43,7 +66,7 @@
 	?>
 	</div>
 	
-	<div class="sobre">
+	<div class="sobre_col2">
 	<?php
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
 		require_once($diretorio.'controller/controllerSobre.php');
@@ -53,25 +76,45 @@
 		while($cont < count($rsLayout2)){
 	?>
 		
-		<div class="sobre_imagem">
-			<img src="<?php echo($rsLayout2[$cont]->getImagem()) ?>">
-		</div>
+		<div class="sobre_col2_item">
+			<div class="sobre_imagem">
+				<img src="<?php echo($rsLayout2[$cont]->getImagem()) ?>">
+			</div>
 
-		<article>
-			<p class="sobre_titulo"><?php echo($rsLayout2[$cont]->getTitulo()) ?></p>
-			<p class="sobre_descricao"><?php echo($rsLayout2[$cont]->getDescricao()) ?></p>
-		</article>
+			<article>
+				<p class="sobre_titulo"><?php echo($rsLayout2[$cont]->getTitulo()) ?></p>
+				<p class="sobre_descricao"><?php echo($rsLayout2[$cont]->getDescricao()) ?>...</p>
+			</article>
 
-		<div class="acoes">
-			<img src="../imagens/addconteudo.png">
-			<img src="../imagens/delconteudo.png">
-			<span class="editar" onClick="buscarLayout2(<?php echo($rsLayout2[$cont]->getId()) ?>)">
-				<img src="../imagens/pencil.png">
-			</span>
-			<img src="../imagens/visualizar.png">
-			<img src="../imagens/ativar.png">
-			<img src="../imagens/delete16.png">
+			<div class="acoes">
+				<span class="editar" onClick="buscarLayout2(<?php echo($rsLayout2[$cont]->getId()) ?>)">
+					<img src="../imagens/pencil.png">
+				</span>
+
+				<span class="visualizar" onClick="visualizarLayout2(<?php echo($rsLayout2[$cont]->getId()) ?>)">
+					<img src="../imagens/visualizar.png">
+				</span>
+
+				<span onClick="status(<?php echo($rsLayout2[$cont]->getStatus()) ?>, <?php echo($rsLayout2[$cont]->getId()) ?>, <?php echo($rsLayout2[$cont]->getLayout()) ?>)">
+					<?php
+						$status = $rsLayout2[$cont]->getStatus();
+
+						if($status == 1){
+							$img = 'ativar.png';
+						}else{
+							$img = 'desativar.png';
+						}
+					?>
+
+					<img src="../imagens/<?php echo($img) ?>">
+				</span>
+
+				<span onClick="excluir(<?php echo($rsLayout2[$cont]->getId()) ?>)">
+					<img src="../imagens/delete16.png">
+				</span>
+			</div>
 		</div>
+		
 	<?php 
 		$cont ++;
 		} 
@@ -80,7 +123,6 @@
 	
 </div>
 
-<div class="quebrar_linha"></div>
 
 
 <div class="erro_tabela" data-erro="<?php echo($cont) ?>">

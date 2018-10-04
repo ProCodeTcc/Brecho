@@ -14,7 +14,7 @@
 		$.ajax({
 			type: 'POST', //tipo de requisição
 			url: url+'/router.php', //url onde será enviada a requisição
-			data:{id:id, modo: 'buscarLayout1', controller: 'sobre'}, //parâmetros enviados
+			data:{id:id, modo: 'buscar', controller: 'sobre'}, //parâmetros enviados
 			success: function(dados){
 				json = JSON.parse(dados); //convertendo os dados para json
 				
@@ -55,18 +55,24 @@
 			//armazenando o formulario em uma variável
 			var formulario =  new FormData($('#frm_sobreLayout1')[0]);
 			
+			//armazenando o tipo de layout numa variável
+			var layout = $('#frm_sobreLayout1').data('layout');
+			
 			//atribuindo ao formulário o parâmetro controller
 			formulario.append('controller', 'sobre');
+			
+			//atribuindo ao formulário o parâmetro layout
+			formulario.append('layout', layout);
 			
 			//desabilitando o submit do botão
 			e.preventDefault();
 			
 			if(id == ""){
 				//atribuindo ao formulário o parâmetro modo, contendo a ação de inserir
-				formulario.append('modo', 'inserirLayout1');
+				formulario.append('modo', 'inserirLayout');
 			}else{
 				//atribuindo ao formulário o parâmetro modo, contendo a ação de editar
-				formulario.append('modo', 'atualizarLayout1');
+				formulario.append('modo', 'atualizarLayout');
 				formulario.append('id', id);
 			}
 			
@@ -101,7 +107,7 @@
 	</form>
 	
 	<form method="POST" data-id="<?php echo($id) ?>" data-layout="1" class="sobre_layout" name="frmSobre" id="frm_sobreLayout1">
-		<div class="form_row">
+		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Titulo:
 			</label>
@@ -110,16 +116,16 @@
 			<input type="hidden" id="txtimagem" name="txtimagem">
 		</div>
 		
-		<div class="form_row">
+		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Descrição:
 			</label>
 			
-			<textarea name="txtdesc" id="txtdesc" required></textarea>
+			<textarea name="txtdesc" class="cadastro_text" id="txtdesc" required></textarea>
 		</div>
 		
-		<div class="form_row">
-			<input type="submit" class="page_btn" value="CADASTRAR">
+		<div class="form_linha" id="btn_linha">
+			<input type="submit" class="sub_btn" value="CADASTRAR">
 		</div>
 	</form>
 </div>

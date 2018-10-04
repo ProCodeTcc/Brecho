@@ -6,40 +6,67 @@
 			require_once($diretorio.'model/dao/sobreDAO.php');
 		}
 		
-		public function inserirLayout1(){
+		public function inserirLayout(){
 			if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$titulo = $_POST['txttitulo'];
 				$descricao = $_POST['txtdesc'];
 				$imagem = $_POST['txtimagem'];
+				$layout = $_POST['layout'];
+				
+				if(isset($_POST['txtdesc2'])){
+					$descricao2 = $_POST['txtdesc2'];
+				}
 			}
 			
-			$layout = new Sobre();
-			$layout->setTitulo($titulo);
-			$layout->setDescricao($descricao);
-			$layout->setImagem($imagem);
+			$sobre = new Sobre();
+			$sobre->setTitulo($titulo);
+			$sobre->setDescricao($descricao);
+			$sobre->setImagem($imagem);
+			$sobre->setLayout($layout);
+			
+			if(isset($descricao2)){
+				$sobre->setDescricao2($descricao2);
+			}
 			
 			$sobreDAO = new SobreDAO();
 			
-			$sobreDAO->Insert($layout);
+			if($layout == 1){
+				$sobreDAO->Insert($sobre);
+			}else{
+				$sobreDAO->InsertLayout2($sobre);
+			}
 		}
 		
-		public function atualizarLayout1(){
+		public function atualizarLayout(){
 			if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$titulo = $_POST['txttitulo'];
 				$descricao = $_POST['txtdesc'];
 				$imagem = $_POST['txtimagem'];
+				$layout = $_POST['layout'];
 				$id = $_POST['id'];
+				
+				if(isset($_POST['txtdesc2'])){
+					$descricao2 = $_POST['txtdesc2'];
+				}
 			}
 			
-			$layout = new Sobre();
-			$layout->setId($id);
-			$layout->setTitulo($titulo);
-			$layout->setDescricao($descricao);
-			$layout->setImagem($imagem);
+			$sobre = new Sobre();
+			$sobre->setId($id);
+			$sobre->setTitulo($titulo);
+			$sobre->setDescricao($descricao);
+			$sobre->setImagem($imagem);
+			
+			if(isset($descricao2)){
+				$sobre->setDescricao2($descricao2);
+			}
 			
 			$sobreDAO = new SobreDAO();
 			
-			$sobreDAO->UpdateLayout($layout);
+			if($layout == 1){
+				$sobreDAO->UpdateLayout1($sobre);
+			}else{
+				$sobreDAO->UpdateLayout2($sobre);
+			}
 		}
 		
 		public function listarLayout1(){
@@ -50,7 +77,7 @@
 			return $listLayout;
 		}
 		
-		public function buscarLayout1($id){			
+		public function buscarLayout($id){			
 			$sobreDAO = new SobreDAO();
 			
 			$listLayout = $sobreDAO->SelectLayoutByID($id);
@@ -58,24 +85,6 @@
 			return $listLayout;
 		}
 		
-		public function inserirLayout2(){
-			if($_SERVER['REQUEST_METHOD'] == 'POST'){
-				$titulo = $_POST['txttitulo'];
-				$descricao = $_POST['txtdesc'];
-				$descricao2 = $_POST['txtdesc2'];
-				$imagem = $_POST['txtimagem'];
-			}
-			
-			$sobreClass = new Sobre();
-			$sobreClass->setTitulo($titulo);
-			$sobreClass->setDescricao($descricao);
-			$sobreClass->setDescricao2($descricao2);
-			$sobreClass->setImagem($imagem);
-			
-			$sobreDAO = new SobreDAO();
-			
-			$sobreDAO->InsertLayout2($sobreClass);
-		}
 		
 		public function listarLayout2(){
 			$sobreDAO = new SobreDAO();
@@ -83,6 +92,24 @@
 			$listLayout2 = $sobreDAO->SelectAllLayout2();
 			
 			return $listLayout2;
+		}
+		
+		public function excluirLayout($id){
+			$sobreDAO = new SobreDAO();
+			
+			$sobreDAO->Delete($id);
+		}
+		
+		public function atualizarStatus($status, $id, $layout){
+			$sobreDAO = new SobreDAO();
+			
+			if($status == 1){
+				$sobreDAO->activateOne($id, $layout);
+				$sobreDAO->disableAll($id, $layout);
+			}else{
+				$sobreDAO->disableAll($id, $layout);
+				$sobreDAO->activateOne($id, $layout);
+			}
 		}
 	}
 ?>

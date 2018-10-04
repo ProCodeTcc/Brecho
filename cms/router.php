@@ -197,30 +197,53 @@
 				$modo = $_POST['modo'];
 				require_once('controller/controllerSobre.php');
 				switch($modo){
-					case 'inserirLayout1':
+					case 'inserirLayout':
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->inserirLayout1();
+						$controllerSobre->inserirLayout();
 					break;
 					
-					case 'buscarLayout1':
+					case 'buscar':
 						$id = $_POST['id'];
 						
 						$controllerSobre = new controllerSobre();
-						$listLayout = $controllerSobre->buscarLayout1($id);
+						$listLayout = $controllerSobre->buscarLayout($id);
 						
 						echo $listLayout;
 					break;
 					
-					case 'atualizarLayout1':
+					case 'atualizarLayout':
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->atualizarLayout1();
+						$controllerSobre->atualizarLayout();
 					break;
 						
-					case 'inserirLayout2':
+						
+					case 'excluir':
+						$id = $_POST['id'];
+						
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->inserirLayout2();
+						$controllerSobre->excluirLayout($id);
+					break;
+						
+					case 'status':
+						$status = $_POST['status'];
+						$id = $_POST['id'];
+						$layout = $_POST['layout'];
+						
+						$controllerSobre = new controllerSobre();
+						$controllerSobre->atualizarStatus($status, $id, $layout);
 					break;
 				}
+		break;
+			
+		case 'cor':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerCor.php');
+			switch($modo){
+				case 'inserir':
+					$controllerCor = new controllerCor();
+					$controllerCor->inserirCor();
+				break;
+			}
 		break;
     }
 ?>
