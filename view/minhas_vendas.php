@@ -191,6 +191,122 @@
                             Vendido
                         </div>
                     </div>
+                    
+                    
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+                    <div class="itens_vendas">
+                        <div class="produto_vendas">
+                            Blusa Masculina Dixie Tricot Gola V
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: 129,90
+                        </div>
+                         <div class="detalhe_vendas">
+                            00/00/0000
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

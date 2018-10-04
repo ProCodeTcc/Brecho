@@ -219,8 +219,6 @@
         margin-top: 200px;
         font-size: 90px;
         color: #cecece;
-/*        border-radius: 30px;*/
-/*        opacity: 0.3;*/
     }
 
     .btn_slide:hover{
@@ -478,7 +476,7 @@
 
 /********************* Login **********************/
 
-     .menu_responsivo{
+    .menu_responsivo{
        display: none;
     }
     
@@ -696,14 +694,12 @@
         min-height: 400px;
         margin-left: auto;
         margin-right: auto;
-/*        background-color: dodgerblue;*/
         margin-bottom: 20px;
     }
 
     .primeiro_padrao{
         width: 100%;
         height: 250px;
-/*        background-color: aqua;*/
         margin-bottom: 10px;
 
     }
@@ -711,7 +707,6 @@
     .texto_sobre{
         width: 68%;
         height: 92%;
-/*        background-color: red;*/
         float: left;
         padding: 10px 11px;
     }
@@ -730,7 +725,6 @@
      .texto_sobre_esquerdo{
         width: 30%;
         height: 92%;
-/*        background-color: red;*/
         float: left;
         padding: 10px 11px;
     }
@@ -750,7 +744,6 @@
     .texto_sobre_diteiro{
         width: 30%;
         height: 92%;
-/*        background-color: red;*/
         float: left;
         padding: 10px 11px;
     }
@@ -848,7 +841,6 @@
         float: left;
         height: 35px;
         padding-top: 15px;
-/*        background-color: fuchsia;*/
     }
 
     .detalhe_vendas{
@@ -867,7 +859,6 @@
     .nossas_lojas{
         width: 1300px;
         min-height: 500px;
-        /* background-color: forestgreen; */
         margin-left: auto;
         margin-right: auto;
         overflow: auto;
@@ -877,11 +868,9 @@
     .pesquisa_loja{
         width: 40%;
         min-height: 500px;
-        /* background-color: rgb(255, 173, 41); */
         border-left: solid 2px #cccccc;
         border-right: solid 2px #cccccc;
         float: left;
-        /* border-radius: 10px; */
         background-color: #f2f2f2;
     }
 
@@ -904,7 +893,6 @@
     .titulo_loja{
         width: 100%;
         height: 35px;
-/*        background-color: blue;*/
         text-align: center;
         padding-top: 10px;
         font-size: 25px;
@@ -939,9 +927,7 @@
     .resultado_loja{
         width: 100%;
         height: 365px;
-/*        background-color: blue;*/
         margin-top: 20px;
-        /* border-radius: 10px; */
         padding-top: 10px;
         overflow-y: scroll;
         overflow-x: inherit;
@@ -952,7 +938,6 @@
         height: 40px;
         padding-top: 20px;
         padding-left: 10px;
-/*        background-color: white;*/
         margin-top: 2px;
         margin-bottom: 2px;
         border-bottom: solid 2px #ff9900;
@@ -1010,12 +995,6 @@
         height: 40px;
         margin-left: 5px;
 
-    }
-
-    .campos_fale_radio{
-        width: 40%;
-        height: 40px;
-        margin-left: 5px;
     }
 
     .caixas_campo_fale{
@@ -1078,7 +1057,6 @@
     .imagem_perfil{
         width: 150px;
         height: 150px;
-/*        background-color: fuchsia;*/
         margin-left: auto;
         margin-right: auto;
         border-radius: 100px;
@@ -1127,12 +1105,9 @@
         height: 380px;
         background-color: fuchsia;
         float: right;
-/*        margin-right:150px;*/
         border-radius: 15px;
         border: solid 2px #ff7e00;
         background-color: rgba(204, 204, 204, 0.56);
-
-
     }
 
     .titulo_perfil{
@@ -1158,7 +1133,6 @@
     .icone_dados{
         width: 80px;
         height: 100%;
-/*        background-color: red;*/
         margin-left: 30px;
         float: left;
 
@@ -1175,7 +1149,6 @@
         float: left;
         padding-top: 15px;
         color: black;
-/*        margin-left: 10px;*/
     }
 
     .perfil_tabela{
@@ -1188,26 +1161,21 @@
     .titulo_perfil_pedidos{
         width: 630px    ;
         height: 50px;
-/*        background-color: aqua;*/
         border-bottom: solid 1px darkorange;
     }
 
     .titulo_perfil_campos{
         width: 33%;
         height: 35px;
-/*        background-color: fuchsia;*/
         float: left;
         margin-left: 2px;
         text-align: center;
         padding-top: 15px;
-
-
     }
 
     .titulo_perfil_linha{
         width: 630px;
         height: 50px;
-/*        background-color: aqua;*/
         margin-top: 1px;
         margin-bottom: 1px;
         border-bottom: solid 1px darkorange;
@@ -2204,7 +2172,6 @@
 }
 
 
-
 @media screen and (min-device-width:300px) and (max-device-width:720px){
 
      *{
@@ -2703,25 +2670,18 @@
 
     .carrinho_esquerda{
         width: 900px;
-        min-height: 350px;
+        height: 900px;
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
+        overflow: auto;
     }
 
     .itens_carrinho{
         width: 100%;
-        height: 1170px;
+        min-height: 900px;
         border: solid 1px #cecece;
         border-radius: 5px;
-        overflow: auto;
-       
-    }
-
-    .titulo_carrinho{
-        width: 100%;
-        height: 50px;
-        background-color: fuchsia;
     }
 
     .produto_carrinho{
@@ -2729,8 +2689,8 @@
         height: 380px;
         border-bottom: solid 2px #ff9900;
         margin-bottom: 10px;
-        background-color: aqua;
-        display: none;
+        
+        
     }
 
     .foto_carrinho{
@@ -2744,13 +2704,13 @@
         width: 300px;
         height: 350px;
     }
-/*
 
     .informacao_carrinho{
         width: 570px;
         height: 100%;
         float: left;
         margin-left: 5px;
+        
     }
 
     .informacao_linha{
@@ -2758,10 +2718,9 @@
         height: 65px;
         margin-top: 1px;
         padding-top: 14px;
-        font-size: 30px;
+        font-size: 40px;
     }
 
-    
     .total_carrinho{
         width: 328px;
         height: 350px;
@@ -2771,7 +2730,7 @@
 
     .caixa_total_carrinho{
         width: 100%;
-        height: 200px;
+        height: 290px;
         background-color: rgba(206, 206, 206, 0.33);
         border-radius: 10px;
         border: solid 1px #cecece;
@@ -2781,40 +2740,435 @@
 
     .linha_titilo_total{
         width: 100%;
-        height: 30px;
+        height: 50px;
         text-align: center;
         font-weight: bold;
-        font-size: 25px;
+        font-size: 50px;
     }
 
     .linha_valor_total{
         width: 100%;
         height: 50px;
         padding-top: 50px;
-        font-size: 40px;
+        font-size: 50px;
         text-align: center;
-
+    }
+    
+    .linha_botao_cadastro{
+        width: 400px ;
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
     
     .botao_cadastro{
-
-        width: 150px;
-        height: 40px;
+        width: 400px;
+        height: 90px;
         background-color: #5cb85c;
         border: solid 1px #4cae4c;
         color: white;
         border-radius: 3px;
-        font-size: 14px;
-        line-height: 35px;
-        padding-left: 5px;
+        font-size: 50px;
+        margin-top:20px;
+       
     }
-*/
-
    
+    
+
+/**************************************************/
+
+/********************** Sobre *********************/
+
+    .sobre{
+        width: 100%;
+        min-height: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        overflow: auto;
+    }
+
+    .primeiro_padrao{
+        width: 100%;
+        min-height: 300px;
+        margin-bottom: 10px;
+    }
+
+    .texto_sobre{
+        width: 95%;
+        min-height: 0px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    .imagem_sobre{
+        width: 95%;
+        height: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+    }
+
+    .imagem_sobre img{
+        width: 100%;
+        height: 700px;
+    }
+
+     .texto_sobre_esquerdo{
+        width: 95%;
+        min-height: 0px;
+        padding: 10px 11px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+
+    .imagem_sobre_centro{
+        width: 95%;
+        height: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+    }
+
+    .imagem_sobre_centro img{
+        width: 100%;
+        height: 700px;
+    }
+
+    .texto_sobre_diteiro{
+       width: 95%;
+        min-height: 0px;
+        padding: 10px 11px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+
+/**************************************************/
+    
+/****************** Minhas Vendas *****************/
+
+    .vendas_centro{
+        width: 100%;
+        min-height: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+        padding-bottom: 50px;
+        margin-bottom: 50px;
+    }
+
+    .caixa_botao_vendas{
+        width: 400px;
+        height: 90px;
+        float: right;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    .botao_vendas{
+        width: 100%;
+        height: 80px;
+        outline: 0;
+        border-radius: 5px;
+        border: solid 1px #cecece;
+        background-color: #ff9900;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .caixa_vendas{
+        width: 97%;
+        height: 900px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        clear: both;
+        
+    }
+
+    .titulo_vendas{
+        width: 100%;
+        height: 80px;
+        background-color: #ff9900;
+        border-top-left-radius: 9px;
+        border-top-right-radius: 9px;
+        border-bottom: solid 2px #ff9900;
+    }
+
+    .titulo_produtos_vendas{
+        width: 50%;
+        height: 35px;
+        float: left;
+        padding-top: 20px;
+        text-align: center;
+        border-top-left-radius: 8px;
+        font-size: 40px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .titulo_menor_produtos_vendas{
+        width: 17%;
+        height: 35px;
+        float: left;
+        padding-top: 20px;
+        text-align: center;
+        border-top-left-radius: 8px;
+        font-size: 40px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .titulo_menor_produtos_vendas_final{
+        width: 15%;
+        height: 35px;
+        float: left;
+        padding-top: 20px;
+        text-align: center;
+        border-top-left-radius: 8px;
+        font-size: 40px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .itens_vendas{
+        width: 100%;
+        min-height: 90px;
+        margin-bottom: 5px;
+        overflow: auto;
+        border-bottom: solid 2px #a2a2a2;
+    }
+    
+    .produto_vendas{
+        width: 50%;
+        float: left;
+        min-height: 75px;
+        padding-top: 15px;
+        font-size: 40px;
+    }
+
+    .detalhe_vendas{
+        width: 16%;
+        min-height: 70px;
+        padding-top: 35px;
+        float: left;
+        text-align: center;
+        font-size: 30px;
+        margin-left: 5px;
     }
 
 /**************************************************/
 
+/****************** Nossas Lojas *****************/
+
+    .nossas_lojas{
+        width: 100%;
+        min-height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+        margin-bottom: 40px;
+    }
+
+    .pesquisa_loja{
+        width: 90%;
+        min-height: 400px;
+        border-left: solid 2px #cccccc;
+        border-right: solid 2px #cccccc;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #f2f2f2;
+    }
+
+    .mapa_loja{
+        width: 90%;
+        height: 550px;
+        border: solid 2px #cccccc;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+
+    .mapa_loja img{
+        width: 100%;
+        height: 550px;
+        float: right;
+        border-radius: 5px;
+    }
+
+    .titulo_loja{
+        width: 100%;
+        height: 35px;
+        text-align: center;
+        padding-top: 10px;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    .campos_loja{
+        width: 800px;
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+    }
+
+    .select_uf_lojas{
+        width: 150px;
+        height: 80px;
+        border: solid 1px gray;
+        border-radius: 5px;
+        float: left;
+        font-size: 30px;
+        
+    }
+
+    .select_cidade_lojas{
+        width: 600px;
+        height: 80px;
+        border: solid 1px gray;
+        border-radius: 5px;
+        font-size: 30px;
+        float: left;
+        margin-left: 30px;
+    }
+
+    .resultado_loja{
+        width: 100%;
+        height: 400px;
+        margin-top: 20px;
+        padding-top: 10px;
+        overflow-y: scroll;
+        overflow-x: inherit;
+        font-size: 30px;
+    }
+
+    .linha_loja{
+        width: 98%;
+        min-height: 100px;
+        padding-top: 20px;
+        padding-left: 10px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        border-bottom: solid 2px #ff9900;
+    }
+
+/**************************************************/
+    
+/******************* Fale Conosco *****************/
+
+    .fale_conosco{
+        width: 100%;
+        min-height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+    }
+
+    .imagem_fale{
+        display: none;
+    }
+
+    .caixa_fale{
+        width: 90%;
+        min-height: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .titulo_fale{
+        width: 100%;
+        height: 60px;
+        margin-top: 5px;
+        font-size: 50px;
+        text-align: center;
+    }
+    
+     .campos_fale{
+        width: 100%;
+        height: 80px;
+    }
+    
+    .caixas_campo_fale{
+        width: 850px;
+        height: 70px;
+        border-radius: 5px;
+        border: solid 1px gray;
+        outline-color: #ff6c00;
+        margin-left: 15px;
+        font-size: 30px;
+    }
+    
+    .titulo_fale_radio{
+        width: 100%;
+        height: 80px;
+        margin-top: 20px;
+        font-size: 45px;
+    }
+
+    .caixas_radio_fale{
+        width: 40px;
+        height: 40px;
+        margin-left: 60px;
+        background-color: firebrick;
+    }
+
+    .campos_text_fale{
+        width: 98%;
+        height: 300px;
+        margin-left: 5px;
+        margin-bottom: 20px;
+    }
+
+     .caixas_text_fale{
+        width: 100%;
+        height: 300px;
+        border-radius: 5px;
+        border: solid 1px gray;
+        font-size: 30px;
+        resize: none;
+        outline-color: #ff6c00;
+    }
+
+    .campos_fale_botao{
+        width: 300px;
+        height: 80px;
+        margin-left: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        background-color: aqua;
+    }
+
+    .botao_enviar_fale{
+        width: 300px;
+        height: 80px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #ff9900;
+        border: 0px;
+        border-radius: 5px;
+        font-size: 40px;
+        
+    }
+
+/**************************************************/
+
+    
+    
+    
+    
+    
     
     
     
