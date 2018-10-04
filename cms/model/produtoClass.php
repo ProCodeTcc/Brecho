@@ -9,6 +9,7 @@
 		private $descricao;
 		private $classificacao;
 		private $preco;
+		private $tamanho;
 		
 		public function setIdProduto($id){
 			$this->id = $id;
@@ -49,6 +50,14 @@
 		
 		public function getPreco(){
 			return $this->preco;
+		}
+		
+		public function setTamanho($tamanho){
+			$this->tamanho = $tamanho;
+		}
+		
+		public function getTamanho(){
+			return $this->tamanho;
 		}
 	}
 ?>

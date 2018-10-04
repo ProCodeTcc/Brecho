@@ -1,11 +1,49 @@
+<?php
+	if(isset($_POST['id'])){
+		$id = $_POST['id'];
+	}else{
+		$id = null;
+	}
+?>
+
 <script>
 	url = '../../';
+	
+	//função que exibe os dados no formulário
+	function exibirDados(id){
+		$.ajax({
+			type: 'POST', //tipo de requisição
+			url: url+'router.php', //url onde será enviada a requisição
+			data: {id:id, modo: 'buscar', controller: 'cor'}, //parâmetros enviados
+			success: function(dados){
+				//convertendo os dados para json
+				json = JSON.parse(dados);
+				
+				//colocando os valores nas caixas de texto
+				$('#txtnome').val(json.nome);
+				$('#txtcor').val(json.cor);
+			}
+		});
+	}
+	
 	$(document).ready(function(){
+		var id = $('#frmCor').data('id');
+		
+		if(id != ""){
+			exibirDados(id);
+		}
+		
 		$('#frmCor').submit(function(e){
 			e.preventDefault();
 			var formulario = new FormData($('#frmCor')[0]);
 			formulario.append('controller', 'cor');
-			formulario.append('modo', 'inserir');
+			
+			if(id == ""){
+				formulario.append('modo', 'inserir');
+			}else{
+				formulario.append('modo', 'editar');
+				formulario.append('id', id);
+			}
 			
 			$.ajax({
 				type: 'POST',
@@ -17,6 +55,8 @@
                 async: true,
 				success: function(dados){
 					alert(dados);
+					listar();
+					$('.container_modal').fadeOut(400);
 				}
 			});
 		});
@@ -24,7 +64,7 @@
 </script>
 
 <div class="form_container">
-	<form class="frm_cor" id="frmCor" name="frm_cor">
+	<form class="frm_cor" data-id="<?php echo($id) ?>" id="frmCor" name="frm_cor">
 		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Nome:

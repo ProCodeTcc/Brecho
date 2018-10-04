@@ -243,7 +243,34 @@
 					$controllerCor = new controllerCor();
 					$controllerCor->inserirCor();
 				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					$controllerCor = new controllerCor();
+					$controllerCor->excluirCor($id);
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					$controllerCor = new controllerCor();
+					$listCor = $controllerCor->buscarCor($id);
+					
+					echo $listCor;
+				break;
+					
+				case 'editar':
+					$controllerCor = new controllerCor();
+					$controllerCor->atualizarCor();
+				break;
 			}
+		break;
+			
+		case 'produto':
+			$tamanho = $_POST['tamanho'];
+			$controllerCor = new controllerCor();
+			$listTamanho = $controllerCor->buscarTamanho($tamanho);
+			
+			echo($listTamanho);
 		break;
     }
 ?>

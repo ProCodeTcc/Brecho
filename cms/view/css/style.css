@@ -630,6 +630,15 @@ footer{
 	border-color: deepskyblue;
 }
 
+#tipo_tamanho{
+	display: flex;
+	justify-content: space-between;
+}
+
+#txttamanho{
+	display: none;
+}
+
 /*************************** FALE CONOSCO *****************************/
 
 .fale_conosco{
@@ -843,4 +852,9 @@ footer{
 	height: 32px;
 	padding: 0;
 	outline: none;
+}
+
+#cor{
+	width: 80px;
+	margin: auto;
 }

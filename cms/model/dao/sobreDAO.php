@@ -1,4 +1,12 @@
 <?php
+	/*
+        Projeto: CMS do Brechó
+        Autor: Lucas Eduardo
+        Data: 04/10/2018
+        Objetivo: CRUD da página sobre
+
+    */ 
+
 	class SobreDAO{
 		public function __construct(){
 			require_once('bdClass.php');

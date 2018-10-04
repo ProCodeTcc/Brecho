@@ -30,7 +30,41 @@
 			});
 		}
 		
+		function listar(){
+			$.ajax({
+				type: 'POST',
+				url: 'dados.php',
+				success: function(dados){
+					$('#consulta').html(dados);
+				}
+			});
+		}
+		
+		function buscar(idItem){
+			$.ajax({
+				type: 'POST',
+				url: 'frm_cor.php',
+				data: {id:idItem},
+				success: function(dados){
+					$('.modal').html(dados);
+				}
+			});
+		}
+		
+		function excluir(idItem){
+			$.ajax({
+				type: 'POST',
+				url: url+'router.php',
+				data: {id:idItem, controller: 'cor', modo: 'excluir'},
+				success: function(dados){
+					listar();
+					alert(dados);
+				}
+			});
+		}
+		
 		$(document).ready(function(){
+			listar();
 			$('#adicionar').click(function(){
 				$('.container_modal').fadeIn(400);
 			});
@@ -107,7 +141,10 @@
 
                 <div class="users_view">
                     <div class="users_view_title">
-                        <div class="users_view_itens">Cores Cadastradas</div>
+                        <div class="users_view_itens">#</div>
+                        <div class="users_view_itens">Nome</div>
+						<div class="users_view_itens">Cor</div>
+                        <div class="users_view_itens">Ações</div>
                     </div>
 
                     <div id="consulta">

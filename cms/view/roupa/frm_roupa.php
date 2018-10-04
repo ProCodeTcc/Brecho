@@ -3,6 +3,14 @@
 		$('.fechar').click(function(){
 			$('.container_modal').fadeOut(400);
 		});
+		
+		$('#txtnumero').click(function(){
+			alert('numero');
+		});
+		
+		$('#txtmedida').click(function(){
+			alert('medida');
+		});
 	});
 </script>
 
@@ -20,9 +28,20 @@
 				<textarea name="txtdesc" class="cadastro_text" id="txtdesc"></textarea>
 			</div>
 			
-			<div class="form_linha">
+			<div class="form_linha" id="tipo_tamanho_linha">
 				<label class="lbl_cadastro">Tipo: </label>
-				<select name="txttipo" class="cadastro_select" id="txttipo">
+				
+				<div id="tipo_tamanho">
+					<label for="txtmedida">Medida</label>
+					<input type="radio" id="txtmedida" name="txttipo" value="medida" onClick="buscarMedidas(1)">
+
+					<label for="txtnumero">Número</label>
+					<input type="radio" id="txtnumero" name="txttipo" value="numero">
+				</div>
+			</div>
+			
+			<div class="form_linha">
+				<select name="txttipo" class="cadastro_select" id="txttamanho">
 					<option>tipo</option>
 				</select>
 			</div>
