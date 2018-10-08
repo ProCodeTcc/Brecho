@@ -1231,7 +1231,6 @@
     .categoria_linha{
         width: 100%;
         height: 35px;
-/*        background-color: gold;*/
         margin-bottom: 2px;
         padding-top: 15px;
         font-size: 18px;
@@ -1241,7 +1240,6 @@
     .categoria_tamanhos{
         width: 100%;
         height: 150px;
-/*        background-color: dodgerblue;*/
     }
 
    .filtro_categoria{
@@ -1253,14 +1251,12 @@
     .categoria_pesquisa{
         width: 100%;
         height: 50px;
-/*        background-color: green;*/
         margin-bottom: 20px;
     }
 
     .categoria_pesquisa_centro{
         width: 800px;
         height: 50px;
-/*        background-color: firebrick;*/
         margin-left: auto;
         margin-right: auto;
     }
@@ -1295,7 +1291,6 @@
         font-size: 16px;
         font-family: arial;
     }
-
 
 /**************************************************/
 
@@ -2775,8 +2770,6 @@
        
     }
    
-    
-
 /**************************************************/
 
 /********************** Sobre *********************/
@@ -3164,7 +3157,383 @@
 
 /**************************************************/
 
+/********************** Perfil ********************/
+
+    .perfil_full{
+        width: 100%;
+        min-height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+    }
     
+    .imagem_perfil{
+        display: none;
+    }
+
+    .bem_vindo_perfil{
+        width: 100%;
+        height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 60px;
+        padding-bottom: 20px;
+    }
+
+    .perfil{
+        width: 100%;
+        min-height: 600px;
+    }
+
+    .perfil_esquerdo{
+        width: 95%;
+        min-height: 395px;
+        margin-left:auto;
+        margin-right:auto;
+        border-radius: 15px;
+        border: solid 2px #ff7e00;
+        background-color: rgba(204, 204, 204, 0.56);
+    }
+    
+    .titulo_perfil{
+        width: 100%;
+        height: 80px;
+        text-align: center;
+        font-size: 60px;
+    }
+    
+    .botao_dados{
+        width: 464px;
+        height: 300px;
+        background-color: white;
+        border-top: solid 2px #cccccc;
+        border-bottom: solid 2px #cccccc;
+        float: left;
+    }
+    
+    .icone_dados{
+        width: 200px;
+        height: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .icone_dados img{
+        width: 200px;
+        height: 200px;
+    }
+    
+    .texto_dados{
+        width: 450px;
+        height: 80px;
+        color: black;
+        font-size: 25px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .perfil_direito{
+        width: 95%;
+        min-height: 500px;
+        border-radius: 15px;
+        border: solid 2px #ff7e00;
+        background-color: rgba(204, 204, 204, 0.56);
+        margin-left:auto;
+        margin-right:auto;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        padding-bottom: 20px;
+    }
+    
+     .perfil_tabela{
+        width: 100%;
+        min-height: 400px;
+        background-color: rgb(247, 247, 247);
+    }
+
+    .titulo_perfil_pedidos{
+        width: 100%;
+        height: 60px;
+        border-bottom: solid 1px darkorange;
+    }
+
+    .titulo_perfil_campos{
+        width: 33%;
+        height: 35px;
+        float: left;
+        margin-left: 2px;
+        text-align: center;
+        padding-top: 15px;
+        font-size: 30px;
+    }
+
+    .titulo_perfil_linha{
+        width: 100%;
+        height: 60px;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        border-bottom: solid 1px darkorange;
+    }
+
+/**************************************************/
+
+/************ Visualizar por categoria ************/
+
+    .caixa_categoria{
+        width: 100%;
+        min-height: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-y: auto;
+    }
+
+    .categoria{
+        width: 350px;
+        height: 100%;
+        float: left;
+        border-left: solid 1px gray;
+        border-right: solid 1px gray;
+        border-bottom: solid 1px gray;
+        text-align: center;
+        padding-bottom: 10px;
+        
+    }
+
+    .titulo_categoria_primeiro{
+        width: 100%;
+        height: 60px;
+        background-color: rgba(255, 153, 0, 0.75);
+        padding-top: 10px;
+        font-size: 40px;
+        margin-bottom: 2px;
+    }
+
+    .titulo_categoria{
+        width: 100%;
+        height: 60px;
+        background-color: rgba(255, 153, 0, 0.75);
+        padding-top: 10px;
+        font-size: 40px;
+        margin-bottom: 2px;
+    }
+
+    .categoria_linha{
+        width: 100%;
+        height: 50px;
+        margin-bottom: 2px;
+        padding-top: 10px;
+        font-size: 35px;
+        border-bottom: solid 1px darkorange;
+    }
+
+    .categoria_tamanhos{
+        width: 100%;
+        height: 260px;
+    }
+
+   .filtro_categoria{
+        width: 620px;
+        height: 100%;
+        float: left;
+    }
+
+    .categoria_pesquisa{
+        width: 100%;
+        height: 80px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .categoria_pesquisa_centro{
+        width: 100%;
+        height: 80px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .campo_pesquisa_categoria{
+        width: 506px;
+        height: 65px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-left: solid 1px gray;
+        border-top: solid 1px gray;
+        border-bottom: solid 1px gray;
+        outline: 0px;
+        font-size: 20px;
+        float: left;
+    }
+
+    .botao_pesquisa_categoria{
+        width: 113px;
+        height: 65px;
+        background-color: #ff9900;
+        float: left;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-left: solid 0px gray;
+        border-right: solid 1px gray;
+        border-top: solid 1px gray;
+        border-bottom: solid 1px gray;
+        outline: 0px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 25px;
+        font-family: arial;
+/*        display: none;*/
+    }
+
+/**************************************************/
+    
+/**************** Visualizar produto **************/
+
+    .visualizar_produto{
+        width: 100%;
+        height: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+
+    .produto_imagens{
+        width: 950px;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: aqua;
+        
+    }
+
+    .caixa_mini_imagens{
+        width: 176px;
+        height: 100%;
+        padding-top: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+        float: left;
+        background-color: #cecece;
+    }
+
+    .mini_imagens{
+        width: 100%;
+        height: 171px;
+        margin-bottom: 2px;
+        background-color: fuchsia;
+    }
+
+    .mini_imagens img{
+        width: 100%;
+        height: 171px;
+    }
+
+    .visualizar_produto_imagem{
+        width: 770px;
+        height: 520px;
+        float: left;
+    }
+
+    .visualizar_produto_imagem img{
+        width: 770px;
+        height: 520px;
+    }
+
+    .visualizar_produto_detalhes{
+        width: 100%;
+        height: 490px;
+        background-color: aqua;
+        
+    }
+
+    .produto_detalhes_titulo{
+        width: 100%;
+        min-height: 45px;
+        padding-top: 15px;
+        font-size: 25px;
+        padding-left: 5px;
+        background-color: fuchsia
+    }
+
+    .produto_detalhes_linha{
+        width: 99%;
+        height: 30px;
+        padding-top: 20px;
+        margin-top: 1px;
+        font-size: 18px;
+        padding-left: 5px;
+    }
+
+    .produto_escondido{
+        width: 100%;
+        height: 180px;
+    }
+
+    .produto_detalhes_botao{
+        width: 530px;
+        height: 60px;
+        margin-left: 40px;
+        display: none;
+    }
+
+     .botao_compra{
+        width: 250px;
+        height: 60px;
+        background-color: #ff8e07;
+        border: 0px;
+        color: #fff;
+        font-family: sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        outline: 0;
+        float: left;
+         margin-left: 10px;
+         display: none;
+    }
+
+    .botao_compra:hover{
+        cursor: pointer;
+        display: none;
+    }
+
+    .produto_descricao{
+        width: 1300px;
+        min-height: 140px;
+        margin-left: auto;
+        margin-right: auto;
+        display: none;
+    }
+
+    .caixa_titulo_linha{
+        width: 100%;
+        height: 30px;
+        border-bottom: solid 2px darkorange;
+        margin-bottom: 10px;
+        display: none;
+    }
+
+    .veja_tambem{
+        width: 1150px;
+        min-height: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding-left: 150px;
+        color: black;
+        overflow: auto;
+        display: none;
+    }
+
+    .preto{
+
+        color: black;
+
+    }
+
+/**************************************************/
+
     
     
     
