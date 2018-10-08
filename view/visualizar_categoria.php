@@ -112,6 +112,12 @@
         </header>
         <main>
                 <div class="caixa_categoria">
+                    <div class="categoria_pesquisa">
+                                <div class="categoria_pesquisa_centro">
+                                   <input type="search" class="campo_pesquisa_categoria"> 
+                                   <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar"> 
+                                </div>
+                            </div>
                         <div class="categoria">
                             <div class="titulo_categoria_primeiro">
                                 Subcategorias
@@ -142,16 +148,9 @@
                             </div>
                         </div>
                         
+                         
                     
                         <div class="filtro_categoria">
-                            <div class="categoria_pesquisa">
-                                <div class="categoria_pesquisa_centro">
-                                   <input type="search" class="campo_pesquisa_categoria"> 
-                                   <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar"> 
-                                </div>
-                            
-                            </div>
-                       
                             <a href="visualizar_produto.php">
                                 <div class="produto">
                                     <div class="imagem_produto">
@@ -244,6 +243,9 @@
                             </a>
 
                      </div>
+                        <div class="botao_categoria_responsivo"> 
+                            <img src="icones/categoria.png">
+                        </div>
                   </div>  
         </main>
         <footer>

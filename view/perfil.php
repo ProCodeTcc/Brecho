@@ -111,6 +111,7 @@
             </div>
         </header>
         <main>
+            <div class="perfil_full">
             <div class="linha">
                 Perfil
             </div>
@@ -122,61 +123,61 @@
                 Bem Vindo Usuario
             </div>
             
-            <div class="perfil">
-                <div class="perfil_esquerdo">
-                    <h1 class="titulo_perfil"> Meus Dados </h1>
-                    <div class="botao_dados">
-                        <div class="icone_dados">
-                            <img alt="#" src="icones/atualizar_dados%20.png">
-                        </div>
+                <div class="perfil">
+                    <div class="perfil_esquerdo">
+                        <h1 class="titulo_perfil"> Meus Dados </h1>
                         <a href="atualizar_dados.php">
-                            <div class="texto_dados">
-                                <h1 class="titulo_perfil"> Atualizar Dados </h1>
+                            <div class="botao_dados">
+                                <div class="icone_dados">
+                                    <img alt="#" src="icones/atualizar_dados%20.png">
+                                </div>
+                                <div class="texto_dados">
+                                    <h1> Atualizar Dados </h1>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="minhas_vendas.php">
+                            <div class="botao_dados">
+                                <div class="icone_dados">
+                                    <img alt="#" src="icones/minhas_vendas.png">
+                                </div>
+                                <div class="texto_dados">
+                                    <h1> Minhas Vendas </h1>
+                                </div>
                             </div>
                         </a>
                     </div>
-                    <a href="minhas_vendas.php">
-                        <div class="botao_dados">
-                            <div class="icone_dados">
-                                <img alt="#" src="icones/minhas_vendas.png">
-                            </div>
-                            <div class="texto_dados">
-                                <h1 class="titulo_perfil"> Minhas Vendas </h1>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                 <div class="perfil_direito">
-                     <h1 class="titulo_perfil"> Meus Pedidos </h1>
-                     <div class="perfil_tabela">
-                         <div class="titulo_perfil_pedidos">
-                             <div class="titulo_perfil_campos">
-                                <h3> N° Pedido </h3>
+                     <div class="perfil_direito">
+                         <h1 class="titulo_perfil"> Meus Pedidos </h1>
+                         <div class="perfil_tabela">
+                             <div class="titulo_perfil_pedidos">
+                                 <div class="titulo_perfil_campos">
+                                    <h3> N° Pedido </h3>
+                                 </div>
+                                 <div class="titulo_perfil_campos">
+                                    <h3> Valor </h3>
+                                 </div>
+                                 <div class="titulo_perfil_campos">
+                                    <h3> Data De Retirada </h3>
+                                 </div>
                              </div>
-                             <div class="titulo_perfil_campos">
-                                <h3> Valor </h3>
+
+                              <div class="titulo_perfil_linha">
+                                 <div class="titulo_perfil_campos">
+                                     12345678
+                                 </div>
+                                 <div class="titulo_perfil_campos">
+                                     R$ 300,00
+                                 </div>
+                                 <div class="titulo_perfil_campos">
+                                     00/00/0000
+                                 </div>
                              </div>
-                             <div class="titulo_perfil_campos">
-                                <h3> Data De Retirada </h3>
-                             </div>
+
                          </div>
-                         
-                          <div class="titulo_perfil_linha">
-                             <div class="titulo_perfil_campos">
-                                 12345678
-                             </div>
-                             <div class="titulo_perfil_campos">
-                                 R$ 300,00
-                             </div>
-                             <div class="titulo_perfil_campos">
-                                 00/00/0000
-                             </div>
-                         </div>
-                         
-                     </div>
+                    </div>
                 </div>
             </div>
-            
         </main>
         <footer>
             <div class="footer_centro">
