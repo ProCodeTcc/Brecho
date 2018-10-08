@@ -542,20 +542,26 @@ footer{
 
 /***************************** ANÁLISE **********************************/
 .produtos_linha{
-	width: 100%;
+	width: 1200px;
 	height: auto;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	box-sizing: border-box;
 	padding: 10px;
+	flex-wrap: wrap;
 }
 
 .produtos{
+	width: 200px;
+	height: 220px;
 	margin: 20px;
 	padding: 20px;
 	text-align: center;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .produtos:hover{
@@ -567,6 +573,12 @@ footer{
 	width: 128px;
 	height: 128px;
 	border: 1px solid black;
+	margin: auto;
+}
+
+.produtos_imagem > img{
+	width: 128px;
+	height: 128px;
 }
 
 .produtos_titulo{
@@ -589,24 +601,84 @@ footer{
 }
 
 /************************* FORMULÁRIO DE PRODUTOS **********************/
+#modal_roupa{
+	height: 650px;
+}
+
 .frm_roupa{
+	margin-top: 25px;
+}
+
+.frm_imagem{
+	height: auto;
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+#roupas_form{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+}
+
+#visualizar_roupa{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+#visualizar_roupa .imagem_roupa{
+	width: 128px;
+	height: 128px;
+	margin-right: 5px;
 }
 
 #form_container_roupa{
 	text-align: center;
 }
 
+.dados_imagens{
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.imagem_linha{
+	width: 100%;
+	height: 150px;
+	display: flex;
+	flex-direction: row;
+	margin: 25px 0px 25px 0px;
+}
+
+.imagem_visualizar{
+	width: 128px;
+	height: 128px;
+}
+
+#visualizar_roupa img{
+	width: 128px;
+	height: 128px;
+}
+
+.imagem_visualizar img{
+	width: 128px;
+	height: 128px;
+}
+
+#send_image{
+	text-align: center;
+}
+
 #roupas_col1{
 	height: auto;
-	margin-top: 60px;
 }
 
 #roupas_col2{
 	height: auto;
-	margin-top: 60px;
 }
 
 .form_linha{
@@ -857,4 +929,18 @@ footer{
 #cor{
 	width: 80px;
 	margin: auto;
+}
+
+/************************* PROMOÇÃO ***************************/
+.frmPromocao{
+	width: 230px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: auto;
+}
+
+#novo{
+	display: none;
 }

@@ -4,18 +4,23 @@
 			
 		}
 		
-		private $idProduto;
-		private $nome;
+		private $id;
+		protected $nome;
 		private $descricao;
 		private $classificacao;
-		private $preco;
+		protected $preco;
 		private $tamanho;
+		private $categoria;
+		private $marca;
+		private $cor;
+		protected $imagem;
+		protected $status;
 		
-		public function setIdProduto($id){
+		public function setId($id){
 			$this->id = $id;
 		}
 		
-		public function getIdProduto(){
+		public function getId(){
 			return $this->id;
 		}
 		
@@ -27,7 +32,7 @@
 			return $this->nome;
 		}
 		
-		public function setDescricao(){
+		public function setDescricao($descricao){
 			$this->descricao = $descricao;
 		}
 		
@@ -58,6 +63,46 @@
 		
 		public function getTamanho(){
 			return $this->tamanho;
+		}
+		
+		public function setCor($cor){
+			$this->cor = $cor;
+		}
+		
+		public function getCor(){
+			return $this->cor;
+		}
+		
+		public function setMarca($marca){
+			$this->marca = $marca;
+		}
+		
+		public function getMarca(){
+			return $this->marca;
+		}
+		
+		public function setCategoria($categoria){
+			$this->categoria = $categoria;
+		}
+		
+		public function getCategoria(){
+			return $this->categoria;
+		}
+		
+		public function setImagem($imagem){
+			$this->imagem = $imagem;
+		}
+		
+		public function getImagem(){
+			return $this->imagem;
+		}
+		
+		public function setStatus($status){
+			$this->status = $status;
+		}
+		
+		public function getStatus(){
+			return $this->status;
 		}
 	}
 ?>

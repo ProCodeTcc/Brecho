@@ -18,7 +18,80 @@
 		
 		<script>
 			var url = '../../';
+			
+			function listar(){
+				$.ajax({
+					type: 'POST',
+					url: 'dados.php',
+					success: function(dados){
+						$('#consulta').html(dados);
+					}
+				});
+			};
+			
+			//função para atualizar o status
+			function status(status, id){
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: url+'router.php', //url onde será enviada a requisição
+					data: {status:status, id:id, modo: 'status', controller: 'produto'}, //parâmetros enviados
+					success: function(dados){
+						//listagem dos dados atualizados
+						listar();
+					}
+				});
+			}
+			
+			function inserirPromocao(id){
+				$.ajax({
+					type: 'POST',
+					url: url+'router.php',
+					data: {id:id, modo: 'inserirPromocao', controller: 'produto'},
+					success: function(dados){
+						alert(dados);
+					}
+				});
+			}
+			
+			//função que lista as imagens do produto
+			function listarImagens(idItem){
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: 'editar_imagem.php', //url onde será enviada a requisição
+					data: {id:idItem}, //dados enviados
+					success: function(dados){
+						$('.modal').html(dados); //carregando os dados
+					}
+				});
+			}
+			
+			//função que busca um produto
+			function buscar(idItem){
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: 'frm_roupa.php', //url onde será enviada a requisição
+					data: {id:idItem}, //dados enviados
+					success: function(dados){
+						$('.modal').html(dados); //carregando os dados
+					}
+				});
+			}
+			
+			//função que exclui um produto
+			function excluir(idItem){
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: url+'router.php', //url onde será enviada a requisição
+					data: {id:idItem, controller: 'produto', modo: 'excluir'}, //dados enviados
+					success: function(dados){
+						alert(dados); //mensagem de sucesso
+						listar(); //recarregando os dados
+					}
+				});
+			}
+			
 			$(document).ready(function(){
+				listar();
 				$('#adicionar').click(function(){
 					$('.container_modal').fadeIn(400);
 					
@@ -47,7 +120,7 @@
 
     <body>
         <div class="container_modal">
-            <div class="modal">
+            <div class="modal" id="modal_roupa">
                 
             </div>
         </div>
@@ -108,27 +181,6 @@
                     </div>
 
                     <div id="consulta">
-						
-						
-						<div class="produtos_linha">
-							<div class="produtos">
-								<div class="produtos_imagem">
-								
-								</div>
-								
-								<article>
-									<p class="produtos_titulo">nome</p>
-									<p class="produtos_titulo">preço</p>
-								</article>
-								
-								<div class="acoes">
-									<img src="../imagens/delete16.png">
-									<img src="../imagens/pencil.png">
-									<img src="../imagens/ativar.png">
-								</div>
-							</div>
-						
-						</div>
 						
 						
                     </div>

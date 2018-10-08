@@ -140,5 +140,11 @@
 			session_start();
 			session_destroy();
 		}
+		
+		public function checarLogin(){
+			if(!isset($_SESSION['usuario'])){
+				header("location: ../../index.php");
+			}
+		}
     }
 ?>

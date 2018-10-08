@@ -9,8 +9,12 @@
 
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
 	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
 	$controllerNivel = new controllerNivel();
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>

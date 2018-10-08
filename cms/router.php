@@ -266,11 +266,140 @@
 		break;
 			
 		case 'produto':
-			$tamanho = $_POST['tamanho'];
-			$controllerCor = new controllerCor();
-			$listTamanho = $controllerCor->buscarTamanho($tamanho);
+			$modo = $_POST['modo'];
+			require_once('controller/controllerProduto.php');
+			switch($modo){
+				case 'inserir':
+					$controllerProduto = new controllerProduto();
+					
+					$controllerProduto->inserirProduto();
+				break;
+					
+				case 'editar':
+					$id = $_POST['id'];
+					
+					$controllerProduto = new controllerProduto();
+					
+					$controllerProduto->atualizarProduto($id);
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerProduto = new controllerProduto();
+					
+					$listProduto = $controllerProduto->buscarProduto($id);
+					
+					echo($listProduto);
+				break;
+					
+				case 'status':
+					$id = $_POST['id'];
+					$status = $_POST['status'];
+					
+					$controllerProduto = new controllerProduto();
+					
+					$controllerProduto->atualizarStatus($status, $id);
+				break;
+					
+				case 'atualizarImagem':
+					$id = $_POST['id'];
+					$imagem = $_POST['imagem'];
+					
+					$controllerProduto = new controllerProduto();
+					$controllerProduto->atualizarImagem($imagem, $id);
+				break;
+					
+				case 'excluirImagem':
+					$id = $_POST['id'];
+					
+					$controllerProduto = new controllerProduto();
+					$controllerProduto->excluirImagem($id);
+				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					
+					$controllerProduto = new controllerProduto();
+					
+					$controllerProduto->excluirProduto($id);
+				break;
+					
+				case 'inserirPromocao':
+					$id = $_POST['id'];
+					
+					$controllerProduto = new controllerProduto();
+					
+					$controllerProduto->inserirPromocao($id);
+				break;
+					
+				case 'buscarMedida':
+					$tamanho = $_POST['tamanho'];
+					$controllerProduto = new controllerProduto();
+					$listTamanho = $controllerProduto->buscarTamanho($tamanho);
+
+					echo($listTamanho);
+				break;
+					
+				case 'buscarCor':
+					$controllerProduto = new controllerProduto();
+					$listCor = $controllerProduto->listarCor();
+					
+					echo($listCor);
+				break;
+					
+				case 'buscarMarca':
+					$controllerProduto = new controllerProduto();
+					$listMarca = $controllerProduto->listarMarca();
+					
+					echo($listMarca);
+				break;
+					
+				case 'buscarCategoria':
+					$controllerProduto = new controllerProduto();
+					$listCategoria = $controllerProduto->listarCategoria();
+					
+					echo($listCategoria);
+				break;
+					
+			}
+		break;
 			
-			echo($listTamanho);
+		case 'promoção':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerPromocao.php');
+			switch($modo){
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerPromocao = new controllerPromocao();
+					$listProduto = $controllerPromocao->buscarProduto($id);
+					
+					echo($listProduto);
+				break;
+					
+				case 'inserir':
+					$id = $_POST['id'];
+					
+					$controllerPromocao = new controllerPromocao();
+					$controllerPromocao->cadastrarPromocao($id);
+				break;
+				
+				case 'excluir':
+					$id = $_POST['id'];
+					
+					$controllerPromocao = new controllerPromocao();
+					$controllerPromocao->excluirPromocao($id);
+				break;
+					
+				case 'status':
+					$status = $_POST['status'];
+					$id = $_POST['id'];
+					
+					$controllerPromocao = new controllerPromocao();
+					$controllerPromocao->atualizarStatus($status, $id);
+				break;
+			}
 		break;
     }
 ?>
