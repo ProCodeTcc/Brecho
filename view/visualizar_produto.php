@@ -1,8 +1,20 @@
+<?php
+	if(isset($_GET['id'])){
+		$id = $_GET['id'];
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery.js"></script>
+		
+		<script>
+			
+		</script>
+		
     </head>
     <body>
         <header>
@@ -128,18 +140,26 @@
                         <img alt="#" src="imagens/jaqueta.jpg">
                     </div>
                 </div>
+				
+				<?php
+					$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+					require_once($diretorio.'controller/controllerProduto.php');
+					$listProduto = new controllerProduto();
+					$rsProduto = $listProduto->buscarProduto($id);
+				?>
+				
                 <div class="visualizar_produto_detalhes">
                     <div class="produto_detalhes_titulo">
-                       <b> Jaqueta de Couro Feminina estilo Biker</b>
+                       <b> <?php echo($rsProduto->getNome()) ?></b>
                     </div>
                     <div class="produto_detalhes_linha">
-                       Preço: R$ 150,00
+                       Preço: R$ <?php echo($rsProduto->getPreco()) ?>
                     </div>
                     <div class="produto_detalhes_linha">
-                       Cor: Preto
+                       Cor: <?php echo($rsProduto->getCor()) ?>
                     </div>
                     <div class="produto_detalhes_linha">
-                       Tamanho: M
+                       Tamanho: <?php echo($rsProduto->getTamanho()) ?>
                     </div>
                     
                     <div class="produto_escondido">
@@ -159,11 +179,7 @@
                 <div class="caixa_titulo_linha">
                     <h2>Descrição</h2>
                 </div>
-                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
-Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.
-Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
+                   <?php echo($rsProduto->getDescricao())?>
                 
             </div>
             <div class="linha">

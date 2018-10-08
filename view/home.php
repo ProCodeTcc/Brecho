@@ -7,7 +7,7 @@
         
         <script src="view/js/jquery.js"> </script>
         <script src="view/js/jquery.cycle.all.js"> </script>
-        <script>
+        <script>		
 			$(document).ready(function(){
 				$(function (){
 					$("#slide ul").cycle({
@@ -168,24 +168,35 @@
                 </div>
                 
                 <div class="caixa_produto">
+					<?php
+						$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+						require_once($diretorio.'controller/controllerProduto.php');
+					
+						$listProduto = new controllerProduto();
+						$rsProdutos = $listProduto->listarProdutos();
+						
+						$cont = 0;
+					
+						while($cont < count($rsProdutos)){
+					?>
                         <div class="produto">
-                            <a href="view/visualizar_produto.php">
+                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>">
 
                             <div class="imagem_produto">
-                                <img src="view/imagens/blusa.jpg" alt="#">
+                                <img src="cms/view/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
                             </div>
                             <div class="descritivo_produto">
                                 <div class="titulo_produto">
-                                    Blusa Masculina Dixie Tricot Gola V
+                                    <?php echo($rsProdutos[$cont]->getNome()) ?>
                                 </div>
                                 <div class="descricao">
-                                    Fabricada em tricot e lã, a Blusa Dixie conta com efeito degradê de cores e gola V. Perfeita para compor looks casuais, é ideal para ser usada com jeans e jaquetas! Confortável e super estilosa, é indispensável para os homens que buscam conforto e qualidade em uma só peça.
+                                    <?php echo($rsProdutos[$cont]->getDescricao()) ?>
                                 </div>
                                 <div class="tamanho">
-                                   Tamanho: [M]
+                                   Tamanho: <?php echo($rsProdutos[$cont]->getTamanho()) ?>
                                 </div>
                                 <div class="preco">
-                                    R$ 129,90
+                                    R$ <?php echo($rsProdutos[$cont]->getPreco()) ?>
                                 </div>
                                 <div class="opcoes">
                                         <div class="comprar_produto">
@@ -198,8 +209,11 @@
                             </div>
                             </a>
                         </div>
-                    
-                    <a href="view/visualizar_produto.php">
+                    <?php
+					$cont++;
+						}
+					?>
+                    <!--<a href="view/visualizar_produto.php">
                         <div class="produto">
                             <div class="imagem_produto">
                                 <img src="view/imagens/tenis.jpg" alt="#">
@@ -258,7 +272,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </a>-->
                 </div>
                 
                 <div class="linha">
