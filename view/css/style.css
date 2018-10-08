@@ -1255,14 +1255,15 @@
     }
 
     .categoria_pesquisa_centro{
-        width: 800px;
+        width: 1000px;
         height: 50px;
         margin-left: auto;
         margin-right: auto;
+        float: right;
     }
 
     .campo_pesquisa_categoria{
-        width: 706px;
+        width: 866px;
         height: 45px;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
@@ -1275,7 +1276,7 @@
     }
 
     .botao_pesquisa_categoria{
-        width: 80px;
+        width: 120px;
         height: 45px;
         background-color: #ff9900;
         float: left;
@@ -1290,6 +1291,10 @@
         font-weight: bold;
         font-size: 16px;
         font-family: arial;
+    }
+    
+    .botao_categoria_responsivo{
+        display: none;
     }
 
 /**************************************************/
@@ -3280,7 +3285,7 @@
     }
 
 /**************************************************/
-
+    
 /************ Visualizar por categoria ************/
 
     .caixa_categoria{
@@ -3289,6 +3294,7 @@
         margin-left: auto;
         margin-right: auto;
         overflow-y: auto;
+        margin-bottom: 150px;
     }
 
     .categoria{
@@ -3300,6 +3306,7 @@
         border-bottom: solid 1px gray;
         text-align: center;
         padding-bottom: 10px;
+        display: none;
         
     }
 
@@ -3336,41 +3343,41 @@
     }
 
    .filtro_categoria{
-        width: 620px;
+        width: 70%;
         height: 100%;
-        float: left;
+       margin-left: 50px;
+       float: left;
     }
 
     .categoria_pesquisa{
         width: 100%;
-        height: 80px;
+        height: 100px;
         margin-top: 20px;
         margin-bottom: 20px;
     }
 
     .categoria_pesquisa_centro{
         width: 100%;
-        height: 80px;
-        margin-left: auto;
-        margin-right: auto;
+        height: 100px;
     }
 
     .campo_pesquisa_categoria{
-        width: 506px;
-        height: 65px;
+        width: 73%;
+        height: 95px;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
         border-left: solid 1px gray;
         border-top: solid 1px gray;
         border-bottom: solid 1px gray;
         outline: 0px;
-        font-size: 20px;
+        font-size: 40px;
         float: left;
+        margin-left: 20px;
     }
 
     .botao_pesquisa_categoria{
-        width: 113px;
-        height: 65px;
+        width: 23%;
+        height: 95px;
         background-color: #ff9900;
         float: left;
         border-top-right-radius: 10px;
@@ -3382,18 +3389,35 @@
         outline: 0px;
         cursor: pointer;
         font-weight: bold;
-        font-size: 25px;
+        font-size: 40px;
         font-family: arial;
-/*        display: none;*/
+    }
+    
+    .botao_categoria_responsivo{
+        width: 150px;
+        height: 150px;
+        background-color: rgba(255, 137, 0, 0.76);
+        float: left;
+        position: fixed;
+        margin-left: 800px;
+        margin-top: 100px;
+        border-radius: 100px;
+    }
+    
+    .botao_categoria_responsivo img{
+        width: 110px;
+        height: 110px;
+        margin-left: 20px;
+        margin-top: 20px;
     }
 
 /**************************************************/
-    
+     
 /**************** Visualizar produto **************/
 
     .visualizar_produto{
         width: 100%;
-        height: 520px;
+        min-height: 520px;
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
@@ -3422,7 +3446,6 @@
         width: 100%;
         height: 171px;
         margin-bottom: 2px;
-        background-color: fuchsia;
     }
 
     .mini_imagens img{
@@ -3442,88 +3465,82 @@
     }
 
     .visualizar_produto_detalhes{
-        width: 100%;
-        height: 490px;
-        background-color: aqua;
-        
+        width: 95%;
+        min-height: 540px;
+        clear: both;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .produto_detalhes_titulo{
         width: 100%;
         min-height: 45px;
         padding-top: 15px;
-        font-size: 25px;
-        padding-left: 5px;
-        background-color: fuchsia
+        font-size: 45px;
     }
 
     .produto_detalhes_linha{
         width: 99%;
-        height: 30px;
+        height: 60px;
         padding-top: 20px;
         margin-top: 1px;
-        font-size: 18px;
+        font-size: 38px;
         padding-left: 5px;
     }
 
     .produto_escondido{
-        width: 100%;
-        height: 180px;
-    }
-
-    .produto_detalhes_botao{
-        width: 530px;
-        height: 60px;
-        margin-left: 40px;
         display: none;
     }
 
+    .produto_detalhes_botao{
+        width: 100%;
+        height: 140px;
+    }
+
      .botao_compra{
-        width: 250px;
-        height: 60px;
+        width: 450px;
+        height: 120px;
         background-color: #ff8e07;
         border: 0px;
         color: #fff;
         font-family: sans-serif;
-        font-size: 18px;
+        font-size: 40px;
         font-weight: bold;
         outline: 0;
         float: left;
-         margin-left: 10px;
-         display: none;
-    }
-
-    .botao_compra:hover{
-        cursor: pointer;
-        display: none;
+        margin-left: 10px;
     }
 
     .produto_descricao{
-        width: 1300px;
+        width: 95%;
         min-height: 140px;
         margin-left: auto;
         margin-right: auto;
-        display: none;
+        padding: 10px;
     }
 
     .caixa_titulo_linha{
         width: 100%;
-        height: 30px;
-        border-bottom: solid 2px darkorange;
+        min-height: 30px;
+        border-bottom: solid 5px darkorange;
         margin-bottom: 10px;
-        display: none;
+        font-size: 50px;
     }
 
     .veja_tambem{
-        width: 1150px;
+        width: 100%;
         min-height: 400px;
-        margin-left: auto;
-        margin-right: auto;
         margin-bottom: 20px;
-        padding-left: 150px;
         color: black;
         overflow: auto;
-        display: none;
+    }
+    
+    .produto_veja{
+        width: 700px;
+        min-height: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    
     }
 
     .preto{
@@ -3534,7 +3551,188 @@
 
 /**************************************************/
 
-    
+/********************* Eventos ********************/
+
+    .eventos{
+        width: 100%;
+        min-height: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+    }
+
+    .linha_evento{
+        width: 100%;
+        min-height: 300px;
+        border-bottom: solid 1px #cecece;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+    }
+
+    .imagem_evento{
+        width: 100%;
+        height: 500px;
+    }
+
+    .imagem_evento img{
+        width: 100%;
+        height: 500px;
+    }
+
+    .descricao_evento{
+        width: 100%;
+        min-height: 300px;
+    }
+
+    .titulo_evento{
+        width: 100%;
+        height: 65px;
+        font-size: 60px;
+        padding-top: 10px;
+        border-bottom: solid 5px darkorange;
+        text-align: center;
+    }
+
+    .item_linha_evento{
+        width: 98%;
+        min-height: 0px;
+        padding-top: 30px;
+        font-size: 35px;
+        padding-left: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .descricao_linha_evento{
+        width: 98%;
+        min-height: 90px;
+        padding-top: 30px;
+        padding-left: 20px;
+        font-size: 20px;
+    }
+
+/**************************************************/
+
+/******************** Promoção ********************/
+
+    .caixa_promocao{
+        width: 100%;
+        min-height: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+        margin-top: 50px;
+        
+    }
+
+    .produto_promocao{
+        width: 600px;
+        height: 850px;
+        margin-left: 40px;
+        margin-bottom: 20px;
+        background-color:  aqua;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    .imagem_produto_promocao{
+        width: 100%;
+        height: 500px;
+    }
+
+    .imagem_produto_promocao img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .icone_promocao{
+        width: 110px;
+        height: 97px;
+        background-color: #db0000;
+        position: absolute;
+        border-radius: 100px;
+        color: white;
+        font-size: 50px;
+        padding-top: 36px;
+        padding-left: 20px;
+        border: solid 5px #a50000;
+        font-weight: 600;
+    }
+
+    .descritivo_produto_promocao{
+        width: 100%;
+        height: 245px;
+        padding-top: 5px;
+        background-color: fuchsia;
+    }
+
+    .titulo_produto_promocao{
+        width: 100%;
+        min-height: 50px;
+        max-height: 40px;
+        font-size: 16px;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: black;
+        background-color: forestgreen;
+    }
+
+    .preco_promocao{
+        width: 100%;
+        height: 20px;
+        text-align: center;
+    }
+
+    .opcoes_promocao{
+        width: 100%;
+        height: 50px;
+        text-align: center;
+    }
+
+    .comprar_produto_promocao{
+        width: 145px;
+        height: 35px;
+        float: left;
+        margin-left: 70px;
+        padding-top: 5px;
+        font-size: 25px;
+        border: solid 3px darkorange;
+        border-radius: 20px;
+        color: black;
+    }
+
+
+    .comprar_produto_promocao:hover{
+        cursor: pointer;
+        background-color: #ff9900;
+    }
+
+    .carrinho_produto_promocao{
+        width: 40px;
+        height: 40px;
+        float: right;
+        border: solid 3px darkorange;
+        border-radius: 40px;
+        margin-right: 20px;
+    }
+
+    .carrinho_produto_promocao img{
+        width: 30px;
+        height: 30px;
+        margin-top: 7px;
+
+    }
+
+    .carrinho_produto_promocao:hover{
+        cursor: pointer;
+        background-color: #ff9900;
+    }
+
+/**************************************************/
+
     
     
     
