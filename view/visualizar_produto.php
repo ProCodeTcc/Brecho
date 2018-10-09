@@ -210,6 +210,48 @@
                         </div>
                     </div>
                 </a>
+                <a href="visualizar_produto.php">
+                    <div class="produto_veja">
+                        <div class="imagem_produto">
+                            <img alt="#" src="imagens/tenis.jpg">
+                        </div>
+                        <div class="descritivo_produto">
+                            <div class="titulo_produto">
+                                Tênis Cano Alto Adidas Vs Set Mid Masculino
+                            </div>
+                            <div class="preco">
+                                R$ 249,99
+                            </div>
+                            <div class="opcoes">
+                                <div class="comprar_produto">
+                                    Conferir
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="visualizar_produto.php">
+                    <div class="produto_veja">
+                        <div class="imagem_produto">
+                            <img alt="#" src="imagens/tenis.jpg">
+                        </div>
+                        <div class="descritivo_produto">
+                            <div class="titulo_produto">
+                                Tênis Cano Alto Adidas Vs Set Mid Masculino
+                            </div>
+                            <div class="preco">
+                                R$ 249,99
+                            </div>
+                            <div class="opcoes">
+                                <div class="comprar_produto">
+                                    Conferir
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </main>
         <footer>

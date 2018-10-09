@@ -120,7 +120,7 @@
                         Atualizar Informações da Conta 
                     </div>
                     
-                    <form action="perfil.php">
+                    <form action="perfil.php" class="atualizar">
                         <div class="informacao_conta">
                              <div class="titulo_cadastro_usuario">
                                 E-mail*
@@ -137,13 +137,12 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="password">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="password">
                             </div>
-
                         </div>
 
                         <div class="titulo_atualizar">
@@ -202,7 +201,7 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
+                                <input  class="campo_cadastro_usuario_meio" type="date">
                             </div>
 
                         </div>
@@ -218,7 +217,7 @@
                             <div class="linha_cadastro_usuario">
                                 <input class="campo_cadastro_usuario" type="text">
                             </div>
-                            
+                           
                             <div class="titulo_cadastro_usuario">
                                 Numero do Cartão*
                             </div>
@@ -226,7 +225,7 @@
                                 <input class="campo_cadastro_usuario" type="text">
                             </div>
                             <div class="titulo_cadastro_usuario_mini">
-                                Código de Segurança*
+                                Cód de Segurança*
                              </div>
                             
                             <div class="titulo_cadastro_usuario_mini">
@@ -322,6 +321,7 @@
                                     <input class="botao_cadastro" type="submit" value="Atualizar">
 
                             </div>
+                            
                         </div>
                     </form>
                 </div>

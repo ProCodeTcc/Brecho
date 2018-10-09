@@ -214,11 +214,11 @@
                     </div>
                        
                 </div>
-            </div>
-            <div class="linha_botao_cadastro">
+                <div class="linha_botao_cadastro">
                 <form action="minhas_vendas.php">
                     <input class="botao_cadastro" type="submit" value="Cadastrar">
                 </form>
+            </div>
             </div>
         </main>
         <footer>

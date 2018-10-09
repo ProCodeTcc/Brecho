@@ -139,27 +139,27 @@
                 <div class="dados_direito">
                     <div class="titulo_pagamento_direito">
                         RESUMO DO PEDIDO 
-                        
-                        <div class="endereco_retirada">
-                            <div class="linha_pagamento_titulo">
-                                Endereço de Retirada
-                            </div>
-                            <div class="linha_pagamento">
-                                Rua: Elton Silva
-                            </div>
-                            <div class="linha_pagamento">
-                                Bairro: Centro
-                            </div>
-                            <div class="linha_pagamento">
-                                Cidade:Jandira - SP
-                            </div>
-                            <div class="linha_pagamento">
-                                CEP: 06600-025
-                            </div>
-                            <div class="linha_pagamento">
-                                Telefone: (11)4002-8922
-                            </div>
+                    </div>
+                    <div class="endereco_retirada">
+                        <div class="linha_pagamento_titulo">
+                            Endereço de Retirada
                         </div>
+                        <div class="linha_pagamento">
+                            Rua: Elton Silva
+                        </div>
+                        <div class="linha_pagamento">
+                            Bairro: Centro
+                        </div>
+                        <div class="linha_pagamento">
+                            Cidade:Jandira - SP
+                        </div>
+                        <div class="linha_pagamento">
+                            CEP: 06600-025
+                        </div>
+                        <div class="linha_pagamento">
+                            Telefone: (11)4002-8922
+                        </div>
+                    </div>
                         
 <!--
                         <div class="tabela_produto">
@@ -171,63 +171,60 @@
                             </div>
                         </div>
 -->
-                        <div class="tabela_produto">
-                            <div class="linha_titulo_produtos">
-                                <div class="coluna_tabela_produto_maior">
-                                    Itens do Pedido
-                                </div>
-                                <div class="coluna_tabela_produto_menor">
-                                    Valor
-                                </div>
+                    <div class="tabela_produto">
+                        <div class="linha_titulo_produtos">
+                            <div class="coluna_tabela_produto_maior">
+                                Itens do Pedido
                             </div>
-                            <div class="linha_item_produtos">
-                                <div class="coluna_tabela_produto_maior">
-                                    Blusa Masculina Dixie Tricot Gola V
-                                </div>
-                                <div class="coluna_tabela_produto_menor">
-                                    R$: 129,90
-                                </div>
-                            </div>
-                            <div class="linha_item_produtos">
-                                <div class="coluna_tabela_produto_maior">
-                                    Blusa Masculina Dixie Tricot Gola V
-                                </div>
-                                <div class="coluna_tabela_produto_menor">
-                                    R$: 129,90
-                                </div>
-                            </div>
-                            <div class="linha_item_produtos">
-                                <div class="coluna_tabela_produto_maior">
-                                    Blusa Masculina Dixie Tricot Gola V
-                                </div>
-                                <div class="coluna_tabela_produto_menor">
-                                    R$: 129,90
-                                </div>
-                            </div>
-                            <div class="linha_item_produtos">
-                                <div class="coluna_tabela_produto_maior">
-                                    Blusa Masculina Dixie Tricot Gola V
-                                </div>
-                                <div class="coluna_tabela_produto_menor">
-                                    R$: 129,90
-                                </div>
-                            </div>
-                            <div class="linha_item_produtos">
-                                <div class="coluna_tabela_produto_maior">
-                                    Blusa Masculina Dixie Tricot Gola V
-                                </div>
-                                <div class="coluna_tabela_produto_menor">
-                                    R$: 129,90
-                                </div>
+                            <div class="coluna_tabela_produto_menor">
+                                Valor
                             </div>
                         </div>
-                        
-                        <div class="linha_botao_dados">
-                            <form action="pedido_finalizado.php">
-                                <input class="botao_cadastro" type="submit" value="Comprar">
-                            </form>
+                        <div class="linha_item_produtos">
+                            <div class="coluna_tabela_produto_maior">
+                                Blusa Masculina Dixie Tricot Gola V
+                            </div>
+                            <div class="coluna_tabela_produto_menor">
+                                R$: 129,90
+                            </div>
                         </div>
-                        
+                        <div class="linha_item_produtos">
+                            <div class="coluna_tabela_produto_maior">
+                                Blusa Masculina Dixie Tricot Gola V
+                            </div>
+                            <div class="coluna_tabela_produto_menor">
+                                R$: 129,90
+                            </div>
+                        </div>
+                        <div class="linha_item_produtos">
+                            <div class="coluna_tabela_produto_maior">
+                                Blusa Masculina Dixie Tricot Gola V
+                            </div>
+                            <div class="coluna_tabela_produto_menor">
+                                R$: 129,90
+                            </div>
+                        </div>
+                        <div class="linha_item_produtos">
+                            <div class="coluna_tabela_produto_maior">
+                                Blusa Masculina Dixie Tricot Gola V
+                            </div>
+                            <div class="coluna_tabela_produto_menor">
+                                R$: 129,90
+                            </div>
+                        </div>
+                        <div class="linha_item_produtos">
+                            <div class="coluna_tabela_produto_maior">
+                                Blusa Masculina Dixie Tricot Gola V
+                            </div>
+                            <div class="coluna_tabela_produto_menor">
+                                R$: 129,90
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha_botao_dados">
+                        <form action="pedido_finalizado.php">
+                            <input class="botao_login" type="submit" value="Comprar">
+                        </form>
                     </div>
                 </div>
             </div>

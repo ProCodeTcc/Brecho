@@ -126,12 +126,12 @@
                             </div>
                             <div class="descritivo_produto_promocao">
                                 <div class="titulo_produto_promocao">
-                                    Blusa Masculina Dixie Tricot Gola V
+                                    Blusa Masculina Dixie Tricot Gola
                                 </div>
-                                <div class="preco">
+                                <div class="preco_promocao">
                                     <del>De: R$ 129,90</del>
                                 </div>
-                                 <div class="preco">
+                                 <div class="preco_promocao">
                                     Por: R$ 89,90
                                 </div>
                                 <div class="opcoes_promocao">
@@ -152,27 +152,27 @@
                         <div class="produto_promocao">
                             <div class="imagem_produto_promocao">
                                 <div class="icone_promocao">
-                                    20%
+                                    30%
                                 </div>
-                                <img alt="#"  src="imagens/tenis.jpg">
+                                <img alt="#"  src="imagens/blusa.jpg">
                             </div>
-                            <div class="descritivo_produto">
-                                <div class="titulo_produto">
-                                    Blusa Masculina Dixie Tricot Gola V
+                            <div class="descritivo_produto_promocao">
+                                <div class="titulo_produto_promocao">
+                                    Blusa Masculina Dixie Tricot Gola
                                 </div>
-                                <div class="preco">
+                                <div class="preco_promocao">
                                     <del>De: R$ 129,90</del>
                                 </div>
-                                 <div class="preco">
+                                 <div class="preco_promocao">
                                     Por: R$ 89,90
                                 </div>
-                                <div class="opcoes">
+                                <div class="opcoes_promocao">
 <!--                                    <a class="preto" href="visualizar_produto.php">-->
                                         <div class="comprar_produto_promocao">
                                             Conferir
                                         </div>
 <!--                                    </a>-->
-                                    <div class="carrinho_produto">
+                                    <div class="carrinho_produto_promocao">
                                         <img alt="#"  src="icones/carrinho.png">
                                     </div>
                                 </div>
@@ -184,34 +184,33 @@
                         <div class="produto_promocao">
                             <div class="imagem_produto_promocao">
                                 <div class="icone_promocao">
-                                    10%
+                                    30%
                                 </div>
-                                <img alt="#"  src="imagens/jaqueta.jpg">
+                                <img alt="#"  src="imagens/blusa.jpg">
                             </div>
-                            <div class="descritivo_produto">
-                                <div class="titulo_produto">
-                                    Blusa Masculina Dixie Tricot Gola V
+                            <div class="descritivo_produto_promocao">
+                                <div class="titulo_produto_promocao">
+                                    Blusa Masculina Dixie Tricot Gola
                                 </div>
-                                <div class="preco">
+                                <div class="preco_promocao">
                                     <del>De: R$ 129,90</del>
                                 </div>
-                                 <div class="preco">
+                                 <div class="preco_promocao">
                                     Por: R$ 89,90
                                 </div>
-                                <div class="opcoes">
+                                <div class="opcoes_promocao">
 <!--                                    <a class="preto" href="visualizar_produto.php">-->
                                         <div class="comprar_produto_promocao">
                                             Conferir
                                         </div>
 <!--                                    </a>-->
-                                    <div class="carrinho_produto">
+                                    <div class="carrinho_produto_promocao">
                                         <img alt="#"  src="icones/carrinho.png">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </a>
-                    
                     
                 </div>
         </main>

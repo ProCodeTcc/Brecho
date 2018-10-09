@@ -1417,14 +1417,18 @@
     }
 
     .veja_tambem{
-        width: 1150px;
+        width: 100%;
         min-height: 400px;
-        margin-left: auto;
-        margin-right: auto;
         margin-bottom: 20px;
-        padding-left: 150px;
         color: black;
         overflow: auto;
+    }
+    
+    .produto_veja{
+        width: 300px;
+        min-height: 0px;
+        margin-left: 250px;
+        float: left;
     }
 
     .preto{
@@ -1574,6 +1578,7 @@
         width: 100%;
         height: 20px;
         text-align: center;
+        color: black;
     }
 
     .opcoes_promocao{
@@ -1948,10 +1953,9 @@
     }
 
     .linha_botao_dados{
-        width: 200px;
-        height: 50px;
+        width: 240px;
+        height: 60px;
         margin-top: 20px;
-/*        background-color: aqua;*/
         margin-left: auto;
         margin-right: auto;
     }
@@ -3428,7 +3432,6 @@
         height: 100%;
         margin-left: auto;
         margin-right: auto;
-        background-color: aqua;
         
     }
 
@@ -3517,6 +3520,7 @@
         margin-left: auto;
         margin-right: auto;
         padding: 10px;
+        font-size: 40px;
     }
 
     .caixa_titulo_linha{
@@ -3626,19 +3630,21 @@
     }
 
     .produto_promocao{
-        width: 600px;
+        width: 80%;
         height: 850px;
         margin-left: 40px;
         margin-bottom: 20px;
-        background-color:  aqua;
+/*        background-color:  aqua;*/
         margin-left: auto;
         margin-right: auto;
 
     }
 
     .imagem_produto_promocao{
-        width: 100%;
+        width: 600px;
         height: 500px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .imagem_produto_promocao img{
@@ -3664,26 +3670,24 @@
         width: 100%;
         height: 245px;
         padding-top: 5px;
-        background-color: fuchsia;
     }
 
     .titulo_produto_promocao{
         width: 100%;
-        min-height: 50px;
-        max-height: 40px;
-        font-size: 16px;
+        min-height: 80px;
+        font-size: 45px;
         font-weight: bold;
-        white-space: nowrap;
+        color: black;
         overflow: hidden;
         text-overflow: ellipsis;
-        color: black;
-        background-color: forestgreen;
     }
 
     .preco_promocao{
         width: 100%;
-        height: 20px;
+        height: 50px;
         text-align: center;
+        font-size: 45px;
+        color: black;
     }
 
     .opcoes_promocao{
@@ -3693,36 +3697,35 @@
     }
 
     .comprar_produto_promocao{
-        width: 145px;
-        height: 35px;
-        float: left;
-        margin-left: 70px;
+        width: 265px;
+        height: 85px;
+        margin-left: 250px;
         padding-top: 5px;
-        font-size: 25px;
+        font-size: 70px;
         border: solid 3px darkorange;
         border-radius: 20px;
         color: black;
+        margin-top: 20px;
+        float: left;
     }
 
 
-    .comprar_produto_promocao:hover{
-        cursor: pointer;
-        background-color: #ff9900;
-    }
 
     .carrinho_produto_promocao{
-        width: 40px;
-        height: 40px;
+        width: 100px;
+        height: 100px;
         float: right;
         border: solid 3px darkorange;
-        border-radius: 40px;
-        margin-right: 20px;
+        border-radius: 100px;
+        margin-left: 50px;
+        float: left;
+        margin-top: 20px;
     }
 
     .carrinho_produto_promocao img{
-        width: 30px;
-        height: 30px;
-        margin-top: 7px;
+        width: 70px;
+        height: 70px;
+        margin-top: 20px;
 
     }
 
@@ -3733,10 +3736,472 @@
 
 /**************************************************/
 
+/************** Cadastro De Usuário ***************/
+
+    .caixa_cadastro_usuario{
+        width: 100%;
+        min-height: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+    }
+
+    .cadastro_usuario{
+        width: 98%;
+        min-height: 680px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+
+    .titulo_cadastro_usuario{
+        width: 900px;
+        height: 60px;
+        margin-top: 1px;
+        font-size: 50px;
+        float: left;
+        margin-top: 20px;
+        margin-bottom: 15px;
+        margin-left: 10px;
+        color: #6c6c6c;
+    }
+
+     .linha_cadastro_usuario{
+        width: 900px;
+        height: 65px;
+        margin-top: 1px;
+        float: left;
+        margin-top: 20px;
+        margin-left: 30px;
+        margin-bottom: 20px;
+        font-size: 60px;
+    }
+
+    .campo_cadastro_usuario{
+        width: 100%;
+        height: 60px;
+        border-top: solid 0px;
+        border-left: solid 0px;
+        border-right: solid 0px;
+        border-bottom: solid 2px #000000;
+        font-size: 50px;
+        outline: none;
+        
+    }
+
+    .titulo_cadastro_usuario_meio{
+        width: 473px;
+        height: 60px;
+        font-size: 50px;
+        float: left;
+        margin-top: 20px;
+        margin-left: 7px;
+        color: #6c6c6c;
+    }
+
+    .linha_cadastro_usuario_meio{
+        width: 453px;
+        min-height: 60px;
+        float: left;
+        margin-top: 5px;
+        margin-left: 20px;
+        margin-bottom: 15px;
+        font-size: 60px;
+
+    }
+
+    .campo_cadastro_usuario_meio{
+        width: 100%;
+        height: 60px;
+        border-top: solid 0px;
+        border-left: solid 0px;
+        border-right: solid 0px;
+        border-bottom: solid 2px #2a2a2a;
+        font-size: 50px;
+        outline: none;
+    }
+
+    .linha_cadastro_usuario_botao{
+        width: 250px;
+        height: 110px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+        clear: both;
+        padding-top: 20px;
+    }
+
+    .botao_cadastro{
+        width: 250px;
+        height: 80px;
+        background-color: #5cb85c;
+        border: solid 1px #4cae4c;
+        color: white;
+        border-radius: 3px;
+        font-size: 40px;
+        line-height: 35px;
+        padding-left: 5px;
+    }
+
+    .radio_sexo{
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        margin-left: 60px;
+    }
+/**************************************************/
+
+/***************** Atualizar Dados ****************/
+
+    .caixa_atualizar_dados{
+        width: 100%;
+        min-height: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+    }
+
+    .titulo_atualizar{
+        width: 100%;
+        height: 60px;
+        border-bottom: solid 2px #cecece;
+        margin-top: 40px;
+        padding-top: 10px;
+        font-size: 45px;
+    }
+
+    .informacao_conta{
+        width: 100%;
+        min-height: 200px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+
+    }
+
+    .titulo_cadastro_usuario_mini{
+
+        width: 310px;
+        height: 100px;
+        font-size: 45px;
+        float: left;
+        margin-top: 10px;
+        margin-left: 10px;
+        text-align: center;
+        color: #6c6c6c;
+
+    }
+
+    .linha_cadastro_usuario_mini{
+
+        width: 310px;
+        height: 80px;
+        float: left;
+        margin-left: 10px;
+
+    }
+
+    .campo_cadastro_usuario_mini{
+        width: 100%;
+        height: 100%;
+        border-top: solid 0px;
+        border-left: solid 0px;
+        border-right: solid 0px;
+        border-bottom: solid 2px #2a2a2a;
+        font-size: 40px;
+        outline: none;
+
+    }
+
+/**************************************************/
+
+/**************** Dados de Pagamento **************/
+
+
+    .caixa_dados_pagamento{
+        width: 98%;
+        min-height: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        overflow: auto;
+    }
+
+    .dados_esquedo{
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+
+     .titulo_pagamento{
+        width: 100%;
+        height: 50px;
+        border-bottom: solid 2px #cecece;
+        margin-top: 10px;
+        padding-top: 10px;
+        font-size: 50px;
+    }
+
+    .linha_pagamento{
+        width: 98%;
+        height: 50px;
+        margin-top: 20px;
+        font-size: 40px;
+        text-align: left;
+        margin-left: 5px;
+    }
+
+    .dados_direito{
+        width: 98%;
+        min-height: 650px;
+        border: solid 1px #cecece;
+        border-radius: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .titulo_pagamento_direito{
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+        padding-top: 10px;
+        font-size: 50px;
+        text-align: center;
+    }
     
+     .linha_pagamento_titulo{
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+        font-size: 45px;
+        text-align: center;
+        margin-left: 5px;
+        font-weight: 600;
+    }
+
+    .endereco_retirada{
+        width: 100%;
+        min-height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        border-top: solid 1px #cecece;
+        border-bottom: solid 1px #cecece;
+    }
+
+    .tabela_produto{
+        width: 100%;
+        min-height: 250px;
+        border-top: solid 1px #cecece;
+        border-bottom: solid 1px #cecece;
+    }
+
+    .linha_titulo_produtos{
+        width: 100%;
+        height: 100px;
+        background-color: #c7c7c7;
+    }
+
+    .coluna_tabela_produto_maior{
+        width: 660px;
+        height: 70px;
+        font-size: 40px;
+        float: left;
+        text-align: left;
+        padding-top: 30px;
+        
+    }
+
+    .coluna_tabela_produto_menor{
+        width: 280px;
+        height: 70px;
+        font-size: 40px;
+        float: left;
+        text-align: center;
+        padding-top: 30px;
+          
+    }
+
+    .linha_item_produtos{
+        width: 100%;
+        height: 100px;
+        border-bottom: solid 1px darkorange;
+        
+    }
+
+   .linha_botao_dados{
+        width: 400px;
+        height: 85px;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+       margin-bottom: 25px;
+    }
+
+/**************************************************/
+
+/**************** Pedido Finalizado **************/
+
+    .pedido_finalizado{
+        width: 100%;
+        min-height: 1070px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 60px;
+        font-size: 20px;
+    }
+
+    .mensagem{
+        width: 95%;
+        min-height: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+    }
+
+
+/**************************************************/
+
+/**************** Cadastro de Produtos *******/
+
+    .cadastro_produto{
+        width: 100%;
+        min-height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+    }
+
+    .cadastro_esquerdo{
+        width: 90%;
+        min-height: 100px;
+        margin-left: auto;
+        margin-right: auto; 
+    }
+
+    .linha_cadastro{
+        width: 100%;
+        min-height: 50px;
+    }
+
+    .titulo_cadastro_produto{
+        width: 100%;
+        height: 60px;
+        text-align: center;
+        font-size: 45px;
+        clear: both;
+    }
+
+    .caixa_cadastro_produto{
+        width: 100%;
+        height: 80px;
+        margin-bottom: 20px;
+    }
+
+    .caixa_cadastro_produto_descricao{
+        width: 100%;
+        height: 250px;
+        margin-bottom: 20px;
+    }
+
+    .campo_cadastro_produto{
+        width: 99%;
+        height: 80px;
+        border-top: solid 0px;
+        border-left: solid 0px;
+        border-right: solid 0px;
+        border-bottom: solid 2px #2a2a2a;
+        font-size: 50px;
+        outline: none;
+    }
+
+    .campo_cadastro_produto_descricao{
+        width: 100%;
+        height: 250px;
+        border-top: solid 0px;
+        border-left: solid 0px;
+        border-right: solid 0px;
+        border-bottom: solid 2px #2a2a2a;
+        font-size: 50px;
+        outline: none;
+        resize: none;
+    }
     
-    
-    
-    
-    
+    .cadastro_direito{
+        width: 90%;
+        min-height: 100px;
+        margin-right: 100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .titulo_cadastro_produto_meio{
+        width: 50%;
+        height: 60px;
+        float: left;
+        text-align: center;
+        font-size: 45px;
+    }
+
+    .caixa_cadastro_produto_meio{
+        width: 50%;
+        height: 100px;
+        float: left;
+    }
+
+    .campo_cadastro_produto_meio{
+        width: 97%;
+        height: 80px;
+        border-top: solid 0px;
+        border-left: solid 0px;
+        border-right: solid 0px;
+        border-bottom: solid 2px #2a2a2a;
+        font-size: 40px;
+        outline-color: darkorange;
+    }
+
+    .caixa_fotos{
+        width: 100%;
+        height: 400px;
+    }
+
+    .foto{
+        width: 280px;
+        height: 260px;
+        float: left;
+        margin-left: 10px;
+    }
+
+    .foto img{
+
+    }
+
+    .selecao_fotos{
+        width: 280px;
+        height: 80px;
+        float: left;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .escolha_fotos{
+        width: 280px;
+        height: 40px;
+    }
+
+    .linha_botao_cadastro{
+        width: 250px;
+        height: 110px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+/**************************************************/
+
+
+ 
 }

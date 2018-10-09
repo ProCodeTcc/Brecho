@@ -145,15 +145,15 @@
                                 Senha*
                             </div>
                             <div class="titulo_cadastro_usuario_meio">
-                                Confirme Senha*
+                                Data de Nascimento*
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="password">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="date">
                             </div>
 
 
@@ -176,11 +176,8 @@
                                 Sexo*
                              </div>
 
-                            <div class="titulo_cadastro_usuario_meio">
-                                Data de Nascimento*
-                             </div>
 
-                            <div class="linha_cadastro_usuario_meio">
+                            <div class="linha_cadastro_usuario">
                                 <label>
                                     <input type="radio" class="radio_sexo" name="rb_sexo" checked> Masculino
                                 </label>
@@ -191,9 +188,6 @@
 
                             </div>
 
-                            <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
-                            </div>
 
                             <div class="titulo_cadastro_usuario_meio">
                                 CEP*
