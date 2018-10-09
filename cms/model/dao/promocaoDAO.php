@@ -1,4 +1,12 @@
 <?php
+	/*
+        Projeto: CMS do Brechó
+        Autor: Lucas Eduardo
+        Data: 07/10/2018
+        Objetivo: controlar as ações da página de promoções
+
+    */
+
 	class PromocaoDAO{
 		public function __construct(){
 			require_once('bdClass.php');

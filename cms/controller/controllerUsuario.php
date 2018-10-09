@@ -30,7 +30,8 @@
 
             //instancia da classe usuario
             $usuarioClass = new Usuario();
-
+			
+			//setando os atributos do usuário
             $usuarioClass->setImagem($imagem);
             $usuarioClass->setNome($nome);
             $usuarioClass->setUsuario($usuario);
@@ -77,9 +78,11 @@
         public function buscarUsuario($id){
             //instancia da classe usuarioDAO
             $usuarioDAO = new UsuarioDAO();
-
+			
+			//armazenando os dados da consulta em uma variável
             $listUsuarios = $usuarioDAO->SelectByID($id);
 
+			//retornando a lista com os dados
             return $listUsuarios;
         }
 
@@ -87,8 +90,10 @@
             //instancia da classe usuarioDAO
             $usuarioDAO = new UsuarioDAO();
 
+			//armazenando o retorno da consulta em uma variável
             $listUsuarios = $usuarioDAO->selectAll();
-
+			
+			//retornando a lista com os usuários
             return $listUsuarios;
         }
 
@@ -96,8 +101,10 @@
             //instancia da classe usuarioDAO
             $usuarioDAO = new UsuarioDAO();
 
+			//armazenando o retorno da consulta em uma variável
             $listNiveis = $usuarioDAO->selectNivel();
 
+			//retornando a lista com os níveis
             return $listNiveis;
         }
 
@@ -105,18 +112,26 @@
             //instancia da classe usuarioDAO
             $usuarioDAO = new UsuarioDAO();
 
+			//excluindo o usuário
             $usuarioDAO->excluir($id);
         }
 
         public function logarUsuario($usuario, $senha){
+			//encriptando a senha recebida para MD5
             $encryptSenha = md5($senha);
+			
+			//instância da classe usuarioDAO
             $usuarioDAO = new UsuarioDAO();
+			
+			//retornando o resultado da função que loga o usuário
             return $usuarioDAO->logar($usuario, $encryptSenha);
         }
 
         public function atualizarStatus($id, $status){
+			//instância da classe usuarioDAO
             $usuarioDAO = new UsuarioDAO();
 
+			//chamando o método que atualiza o status do usuário
             $usuarioDAO->updateStatus($id, $status);
         }
 		
@@ -137,12 +152,17 @@
 		}
 		
 		public function deslogarUsuario(){
+			//iniciando a sessão
 			session_start();
+			
+			//destruíndo a sessão
 			session_destroy();
 		}
 		
 		public function checarLogin(){
+			//vericicando se a sessão existe
 			if(!isset($_SESSION['usuario'])){
+				//se não existir, redireciona o usuário pra página de login
 				header("location: ../../index.php");
 			}
 		}

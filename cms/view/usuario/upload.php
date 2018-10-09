@@ -25,7 +25,7 @@
 //					session_start();
 //					$_SESSION['imagem'] = $caminho_imagem;
 
-					echo "<script>frmUsuario.txtimagem.value = '$caminho_imagem'</script>";
+					echo "<script>txtimagem.value = '$caminho_imagem'</script>";
 				}else{
 					echo "<script>alert('erro ao enviar imagem')</script>";
 				}

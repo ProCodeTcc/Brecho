@@ -20,7 +20,7 @@
 				
 				//percorrendo a variável com o novo caminho e armazenando em uma nova variável
 				foreach($novaImagem as $img){
-					//adicionanvo a imagem com o novo caminho á lista de produtos
+					//adicionando a imagem com o novo caminho á lista de produtos
 					$listProduto[$cont]->setImagem($img);
 				}
 				
