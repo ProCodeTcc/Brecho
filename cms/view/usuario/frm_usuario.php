@@ -27,7 +27,7 @@
 
 				//checando se a imagem está vazia, se não, preencher a div de visualizar
 				if(json.imagem != 0){
-					$('#img').attr('src', json.imagem);
+					$('#img').attr('src', '../'+json.imagem);
 					$('#txtimagem').val(json.imagem)
 				}
 			}
@@ -122,7 +122,7 @@
     </form>
 
     <form class="frm_usuario" data-id="<?php echo($id)?>" id="frmUsuario" method="post" name="frmUsuario" action="usuario_view.php">
-        <div class="form_linha">
+		<div class="form_linha">
             <label class="lbl_cadastro">Nome:</label>
             <input type="text" class="cadastro_input" id="txtnome" name="txtnome" placeholder="Insira um nome" required>
             <input type="hidden" name="txtimagem" id="txtimagem">

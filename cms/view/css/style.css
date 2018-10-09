@@ -713,6 +713,11 @@ footer{
 
 /*************************** FALE CONOSCO *****************************/
 
+#modal_faleconosco{
+	height: 400px;
+	width: 400px;
+}
+
 .fale_conosco{
 	width: 400px;
 	height: auto;
@@ -731,6 +736,7 @@ footer{
 .fale_conosco_linha span{
 	margin-bottom: 5px;
 	font-weight: bold;
+	margin-left: 10px;
 }
 
 .fale_conosco_linha input{

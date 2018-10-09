@@ -39,5 +39,24 @@
 			
 			return $listProduto;
 		}
+		
+		public function listarImagens($id){
+			$produtoDAO = new ProdutoDAO();
+			$listImagens = $produtoDAO->selectImages($id);
+			
+			$cont = 0;
+			
+			while($cont < count($listImagens)){
+				$novaImagem = explode('../', $listImagens[$cont]->getImagem());
+				
+				foreach($novaImagem as $img){
+					$listImagens[$cont]->setImagem($img);
+				}
+				
+				$cont++;
+			}
+			
+			return $listImagens;
+		}
 	}
 ?>

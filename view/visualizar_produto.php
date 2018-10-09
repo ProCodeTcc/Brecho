@@ -2,6 +2,9 @@
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+	require_once($diretorio.'controller/controllerProduto.php');
 ?>
 
 <!DOCTYPE html>
@@ -124,26 +127,26 @@
         </header>
         <main>
             <div class="visualizar_produto">
+				<?php
+					$listImagens = new controllerProduto();
+					$rsImagens = $listImagens->listarImagens($id);
+				
+				?>
                 <div class="produto_imagens">
                     <div class="caixa_mini_imagens">
                         <div class="mini_imagens">
-                            <img alt="#" src="imagens/jaqueta.jpg">
+                            <img alt="#" src="../cms/view/<?php echo($rsImagens[0]->getImagem()) ?>">
                         </div>
                         <div class="mini_imagens">
-                            <img alt="#" src="imagens/jaqueta.jpg">
-                        </div>
-                        <div class="mini_imagens">
-                            <img alt="#" src="imagens/jaqueta.jpg">
+                            <img alt="#" src="../cms/view/<?php echo($rsImagens[1]->getImagem()) ?>">
                         </div>
                     </div>
                     <div class="visualizar_produto_imagem">
-                        <img alt="#" src="imagens/jaqueta.jpg">
+                        <img alt="#" src="../cms/view/<?php echo($rsImagens[2]->getImagem()) ?>">
                     </div>
                 </div>
 				
 				<?php
-					$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-					require_once($diretorio.'controller/controllerProduto.php');
 					$listProduto = new controllerProduto();
 					$rsProduto = $listProduto->buscarProduto($id);
 				?>

@@ -1,5 +1,6 @@
 <?php
 	if(isset($_POST)){
+		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/view/';
 		$nomearquivo = $_FILES['fleimagem']['name'];
 		$tamanhoarquivo = round(($_FILES['fleimagem']['size']/1024));
 
@@ -9,7 +10,7 @@
 
 		$nomearquivo = md5(uniqid(time())).$nome_foto.$extensao;
 
-		$upload_dir = "../arquivos/";
+		$upload_dir = "arquivos/";
 
 		$extensoes_permitidas = array('.png', '.jpg', '.jpeg', '.gif', '.svg');
 
@@ -19,10 +20,10 @@
 			if($tamanhoarquivo <= 5120){
 				$arquivo_tmp = $_FILES['fleimagem']['tmp_name'];
 
-				if(move_uploaded_file($arquivo_tmp, $caminho_imagem)){
-					echo '<img src="'.$caminho_imagem.'">';
-					session_start();
-					$_SESSION['imagem'] = $caminho_imagem;
+				if(move_uploaded_file($arquivo_tmp, $diretorio.$caminho_imagem)){
+					echo "<img src='../$caminho_imagem'>";
+//					session_start();
+//					$_SESSION['imagem'] = $caminho_imagem;
 
 					echo "<script>frmUsuario.txtimagem.value = '$caminho_imagem'</script>";
 				}else{
