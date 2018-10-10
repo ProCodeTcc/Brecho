@@ -265,6 +265,17 @@
 			}
 		break;
 			
+		case 'tema':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerTema.php');
+			switch($modo){
+				case 'inserir':
+					$controllerTema = new controllerTema();
+					$controllerTema->inserirTema();
+				break;
+			}
+		break;
+			
 		case 'produto':
 			$modo = $_POST['modo'];
 			require_once('controller/controllerProduto.php');

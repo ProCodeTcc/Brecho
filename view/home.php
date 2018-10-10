@@ -34,6 +34,10 @@
 			});
         </script>
         
+		<?php
+			require_once('tema.php');
+		?>
+		
     </head>
     <body>
         <header>

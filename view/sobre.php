@@ -117,36 +117,37 @@
             <div class="sobre">
                 
                 <div class="primeiro_padrao">
+					<?php
+						$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+						require_once($diretorio.'controller/controllerSobre.php');
+						$listSobre = new controllerSobre();
+						$rsLayout = $listSobre->listarLayout();
+						$rsLayout2 = $listSobre->listarLayout2();
+					?>
                     <div class="texto_sobre">
-                        <h2> Titulo </h2>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
+                        <h2> <?php echo($rsLayout->getTitulo()) ?> </h2>
+                        
+						<?php echo($rsLayout->getDescricao()) ?>
 
                     </div>
                     <div class="imagem_sobre">
-                        <img  alt="#" src="imagens/sobre.jpg">
+                        <img  alt="#" src="../cms/view/<?php echo($rsLayout->getImagem()) ?>">
                     </div>
                 </div>
                 
                 <div class="primeiro_padrao">
                     <div class="texto_sobre_esquerdo">
-                        <h2> Titulo </h2>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
+                        <h2> <?php echo($rsLayout2->getTitulo()) ?> </h2>
+                        
+						<?php echo($rsLayout2->getDescricao()) ?>
 
                     </div>
                     <div class="imagem_sobre_centro">
-                        <img  alt="#" src="imagens/sobre_dois.jpg">
+                        <img  alt="#" src="../cms/view/<?php echo($rsLayout2->getImagem()) ?>">
                     </div>
                     <div class="texto_sobre_diteiro">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
+                        
+						<?php echo($rsLayout2->getDescricao2()) ?>
 
                     </div>
                 </div>

@@ -132,11 +132,29 @@ header{
     /* background-color: red; */
 }
 
+.paginas_container{
+	width: 200px;
+	height: 30px;
+	display: flex;
+}
+
+.paginas_icon{
+	width: 24px;
+	height: 24px;
+}
+
+.paginas_nome{
+	font-weight: bold;
+	box-sizing: border-box;
+	padding-top: 2px;
+	cursor: pointer;
+}
 .paginas_link{
     display: block;
     line-height: 30px;
     text-decoration: none;
     color: black;
+	font-weight: normal;
 }
 
 .paginas_link:visited{
@@ -949,4 +967,22 @@ footer{
 
 #novo{
 	display: none;
+}
+
+/************************* TEMAS *********************************/
+
+#modal_tema{
+	width: 350px;
+	height: 320px;
+}
+
+.frm_tema{
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+}
+
+.radio_buttons{
+	display: flex;
 }

@@ -27,6 +27,10 @@
 	
 	<script>
 		$(document).ready(function(){
+			$('.paginas_nome').click(function(){
+				$('.submenu').toggle(400);
+			});
+			
 			$('#logout').click(function(){
 				$.ajax({
 					type: 'POST',
@@ -67,7 +71,17 @@
                     </div>
 
                     <div class="pages">
-                        <a class="paginas_link" href="usuario/usuario_view.php">
+						<div class="paginas_container">
+							<div class="paginas_icon">
+								<img src="imagens/usericon.png">
+							</div>
+							
+							<div class="paginas_nome">
+								Administrativo
+							</div>
+						</div>
+						
+                        <!--<a class="paginas_link" href="usuario/usuario_view.php">
                             Usuários
                         </a>
 
@@ -77,7 +91,7 @@
 
                         <a class="paginas_link" href="enquete/enquete_view.php">
                             Enquetes
-                        </a>
+                        </a>-->
                     </div>
                 </div>
 
