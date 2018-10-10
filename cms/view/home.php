@@ -27,8 +27,8 @@
 	
 	<script>
 		$(document).ready(function(){
-			$('.paginas_nome').click(function(){
-				$('.submenu').toggle(400);
+			$('.menu').children().click(function(e){
+				$(this).children('.submenu').toggle(300);
 			});
 			
 			$('#logout').click(function(){
@@ -71,27 +71,101 @@
                     </div>
 
                     <div class="pages">
-						<div class="paginas_container">
-							<div class="paginas_icon">
-								<img src="imagens/usericon.png">
-							</div>
+						<ul class="menu">
+							<li class="menu_itens">
+								<div class="menu_item_container">
+									<img src="imagens/admin.png">
+									
+									<p class="item_titulo">Administração</p>
+								</div>
+								
+								<ul class="submenu">
+									<li class="submenu-itens">
+										<a class="paginas_link" href="usuario/usuario_view.php">
+											Usuários
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="nivel/nivel_view.php">
+											Níveis
+										</a>
+									</li>
+								</ul>
+							</li>
 							
-							<div class="paginas_nome">
-								Administrativo
-							</div>
-						</div>
-						
-                        <!--<a class="paginas_link" href="usuario/usuario_view.php">
-                            Usuários
-                        </a>
-
-                        <a class="paginas_link" href="nivel/nivel_view.php">
-                            Níveis
-                        </a>
-
-                        <a class="paginas_link" href="enquete/enquete_view.php">
-                            Enquetes
-                        </a>-->
+							<li class="menu_itens">
+								<div class="menu_item_container">
+									<img src="imagens/content.png">
+									
+									<p class="item_titulo">Conteúdo</p>
+								</div>
+								
+								<ul class="submenu">
+									<li class="submenu-itens">
+										<a class="paginas_link" href="enquete/enquete_view.php">
+											Enquetes
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="sobre/sobre_view.php">
+											Sobre nós
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="fale_conosco/fale_conosco_view.php">
+											Fale Conosco
+										</a>
+									</li>
+								</ul>
+							</li>
+							
+							<li class="menu_itens">
+								<div class="menu_item_container">
+									<img src="imagens/cart.png">
+									
+									<p class="item_titulo">Produtos</p>
+								</div>
+								
+								<ul class="submenu">
+									<li class="submenu-itens">
+										<a class="paginas_link" href="roupa/roupa_view.php">
+											Roupas
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="promocao/promocao_view.php">
+											Promoção
+										</a>
+									</li>
+								</ul>
+							</li>
+							
+							<li class="menu_itens">
+								<div class="menu_item_container">
+									<img src="imagens/visual.png">
+									
+									<p class="item_titulo">Visual</p>
+								</div>
+								
+								<ul class="submenu">
+									<li class="submenu-itens">
+										<a class="paginas_link" href="tema/tema_view.php">
+											Temas
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="cor/cor_view.php">
+											Cores
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
                     </div>
                 </div>
 
@@ -99,37 +173,37 @@
                     <div class="home_pages_row">
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/usuario.png">
+                                <img src="imagens/admin128.png">
                             </div>
 
-                            <p class="pages_card_title">Usuários</p>
+                            <p class="pages_card_title">Administração</p>
 
                             <div class="pages_card_desc">
-                                Área responsável pelo gerenciamento dos usuários que fazem uso do CMS
+                                Área responsável pelo gerenciamento de todos os usuários e níveis que acessam o sistema
                             </div>
                         </div>
 
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/employee.png">
+                                <img src="imagens/content128.png">
                             </div>
 
-                            <p class="pages_card_title">Níveis</p>
+                            <p class="pages_card_title">Conteúdo</p>
 
                             <div class="pages_card_desc">
-                                Área responsável por todos os níveis de usuário do sistema
+                                Área responsável por gerenciar o conteúdo de todas as páginas do site
                             </div>
                         </div>
 
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/enquete.png">
+                                <img src="imagens/cart128.png">
                             </div>
 
-                            <p class="pages_card_title">Enquetes</p>
+                            <p class="pages_card_title">Produtos</p>
 
                             <div class="pages_card_desc">
-                                Área responsável por todas as enquetes disponíveis para os clientes
+                                Área responsável por gerenciar tudo que é relacionado aos produtos do site
                             </div>
                         </div>
                     </div>
@@ -137,28 +211,17 @@
 					<div class="home_pages_row" style="margin-top: 20px;">
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/analise.png">
+                                <img src="imagens/color-picker128.png">
                             </div>
 
-                            <p class="pages_card_title">Análise</p>
+                            <p class="pages_card_title">Visual</p>
 
                             <div class="pages_card_desc">
-                                Área responsável pela aprovação ou não de produtos dos clientes
-                            </div>
-                        </div>
-
-                        <div class="pages_card">
-                            <div class="pages_card_image">
-                                <img src="imagens/roupa.png">
-                            </div>
-
-                            <p class="pages_card_title">Produtos</p>
-
-                            <div class="pages_card_desc">
-                                Área responsável por todos os produtos que são exibidos no site
+                                Área responsável por gerenciar as cores e temas que são utilizados no site
                             </div>
                         </div>
                     </div>
+					
                 </div>
             </div>
         </div>

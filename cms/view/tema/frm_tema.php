@@ -48,7 +48,7 @@
 				Gênero
 			</label>
 			
-			<div class="radio_buttons">
+			<div class="radio">
 				<label for="masculino">Masculino</label>
 				<input type="radio" name="txtgenero" id="masculino" value="M">
 				

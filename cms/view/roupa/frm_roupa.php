@@ -234,10 +234,10 @@
 					<textarea name="txtdescricao" class="cadastro_text" id="txtdesc"></textarea>
 				</div>
 
-				<div class="form_linha" id="tipo_tamanho_linha">
+				<div class="form_linha" id="radio_linha">
 					<label class="lbl_cadastro">Tipo: </label>
 
-					<div id="tipo_tamanho">
+					<div class="radio">
 						<label for="txtmedida">Medida</label>
 						<input type="radio" id="txtmedida" name="txttipo" value="medida" onClick="buscarMedida">
 

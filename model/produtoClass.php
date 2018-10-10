@@ -5,15 +5,15 @@
 		}
 		
 		private $id;
-		private $nome;
-		private $descricao;
-		private $preco;
-		private $classificacao;
-		private $marca;
-		private $categoria;
-		private $cor;
-		private $tamanho;
-		private $imagem;
+		protected $nome;
+		protected $descricao;
+		protected $preco;
+		protected $classificacao;
+		protected $marca;
+		protected $categoria;
+		protected $cor;
+		protected $tamanho;
+		protected $imagem;
 		
 		
 		public function setId($id){

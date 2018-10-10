@@ -132,15 +132,51 @@ header{
     /* background-color: red; */
 }
 
-.paginas_container{
-	width: 200px;
-	height: 30px;
+.menu{
 	display: flex;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	margin: 0;
+	padding: 0;
 }
 
-.paginas_icon{
-	width: 24px;
-	height: 24px;
+.menu_itens{
+	width: 200px;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+.menu_item_container{
+	display: flex;
+	flex-direction: row;
+}
+
+.item_titulo{
+	margin: 0;
+	box-sizing: border-box;
+	padding-top: 5px;
+	margin-left: 5px;
+	font-weight: bold;
+}
+
+.submenu{
+	display: none;
+	width: 200px;
+	height: auto;
+	margin: 0;
+	margin-top: 5px;
+	margin-left: 50px;
+	padding: 0;
+}
+
+.submenu-itens{
+	padding: 0;
+	list-style-type: none;
 }
 
 .paginas_nome{
@@ -151,7 +187,7 @@ header{
 }
 .paginas_link{
     display: block;
-    line-height: 30px;
+    line-height: 20px;
     text-decoration: none;
     color: black;
 	font-weight: normal;
@@ -180,7 +216,7 @@ header{
 
 .home_pages{
     width: 78%;
-    height: 500px;
+    height: auto;
     background-color: rgba(181, 182, 183, 0.2);
     box-sizing: border-box;
     padding: 10px;
@@ -193,7 +229,7 @@ header{
 
 .pages_card{
     width: 300px;
-    height: 220px;
+    height: auto;
     margin-right: 10px;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -235,6 +271,7 @@ footer{
     padding: 10px;
     color: white;
 }
+
 /*********************** USUARIOS ***********************/
 
 .container{
@@ -720,9 +757,14 @@ footer{
 	border-color: deepskyblue;
 }
 
-#tipo_tamanho{
+.radio{
 	display: flex;
 	justify-content: space-between;
+}
+
+.radio label{
+	box-sizing: border-box;
+	padding-top: 10px;
 }
 
 #txttamanho{
