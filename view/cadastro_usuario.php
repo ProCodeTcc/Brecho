@@ -3,6 +3,37 @@
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        
+         
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.mask.js"></script>
+        
+        <script type="text/javascript">
+            
+            function validar (caracter,blockType){
+                if(window.event){
+                    var letra = caracter.charCode;
+                }else{
+                    var letra = caracter.which;
+                }
+                
+                if (blockType == 'caracter'){
+                    if(letra<48 || letra>57){
+                        if(letra !=8 && letra!=32){
+                            alert('Você não pode digitar letras neste campo');
+                            return false;
+                        }
+                    }
+                }else if(blockType == 'number'){
+                    if(letra >=48 && letra<=57){
+                        alert('Você não pode digitar numeros neste campo');
+                        return false;
+                    }
+                }
+            }
+ 
+        </script>
+        
     </head>
     <body>
         <header>
@@ -118,7 +149,7 @@
 
                 <div class="caixa_cadastro_usuario">
                     <div class="cadastro_usuario">
-                        <form action="../index.php">
+                        <form method="POST" action="../router.php?controller=ClienteFisico">
                             <div class="titulo_cadastro_usuario_meio">
                                 Nome*
                             </div>
@@ -127,33 +158,48 @@
                              </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtNome" required onkeypress="return validar(event,'number')">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtSobrenome" required onkeypress="return validar(event,'number')">
                             </div>
 
                             <div class="titulo_cadastro_usuario">
                                 E-mail*
                             </div>
                             <div class="linha_cadastro_usuario">
-                                <input class="campo_cadastro_usuario" type="text">
+                                <input class="campo_cadastro_usuario" type="email" name="txtEmail" required>
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
+                                Usuario*
+                            </div>
+                            <div class="titulo_cadastro_usuario_meio">
                                 Senha*
+                            </div>
+                            
+                            <div class="linha_cadastro_usuario_meio">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtUsuario" required>
+                            </div>
+                            
+                            <div class="linha_cadastro_usuario_meio">
+                                <input class="campo_cadastro_usuario_meio" type="password" name="txtSenha" required>
                             </div>
                             <div class="titulo_cadastro_usuario_meio">
                                 Data de Nascimento*
                             </div>
-
-                            <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="password">
+                            
+                            <div class="titulo_cadastro_usuario_meio">
+                                CPF*
                             </div>
-
+                            
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="date">
+                                <input class="campo_cadastro_usuario_meio" type="date" name="txtDataNasc" required>
+                            </div>
+                            <div class="linha_cadastro_usuario_meio">
+                                <input id="txt_cpf" class="campo_cadastro_usuario_meio" type="text" name="txtCpf"required onkeypress="return validar(event,'caracter')">
+                                <script type="text/javascript">$("#txt_cpf").mask("000.000.000-00");</script>
                             </div>
 
 
@@ -165,11 +211,13 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input id="txt_telefone" class="campo_cadastro_usuario_meio" type="text" name="txtTelefone"required onkeypress="return validar(event,'caracter')">
+                                <script type="text/javascript">$("#txt_telefone").mask("(00) 0000-0000");</script>
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input id="txt_celular" class="campo_cadastro_usuario_meio" type="text" name="txtCelular"onkeypress="return validar(event,'caracter')">
+                                <script type="text/javascript">$("#txt_celular").mask("(00) 00000-0000");</script>
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
@@ -179,11 +227,11 @@
 
                             <div class="linha_cadastro_usuario">
                                 <label>
-                                    <input type="radio" class="radio_sexo" name="rb_sexo" checked> Masculino
+                                    <input type="radio" class="radio_sexo" name="rb_sexo" checked value="M"> Masculino
                                 </label>
 
                                 <label>
-                                    <input type="radio" class="radio_sexo" name="rb_sexo"> Feminino
+                                    <input type="radio" class="radio_sexo" name="rb_sexo" value="F"> Feminino
                                 </label>
 
                             </div>
@@ -198,7 +246,8 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input id="txt_cep" class="campo_cadastro_usuario_meio" type="text" onkeypress="return validar(event,'caracter')">
+                                <script type="text/javascript">$("#txt_cep").mask("00000-000");</script>
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
@@ -228,11 +277,11 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
+                                <input  class="campo_cadastro_usuario_meio" type="text" >
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio"  type="text">
+                                <input class="campo_cadastro_usuario_meio"  type="text" >
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
@@ -244,11 +293,11 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
+                                <input  class="campo_cadastro_usuario_meio" type="text" >
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
+                                <input  class="campo_cadastro_usuario_meio" type="text" >
                             </div>
 
                             <div class="linha_cadastro_usuario_botao">

@@ -35,9 +35,14 @@
             
             $controllerFaleConosco = new controllerFaleConosco();
             $controllerFaleConosco->inserirFaleConosco();
-            header('location:index.php');
-            
+
         break;
+            
+        case 'ClienteFisico':
+            require_once('controller/controllerClienteFisico.php');
+            
+            $controllerClienteFisico = new controllerClienteFisico();
+            $controllerClienteFisico->inserirCliente();
         
     }
 ?>

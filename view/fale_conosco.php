@@ -3,6 +3,36 @@
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        
+        
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.mask.js"></script>
+        
+        <script type="text/javascript">
+            
+            function validar (caracter,blockType){
+                if(window.event){
+                    var letra = caracter.charCode;
+                }else{
+                    var letra = caracter.which;
+                }
+                
+                if (blockType == 'caracter'){
+                    if(letra<48 || letra>57){
+                        if(letra !=8 && letra!=32){
+                            alert('Você não pode digitar letras neste campo');
+                            return false;
+                        }
+                    }
+                }else if(blockType == 'number'){
+                    if(letra >=48 && letra<=57){
+                        alert('Você não pode digitar numeros neste campo');
+                        return false;
+                    }
+                }
+            }
+ 
+        </script>
     </head>
     <body>
         <header>
@@ -124,7 +154,7 @@
                     </div>
 
                     <div class="campos_fale">
-                        <input type="text" class="caixas_campo_fale" name="txtnome">
+                        <input type="text" class="caixas_campo_fale" name="txtnome" required onkeypress="return validar(event,'number')">
                     </div>
 
                     <div class="titulo_fale" >
@@ -132,7 +162,7 @@
                     </div>
 
                     <div class="campos_fale">
-                        <input type="text" class="caixas_campo_fale" name="txtemail">
+                        <input type="email" class="caixas_campo_fale" name="txtemail" required>
                     </div>
 
                     <div class="titulo_fale" >
@@ -140,13 +170,14 @@
                     </div>
 
                     <div class="campos_fale">
-                        <input type="text" class="caixas_campo_fale" name="txttelefone">
+                        <input id="txt_telefone" type="text" class="caixas_campo_fale" name="txttelefone" required onkeypress="return validar(event,'caracter')" maxlength="12" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}">
+                        <script type="text/javascript">$("#txt_telefone").mask("(00) 0000-0000");</script>
                     </div>
 
                     <div class="titulo_fale_radio" >
                         Sexo*
 
-                        <label><input type="radio" name="radio_sexo_fale" class="caixas_radio_fale" value="M" checked> Masculino</label>
+                        <label><input type="radio" name="radio_sexo_fale" class="caixas_radio_fale" value="M" checked > Masculino</label>
                         <label><input type="radio" name="radio_sexo_fale" class="caixas_radio_fale" value="F"> Feminino</label>
 
                     </div>
@@ -156,14 +187,12 @@
                     </div>
 
                     <div class="campos_fale">
-                        <select class="caixas_campo_fale" name="txtassunto">
-                            <option>
-                                Selecione uma opção
-                            </option>
-                            <option>
+                        <select class="caixas_campo_fale" name="txtassunto" required >
+                            <option value="0" selected="selected" disabled="disabled">Escolha uma opção</option>
+                            <option value="Sugestão">
                                 Sugestão
                             </option>
-                            <option>
+                            <option value="Crítica">
                                 Crítica
                             </option>
                         </select>
@@ -174,7 +203,7 @@
                     </div>
 
                     <div class="campos_text_fale">
-                        <textarea class="caixas_text_fale" name="txtcomentario"></textarea>
+                        <textarea class="caixas_text_fale" name="txtcomentario" required></textarea>
                     </div>
                     <div class="campos_fale_botao">
                         <input type="submit" value="Enviar" class="botao_enviar_fale">

@@ -3,15 +3,11 @@
     class FaleConoscoDAO{
     
         public function __construct(){
-        
             require_once('bdClass.php');
-            
         }
         
         public function Insert(FaleConosco $fale){
         
-            
-            
             //instancia da classe de conexão com o banco
             $conexao = new ConexaoMySQL();
             
@@ -28,11 +24,11 @@
             $stm->bindParam(5, $fale->getAssunto());
             $stm->bindParam(6, $fale->getComentario());
             
-            $stm->execute();
-            
+            if($stm->execute()){
+                header("location:index.php");
+            }else{
+                echo("Erro ao enviar");   
+            }
         }
-    
     }
-
-
 ?>
