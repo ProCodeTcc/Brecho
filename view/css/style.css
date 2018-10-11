@@ -2032,6 +2032,15 @@
         width: 100%;
         height: 150px;
     }
+	
+	#radio_produto{
+		text-align: center;
+		margin-top: 10px;
+	}
+	
+	#txttamanho{
+		display: none;
+	}
 
     .campo_cadastro_produto{
         width: 100%;
@@ -2079,32 +2088,50 @@
     .caixa_fotos{
         width: 100%;
         height: 200px;
+		text-align: center;
     }
 
+	.fotos_container{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+	
     .foto{
-        width: 160px;
-        height: 140px;
-        float: left;
-        margin-left: 10px;
-    }
+        width: 128px;
+        height: 128px;
+		margin-right: 45px;
+   	}
 
     .foto img{
-
+		width: 128px;
+		height: 128px;
     }
 
+	.selecao_container{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+	
     .selecao_fotos{
         width: 135px;
         height: 40px;
-        float: left;
-        margin-left: 10px;
-        margin-top: 10px;
-        padding-left: 25px;
+		margin: auto;
     }
-
-    .escolha_fotos{
-        width: 100px;
-        height: 40px;
-    }
+	
+	
+	#imagem, #imagem2, #imagem3{
+		display: none;
+	}
+	
+	.botao_imagem{
+		width: 90px;
+		height: 50px;
+		box-sizing: border-box;
+		padding-top: 15px;
+		cursor: pointer;
+	}
 
     .linha_botao_cadastro{
         width: 150px;

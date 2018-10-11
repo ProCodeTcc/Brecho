@@ -3,6 +3,118 @@
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.form.js"></script>
+		
+		<script>
+			var url = '../';
+			
+			//função para listar as cores
+			function listarCor(){
+				$.ajax({
+					type: 'GET', //tipo de requisição
+					url: url+'router.php', //url onde será enviada a requisição
+					data: {modo: 'listarCor', controller: 'avaliação'}, //parâmetros enviados
+					success: function(dados){
+						//conversão dos dados para json
+						json = JSON.parse(dados);
+						
+						//percorrendo os dados
+						for(var i = 0; i < json.length; i++){
+							//criando um novo option para o select com os dados
+							$('#txtcor').append(new Option(json[i].nome, json[i].idCor));
+						}
+					}
+				});
+			}
+			
+			//função para listar as marcas
+			function listarMarca(){
+				$.ajax({
+					type: 'GET', //tipo de requisição
+					url: url+'router.php', //url onde será enviada a requisição
+					data: {modo: 'listarMarca', controller: 'avaliação'}, //parâmetros enviados
+					success: function(dados){
+						//conversão dos dados para json
+						json = JSON.parse(dados);
+						
+						//percorrendo os dados
+						for(var i = 0; i < json.length; i++){
+							$('#txtmarca').append(new Option(json[i].nomeMarca, json[i].idMarca));
+						}
+					}
+				});
+			}
+			
+			//função para listar as categorias
+			function listarCategoria(){
+				$.ajax({
+					type: 'GET', //tipo de requisição
+					url: url+'router.php', //url onde será enviada a requisição
+					data: {modo: 'listarCategoria', controller: 'avaliação'}, //parâmetros enviados
+					success: function(dados){
+						//conversão dos dados para json
+						json = JSON.parse(dados);
+						
+						//percorrendo os dados
+						for(var i = 0; i < json.length; i++){
+							$('#txtcategoria').append(new Option(json[i].nomeCategoria, json[i].idCategoria));
+						}
+					}
+				});
+			}
+			
+			//função que lista os tamanhos
+			function buscarTamanho(tipoTamanho){
+				$.ajax({
+					type: 'GET', //tipo de requisição
+					url: url+'router.php', //url onde será enviada a requisição
+					data: {modo: 'buscarTamanho', controller: 'avaliação', tipo: tipoTamanho}, //parâmetros enviados
+					success: function(dados){
+						//conversão dos dados para json
+						json = JSON.parse(dados);
+						
+						//percorrendo os dados
+						for(var i = 0; i < json.length; i++){
+							$('#txttamanho').append(new Option(json[i].tamanho, json[i].idTamanho));
+						}
+					}
+				});
+			}
+			
+			//função que mostra a prévia da imagem
+			function mostrarPrevia(input, localPrevia){
+				if(input.files && input.files[0]){
+					//criando um novo leitor
+					var leitor = new FileReader();
+					
+					//função no momento em que a imagem é carregada
+					leitor.onload = function(event){
+						//lugar onde vai mostrar a prévia
+						$(localPrevia).attr('src', event.target.result);
+					}
+					
+					leitor.readAsDataURL(input.files[0]);
+				}
+			}
+			
+			$(document).ready(function(){
+				//listagem da cor
+				listarCor();
+				listarMarca();
+				listarCategoria();
+				
+				$('.txttipo').click(function(){
+					$('#txttamanho').find('option').remove();
+					
+					var tipoTamanho = $('input[name=txttipo]:checked').val();
+					
+					$('#txttamanho').show();
+					
+					buscarTamanho(tipoTamanho);
+				});
+			});
+		</script>
     </head>
     <body>
         <header>
@@ -117,22 +229,14 @@
                 Cadastar Produto           
             </div>
             
-            <div class="cadastro_produto">
+            <form method="POST" name="frmProduto" enctype="multipart/form-data" class="cadastro_produto" action="../router.php?controller=avaliação&modo=cadastrar">
                 <div class="cadastro_esquerdo">
                     <div class="linha_cadastro">
                         <div class="titulo_cadastro_produto">
                             Nome do Produto:
                         </div>
                         <div class="caixa_cadastro_produto">
-                            <input class="campo_cadastro_produto" type="text">
-                        </div>
-                    </div>
-                    <div class="linha_cadastro">
-                        <div class="titulo_cadastro_produto">
-                            Descrição:
-                        </div>
-                        <div class="caixa_cadastro_produto_descricao">
-                            <textarea class="campo_cadastro_produto_descricao"></textarea>
+                            <input class="campo_cadastro_produto" name="txtnome" type="text">
                         </div>
                     </div>
                     <div class="linha_cadastro">
@@ -144,12 +248,29 @@
                             
                         </div>
                     </div>
+					<div class="linha_cadastro">
+                        <div class="titulo_cadastro_produto">
+                            Tamanho:
+                        </div>
+						
+						<div class="caixa_cadastro_produto" id="radio_produto">
+							<label>Medida</label>
+                            <input type="radio" name="txttipo" class="txttipo" value="1">
+							
+							<label>Número</label>
+							<input type="radio" name="txttipo" class="txttipo" value="2">
+                        </div>
+						
+                        <div class="caixa_cadastro_produto">
+                            <select class="campo_cadastro_produto" name="txttamanho" id="txttamanho"></select>                      
+                        </div>
+                    </div>
                     <div class="linha_cadastro">
                         <div class="titulo_cadastro_produto">
                             Categoria do Produto:
                         </div>
                         <div class="caixa_cadastro_produto">
-                            <select class="campo_cadastro_produto"></select>
+                            <select id="txtcategoria" name="txtcategoria" class="campo_cadastro_produto"></select>
                         </div>
                     </div>
                     <div class="linha_cadastro">
@@ -157,7 +278,7 @@
                             Marca do Produto:
                         </div>
                         <div class="caixa_cadastro_produto">
-                            <select class="campo_cadastro_produto"></select>
+                            <select id="txtmarca" name="txtmarca" class="campo_cadastro_produto"></select>
                         </div>
                     </div>
                     
@@ -172,10 +293,22 @@
                             Cor:
                         </div>
                         <div class="caixa_cadastro_produto_meio">
-                            <input class="campo_cadastro_produto_meio" type="text">
+                            <input class="campo_cadastro_produto_meio" name="txtvalor" type="number">
                         </div>
                         <div class="caixa_cadastro_produto_meio">
-                            <select class="campo_cadastro_produto"></select>
+                            <select class="campo_cadastro_produto" name="txtcor" id="txtcor"></select>
+                        </div>
+                    </div>
+					<div class="linha_cadastro">
+                        <div class="titulo_cadastro_produto">
+                            Classificação
+                        </div>
+                        <div class="caixa_cadastro_produto">
+                            <select id="txtclassificacao" name="txtclassificacao" class="campo_cadastro_produto">
+								<option value="A">A</option>
+								<option value="B">B</option>
+								<option value="C">C</option>
+							</select>
                         </div>
                     </div>
                     <div class="linha_cadastro">
@@ -183,7 +316,7 @@
                             Estado da Roupa:
                         </div>
                         <div class="caixa_cadastro_produto_descricao">
-                            <textarea class="campo_cadastro_produto_descricao"></textarea>
+                            <textarea class="campo_cadastro_produto_descricao" name="txtestado"></textarea>
                         </div>
                     </div>
                     <div class="linha_cadastro">
@@ -192,34 +325,53 @@
                         </div>
                     </div>
                     <div class="caixa_fotos">
-                        <div class="foto">
-                            <img alt="#"  src="icones/foto.png">
-                        </div>
-                        
-                        <div class="foto">
-                            <img alt="#"  src="icones/foto.png">
-                        </div>
-                        <div class="foto">
-                            <img alt="#"  src="icones/foto.png">
-                        </div>
-                        <div class="selecao_fotos">
-                            <input class="escolha_fotos" type="file">    
-                        </div>
-                        <div class="selecao_fotos">
-                            <input class="escolha_fotos" type="file"> 
-                        </div>
-                        <div class="selecao_fotos">
-                           <input class="escolha_fotos" type="file">  
-                        </div>
+                        <div class="fotos_container">
+							<div class="foto">
+                            	<img alt="#" id="prev_imagem" src="icones/foto.png">
+							</div>
+
+							<div class="foto">
+								<img alt="#" id="prev_imagem2" src="icones/foto.png">
+							</div>
+							<div class="foto">
+								<img alt="#" id="prev_imagem3" src="icones/foto.png">
+							</div>
+						</div>
+						
+						<div class="selecao_container">
+							<div class="selecao_fotos">
+								<input class="escolha_fotos" id="imagem" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem')">
+								<label for="imagem">
+									<div class="botao_imagem">
+										selecionar
+									</div>
+								</label>
+
+							</div>
+							<div class="selecao_fotos">
+								<input class="escolha_fotos" id="imagem2" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem2')">
+								<label for="imagem2">
+									<div class="botao_imagem">
+										selecionar
+									</div>
+								</label>
+							</div>
+							<div class="selecao_fotos">
+							   <input class="escolha_fotos" id="imagem3" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem3')">
+								<label for="imagem3">
+									<div class="botao_imagem">
+										selecionar
+									</div>
+								</label> 
+							</div>
+						</div>
                     </div>
                        
                 </div>
                 <div class="linha_botao_cadastro">
-                <form action="minhas_vendas.php">
                     <input class="botao_cadastro" type="submit" value="Cadastrar">
-                </form>
-            </div>
-            </div>
+            	</div>
+            </form>
         </main>
         <footer>
             <div class="footer_centro">
