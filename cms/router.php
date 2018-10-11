@@ -315,10 +315,9 @@
 					
 				case 'atualizarImagem':
 					$id = $_POST['id'];
-					$imagem = $_POST['imagem'];
 					
 					$controllerProduto = new controllerProduto();
-					$controllerProduto->atualizarImagem($imagem, $id);
+					$controllerProduto->atualizarImagem($id);
 				break;
 					
 				case 'excluirImagem':

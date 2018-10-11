@@ -11,6 +11,7 @@
 		public function __construct(){
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
 			require_once($diretorio.'model/sobreClass.php');
+			require_once($diretorio.'model/imagemClass.php');
 			require_once($diretorio.'model/dao/sobreDAO.php');
 		}
 		
@@ -21,11 +22,15 @@
 				//resgatando os valores das caixas de texto
 				$titulo = $_POST['txttitulo'];
 				$descricao = $_POST['txtdesc'];
-				$imagem = $_POST['txtimagem'];
 				$layout = $_POST['layout'];
 				
 				if(isset($_POST['txtdesc2'])){
 					$descricao2 = $_POST['txtdesc2'];
+				}
+				
+				if(!empty($_FILES['fleimagem'])){
+					$imagemClass = new Imagem();
+					$imagem = $imagemClass->uploadImagem();
 				}
 			}
 			
@@ -60,13 +65,25 @@
 				//resgatando os valores das caixas de texto
 				$titulo = $_POST['txttitulo'];
 				$descricao = $_POST['txtdesc'];
-				$imagem = $_POST['txtimagem'];
 				$layout = $_POST['layout'];
 				$id = $_POST['id'];
 				
 				if(isset($_POST['txtdesc2'])){
 					$descricao2 = $_POST['txtdesc2'];
 				}
+				
+				//verificando se o input de upload está vazio
+				if($_FILES['fleimagem']['size'] == 0){
+					//se estiver, mantém a imagem que já estava
+					$imagem = $_POST['imagem'];
+				}else{
+					//se não, instancia a classe de imagem
+					$imagemClass = new Imagem();
+					
+					//e faz o upload
+					$imagem = $imagemClass->uploadImagem();
+				}
+				
 			}
 			
 			//instância da classe Sobre

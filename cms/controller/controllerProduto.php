@@ -12,6 +12,7 @@
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
 			require_once($diretorio.'model/produtoClass.php');
 			require_once($diretorio.'model/dao/produtoDAO.php');
+			require_once($diretorio.'model/imagemClass.php');
 		}
 		
 		//função que insere um produto
@@ -27,12 +28,11 @@
 				$categoria = $_POST['txtcategoria'];
 				$cor = $_POST['txtcor'];
 				$tamanho = $_POST['txttamanho'];
-				$imagem = $_POST['txtimagem1'];
-				$imagem2 = $_POST['txtimagem2'];
-				$imagem3 = $_POST['txtimagem3'];
 				
-				//armazena as imagens num array de imagens
-				$imagens = array($imagem, $imagem2, $imagem3);
+				if(!empty($_FILES['fleimagem'])){
+					$imagemClass = new Imagem();
+					$imagens = $imagemClass->uploadMultiplo();
+				}
 			}
 			
 			//instânciando um novo produto
@@ -109,7 +109,13 @@
 		
 		
 		//função que atualiza uma imagem
-		public function atualizarImagem($imagem, $id){
+		public function atualizarImagem($id){
+			
+			if(!empty($_FILES['fleimagem'])){
+				$imagemClass = new Imagem();
+				$imagem = $imagemClass->uploadImagem();
+			}
+			
 			//instância da clase ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			

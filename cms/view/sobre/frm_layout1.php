@@ -23,14 +23,24 @@
 				$('#txtdesc').val(json.descricao);
 				
 				//checando se a imagem está vazia, se não, preencher a div de visualizar
-				//e atribuir o valor ao txtimagem
-				
-				if(json.imagem != 0){
-					$('#imgSobre').attr('src', json.imagem);
-					$('#txtimagem').val(json.imagem);
+				if(json.imagem != null){
+					$('#imgSobre').attr('src', '../arquivos/'+json.imagem);
+					$('#frm_sobreLayout1').data('imagem', json.imagem);
 				}
 			}
 		})
+	}
+	
+	function mostrarPrevia(input){
+		if(input.files && input.files[0]){
+			var leitor = new FileReader();
+			
+			leitor.onload = function(event){
+				$('#imgSobre').attr('src', event.target.result);
+			}
+			
+			leitor.readAsDataURL(input.files[0]);
+		}
 	}
 	
 	$(document).ready(function(){
@@ -44,12 +54,10 @@
 			$('.container_modal').fadeOut(400);
 		});
 		
-		
-		$('#imagem').change(function(){
-			$('#frmImagem').ajaxForm({
-				target: '#visualizar_sobre'
-			}).submit();
+		$('#imagem').live('change', function(){
+			mostrarPrevia(this);
 		});
+		
 		
 		$('#frm_sobreLayout1').submit(function(e){
 			//armazenando o formulario em uma variável
@@ -71,6 +79,9 @@
 				//atribuindo ao formulário o parâmetro modo, contendo a ação de inserir
 				formulario.append('modo', 'inserirLayout');
 			}else{
+				var imagem = $('#frm_sobreLayout1').data('imagem');
+				
+				formulario.append('imagem', imagem);
 				//atribuindo ao formulário o parâmetro modo, contendo a ação de editar
 				formulario.append('modo', 'atualizarLayout');
 				formulario.append('id', id);
@@ -97,16 +108,14 @@
 
 <div class="frm_container">
 	<img class="fechar" src="../imagens/fechar.png">
-	<form method="POST" class="frmImagem" id="frmImagem" action="upload.php" enctype="multipart/form-data">
+	<form method="POST" data-id="<?php echo($id) ?>" data-layout="1" enctype="multipart/form-data" class="sobre_layout" name="frmSobre" id="frm_sobreLayout1">
 		<div id="visualizar_sobre">
 			<label for="imagem" title="clique aqui para selecionar uma imagem">
 				<img id="imgSobre" src="../imagens/picture.png">
 			</label>
 			<input type="file" id="imagem" name="fleimagem">
 		</div>
-	</form>
-	
-	<form method="POST" data-id="<?php echo($id) ?>" data-layout="1" class="sobre_layout" name="frmSobre" id="frm_sobreLayout1">
+		
 		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Titulo:

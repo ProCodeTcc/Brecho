@@ -22,12 +22,26 @@
 				$('#txtdesc').val(json.descricao);
 				$('#txtdesc2').val(json.descricao2);
 				
-				if(json.imagem != 0){
-					$('#imgSobre').attr('src', json.imagem);
-					$('#txtimagem').val(json.imagem);
+				//verificando se a imagem não está vazia, e então mostra ela na div
+				//de visualizar
+				if(json.imagem != null){
+					$('#imgSobre').attr('src', '../arquivos/'+json.imagem);
+					$('#frm_sobreLayout2').data('imagem', json.imagem);
 				}
 			}
 		});
+	}
+	
+	function mostrarPrevia(input){
+		if(input.files && input.files[0]){
+			var leitor = new FileReader();
+			
+			leitor.onload = function(event){
+				$('#imgSobre').attr('src', event.target.result);
+			}
+			
+			leitor.readAsDataURL(input.files[0]);
+		}
 	}
 	
 	$(document).ready(function(){
@@ -42,9 +56,7 @@
 		});
 		
 		$('#imagem').change(function(){
-			$('#frmImagem').ajaxForm({
-				target: '#visualizar_sobre'
-			}).submit();
+			mostrarPrevia(this);
 		});
 		
 		$('#frm_sobreLayout2').submit(function(e){
@@ -66,6 +78,9 @@
 			if(id == ""){
 				formulario.append('modo', 'inserirLayout');
 			}else{
+				var imagem = $('#frm_sobreLayout2').data('imagem');
+				
+				formulario.append('imagem', imagem);
 				formulario.append('modo', 'atualizarLayout');
 				formulario.append('id', id);
 			}
@@ -90,16 +105,14 @@
 
 <div class="frm_container">
 	<img class="fechar" src="../imagens/fechar.png">
-	<form method="POST" class="frmImagem" id="frmImagem" action="upload.php" enctype="multipart/form-data">
+	<form method="POST" class="sobre_layout" data-id="<?php echo($id) ?>" enctype="multipart/form-data" data-layout="2" name="frmSobre" id="frm_sobreLayout2">
 		<div id="visualizar_sobre">
 			<label for="imagem" title="clique aqui para selecionar uma imagem">
 				<img id="imgSobre" src="../imagens/picture.png">
 			</label>
 			<input type="file" id="imagem" name="fleimagem">
 		</div>
-	</form>
-	
-	<form method="POST" class="sobre_layout" data-id="<?php echo($id) ?>" data-layout="2" name="frmSobre" id="frm_sobreLayout2">
+		
 		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Titulo:

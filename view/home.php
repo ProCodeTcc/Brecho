@@ -187,7 +187,7 @@
                             <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>">
 
                             <div class="imagem_produto">
-                                <img src="cms/view/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
+                                <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
                             </div>
                             <div class="descritivo_produto">
                                 <div class="titulo_produto">

@@ -6,15 +6,25 @@
 
 <script>
 	var url = '../../';
+	
+	function mostrarPrevia(input){
+		if(input.files && input.files[0]){
+			var leitor = new FileReader();
+			
+			leitor.onload = function(event){
+				$('#img').attr('src', event.target.result);
+			}
+			
+			leitor.readAsDataURL(input.files[0]);
+		}
+	}
+	
 	$(document).ready(function(){
 		$('.modal').height(300);
 		$('.modal').width(300);
 		
 		$('#imagem').live('change', function(){
-			$('#frmImagem').ajaxForm({
-				target: '#visualizar_roupa',
-
-			}).submit();
+			mostrarPrevia(this);
 		});
 		
 		//função para submeter o formulário
@@ -24,14 +34,8 @@
 			//armazenando o formulário em uma variável
 			var formulario = new FormData($('#send_image')[0]);
 			
-			//armazenando o caminho da imagem em uma variável
-			var imagem = $('#img1').attr('src');
-			
 			//armazenando o id da imagem em uma variável
 			var id = $('#send_image').data('id');
-			
-			//atribuindo ao formulário o parâmetro imagem
-			formulario.append('imagem', imagem);
 			
 			//atribuindo ao formulário o parâmetro id
 			formulario.append('id', id);
@@ -53,6 +57,7 @@
                 async: true,
 				success: function(dados){
 					alert(dados);
+					listar();
 					$('.container_modal').fadeOut(400);
 				}
 			});
@@ -61,15 +66,13 @@
 	});
 </script>
 
-<form method="post" class="frmImagem" id="frmImagem" name="frmImagem" enctype="multipart/form-data" action="upload.php">
+<form id="send_image" data-id="<?php echo($id) ?>">
 	<div id="visualizar_roupa">
 		<label for="imagem">
-			<img src="../imagens/image.png">
-			<input type="file" name="fleimagem[]" id="imagem">
+			<img id="img" src="../imagens/image.png">
+			<input type="file" name="fleimagem" id="imagem">
 		</label>
 	</div>
-</form>
-
-<form id="send_image" data-id="<?php echo($id) ?>">
+	
 	<input type="submit" class="sub_btn" value="ENVIAR">
 </form>

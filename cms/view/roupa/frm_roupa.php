@@ -133,6 +133,18 @@
 		});
 	}
 	
+	function mostrarPrevia(input, localPrevia){
+		if(input.files && input.files[0]){
+			var leitor = new FileReader();
+			
+			leitor.onload = function(event){
+				$(localPrevia).attr('src', event.target.result);
+			}
+			
+			leitor.readAsDataURL(input.files[0]);
+		}
+	}
+	
 	$(document).ready(function(){
 		var id = $('#frmRoupa').data('id');
 		listarCategoria();
@@ -143,22 +155,9 @@
 			buscarProduto(id);
 		}
 		
-		$('#imagem').live('change', function(){
-			$('#frmImagem').ajaxForm({
-				target: '#visualizar_roupa',
-				beforeSubmit: function(dados){
-					console.log(dados);
-					
-					//$('#imagem').attr('src', '../imagens/catloading.gif');
-					
-					if(dados.length > 3){
-						alert('O número máximo de imagens que podem ser escolhidas é 3!!');
-						return false;
-					}
-					
-				}
-			}).submit();
-		});
+//		$('#imagem').live('change', function(){
+//			
+//		});
 		
 		$('#frmRoupa').submit(function(e){
 			e.preventDefault();
@@ -209,21 +208,35 @@
 	<img class="fechar" src="../imagens/fechar.png">
     
 	<form method="post" class="frm_imagem" id="frmImagem" name="frmImagem" enctype="multipart/form-data" action="upload.php">
-		<div id="visualizar_roupa">
-			<label for="imagem">
-				<img src="../imagens/image.png">
-			</label>
-			
-			<input type="file" name="fleimagem[]" id="imagem" multiple>
-		</div>
+		
 	</form>
 	
 	<form class="frm_roupa" id="frmRoupa" data-id="<?php echo($id) ?>" method="post" name="frmRoupa" enctype="multipart/form-data" name="frmImagem" action="usuario_view.php">
+		
+		<div class="form_linha">
+			<div class="imagens_container">
+				<label for="imagem">
+					<img id="prev_imagem" src="../imagens/image.png">
+				</label>
+
+				<input type="file" name="fleimagem[]" id="imagem" onChange="mostrarPrevia(this, '#prev_imagem')">
+
+				<label for="imagem2">
+					<img id="prev_imagem2" src="../imagens/image.png">
+				</label>
+
+				<input type="file" name="fleimagem[]" id="imagem2" onChange="mostrarPrevia(this, '#prev_imagem2')">
+
+				<label for="imagem3">
+					<img id="prev_imagem3" src="../imagens/image.png">
+				</label>
+
+				<input type="file" name="fleimagem[]" id="imagem3" onChange="mostrarPrevia(this, '#prev_imagem3')">
+			</div>
+		</div>
+		
 		<div id="roupas_form">
 			<div id="roupas_col1">
-				<input type="hidden" name="txtimagem1">
-				<input type="hidden" name="txtimagem2">
-				<input type="hidden" name="txtimagem3">
 				<div class="form_linha">
 					<label class="lbl_cadastro">Nome: </label>
 					<input type="text" class="cadastro_input" name="txtnome" id="txtnome">

@@ -131,7 +131,7 @@
 
                     </div>
                     <div class="imagem_sobre">
-                        <img  alt="#" src="../cms/view/<?php echo($rsLayout->getImagem()) ?>">
+                        <img  alt="#" src="../cms/view/arquivos/<?php echo($rsLayout->getImagem()) ?>">
                     </div>
                 </div>
                 
@@ -143,7 +143,7 @@
 
                     </div>
                     <div class="imagem_sobre_centro">
-                        <img  alt="#" src="../cms/view/<?php echo($rsLayout2->getImagem()) ?>">
+                        <img  alt="#" src="../cms/view/arquivos/<?php echo($rsLayout2->getImagem()) ?>">
                     </div>
                     <div class="texto_sobre_diteiro">
                         

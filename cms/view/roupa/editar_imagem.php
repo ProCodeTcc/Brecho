@@ -66,7 +66,7 @@
 				if($rsImagens[$cont]->getImagem() == null){
 					echo("<img src='../imagens/nullimage.png'>");
 				}else{
-					echo("<img src='{$rsImagens[$cont]->getImagem()}'>");
+					echo("<img src='../arquivos/{$rsImagens[$cont]->getImagem()}'>");
 				}
 			?>
 		</div>

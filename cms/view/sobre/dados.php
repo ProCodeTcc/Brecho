@@ -25,7 +25,7 @@
 		
 		<div class="sobre_col1_item">
 			<div class="sobre_imagem">
-				<img src="<?php echo($rsLayout[$cont]->getImagem()) ?>">
+				<img src="../arquivos/<?php echo($rsLayout[$cont]->getImagem()) ?>">
 			</div>
 
 			<article>
@@ -78,7 +78,7 @@
 		
 		<div class="sobre_col2_item">
 			<div class="sobre_imagem">
-				<img src="<?php echo($rsLayout2[$cont]->getImagem()) ?>">
+				<img src="../arquivos/<?php echo($rsLayout2[$cont]->getImagem()) ?>">
 			</div>
 
 			<article>

@@ -15,10 +15,11 @@
             require_once($diretorio.'model/dao/faleConoscoDAO.php');
         }
     
+		//chamada da função que envia um feedback
         public function inserirFaleConosco(){
-        
+        	//verifica se o método é POST
             if($_SERVER['REQUEST_METHOD']=='POST'){
-            
+            	//resgatando os valores das caixas de texto
                 $nome = $_POST['txtnome'];
                 $email= $_POST['txtemail'];
                 $telefone = $_POST['txttelefone'];
@@ -31,6 +32,7 @@
             //instancia da classe fale conosco
             $faleConoscoClass = new FaleConosco();
             
+			//setando os atributos
             $faleConoscoClass->setNomePessoa($nome);
             $faleConoscoClass->setEmail($email);
             $faleConoscoClass->setTelefone($telefone);
@@ -43,7 +45,6 @@
             $faleConoscoDAO = new FaleConoscoDAO();
             
             //chamada da função para inserir dados
-            
             $faleConoscoDAO::Insert($faleConoscoClass);
             
         }

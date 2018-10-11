@@ -493,7 +493,7 @@ footer{
     height: 64px;
 }
 
-#imagem{
+#imagem, #imagem2, #imagem3{
     display: none;
 }
 
@@ -664,31 +664,21 @@ footer{
 	margin-top: 25px;
 }
 
-.frm_imagem{
-	height: auto;
-	display: flex;
-	justify-content: center;
-	margin-top: 30px;
-}
-
 #roupas_form{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 }
 
-#visualizar_roupa{
-	width: 100%;
-	height: auto;
+.imagens_container{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 }
 
-#visualizar_roupa .imagem_roupa{
-	width: 128px;
+.imagens_container img{
 	height: 128px;
-	margin-right: 5px;
+	width: 128px;
 }
 
 #form_container_roupa{

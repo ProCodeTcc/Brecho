@@ -76,13 +76,11 @@
 			$stm->bindParam(4, $usuario->getNivel());
 			$stm->bindParam(5, $usuario->getSenha());
 			$stm->bindParam(6, $usuario->getId());
-
-            //executando o statement
-			$stm->execute();
 			
-			//verificando o número de linhas
-			if($stm->rowCount() != 0){
+			if($stm->execute()){
 				echo('Dados atualizados com sucesso!!');
+			}else{
+				echo('Ocorreu um erro ao atualizar os dados!!');
 			}
 
             //fechando a conexão

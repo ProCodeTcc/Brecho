@@ -135,14 +135,14 @@
                 <div class="produto_imagens">
                     <div class="caixa_mini_imagens">
                         <div class="mini_imagens">
-                            <img alt="#" src="../cms/view/<?php echo($rsImagens[0]->getImagem()) ?>">
+                            <img alt="#" src="../cms/view/arquivos/<?php echo($rsImagens[0]->getImagem()) ?>">
                         </div>
                         <div class="mini_imagens">
-                            <img alt="#" src="../cms/view/<?php echo($rsImagens[1]->getImagem()) ?>">
+                            <img alt="#" src="../cms/view/arquivos/<?php echo($rsImagens[1]->getImagem()) ?>">
                         </div>
                     </div>
                     <div class="visualizar_produto_imagem">
-                        <img alt="#" src="../cms/view/<?php echo($rsImagens[2]->getImagem()) ?>">
+                        <img alt="#" src="../cms/view/arquivos/<?php echo($rsImagens[2]->getImagem()) ?>">
                     </div>
                 </div>
 				

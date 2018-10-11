@@ -22,14 +22,6 @@
 			//armazenando o retorno dos dados em uma variável
 			$listLayout = $sobreDAO->selectLayout();
 			
-			//tirando os '../' e armazenando em uma variável
-			$novoCaminho = explode('../', $listLayout->getImagem());
-			
-			//percorrendo o caminho e armazenando em uma variável
-			foreach($novoCaminho as $img){
-				$listLayout->setImagem($img);
-			}
-			
 			//retornando o layout
 			return $listLayout;
 		}
@@ -41,13 +33,6 @@
 			
 			//armazenando o retorno dos dados em uma variável
 			$listSobre = $sobreDAO->selectLayout2();
-			
-			//tirando os '../' e armazenando em uma variável
-			$novoCaminho = explode('../', $listSobre->getImagem());
-			
-			foreach($novoCaminho as $img){
-				$listSobre->setImagem($img);
-			}
 			
 			//retornando o layout
 			return $listSobre;

@@ -16,9 +16,11 @@
                     
         }
         
+		//função que insere um cliente
         public function inserirCliente(){
+			//verifica se o método é POST
             if($_SERVER['REQUEST_METHOD']=='POST'){
-            
+            	//resgatando os valores da caixas de texto
                 $nome = $_POST['txtNome'];
                 $sobrenome = $_POST['txtSobrenome'];
                 $telefone = $_POST['txtTelefone'];
@@ -35,6 +37,7 @@
             //Instancia da classe Cliente Fisico
             $clienteFisicoClass = new ClienteFisico();
             
+			//setando os atributos
             $clienteFisicoClass->setNome($nome);
             $clienteFisicoClass->setSobrenome($sobrenome);
             $clienteFisicoClass->setTelefone($telefone);

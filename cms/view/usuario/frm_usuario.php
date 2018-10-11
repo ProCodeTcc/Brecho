@@ -20,19 +20,38 @@
 				json = JSON.parse(dados);
 
 				//colocando esses valores na caixa de texto
-				$('#frmImagem').data('id', json.idUsuario);
 				$('#txtnome').val(json.nomeUsuario);
 				$('#txtusuario').val(json.login);
 				$('#txtnivel').val(json.idNivel);
 
-				//checando se a imagem está vazia, se não, preencher a div de visualizar
-				if(json.imagem != 0){
-					$('#img').attr('src', '../'+json.imagem);
-					$('#txtimagem').val(json.imagem)
+				//checando se a imagem não está nula, então preenche a div de visualizar
+				if(json.imagem != null){
+					$('#img').attr('src', '../arquivos/'+json.imagem);
+					$('#frmUsuario').data('imagem', json.imagem);
 				}
 			}
 		});
 	}
+	
+	//função que mostra a prévia da imagem
+	function mostrarPrevia(input){
+		if(input.files && input.files[0]){
+			//criando um novo leitor de arquivos
+			var leitor = new FileReader();
+			
+			//função no momento em que algum arquivo for carregado
+			leitor.onload = function(event){
+				//colocando a imagem
+				$('#img').attr('src', event.target.result);
+			}
+			
+			leitor.readAsDataURL(input.files[0]);
+		}
+	}
+	
+	$('#imagem').live('change', function(){
+		mostrarPrevia(this);
+	});
 	
     $(document).ready(function(){
 		//resgatando o id do usuario
@@ -47,40 +66,31 @@
             $('.container_modal').fadeOut(400);
         });
 
-        $('#imagem').live('change', function(){
-            $('#frmImagem').ajaxForm({
-                target: '#visualizar'
-            }).submit();
-        });
-
         $('#frmUsuario').submit(function(event){
-            //resgatando o data-atributo contendo o id do usuário
-            var id = $('.frmImagem').data('id');
-
             //criando uma variavel e armazenando o formulário nela
             var formulario = new FormData($('#frmUsuario')[0]);
 
             //se a variável usuário for nula, o modo deverá ser de inserir, caso contrário, editar
-            if(id == null){
+            if(idUsuario == ""){
                 //acrescentando ao formulário o parâmetro modo;
                 formulario.append('modo', 'inserir');
             }else{
+				var imagem = $('#frmUsuario').data('imagem');
                 //acrescentando ao formulário o parâmetro modo;
                 formulario.append('modo', 'editar');
-                formulario.append('id', id);
+				
+				//acrescentando ao formulário o parâmetro id
+                formulario.append('id', idUsuario);
+				
+				//acrescentando ao formulário o parâmetro imagem, que irá conter a imagem
+				//que já estava, caso não seja alterada
+				formulario.append('imagem', imagem);
             }
 
             event.preventDefault();
-            
-            //resgatando a imagem
-            var imagem = $('#txtimagem').val();
 
             //acrescentando ao formulário o parâmetro controller
             formulario.append('controller', 'usuario');
-
-            //acrescentando ao formulário o parâmetro txt imagem
-            //contendo a imagem;
-            formulario.append('txtimagem', imagem);
             
             $.ajax({
                 type: 'post',
@@ -111,17 +121,15 @@
 
 <div class="form_container">
     <img class="fechar" src="../imagens/fechar.png">
-    <form class="frmImagem" action="upload.php" method="post" id="frmImagem" name="frmImagem" enctype="multipart/form-data">
-        <div id="visualizar">
+    <form class="frm_usuario" data-id="<?php echo($id)?>" id="frmUsuario" method="post" enctype="multipart/form-data" name="frmUsuario" action="usuario_view.php">
+		<div id="visualizar">
             <label for="imagem" title="clique aqui para selecionar uma imagem">
                 <img id="img" src="../imagens/user.png">
             </label>
 
             <input type="file" id="imagem" name="fleimagem">
         </div>
-    </form>
-
-    <form class="frm_usuario" data-id="<?php echo($id)?>" id="frmUsuario" method="post" name="frmUsuario" action="usuario_view.php">
+		
 		<div class="form_linha">
             <label class="lbl_cadastro">Nome:</label>
             <input type="text" class="cadastro_input" id="txtnome" name="txtnome" placeholder="Insira um nome" required>

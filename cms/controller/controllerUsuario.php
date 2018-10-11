@@ -11,6 +11,7 @@
         public function __construct(){
             $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
             require_once($diretorio.'/model/usuarioClass.php');
+			require_once($diretorio.'/model/imagemClass.php');
             require_once($diretorio.'/model/dao/usuarioDAO.php');
         }
 
@@ -23,9 +24,11 @@
                 $senha = $_POST['txtsenha'];
 
                 $encryptSenha = md5($senha);
-
-                $imagem = $_POST['txtimagem'];
-
+				
+				if(!empty($_FILES['fleimagem'])){
+					$imagemClass = new Imagem();
+					$imagem = $imagemClass->uploadImagem();
+				}
             }
 
             //instancia da classe usuario
@@ -42,7 +45,7 @@
             $usuarioDAO = new UsuarioDAO();
 
             //chamada da função para inserção de dados
-            $usuarioDAO::Insert($usuarioClass);
+           	$usuarioDAO::Insert($usuarioClass);
         }
 
         public function atualizarContato($id){
@@ -54,8 +57,16 @@
                 $senha = $_POST['txtsenha'];
 
                 $encryptSenha = md5($senha);
-
-                $imagem = $_POST['txtimagem'];
+				
+				//verificanso se o input de upload está vazio
+				if($_FILES['fleimagem']['size'] == 0){
+					//se estiver, mantém a imagem atual
+					$imagem = $_POST['imagem'];
+				}else{
+					//se não estiver, realiza o upload da nova
+					$imagemClass = new Imagem();
+					$imagem = $imagemClass->uploadImagem();
+				}
             }
 
             //instancia da classe usuario
