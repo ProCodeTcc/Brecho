@@ -1,13 +1,47 @@
+<?php
+	if(isset($_POST['id'])){
+		$id = $_POST['id'];
+	}else{
+		$id = null;
+	}
+?>
 
 <script>
 	var url = '../../';
+	
+	function exibirDados(id){
+		$.ajax({
+			type: 'POST',
+			url: url+'router.php',
+			data: {id:id, controller: 'tema', modo: 'buscar'},
+			success: function(dados){
+				json = JSON.parse(dados);
+				
+				$('#txtnome').val(json.nomeTema);
+				$('#txtcor').val(json.corTema);
+			}
+		});
+	}
+	
 	$(document).ready(function(){
+		var id = $('#frmTema').data('id');
+		
+		if(id != ""){
+			exibirDados(id);
+		}
+		
 		$('#frmTema').submit(function(e){
 			e.preventDefault();
 			
 			var formulario = new FormData($('#frmTema')[0]);
-			formulario.append('modo', 'inserir');
 			formulario.append('controller', 'tema');
+			
+			if(id == ""){
+				formulario.append('modo', 'inserir');
+			}else{
+				formulario.append('modo', 'editar');
+				formulario.append('id', id);
+			}
 			
 			$.ajax({
 				type: 'POST',
@@ -18,7 +52,9 @@
                 processData: false,
                 async: true,
 				success: function(dados){
+					listar();
 					alert(dados);
+					$('.container_modal').fadeOut(400);
 				}
 			});
 		});
@@ -26,7 +62,7 @@
 </script>
 
 <div class="form_container">
-	<form class="frm_tema" id="frmTema" name="frm_tema">
+	<form class="frm_tema" data-id="<?php echo($id) ?>" id="frmTema" name="frm_tema">
 		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Nome:

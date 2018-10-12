@@ -273,6 +273,29 @@
 					$controllerTema = new controllerTema();
 					$controllerTema->inserirTema();
 				break;
+					
+				case 'editar':
+					$id = $_POST['id'];
+					
+					$controllerTema = new controllerTema();
+					$controllerTema->atualizarTema($id);
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerTema = new controllerTema();
+					$listTema = $controllerTema->buscarTema($id);
+					
+					echo($listTema);
+				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					
+					$controllerTema = new controllerTema();
+					$controllerTema->excluirTema($id);
+				break;
 			}
 		break;
 			

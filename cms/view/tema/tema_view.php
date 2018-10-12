@@ -20,17 +20,64 @@
 	<script>
 		var url = '../../';
 		
+		//função que lista os dados
+		function listar(){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: 'dados.php', //url onde será enviada a requisição
+				success: function(dados){
+					//listando os dados na div de consulta
+					$('#consulta').html(dados);
+				}
+			});
+		}
+		
+		//função que carrega a modal
 		function adicionar(){
 			$.ajax({
-				type: 'POST',
-				url: 'frm_tema.php',
+				type: 'POST', //tipo de requisição
+				url: 'frm_tema.php', //url onde será enviada a requisição
 				success: function(dados){
+					//listando os dados na modal
 					$('.modal').html(dados);
 				}
 			});
 		}
 		
+		//função que busca um tema
+		function buscar(id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: 'frm_tema.php', //url onde será enviada a requisição
+				data: {id:id}, //parâmetros enviados
+				success: function(dados){
+					//listando os dados na modal
+					$('.modal').html(dados);
+				}
+			});
+		}
+		
+		//função que exclui um tema
+		function excluir(id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, controller: 'tema', modo: 'excluir'}, //parÂmetros enviados
+				success: function(dados){
+					//listando os dados
+					listar();
+					
+					//mensagem de sucesso
+					alert(dados);
+					
+					//fechando a modal
+					$('.container_modal').fadeOut(400);
+				}
+			});
+		}
+		
 		$(document).ready(function(){
+			listar();
 			$('#adicionar').click(function(){
 				$('.container_modal').fadeIn(400);
 			});
