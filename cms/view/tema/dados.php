@@ -29,6 +29,18 @@
 		<span onclick="excluir(<?php echo($rsTema[$cont]->getId()) ?>)">
 			<img src="../imagens/delete16.png">
 		</span>
+		
+		<span onClick="status(<?php echo($rsTema[$cont]->getStatus())?>, <?php echo($rsTema[$cont]->getId()) ?>)">
+			<?php
+				$status = $rsTema[$cont]->getStatus();
+				
+				if($status == 1){
+					echo('<img src="../imagens/ativar.png">');
+				}else{
+					echo('<img src="../imagens/desativar.png">');
+				}
+			?>
+		</span>
 	</div>
 </div>
 

@@ -4,12 +4,6 @@
 	if(isset($_SESSION['imagem'])){
 		//armazenando a imagem na variável de sessão
 		$imagem = $_SESSION['imagem'];
-		
-		//separando a imagem da url relativa, pra não dar conflito de caminhos
-		$newImagem = explode('../', $imagem);
-		
-		//armazenando o caminho separado na variável imagem
-		$imagem = $newImagem[1];
 	}
 ?>
 
@@ -27,8 +21,14 @@
 	
 	<script>
 		$(document).ready(function(){
-			$('.menu').children().click(function(e){
-				$(this).children('.submenu').toggle(300);
+			
+			//evento no click de um item do menu
+			$('.menu .menu_itens').click(function(e){
+				//mostrando o submenu somente do item clicado
+				$(this).find('.submenu').toggle(400);
+				
+				//escondendo os submenus dos itens que não forem clicados
+				$('.menu_itens').not(this).find('.submenu').hide('fast');
 			});
 			
 			$('#logout').click(function(){
