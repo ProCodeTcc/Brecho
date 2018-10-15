@@ -1,6 +1,8 @@
 <?php
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
+	}else{
+		header('location: erro.php');
 	}
 
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
@@ -15,11 +17,27 @@
 		<script src="js/jquery.js"></script>
 		
 		<script>
-			
+			function visualizarImagem(imagem){
+				$('.container_modal').fadeIn(400);
+				
+				$.ajax({
+					type: 'POST',
+					url: 'modal.php',
+					data: {imagem:imagem},
+					success: function(dados){
+						$('.modal').html(dados);
+					}
+				});
+			}
 		</script>
 		
     </head>
     <body>
+		<div class="container_modal">
+			<div class="modal">
+			
+			</div>
+		</div>
         <header>
             <div class="menu_paginas">
                 <div class="menu_paginas_site">
@@ -134,14 +152,14 @@
 				?>
                 <div class="produto_imagens">
                     <div class="caixa_mini_imagens">
-                        <div class="mini_imagens">
+                        <div class="mini_imagens" onclick="visualizarImagem('<?php echo($rsImagens[0]->getImagem()) ?>')">
                             <img alt="#" src="../cms/view/arquivos/<?php echo($rsImagens[0]->getImagem()) ?>">
                         </div>
-                        <div class="mini_imagens">
+                        <div class="mini_imagens" onclick="visualizarImagem('<?php echo($rsImagens[1]->getImagem()) ?>')">
                             <img alt="#" src="../cms/view/arquivos/<?php echo($rsImagens[1]->getImagem()) ?>">
                         </div>
                     </div>
-                    <div class="visualizar_produto_imagem">
+                    <div class="visualizar_produto_imagem" onclick="visualizarImagem('<?php echo($rsImagens[2]->getImagem()) ?>')">
                         <img alt="#" src="../cms/view/arquivos/<?php echo($rsImagens[2]->getImagem()) ?>">
                     </div>
                 </div>

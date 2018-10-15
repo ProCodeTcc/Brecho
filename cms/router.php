@@ -434,5 +434,35 @@
 				break;
 			}
 		break;
+			
+		case 'avaliação':
+			$modo = $_POST{'modo'};
+			require_once('controller/controllerAvaliacao.php');
+			switch($modo){
+				case 'aprovar':
+					$id = $_POST['id'];
+					
+					$controllerAvaliacao = new controllerAvaliacao();
+					$controllerAvaliacao->aprovarProduto($id);
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerAvaliacao = new controllerAvaliacao();
+					$listProduto = $controllerAvaliacao->buscarProduto($id);
+					
+					echo($listProduto);
+				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					
+					$controllerAvaliacao = new controllerAvaliacao();
+					$controllerAvaliacao->excluirImagemDiretorio($id);
+					$controllerAvaliacao->excluirProduto($id);
+				break;
+			}
+		break;
     }
 ?>

@@ -131,6 +131,12 @@
 								
 								<ul class="submenu">
 									<li class="submenu-itens">
+										<a class="paginas_link" href="avaliacao/avaliacao_view.php">
+											Avaliação
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
 										<a class="paginas_link" href="roupa/roupa_view.php">
 											Roupas
 										</a>

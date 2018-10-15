@@ -111,9 +111,13 @@
 		//função que atualiza uma imagem
 		public function atualizarImagem($id){
 			
-			if(!empty($_FILES['fleimagem'])){
-				$imagemClass = new Imagem();
-				$imagem = $imagemClass->uploadImagem();
+			if($_FILES['fleimagem']['size'] == 0){
+				$imagem = $_POST['imagem'];
+			}else{
+				if(!empty($_FILES['fleimagem'])){
+					$imagemClass = new Imagem();
+					$imagem = $imagemClass->uploadImagem();
+				}
 			}
 			
 			//instância da clase ProdutoDAO

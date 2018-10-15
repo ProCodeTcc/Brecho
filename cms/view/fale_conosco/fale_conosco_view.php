@@ -55,6 +55,15 @@
 		$(document).ready(function(){
 			listar();
 			
+			//evento no click de um item do menu
+			$('.menu .menu_itens').click(function(e){
+				//mostrando o submenu somente do item clicado
+				$(this).find('.submenu').toggle(400);
+
+				//escondendo os submenus dos itens que não forem clicados
+				$('.menu_itens').not(this).find('.submenu').hide('fast');
+			});
+			
 			$('#logout').click(function(){
 				$.ajax({
 					type: 'POST',
@@ -70,7 +79,7 @@
 
     <body>
         <div class="container_modal">
-            <div class="modal" id="modal_faleconosco">
+            <div class="modal">
                 
             </div>
         </div>
@@ -111,13 +120,7 @@
                     </div>
 
                     <div class="pages">
-                        <a class="paginas_link" href="../usuario/usuario_view.php">
-                            Usuários
-                        </a>
-
-                        <a class="paginas_link" href="../nivel/nivel_view.php">
-                            Níveis
-                        </a>
+                        <?php require_once('../menu.php') ?>
                     </div>
                 </div>
 

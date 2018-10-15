@@ -18,7 +18,7 @@
 
 					$nomearquivo = md5(uniqid(time())).$nome_foto.$extensao;
 
-					$upload_dir = $diretorio."view/arquivos/";
+					$upload_dir = $diretorio."cms/view/arquivos/";
 
 					$extensoes_permitidas = array('.png', '.jpg', '.jpeg', '.gif', '.svg');
 

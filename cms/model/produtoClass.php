@@ -6,13 +6,13 @@
 		
 		private $id;
 		protected $nome;
-		private $descricao;
-		private $classificacao;
+		protected $descricao;
+		protected $classificacao;
 		protected $preco;
-		private $tamanho;
-		private $categoria;
-		private $marca;
-		private $cor;
+		protected $tamanho;
+		protected $categoria;
+		protected $marca;
+		protected $cor;
 		protected $imagem;
 		protected $status;
 		

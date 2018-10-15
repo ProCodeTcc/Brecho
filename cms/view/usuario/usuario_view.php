@@ -81,6 +81,15 @@
             $(document).ready(function(){                
                 listar();
                 
+				//evento no click de um item do menu
+				$('.menu .menu_itens').click(function(e){
+					//mostrando o submenu somente do item clicado
+					$(this).find('.submenu').toggle(400);
+
+					//escondendo os submenus dos itens que não forem clicados
+					$('.menu_itens').not(this).find('.submenu').hide('fast');
+				});
+				
                 $('#adicionar').click(function(){
                     $('.container_modal').fadeIn(400);
 					
@@ -154,13 +163,7 @@
                     </div>
 
                     <div class="pages">
-                        <a class="paginas_link" href="../nivel/nivel_view.php">
-                            Níveis
-                        </a>
-
-                        <a class="paginas_link" href="../enquete/enquete_view.php">
-                            Enquetes
-                        </a>
+                   		<?php require_once('../menu.php') ?>
                     </div>
 					
 					<div class="estatisticas">

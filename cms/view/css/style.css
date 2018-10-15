@@ -650,6 +650,44 @@ footer{
 	cursor: pointer;
 }
 
+.visualizar_container{
+	display: flex;
+	flex-direction: column;
+}
+
+.visualizar_container .fechar{
+	align-self: flex-end;
+}
+
+.visualizar_detalhes{
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.detalhes_titulo{
+	margin-bottom: 20px;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.detalhe_item{
+	display: flex;
+	flex-direction: row;
+}
+
+.descricao_container{
+	width: 300px;
+}
+
+.visualizar_desc{
+	width: 100%;
+	overflow-y: hidden;
+	resize: none;
+}
+
 /************************** EVENTOS ***********************************/
 #txtdesc{
 	overflow: hidden;
@@ -686,37 +724,10 @@ footer{
 	text-align: center;
 }
 
-.dados_imagens{
-	display: flex;
-	flex-direction: column;
-	padding: 10px;
-}
-
-.imagem_linha{
-	width: 100%;
-	height: 150px;
-	display: flex;
-	flex-direction: row;
-	margin: 25px 0px 25px 0px;
-}
-
-.imagem_visualizar{
-	width: 128px;
-	height: 128px;
-}
 
 #visualizar_roupa img{
 	width: 128px;
 	height: 128px;
-}
-
-.imagem_visualizar img{
-	width: 128px;
-	height: 128px;
-}
-
-#send_image{
-	text-align: center;
 }
 
 #roupas_col1{
@@ -760,6 +771,47 @@ footer{
 
 #txttamanho{
 	display: none;
+}
+
+.container_imagens{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.container_imagens .fechar{
+	align-self: flex-end;
+}
+
+.dados_imagens{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.dados_imagens #imagens{
+	width: 256px;
+	height: 256px;
+}
+
+#frmImagem{
+	text-align: center;
+}
+
+#frmImagem .sub_btn{
+	margin-top: 10px;
+}
+
+#visualizar_edicao{
+	width: 256px;
+	height: 256px;
+	margin: auto;
+}
+
+#visualizar_edicao img{
+	width: 256px;
+	height: 256px;
 }
 
 /*************************** FALE CONOSCO *****************************/

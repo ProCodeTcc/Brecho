@@ -19,7 +19,68 @@
 	
 	<script>
 		var url = '../../';
+		
+		function listar(){
+			$.ajax({
+				type: 'POST',
+				url: 'dados.php',
+				success: function(dados){
+					$('#consulta').html(dados);
+				}
+			});
+		}
+		
+		//função para aprovar um produto
+		function aprovar(id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, controller: 'avaliação', modo: 'aprovar'}, //parâmetros enviados
+				success: function(dados){
+					alert(dados);
+					listar();
+				}
+			});
+		}
+		
+		//função que para excluir um produto
+		function excluir(id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, controller: 'avaliação', modo: 'excluir'}, //parâmetros enviados
+				success: function(dados){
+					//listagem dos dados
+					listar();
+				}
+			});
+		}
+		
+		//função para visualizar um produto
+		function visualizar(id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: 'visualizar.php', //url onde será enviada a requisição
+				data: {id:id}, //parâmetro enviado
+				success: function(dados){
+					//carregando a modal com os dados
+					$('.modal').html(dados);
+				}
+			});
+		}
+		
 		$(document).ready(function(){
+			listar();
+			
+			//evento no click de um item do menu
+			$('.menu .menu_itens').click(function(e){
+				//mostrando o submenu somente do item clicado
+				$(this).find('.submenu').toggle(400);
+
+				//escondendo os submenus dos itens que não forem clicados
+				$('.menu_itens').not(this).find('.submenu').hide('fast');
+			});
+			
 			$('#logout').click(function(){
 				$.ajax({
 					type: 'POST',
@@ -80,13 +141,7 @@
                     </div>
 
                     <div class="pages">
-                        <a class="paginas_link" href="../usuario/usuario_view.php">
-                            Usuários
-                        </a>
-
-                        <a class="paginas_link" href="../nivel/nivel_view.php">
-                            Níveis
-                        </a>
+                        <?php require_once('../menu.php') ?>
                     </div>
                 </div>
 
@@ -98,35 +153,14 @@
                     <div id="consulta">
 						
 						
-						<div class="produtos_linha">
-							<?php
-								$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
-								require_once($diretorio.'/controller/controllerAnalise.php');
-								$listProdutos = new controllerAnalise();
-							?>
-							<div class="produtos">
-								<div class="produtos_imagem">
-								
-								</div>
-								
-								<article>
-									<p class="produtos_titulo">nome</p>
-									<p class="produtos_titulo">preço</p>
-								</article>
-								
-								<div class="acoes">
-									<img src="../imagens/visualizar.png">
-									<img src="../imagens/ativar.png">
-									<img src="../imagens/delete16.png">
-								</div>
-							</div>
 						
-						</div>
+					
+					</div>
+					
+					<div id="visualizar">
 						
-						
-                    </div>
-                </div>
-
+					</div>
+				</div>
             </div>
 
             <div class="next_itens">
