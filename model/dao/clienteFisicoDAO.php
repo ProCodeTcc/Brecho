@@ -34,13 +34,34 @@
             
             if($stm->execute()){
                 header("location:index.php");
+                $idCliente=$PDO_conexao->lastInsertId();
+                return $idCliente;
+                    
+                    
             }else{
                 echo('Erro ao Cadastrar');
             }
             
         }
-    
-    
+        
+        
+        
+        public function InserirClienteEndereco($idCliente,$idEndereco){
+            //Instancia da classe de cinexão com o banco 
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função para conectar o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //criando um statement e preparando a querry que irá inserir os dados no banco.
+            $stm = $PDO_conexao->prepare('insert into clientefisico_endereco (idCliente,idEndereco) values(?,?)');
+            
+            $stm->bindParam(1, $idCliente);
+            $stm->bindParam(2, $idEndereco);
+            
+            $stm->execute();
+            
+        }
     }
 
 

@@ -252,16 +252,16 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input id="txt_cep" class="campo_cadastro_usuario_meio" type="text" onkeypress="return validar(event,'caracter')">
+                                <input id="txt_cep" class="campo_cadastro_usuario_meio" type="text" onkeypress="return validar(event,'caracter')" name="txtCep">
                                 <script type="text/javascript">$("#txt_cep").mask("00000-000");</script>
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <select class="campo_cadastro_usuario_meio">
-                                    <option value="">Rua</option>
-                                    <option value="">Avenida</option>
-                                    <option value="">Praça</option>
-                                    <option value="">Viela</option>
+                                <select class="campo_cadastro_usuario_meio" name="txtTipo">
+                                    <option value="0">Rua</option>
+                                    <option value="1">Avenida</option>
+                                    <option value="2">Praça</option>
+                                    <option value="3">Viela</option>
                                 </select>
                             </div>
 
@@ -271,7 +271,7 @@
                             </div>
 
                             <div class="linha_cadastro_usuario">
-                                <input class="campo_cadastro_usuario" type="text">
+                                <input class="campo_cadastro_usuario" type="text" name="txtLogradouro">
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
@@ -283,11 +283,11 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text" >
+                                <input  class="campo_cadastro_usuario_meio" type="text" name="txtEstado">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio"  type="text" >
+                                <input class="campo_cadastro_usuario_meio"  type="text" name="txtCidade">
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
@@ -299,11 +299,11 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text" >
+                                <input  class="campo_cadastro_usuario_meio" type="text" name="txtNumero">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text" >
+                                <input  class="campo_cadastro_usuario_meio" type="text" name="txtComplemento">
                             </div>
 
                             <div class="linha_cadastro_usuario_botao">
