@@ -184,7 +184,7 @@
 						while($cont < count($rsProdutos)){
 					?>
                         <div class="produto">
-                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>">
+                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=home">
 
                             <div class="imagem_produto">
                                 <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">

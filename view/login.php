@@ -1,3 +1,10 @@
+<?php
+	if(isset($_POST['txtemail'])){
+		session_start();
+		$_SESSION['email'] = $_POST['txtemail'];
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -55,12 +62,12 @@
                         <div class="titulo_login">
                                 Criar Conta
                         </div>
-                        <form action="cadastro_usuario.php">
+                        <form action="cadastro_usuario.php" method="post">
                             <div class="caixa_campos_direita">
                                 E-mail:
                                 <div class="campos">
 
-                                    <input class="campos_login" type="email">
+                                    <input class="campos_login" name="txtemail" type="email">
                                 </div>
                                 <div class="campos">
                                 </div>

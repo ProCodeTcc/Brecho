@@ -116,23 +116,33 @@
                 </div>
                 
                 <div class="caixa_promocao">
-                    <a href="visualizar_produto.php">
+                    <?php
+						$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+						require_once($diretorio.'controller/controllerPromocao.php');
+						$listPromocao = new controllerPromocao();
+						$rsPromocao = $listPromocao->listarPromocao();
+					
+						$cont = 0;
+						while($cont < count($rsPromocao)){
+					?>
+					
+					<a href="visualizar_produto.php?id=<?php echo($rsPromocao[$cont]->getIdProduto()) ?>&pagina=promoção">
                         <div class="produto_promocao">
                             <div class="imagem_produto_promocao">
                                 <div class="icone_promocao">
-                                    30%
+                                    <?php echo($rsPromocao[$cont]->getDesconto().'%') ?>
                                 </div>
-                                <img alt="#"  src="imagens/blusa.jpg">
+                                <img alt="#"  src="../cms/view/arquivos/<?php echo($rsPromocao[$cont]->getImagem()) ?>">
                             </div>
                             <div class="descritivo_produto_promocao">
                                 <div class="titulo_produto_promocao">
-                                    Blusa Masculina Dixie Tricot Gola
+                                    <?php echo($rsPromocao[$cont]->getNome()) ?>
                                 </div>
                                 <div class="preco_promocao">
-                                    <del>De: R$ 129,90</del>
+                                    <del>De: R$ <?php echo($rsPromocao[$cont]->getPreco()) ?></del>
                                 </div>
                                  <div class="preco_promocao">
-                                    Por: R$ 89,90
+                                    Por: R$ <?php echo($rsPromocao[$cont]->getTotalDesconto()) ?>
                                 </div>
                                 <div class="opcoes_promocao">
 <!--                                    <a class="preto" href="visualizar_produto.php">-->
@@ -147,70 +157,11 @@
                             </div>
                         </div>
                     </a>
+                    <?php
+					$cont++;
+						}
+					?>
                     
-                    <a href="visualizar_produto.php">
-                        <div class="produto_promocao">
-                            <div class="imagem_produto_promocao">
-                                <div class="icone_promocao">
-                                    30%
-                                </div>
-                                <img alt="#"  src="imagens/blusa.jpg">
-                            </div>
-                            <div class="descritivo_produto_promocao">
-                                <div class="titulo_produto_promocao">
-                                    Blusa Masculina Dixie Tricot Gola
-                                </div>
-                                <div class="preco_promocao">
-                                    <del>De: R$ 129,90</del>
-                                </div>
-                                 <div class="preco_promocao">
-                                    Por: R$ 89,90
-                                </div>
-                                <div class="opcoes_promocao">
-<!--                                    <a class="preto" href="visualizar_produto.php">-->
-                                        <div class="comprar_produto_promocao">
-                                            Conferir
-                                        </div>
-<!--                                    </a>-->
-                                    <div class="carrinho_produto_promocao">
-                                        <img alt="#"  src="icones/carrinho.png">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="visualizar_produto.php">
-                        <div class="produto_promocao">
-                            <div class="imagem_produto_promocao">
-                                <div class="icone_promocao">
-                                    30%
-                                </div>
-                                <img alt="#"  src="imagens/blusa.jpg">
-                            </div>
-                            <div class="descritivo_produto_promocao">
-                                <div class="titulo_produto_promocao">
-                                    Blusa Masculina Dixie Tricot Gola
-                                </div>
-                                <div class="preco_promocao">
-                                    <del>De: R$ 129,90</del>
-                                </div>
-                                 <div class="preco_promocao">
-                                    Por: R$ 89,90
-                                </div>
-                                <div class="opcoes_promocao">
-<!--                                    <a class="preto" href="visualizar_produto.php">-->
-                                        <div class="comprar_produto_promocao">
-                                            Conferir
-                                        </div>
-<!--                                    </a>-->
-                                    <div class="carrinho_produto_promocao">
-                                        <img alt="#"  src="icones/carrinho.png">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
                     
                 </div>
         </main>

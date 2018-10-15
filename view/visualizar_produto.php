@@ -1,12 +1,14 @@
 <?php
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
+		$pagina = $_GET['pagina'];
 	}else{
 		header('location: erro.php');
 	}
 
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 	require_once($diretorio.'controller/controllerProduto.php');
+	require_once($diretorio.'controller/controllerPromocao.php');
 ?>
 
 <!DOCTYPE html>
@@ -165,8 +167,13 @@
                 </div>
 				
 				<?php
-					$listProduto = new controllerProduto();
-					$rsProduto = $listProduto->buscarProduto($id);
+					if($pagina == 'home'){
+						$listProduto = new controllerProduto();
+						$rsProduto = $listProduto->buscarProduto($id);
+					}else if($pagina == 'promoção'){
+						$listProduto = new controllerPromocao();
+						$rsProduto = $listProduto->buscarProduto($id);
+					}
 				?>
 				
                 <div class="visualizar_produto_detalhes">
