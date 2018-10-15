@@ -40,9 +40,14 @@
             
         case 'ClienteFisico':
             require_once('controller/controllerClienteFisico.php');
+            require_once('controller/controllerEndereco.php');
             
             $controllerClienteFisico = new controllerClienteFisico();
             $controllerClienteFisico->inserirCliente();
+            
+            $controllerEndereco = new controllerEndereco();
+            $controllerEndereco->inserirEndereco();
+            
 		break;
 			
 		case 'avaliação':
