@@ -88,6 +88,15 @@
 					echo($listTamanho);
 				break;
 			}
+            
+        case 'Login':
+            require_once('controller/controllerLogin.php');
+            
+            $controllerLogin = new controllerLogin();
+            $controllerLogin->BuscarConta();
+            
+            
+            
 		break;
         
     }

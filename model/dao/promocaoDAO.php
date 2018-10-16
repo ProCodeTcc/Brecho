@@ -65,7 +65,7 @@
 			
 			//parâmetro enviado
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
-			
+            			
 			//executando o statement
 			$stm->execute();
 			

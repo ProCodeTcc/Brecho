@@ -1,8 +1,10 @@
 <?php
-	if(isset($_POST['txtemail'])){
-		session_start();
-		$_SESSION['email'] = $_POST['txtemail'];
-	}
+//	if(isset($_POST['txtemail'])){
+//		session_start();
+//		$_SESSION['email'] = $_POST['txtemail'];
+//	}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,16 +37,16 @@
                         <div class="titulo_login">
                                 Já Sou Cliente
                         </div>
-                        <form action="perfil.php">
+                        <form method="POST" action="../router.php?controller=Login">
                             <div class="caixa_campos">
                                 E-mail:
                                 <div class="campos">
 
-                                    <input class="campos_login" type="email">
+                                    <input class="campos_login" type="text" name="txtLogin">
                                 </div>
                                 Senha:
                                 <div class="campos">
-                                    <input class="campos_login" type="password">
+                                    <input class="campos_login" type="password" name="txtSenha">
                                 </div> <div class="campos">
                                 <!-- Implementar link para alterar senha do usuário -->
                                 <!-- <a href="#">Esqueci Minha Senha</a> -->

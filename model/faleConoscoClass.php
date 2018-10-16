@@ -85,16 +85,5 @@
         public function getComentario(){
             return $this->comentario;
         }
-        
-    
-    
     }
-
-
-
-
-
-
-
-
 ?>

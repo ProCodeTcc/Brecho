@@ -1,3 +1,22 @@
+<?php
+//	if(isset($_POST['txtemail'])){
+//		session_start();
+//		$_SESSION['email'] = $_POST['txtemail'];
+//	}
+
+    $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+    require_once($diretorio.'controller/controllerLogin.php');
+
+    $listLogin = new controllerLogin();
+    $rsConta = $listLogin->BuscarConta();
+
+
+    var_dump($rsConta);
+    
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
