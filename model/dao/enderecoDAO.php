@@ -14,7 +14,7 @@
             $PDO_conexao = $conexao->conectarBanco();
             
             //Criando um statement e preparando para inserir no banco
-            $stm = $PDO_conexao->prepare('insert into endereco (logradouro,bairro,cidade,estado,numero,complemento,latitude,longitude,cep,idTipoEndereco) values (?,?,?,?,?,?,?,?,?,?)');
+            $stm = $PDO_conexao->prepare('insert into endereco(logradouro,bairro,cidade,estado,numero,complemento,latitude,longitude,cep) values (?,?,?,?,?,?,?,?,?)');
             
             $stm->bindParam(1, $endereco->getLogradouro());
             $stm->bindParam(2, $endereco->getBairro());
@@ -25,16 +25,15 @@
             $stm->bindParam(7, $endereco->getLatitude());
             $stm->bindParam(8, $endereco->getLongitude());
             $stm->bindParam(9, $endereco->getCep());
-            $stm->bindParam(10, $endereco->getIdTipoEndereco());
                         
             
             if($stm->execute()){
-                header("location:index.php");
-                $idEndereco =$PDO_conexao->lastInsertId();
+//                header("location:index.php");
+                $idEndereco = $PDO_conexao->lastInsertId();
                 return $idEndereco;
                 
             }else{
-                echo("Erro ao enviar");   
+                echo("Ocorreu um erro ao inserir os dados do endereço");   
             }
             
             $conexao->fecharConexao();

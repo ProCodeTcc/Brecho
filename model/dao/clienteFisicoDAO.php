@@ -33,15 +33,15 @@
 //            var_dump($cliente);
             
             if($stm->execute()){
-                header("location:index.php");
+//                header("location:index.php")
                 $idCliente=$PDO_conexao->lastInsertId();
                 return $idCliente;
-                    
-                    
             }else{
-                echo('Erro ao Cadastrar');
+                echo('Ocorreu um erro ao inserir os dados do cliente');
             }
             
+			$conexao->fecharConexao();
+			
         }
         
         
@@ -54,12 +54,14 @@
             $PDO_conexao = $conexao->conectarBanco();
             
             //criando um statement e preparando a querry que irá inserir os dados no banco.
-            $stm = $PDO_conexao->prepare('insert into clientefisico_endereco (idCliente,idEndereco) values(?,?)');
+            $stm = $PDO_conexao->prepare('insert into clientefisico_endereco(idClienteFisico,idEndereco) values(?,?)');
             
             $stm->bindParam(1, $idCliente);
             $stm->bindParam(2, $idEndereco);
             
             $stm->execute();
+			
+			$conexao->fecharConexao();
             
         }
     }

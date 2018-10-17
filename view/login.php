@@ -1,9 +1,4 @@
 <?php
-//	if(isset($_POST['txtemail'])){
-//		session_start();
-//		$_SESSION['email'] = $_POST['txtemail'];
-//	}
-
 
 ?>
 
@@ -12,6 +7,36 @@
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-3.2.1.min.js"></script>
+		
+		<script>
+			$(document).ready(function(){
+				//função no click do botão logar
+				$('#logar').click(function(e){
+					//desativando o submit do botão
+					e.preventDefault();
+					$.ajax({
+						type: 'POST', //tipo de requisição
+						url: '../router.php?controller=login&modo=logar', //url onde será enviada a requisição
+						data: new FormData($('#frmLogin')[0]), //enviando os dados do formulário
+						cache: false,
+						contentType: false,
+						processData: false,
+						async: true,
+						success: function(dados){
+							//verificando o retorno dos dados
+							if(dados == true){
+								//se for verdadeiro, redireciona pro login
+								window.location.href="../index.php";
+							}else{
+								//se for falso, mostra mensagem de esrro
+								alert('Usuário ou Senha incorretos!!');
+							}
+						}
+					});
+				});
+			});
+		</script>
     </head>
     <body>
         <header>
@@ -37,7 +62,7 @@
                         <div class="titulo_login">
                                 Já Sou Cliente
                         </div>
-                        <form method="POST" action="../router.php?controller=Login">
+                        <form method="POST" id="frmLogin">
                             <div class="caixa_campos">
                                 E-mail:
                                 <div class="campos">
@@ -52,7 +77,7 @@
                                 <!-- <a href="#">Esqueci Minha Senha</a> -->
                                 </div>
                                 <div class="campos">
-                                    <input class="botao_login" type="submit" value="Acessar Conta">
+                                    <input class="botao_login" id="logar" type="submit" value="Acessar Conta">
                                 </div>
                             </div>
                         </form>

@@ -1,7 +1,5 @@
 <?php
-	session_start();
-	$email = $_SESSION['email'];
-	echo($email);
+//	header('Access-Control-Allow-Origin: *');
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +35,23 @@
                     }
                 }
             }
+			
+			$(document).ready(function(){
+				$('#txt_cep').blur(function(){
+					var cep = $('#txt_cep').val();
+					$('#txtlogradouro').val('...');
+					$('#txtbairro').val('...');
+					$('#txtestado').val('...');
+					$('#txtcidade').val('...');
+					
+					$.getJSON("https://viacep.com.br/ws/"+cep+"/json/", function(dados){
+						$('#txtlogradouro').val(dados.logradouro);
+						$('#txtbairro').val(dados.bairro);
+						$('#txtestado').val(dados.uf);
+						$('#txtcidade').val(dados.localidade);
+					});
+				});
+			});
  
         </script>
         
@@ -155,7 +170,7 @@
 
                 <div class="caixa_cadastro_usuario">
                     <div class="cadastro_usuario">
-                        <form method="POST" action="../router.php?controller=ClienteFisico">
+                        <form method="POST" action="../router.php?controller=ClienteFisico&modo=cadastrar">
                             <div class="titulo_cadastro_usuario_meio">
                                 Nome*
                             </div>
@@ -248,7 +263,7 @@
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
-                                Tipo de Endereço*
+                                Bairro*
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
@@ -257,12 +272,7 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <select class="campo_cadastro_usuario_meio" name="txtTipo">
-                                    <option value="0">Rua</option>
-                                    <option value="1">Avenida</option>
-                                    <option value="2">Praça</option>
-                                    <option value="3">Viela</option>
-                                </select>
+                                <input type="text" class="campo_cadastro_usuario" id="txtbairro" name="txtbairro">
                             </div>
 
 
@@ -271,7 +281,7 @@
                             </div>
 
                             <div class="linha_cadastro_usuario">
-                                <input class="campo_cadastro_usuario" type="text" name="txtLogradouro">
+                                <input class="campo_cadastro_usuario" id="txtlogradouro" type="text" name="txtLogradouro">
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
@@ -283,11 +293,11 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text" name="txtEstado">
+                                <input  class="campo_cadastro_usuario_meio" type="text" id="txtestado" name="txtEstado">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio"  type="text" name="txtCidade">
+                                <input class="campo_cadastro_usuario_meio"  type="text" id="txtcidade" name="txtCidade">
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">

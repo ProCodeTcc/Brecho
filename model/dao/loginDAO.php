@@ -5,7 +5,7 @@
             require_once('bdClass.php');
         }   
         
-        public function Select($login){
+        public function Select($usuario, $senha){
             
             //insert da classe de conexão com o banco
             $conexao = new ConexaoMySQL();
@@ -17,25 +17,22 @@
             $stm = $PDO_conexao->prepare('select * from clientefisico where login = ? and senha = ?');
              
             //parâmetro enviado
-			$stm->bindValue(1, $login, PDO::PARAM_STR);
-			$stm->bindValue(2, $login, PDO::PARAM_STR);
-            
+			$stm->bindParam(1, $usuario);
+			$stm->bindParam(2, $senha);
+			
 			//executando o statement
 			$stm->execute();
 			
-			//armazenando os dados em uma variável
-			$rsConta= $stm->fetch(PDO::FETCH_OBJ);
-			            
-			$listLogin = new Login();
-            
-//			//setando os atributos
-			$listLogin->setIdCliente($rsConta->idCliente);
-			$listLogin->setNome($rsConta->nome);
-			$listLogin->setLogin($rsConta->login);
-			$listLogin->setSenha($rsConta->senha);
+			$listCliente = $stm->fetch(PDO::FETCH_OBJ);
 			
-			//retornando a lista
-			return $listLogin;
+			if($stm->rowCount() != 0){
+				session_start();
+				$_SESSION['login'] = true;
+				$_SESSION['sexo'] = $listCliente->sexo;
+				echo true;
+			}else{
+				echo false;
+			}
             
             $conexao->fecharConexao();
 			

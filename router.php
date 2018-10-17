@@ -39,14 +39,14 @@
         break;
             
         case 'ClienteFisico':
+			$modo = $_GET['modo'];
             require_once('controller/controllerClienteFisico.php');
-            require_once('controller/controllerEndereco.php');
-            
-            $controllerClienteFisico = new controllerClienteFisico();
-            $controllerClienteFisico->inserirCliente();
-            
-            $controllerEndereco = new controllerEndereco();
-            $controllerEndereco->inserirEndereco();
+            switch($modo){
+				case 'cadastrar':
+					$controllerClienteFisico = new controllerClienteFisico();
+					$controllerClienteFisico->inserirCliente();
+				break;
+			}
             
 		break;
 			
@@ -89,12 +89,15 @@
 				break;
 			}
             
-        case 'Login':
+        case 'login':
             require_once('controller/controllerLogin.php');
-            
-            $controllerLogin = new controllerLogin();
-            $controllerLogin->BuscarConta();
-            
+            $modo = $_GET['modo'];
+            switch($modo){
+				case 'logar':
+					$controllerLogin = new controllerLogin();
+					$controllerLogin->BuscarConta();
+				break;
+			}
             
             
 		break;

@@ -18,22 +18,15 @@
     
         public function BuscarConta(){
             if($_SERVER['REQUEST_METHOD']=='POST'){
-                $login = $_POST['txtLogin'];
+                $usuario = $_POST['txtLogin'];
                 $senha = $_POST['txtSenha'];
                 
                 $loginDAO = new LoginDAO();
                 
-                $listLogin = $loginDAO->select($login);
-                $listLogin = $loginDAO->select($senha);
+				$loginDAO->Select($usuario, $senha);
                 
-                return $listLogin;
-                
-            }
-            
-            
-                
-            }
-            
+            }  
+          } 
         }
     
 

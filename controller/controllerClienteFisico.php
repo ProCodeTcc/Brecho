@@ -11,8 +11,10 @@
     class controllerClienteFisico{
         public function __construct(){
             $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-            require_once ($diretorio.'model/clienteFisicoClass.php');
-            require_once ($diretorio.'model/dao/clienteFisicoDAO.php');
+            require_once($diretorio.'model/clienteFisicoClass.php');
+			require_once($diretorio.'model/enderecoClass.php');
+			require_once($diretorio.'model/dao/enderecoDAO.php');
+            require_once($diretorio.'model/dao/clienteFisicoDAO.php');
                     
         }
         
@@ -31,13 +33,21 @@
                 $login = $_POST['txtUsuario'];
                 $senha = $_POST['txtSenha'];
                 $sexo = $_POST['rb_sexo'];
+				$cep= $_POST['txtCep'];
+				$bairro = $_POST['txtbairro'];
+                $logradouro= $_POST['txtLogradouro'];
+                $estado= $_POST['txtEstado'];
+                $cidade= $_POST['txtCidade'];
+                $numero= $_POST['txtNumero'];
+                $complemento= $_POST['txtComplemento'];
             
             }
             
             //Instancia da classe Cliente Fisico
             $clienteFisicoClass = new ClienteFisico();
+			$enderecoClass = new Endereco();
             
-			//setando os atributos
+			//setando os atributos do cliente
             $clienteFisicoClass->setNome($nome);
             $clienteFisicoClass->setSobrenome($sobrenome);
             $clienteFisicoClass->setTelefone($telefone);
@@ -48,12 +58,27 @@
             $clienteFisicoClass->setLogin($login);
             $clienteFisicoClass->setSenha($senha);
             $clienteFisicoClass->setSexo($sexo);
-            
+			
+			//setando os atributos do endereço
+			$enderecoClass->setCep($cep);
+			$enderecoClass->setBairro($bairro);
+            $enderecoClass->setLogradouro($logradouro);
+            $enderecoClass->setEstado($estado);
+            $enderecoClass->setCidade($cidade);
+            $enderecoClass->setNumero($numero);
+            $enderecoClass->setComplemento($complemento);
+			
             //instancia da classe ClienteFicicoDAO
             $clienteFisicoDAO = new ClienteFisicoDAO();
-            
+			
+			//instância da classe EnderecoDAO
+			$enderecoDAO = new EnderecoDAO();
+			
             //Chamada da função para inserir dados
-            $clienteFisicoDAO::Insert($clienteFisicoClass);
+           	$idCliente = $clienteFisicoDAO->Insert($clienteFisicoClass);
+			$idEndereco = $enderecoDAO->Insert($enderecoClass);
+			
+			$clienteFisicoDAO->InserirClienteEndereco($idCliente, $idEndereco);
         }
     
     }
