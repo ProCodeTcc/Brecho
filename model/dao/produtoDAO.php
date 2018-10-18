@@ -109,5 +109,71 @@
 			//retornando as imagens
 			return $listImagens;
 		}
+        
+        public function selectCategorias(){
+            //instancia da classe do banco de dados.
+            $conexao = new ConexaoMySQL();
+        
+            //chamada da função que conecta com o banco.
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query  que realiza a busca de categorias.
+            $sql ='select * from categoria';
+            
+            $resultado = $PDO_conexao->query($sql);
+            
+            $cont = 0;
+            
+            while($rsCategoria = $resultado->fetch(PDO::FETCH_OBJ)){
+                
+            //Criando lista de categoria
+            $listCategoria[] = new Produto();
+                            
+            //Adicionando os dados da categoria
+            $listCategoria[$cont]->setId($rsCategoria->idCategoria);
+            $listCategoria[$cont]->setNome($rsCategoria->nomeCategoria);
+                
+                $cont++;
+            }
+            
+            return $listCategoria;
+        }
+        
+        public function selectProdutoCategoria($id){
+            //instância da classe de conexão com o banco de dados
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+            
+            //query que realiza a consulta
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 AND p.idCategoria = ? GROUP BY p.idProduto');
+            
+            //parâmetros enviados
+			$stm->bindValue(1, $id, PDO::PARAM_INT);
+            
+            //executando o statement
+			$stm->execute();
+            
+            $cont=0;
+            
+            while($rsProdutoCategoria = $stm->fetch(PDO::FETCH_OBJ)){
+            
+                //criando um novo produto
+                $listProdutoCategoria[] = new Produto();
+
+                //adicionando os dados do produto
+                $listProdutoCategoria[$cont]->setImagem($rsProdutoCategoria->imagem);
+                $listProdutoCategoria[$cont]->setId($rsProdutoCategoria->idProduto);
+                $listProdutoCategoria[$cont]->setNome($rsProdutoCategoria->nome);
+                $listProdutoCategoria[$cont]->setDescricao($rsProdutoCategoria->descricao);
+                $listProdutoCategoria[$cont]->setTamanho($rsProdutoCategoria->tamanho);
+                $listProdutoCategoria[$cont]->setPreco($rsProdutoCategoria->preco);
+
+             $cont++;   
+            }
+                //retornando um produto
+                return $listProdutoCategoria;
+        }
 	}
 ?>

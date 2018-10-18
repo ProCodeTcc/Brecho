@@ -173,7 +173,10 @@
 					}else if($pagina == 'promoção'){
 						$listProduto = new controllerPromocao();
 						$rsProduto = $listProduto->buscarProduto($id);
-					}
+					}elseif($pagina == 'categoria'){
+                        $listProduto = new controllerProduto();
+						$rsProduto = $listProduto->buscarProduto($id);
+                    }
 				?>
 				
                 <div class="visualizar_produto_detalhes">

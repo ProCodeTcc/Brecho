@@ -49,5 +49,29 @@
 			//retornando a lista com as imagens
 			return $listImagens;
 		}
+        
+        public function listarCategoria(){
+            
+            $categoriaDAO = new ProdutoDAO();
+            
+            $listCategoria = $categoriaDAO ->selectCategorias();
+            
+            return $listCategoria;
+            
+            
+        }
+        
+        public function listarProdutoCategoria($id){
+        
+            //instância da classe produtoDAO
+            $produtoCategoriaDAO = new ProdutoDAO();
+            
+            //armazenando os dados retornados.
+            $listProdutoCategoria= $produtoCategoriaDAO->selectProdutoCategoria($id);
+            
+            //Retornando o produto da categoria.
+            return $listProdutoCategoria;
+        
+        }
 	}
 ?>

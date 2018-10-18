@@ -106,31 +106,26 @@
             
             <div class="menu_categoria">
                 <div class="menu">
-                    <a href="view/visualizar_categoria.php">
+                    <?php
+                        require_once('controller/controllerProduto.php');
+                            
+                        $listCategoria = new controllerProduto();
+                        $rsCategoria = $listCategoria->listarCategoria();
+                            
+                        $cont = 0;
+                            
+                        while($cont < count($rsCategoria)){
+                    ?>
+                    <a href="view/visualizar_categoria.php?idCategoria=<?php echo($rsCategoria[$cont]->getId())?>">
                         <div class="menu_item">
-                            Comum
+                            <?php echo($rsCategoria[$cont]->getNome())?>
                         </div>
                     </a>
-                    <a href="view/visualizar_categoria.php">
-                        <div class="menu_item">
-                            Alfaiataria
-                        </div>
-                    </a>
-                    <a href="view/visualizar_categoria.php">
-                        <div class="menu_item">
-                            Banho
-                        </div>
-                    </a>
-                    <a href="view/visualizar_categoria.php">
-                        <div class="menu_item">
-                            Pijamas
-                        </div>
-                    </a>
-                    <a href="view/visualizar_categoria.php">
-                        <div class="menu_item">
-                            Social
-                        </div>
-                    </a>
+
+                    <?php
+                        $cont++;
+                        }
+                    ?>
                     <a href="view/promocao.php">
                         <div class="menu_item">
                             Promoção
@@ -141,7 +136,6 @@
                             Eventos
                         </div> 
                     </a>
-                    
                 </div>
             </div>
         </header>
