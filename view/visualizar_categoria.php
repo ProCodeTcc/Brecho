@@ -147,101 +147,60 @@
                                 
                             </div>
                         </div>
-                        
-                         
-                    
+                                            
                         <div class="filtro_categoria">
-                            <a href="visualizar_produto.php">
-                                <div class="produto">
-                                    <div class="imagem_produto">
-                                        <img  alt="#" src="imagens/blusa.jpg">
-                                    </div>
-                                    <div class="descritivo_produto">
-                                        <div class="titulo_produto">
-                                            Blusa Masculina Dixie Tricot Gola V
-                                        </div>
-                                        <div class="descricao">
-                                            Fabricada em tricot e lã, a Blusa Dixie conta com efeito degradê de cores e gola V. Perfeita para compor looks casuais, é ideal para ser usada com jeans e jaquetas! Confortável e super estilosa, é indispensável para os homens que buscam conforto e qualidade em uma só peça.
-                                        </div>
-                                        <div class="tamanho">
-                                           Tamanho: [M]
-                                        </div>
-                                        <div class="preco">
-                                            R$ 129,90
-                                        </div>
-                                        <div class="opcoes">
-                                            <div class="comprar_produto">
-                                                Conferir
-                                            </div>
-                                            <div class="carrinho_produto">
-                                                <img  alt="#" src="icones/carrinho.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a href="visualizar_produto.php">
-                                <div class="produto">
-                                    <div class="imagem_produto">
-                                        <img  alt="#" src="imagens/tenis.jpg">
-                                    </div>
-                                    <div class="descritivo_produto">
-                                        <div class="titulo_produto">
-                                            Tênis Cano Alto Adidas Vs Set Mid Masculino
-                                        </div>
-                                        <div class="descricao">
-                                            Oferecendo pegada esportiva para compor seus looks urbanos, o Tênis Cano Alto Adidas Vs Set Mid Masculino é a pedida certa para seu street style. Conta com palmilha confortável e cabedal em lona.
-                                        </div>
-                                        <div class="tamanho">
-                                           Tamanho: [41]
-                                        </div>
-                                        <div class="preco">
-                                            R$ 249,99
-                                        </div>
-                                        <div class="opcoes">
-                                            <div class="comprar_produto">
-                                                Conferir
-                                            </div>
-                                            <div class="carrinho_produto">
-                                                <img  alt="#" src="icones/carrinho.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a href="visualizar_produto.php">
-                                <div class="produto">
-                                    <div class="imagem_produto">
-                                        <img alt="#" src="imagens/jaqueta.jpg">
-                                    </div>
-                                    <div class="descritivo_produto">
-                                        <div class="titulo_produto">
-                                            Jaqueta de Couro Feminina estilo Biker
-                                        </div>
-                                        <div class="descricao">
-                                            Peça confeccionada individualmente sob medida, exclusivamente para cada cliente.
-            Disponível em couro bovino e em couro pelica (de cabra), em diversas cores.
-                                        </div>
-                                        <div class="tamanho">
-                                           Tamanho: [M]
-                                        </div>
-                                        <div class="preco">
-                                            R$ 576,00
-                                        </div>
-                                        <div class="opcoes">
-                                            <div class="comprar_produto">
-                                                Conferir
-                                            </div>
-                                            <div class="carrinho_produto">
-                                                <img alt="#" src="icones/carrinho.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                            <?php
+                                
+                                    if(isset($_GET['idCategoria'])){
+                                        $id = $_GET['idCategoria'];
+                                        
+                                        $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                                        require_once($diretorio.'controller/controllerProduto.php');
 
+                                        $listProdutoCategoria = new controllerProduto();
+                                        $rsProdutosCategoria = $listProdutoCategoria->listarProdutoCategoria($id);
+                                        
+                                        $cont = 0;
+
+                                        while($cont < count($rsProdutosCategoria)){
+                                ?>
+                            
+                            <a href="visualizar_produto.php?id=<?php echo($rsProdutosCategoria[$cont]->getId())?>&pagina=categoria">
+                                <div class="produto">
+                                    <div class="imagem_produto">
+                                        <img  alt="#" src="../cms/view/arquivos/<?php echo($rsProdutosCategoria[$cont]->getImagem())?>" alt="#">
+                                    </div>
+                                    <div class="descritivo_produto">
+                                        <div class="titulo_produto">
+                                            <?php echo($rsProdutosCategoria[$cont]->getNome())?>
+                                        </div>
+                                        <div class="descricao">
+                                            <?php echo($rsProdutosCategoria[$cont]->getDescricao())?>
+                                        </div>
+                                        <div class="tamanho">
+                                           <?php echo($rsProdutosCategoria[$cont]->getTamanho())?>
+                                        </div>
+                                        <div class="preco">
+                                            R$ <?php echo($rsProdutosCategoria[$cont]->getPreco())?>
+                                        </div>
+                                        <div class="opcoes">
+                                            <div class="comprar_produto">
+                                                Conferir
+                                            </div>
+                                            <div class="carrinho_produto">
+                                                <img  alt="#" src="icones/carrinho.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <?php
+                                        $cont++;
+                                        }
+                                    }
+                                
+                                ?>
+                            </a>
                      </div>
                         <div class="botao_categoria_responsivo"> 
                             <img src="icones/categoria.png">
