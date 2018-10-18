@@ -46,6 +46,20 @@
 					$controllerClienteFisico = new controllerClienteFisico();
 					$controllerClienteFisico->inserirCliente();
 				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerClienteFisico = new controllerClienteFisico();
+					$listCliente = $controllerClienteFisico->listarCliente($id);
+					
+					echo($listCliente);
+				break;
+					
+				case 'atualizar':
+					$controllerClienteFisico = new controllerClienteFisico();
+					$controllerClienteFisico->atualizarCliente();
+				break;
 			}
             
 		break;

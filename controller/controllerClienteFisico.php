@@ -80,6 +80,72 @@
 			
 			$clienteFisicoDAO->InserirClienteEndereco($idCliente, $idEndereco);
         }
+		
+		public function atualizarCliente(){
+			//verifica se o método é POST
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+            	//resgatando os valores da caixas de texto
+                $nome = $_POST['txtnome'];
+                $sobrenome = $_POST['txtsobrenome'];
+                $telefone = $_POST['txttelefone'];
+                $celular = $_POST['txtcelular'];
+                $email = $_POST['txtemail'];
+                $dataNascimento = $_POST['txtdata'];
+                $senha = $_POST['txtsenha'];
+                $sexo = $_POST['rb_sexo'];
+				$cep= $_POST['txtcep'];
+				$bairro = $_POST['txtbairro'];
+                $logradouro= $_POST['txtlogradouro'];
+                $estado= $_POST['txtestado'];
+                $cidade= $_POST['txtcidade'];
+                $numero= $_POST['txtnumero'];
+                $complemento= $_POST['txtcomplemento'];
+				$id = $_POST['id'];
+				$idEndereco = $_POST['idEndereco'];
+            
+            }
+            
+            //Instancia da classe Cliente Fisico
+            $clienteFisicoClass = new ClienteFisico();
+			$enderecoClass = new Endereco();
+            
+			//setando os atributos do cliente
+			$clienteFisicoClass->setIdCliente($id);
+            $clienteFisicoClass->setNome($nome);
+            $clienteFisicoClass->setSobrenome($sobrenome);
+            $clienteFisicoClass->setTelefone($telefone);
+            $clienteFisicoClass->setCelular($celular);
+            $clienteFisicoClass->setEmail($email);
+            $clienteFisicoClass->setdataNascimento($dataNascimento);
+            $clienteFisicoClass->setSenha($senha);
+            $clienteFisicoClass->setSexo($sexo);
+			
+			//setando os atributos do endereço
+			$enderecoClass->setIdEndereco($idEndereco);
+			$enderecoClass->setCep($cep);
+			$enderecoClass->setBairro($bairro);
+            $enderecoClass->setLogradouro($logradouro);
+            $enderecoClass->setEstado($estado);
+            $enderecoClass->setCidade($cidade);
+            $enderecoClass->setNumero($numero);
+            $enderecoClass->setComplemento($complemento);
+			
+            //instancia da classe ClienteFicicoDAO
+            $clienteFisicoDAO = new ClienteFisicoDAO();
+			
+			//instância da classe EnderecoDAO
+			$enderecoDAO = new EnderecoDAO();
+			
+            //Chamada da função para inserir dados
+           	$clienteFisicoDAO->Update($clienteFisicoClass);
+			$enderecoDAO->Update($enderecoClass);
+		}
+		
+		public function listarCliente($id){
+			$clienteFisicoDAO = new ClienteFisicoDAO();
+			$listCliente = $clienteFisicoDAO->selectByID($id);
+			return $listCliente;
+		}
     
     }
 

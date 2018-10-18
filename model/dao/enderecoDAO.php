@@ -62,6 +62,7 @@
 			$stm->bindParam(7, $endereco->getCep());
 			$stm->bindParam(8, $endereco->getIdEndereco());
 			
+			
 			//executando o statement
 			$stm->execute();
 			

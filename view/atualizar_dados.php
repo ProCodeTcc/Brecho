@@ -1,8 +1,99 @@
+<?php
+	session_start();
+	
+	if(isset($_SESSION['idCliente'])){
+		$id = $_SESSION['idCliente'];
+	}else{
+		$id = null;
+	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+	require_once($diretorio.'controller/controllerClienteFisico.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-3.2.1.min.js"></script>
+		
+		<script>
+			function exibirDados(id){
+				$.ajax({
+					type: 'POST',
+					url: '../router.php?controller=ClienteFisico&modo=buscar',
+					data: {id:id},
+					success: function(dados){
+						json = JSON.parse(dados);
+						
+						$("#txtemail").val(json.email);
+						$('#txtsenha').val(json.senha);
+						$('#txtnome').val(json.nome);
+						$('#txtsobrenome').val(json.sobrenome);
+						$('#txttelefone').val(json.telefone);
+						$('#txtcelular').val(json.celular);
+						$('#txtdata').val(json.dataNascimento);
+						$('#txtcep').val(json.cep);
+						$('#txtbairro').val(json.bairro);
+						$('#txtlogradouro').val(json.logradouro);
+						$('#txtestado').val(json.estado);
+						$('#txtcidade').val(json.cidade);
+						$('#txtnumero').val(json.numero);
+						$('#txtcomplemento').val(json.complemento);
+						$('#frmAtualizar').data('idEndereco', json.idEndereco);
+					}
+				});
+			}
+			
+			$(document).ready(function(){
+				var id = $('#frmAtualizar').data('id');
+				if(id != ""){
+					exibirDados(id);
+				}
+				
+				$('#txtcep').blur(function(){
+					var cep = $('#txtcep').val();
+					
+					$('#txtbairro').val('...');
+					$('#txtlogradouro').val('...');
+					$('#txtestado').val('...');
+					$('#txtcidade').val('...');
+					$('#txtnumero').val('...');
+					$('#txtcomplemento').val('...');
+					
+					$.getJSON('https://viacep.com.br/ws/'+cep+'/json/', function(dados){
+						$('#txtbairro').val(dados.bairro);
+						$('#txtlogradouro').val(dados.logradouro);
+						$('#txtestado').val(dados.uf);
+						$('#txtcidade').val(dados.localidade);
+					});
+					
+				});
+				
+				$('#frmAtualizar').submit(function(e){
+					e.preventDefault();
+					var idEndereco = $('#frmAtualizar').data('idEndereco');
+					var formulario = new FormData($('#frmAtualizar')[0]);
+					formulario.append('id', id);
+					formulario.append('idEndereco', idEndereco);
+					
+					$.ajax({
+						type: 'POST',
+						url: '../router.php?controller=ClienteFisico&modo=atualizar',
+						data: formulario,
+						cache: false,
+						contentType: false,
+						processData: false,
+						async: true,
+						success: function(dados){
+							alert(dados);
+						}
+					});
+					
+				});
+			});
+		</script>
     </head>
     <body>
         <header>
@@ -119,14 +210,14 @@
                     <div class="titulo_atualizar">
                         Atualizar Informações da Conta 
                     </div>
-                    
-                    <form action="perfil.php" class="atualizar">
+					
+                    <form method="POST" id="frmAtualizar" name="frmAtualizar" class="atualizar" data-id="<?php echo($id) ?>">
                         <div class="informacao_conta">
                              <div class="titulo_cadastro_usuario">
                                 E-mail*
                             </div>
                             <div class="linha_cadastro_usuario">
-                                <input class="campo_cadastro_usuario" type="text">
+                                <input class="campo_cadastro_usuario" type="text" id="txtemail" name="txtemail">
                             </div>
 
                              <div class="titulo_cadastro_usuario_meio">
@@ -137,7 +228,7 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="password">
+                                <input class="campo_cadastro_usuario_meio" type="password" name="txtsenha" id="txtsenha">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
@@ -158,11 +249,11 @@
                              </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtnome" id="txtnome">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtsobrenome" id="txtsobrenome">
                             </div>
 
                              <div class="titulo_cadastro_usuario_meio">
@@ -173,11 +264,11 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txttelefone" id="txttelefone">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtcelular" id="txtcelular">
                             </div>
 
 
@@ -191,17 +282,17 @@
 
                             <div class="linha_cadastro_usuario_meio">
                                 <label>
-                                    <input type="radio" class="radio_sexo" name="rb_sexo"> Masculino
+                                    <input type="radio" class="radio_sexo" value="M" name="rb_sexo"> Masculino
                                 </label>    
 
                                 <label>
-                                    <input type="radio" class="radio_sexo" name="rb_sexo"> Feminino
+                                    <input type="radio" class="radio_sexo" value="F" name="rb_sexo"> Feminino
                                 </label>    
 
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="date">
+                                <input  class="campo_cadastro_usuario_meio" type="date" name="txtdata" id="txtdata">
                             </div>
 
                         </div>
@@ -265,15 +356,15 @@
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
-                                Tipo de Endereço*
+                                Bairro*
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio" type="text">
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtcep" id="txtcep">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <select class="campo_cadastro_usuario_meio"></select>
+                                <input class="campo_cadastro_usuario_meio" type="text" name="txtbairro" id="txtbairro">
                             </div>
 
 
@@ -282,7 +373,7 @@
                             </div>
 
                             <div class="linha_cadastro_usuario">
-                                <input class="campo_cadastro_usuario" type="text">
+                                <input class="campo_cadastro_usuario" type="text" name="txtlogradouro" id="txtlogradouro">
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
@@ -294,11 +385,11 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
+                                <input  class="campo_cadastro_usuario_meio" type="text" name="txtestado" id="txtestado">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input class="campo_cadastro_usuario_meio"  type="text">
+                                <input class="campo_cadastro_usuario_meio"  type="text" name="txtcidade" id="txtcidade">
                             </div>
 
                             <div class="titulo_cadastro_usuario_meio">
@@ -310,16 +401,14 @@
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
+                                <input  class="campo_cadastro_usuario_meio" type="text" id="txtnumero" name="txtnumero">
                             </div>
 
                             <div class="linha_cadastro_usuario_meio">
-                                <input  class="campo_cadastro_usuario_meio" type="text">
+                                <input  class="campo_cadastro_usuario_meio" type="text" id="txtcomplemento" name="txtcomplemento">
                             </div>
                             <div class="linha_cadastro_usuario_botao">
-
-                                    <input class="botao_cadastro" type="submit" value="Atualizar">
-
+                           		<input class="botao_cadastro" type="submit" value="Atualizar">
                             </div>
                             
                         </div>

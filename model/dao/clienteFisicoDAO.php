@@ -64,6 +64,64 @@
 			$conexao->fecharConexao();
             
         }
+		
+		public function SelectByID($id){
+			$conexao = new ConexaoMySQL();
+			
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			$stm = $PDO_conexao->prepare('SELECT c.*, e.* FROM clientefisico as c INNER JOIN clientefisico_endereco as ce ON c.idCliente = ce.idClienteFisico INNER JOIN endereco as e ON e.idEndereco = ce.idEndereco WHERE c.idCliente = ?');
+			
+			$stm->bindParam(1, $id);
+			
+			$stm->execute();
+			
+			$listCliente = new ClienteFisico();
+			
+			$listCliente = $stm->fetch(PDO::FETCH_OBJ);
+			
+//			$listCliente->setIdCliente($rsClientes->idCliente);
+//			$listCliente->setNome($rsClientes->nome);
+//			$listCliente->setSobrenome($rsClientes->sobrenome);
+//			$listCliente->setTelefone($rsClientes->telefone);
+//			$listCliente->setCelular($rsClientes->celular);
+//			$listCliente->setEmail($rsClientes->email);
+//			$listCliente->setCpf($rsClientes->cpf);
+//			$listCliente->setdataNascimento($rsClientes->dataNascimento);
+//			$listCliente->setSenha($rsClientes->senha);
+//			$listCliente->setSexo($rsClientes->sexo);
+			
+			return json_encode($listCliente);
+			
+			$conexao->fecharConexao();
+		}
+		
+		public function Update(ClienteFisico $cliente){
+			$conexao = new ConexaoMySQL();
+			
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			$stm = $PDO_conexao->prepare('UPDATE clientefisico SET nome = ?, sobrenome = ?, telefone = ?, celular = ?, email = ?, dataNascimento = ?, 
+			senha = ?, sexo = ? WHERE idCliente = ?');
+			
+			$stm->bindParam(1, $cliente->getNome());
+			$stm->bindParam(2, $cliente->getSobrenome());
+			$stm->bindParam(3, $cliente->getTelefone());
+			$stm->bindParam(4, $cliente->getCelular());
+			$stm->bindParam(5, $cliente->getEmail());
+			$stm->bindParam(6, $cliente->getdataNascimento());
+			$stm->bindParam(7, $cliente->getSenha());
+			$stm->bindParam(8, $cliente->getSexo());
+			$stm->bindParam(9, $cliente->getIdCliente());
+			
+			if($stm->execute()){
+				echo('Dados atualizados com sucesso!!');
+			}else{
+				echo('Ocorreu um erro ao atualizar os dados');
+			}
+			
+			$conexao->fecharConexao();
+		}
     }
 
 

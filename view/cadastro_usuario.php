@@ -51,6 +51,8 @@
 						$('#txtcidade').val(dados.localidade);
 					});
 				});
+				
+				
 			});
  
         </script>
@@ -169,6 +171,20 @@
                 </div>
 
                 <div class="caixa_cadastro_usuario">
+					
+					<div class="escolha_cliente">
+						<div class="linha_cadastro_usuario">
+							<label>
+								<input type="radio" name="txtcliente" value="F" id="txtcliente"> Físico
+							</label>
+
+							<label>
+								<input type="radio" name="txtcliente" value="J" id="txtcliente"> Jurídico
+							</label>
+
+						</div>
+					</div>
+					
                     <div class="cadastro_usuario">
                         <form method="POST" action="../router.php?controller=ClienteFisico&modo=cadastrar">
                             <div class="titulo_cadastro_usuario_meio">

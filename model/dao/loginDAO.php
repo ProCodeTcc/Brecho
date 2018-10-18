@@ -29,6 +29,7 @@
 				session_start();
 				$_SESSION['login'] = true;
 				$_SESSION['sexo'] = $listCliente->sexo;
+				$_SESSION['idCliente'] = $listCliente->idCliente;
 				echo true;
 			}else{
 				echo false;
