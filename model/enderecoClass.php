@@ -12,15 +12,15 @@
 
     class Endereco{
         private $idEndereco;
-        private $logradouro;
-        private $bairro;
-        private $cidade;
-        private $estado;
-        private $numero;
-        private $complemento;
+        protected $logradouro;
+        protected $bairro;
+        protected $cidade;
+        protected $estado;
+        protected $numero;
+        protected $complemento;
         private $latitude;
         private $longitude;
-        private $cep;
+        protected $cep;
         private $idTipoEndereco;
         
         public function __construct(){

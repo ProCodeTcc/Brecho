@@ -464,5 +464,41 @@
 				break;
 			}
 		break;
+			
+		case 'unidade':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerUnidade.php');
+			switch($modo){
+				case 'inserir':
+					$controllerUnidade = new controllerUnidade();
+					$controllerUnidade->inserirUnidade();
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerUnidade = new controllerUnidade();
+					$listUnidade = $controllerUnidade->buscarUnidade($id);
+					
+					echo($listUnidade);
+				break;
+					
+				case 'editar':
+					$id = $_POST['id'];
+					$idEndereco = $_POST['idEndereco'];
+					
+					$controllerUnidade = new controllerUnidade();
+					$controllerUnidade->atualizarUnidade($id, $idEndereco);
+				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					$idEndereco = $_POST['idEndereco'];
+					
+					$controllerUnidade = new controllerUnidade();
+					$controllerUnidade->excluirUnidade($id, $idEndereco);
+				break;
+			}
+		break;
     }
 ?>

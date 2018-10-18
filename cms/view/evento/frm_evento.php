@@ -8,60 +8,62 @@
 </script>
 
 <div class="form_container">
-    <img class="fechar" src="../imagens/fechar.png">
-	
-	<form class="frmImagem" id="frmImagem" name="frmImagem" action="upload.php" method="post" enctype="multipart/form-data">
-		<div id="visualizar">
-			<label for="imagem">
-				<img id="img" src="../imagens/user.png">
-			</label>
-
-			<input type="file" name="fleimagem" id="imagem">
-		</div>
-	</form>
-	
-	<form class="frm_cadastro" method="post" name="frmEvento" id="frm_evento" action="enquete_view.php">
-		<div class="form_row">
-			<label class="lbl_cadastro">
-				Título:
-			</label>
-			
-			<input type="text" class="cadastro_input" name="txttitulo" id="txttitulo">
-			<input type="hidden" name="txtimagem">
+	<img class="fechar" src="../imagens/delete.png">
+	<form method="post" id="frmUnidade" data-id="<?php echo($id) ?>" class="frmUnidade" name="frmUnidade">
+		<div class="form_linha">
+			<div id="visualizar">
+				<label for="imagem">
+					<img src="../imagens/image.png">
+				</label>
+				
+				<input type="file" id="imagem" name="fleimagem">
+			</div>
 		</div>
 		
-		<div class="form_row">
-			<label class="lbl_cadastro">
+		<div class="form_linha">
+			<label>
+				Nome:
+			</label>
+			
+			<input type="text" class="cadastro_input" name="txtnome" id="txtnome">
+		</div>
+		
+		<div class="form_linha">
+			<label>
 				Descrição:
 			</label>
 			
-			<textarea name="txtdesc" id="txtdesc"></textarea>
+			<input type="text">
 		</div>
 		
-        <div class="form_row">
-            <label class="lbl_cadastro">
-                Data de Início:
-            </label>
-
-            <input type="date" class="cadastro_input" name="dtinicio" id="dtinicio">
-        </div>
-
-        <div class="form_row">
-            <label class="lbl_cadastro">
-                Data de Término:
-            </label>
-
-            <input type="date" class="cadastro_input" name="dttermino" id="dttermino">
-        </div>
-		
-		<div class="form_row">
-			<label class="lbl_cadastro">
-				Lojas:
+		<div class="form_linha">
+			<label>
+				Loja
 			</label>
+			
+			<select class="cadastro_select">
+			
+			</select>
 		</div>
+		
+		<div class="form_linha" id="lbl_data">
+            <label class="lbl_cadastro">
+                Início:
+            </label>
 
-        <div class="form_row">
-            <input type="submit" class="page_btn" value="CADASTRAR">
-        <div> 
-    </form>
+             <label class="lbl_cadastro">
+                Término:
+            </label>
+        </div>
+
+        <div class="form_linha" id="input_data">
+			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio">
+			
+			<input type="date" class="cadastro_input" name="dttermino" id="dttermino">
+        </div>
+		
+		<div class="form_linha">
+			<input type="submit" class="sub_btn" value="ENVIAR">
+		</div>
+	</form>
 </div>

@@ -11,68 +11,91 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Análise</title>
+        <title>Unidades</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
-    </head>
-	
-	<script>
-		var url = '../../';
 		
-		function adicionar(){
-			$.ajax({
-				type: 'POST',
-				url: 'frm_cor.php',
-				success: function(dados){
-					$('.modal').html(dados);
-				}
-			});
-		}
-		
-		function listar(){
-			$.ajax({
-				type: 'POST',
-				url: 'dados.php',
-				success: function(dados){
-					$('#consulta').html(dados);
-				}
-			});
-		}
-		
-		
-		$(document).ready(function(){
-			listar();
+		<script>
+			var url = '../../';
 			
-			//evento no click de um item do menu
-			$('.menu .menu_itens').click(function(e){
-				//mostrando o submenu somente do item clicado
-				$(this).find('.submenu').toggle(400);
-
-				//escondendo os submenus dos itens que não forem clicados
-				$('.menu_itens').not(this).find('.submenu').hide('fast');
-			});
-			
-			$('#adicionar').click(function(){
-				$('.container_modal').fadeIn(400);
-			});
-			
-			$('#logout').click(function(){
+			//função que lista os dados
+			function listar(){
 				$.ajax({
-					type: 'POST',
-					url: url+'/router.php',
-					data: {controller: 'usuario', modo: 'deslogar'},
+					type: 'POST', //tipo de requisição
+					url: 'dados.php', //url onde será enviada a requisição
 					success: function(dados){
-						window.location.href=url+'index.php';
+						//colocando os dados na div 
+						$('#consulta').html(dados);
 					}
 				});
+			}
+			
+			//função que exibe os dados
+			function adicionar(){
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: 'frm_unidade.php', //url onde será enviada a requisição
+					success: function(dados){
+						//colocando os dados na modal
+						$('.modal').html(dados);
+					}
+				});
+			}
+			
+			//função que exibe o formulário com os dados da unidade
+			function buscar(idItem){
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: 'frm_unidade.php', //url onde será enviada a requisição
+					data: {id:idItem}, //parâmetros envidaos
+					success: function(dados){
+						//mostrando os dados na modal
+						$('.modal').html(dados);
+					}
+				});
+			}
+			
+			//função que exclui uma unidade
+			function excluir(idItem, idEndereco){
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: url+'router.php', //url onde será enviada a requisição
+					data: {id:idItem, idEndereco:idEndereco, controller: 'unidade', modo: 'excluir'}, //parâmetros enviados
+					success: function(dados){
+						//mensagem
+						alert(dados);
+						
+						//listagem dos dados
+						listar();
+					}
+				});
+			}
+			
+			
+			$(document).ready(function(){
+				listar()
+				
+				$('#adicionar').click(function(){
+					$('.container_modal').fadeIn(400);
+				});
+				
+				//evento no click de um item do menu
+				$('.menu .menu_itens').click(function(e){
+					//mostrando o submenu somente do item clicado
+					$(this).find('.submenu').toggle(400);
+
+					//escondendo os submenus dos itens que não forem clicados
+					$('.menu_itens').not(this).find('.submenu').hide('fast');
+				});
 			});
-		});
-	</script>
+		</script>
+		
+    </head>
 
     <body>
         <div class="container_modal">
-            <div class="modal" id="modal_cor">
+            <div class="modal">
                 
             </div>
         </div>
@@ -98,13 +121,13 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Cores</span>
+            <span class="page_title">Unidades</span>
 
             <div class="page_search_container">
                 <input type="text" class="page_search">
             </div>
-
-            <button class="page_btn" onclick="adicionar();" id="adicionar" data-modo="novo">
+			
+			 <button class="page_btn" onclick="adicionar();" id="adicionar" data-modo="novo">
                 Adicionar
             </button>
         </div>
@@ -122,14 +145,15 @@
                 </div>
 
                 <div class="users_view">
-                    <div class="users_view_title">
-                        <div class="users_view_itens">#</div>
-                        <div class="users_view_itens">Nome</div>
-						<div class="users_view_itens">Cor</div>
-                        <div class="users_view_itens">Ações</div>
-                    </div>
+					<div class="users_view_title">
+						<div class="users_view_itens">#</div>
+						<div class="users_view_itens">Usuario</div>
+						<div class="users_view_itens">Nível</div>
+						<div class="users_view_itens">Ações</div>
+					</div>
 
                     <div id="consulta">
+						
 						
                     </div>
                 </div>

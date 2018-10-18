@@ -39,6 +39,35 @@
             $conexao->fecharConexao();
             
         }
+		
+		//função que atualiza os dados
+		public function Update(Endereco $endereco){
+			//instância da classe que conecta com o banco
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que atualiza o endereço
+			$stm = $PDO_conexao->prepare('UPDATE endereco SET logradouro = ?, bairro = ?, cidade = ?, estado = ?, numero = ?, complemento = ?, cep = ?
+			WHERE idEndereco = ?');
+			
+			//parâmetros enviados
+			$stm->bindParam(1, $endereco->getLogradouro());
+			$stm->bindParam(2, $endereco->getBairro());
+			$stm->bindParam(3, $endereco->getCidade());
+			$stm->bindParam(4, $endereco->getEstado());
+			$stm->bindParam(5, $endereco->getNumero());
+			$stm->bindParam(6, $endereco->getComplemento());
+			$stm->bindParam(7, $endereco->getCep());
+			$stm->bindParam(8, $endereco->getIdEndereco());
+			
+			//executando o statement
+			$stm->execute();
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
     
     }
 
