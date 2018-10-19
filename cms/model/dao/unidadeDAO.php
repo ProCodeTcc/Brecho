@@ -1,4 +1,11 @@
 <?php
+	/*
+		Projeto: CMS do Brechó
+		Autor: Lucas Eduardo
+		Data: 17/10/2018
+		Objetivo: Implementado CRUD de unidades
+	*/
+
 	class UnidadeDAO{
 		public function __construct(){
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';

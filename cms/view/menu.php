@@ -33,6 +33,13 @@
 					Níveis
 				</a>
 			</li>
+			
+			<li class="submenu-itens">
+				<a class="paginas_link" href="../unidade/unidade_view.php">
+					Unidades
+				</a>
+			</li>
+			
 		</ul>
 	</li>
 
@@ -56,6 +63,12 @@
 				</a>
 			</li>
 
+			<li class="submenu-itens">
+				<a class="paginas_link" href="../evento/evento_view.php">
+					Eventos
+				</a>
+			</li>
+			
 			<li class="submenu-itens">
 				<a class="paginas_link" href="../fale_conosco/fale_conosco_view.php">
 					Fale Conosco
@@ -87,6 +100,12 @@
 			<li class="submenu-itens">
 				<a class="paginas_link" href="../promocao/promocao_view.php">
 					Promoção
+				</a>
+			</li>
+			
+			<li class="submenu-itens">
+				<a class="paginas_link" href="../retirada/retirada_view.php">
+					Retiradas
 				</a>
 			</li>
 		</ul>

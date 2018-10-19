@@ -689,9 +689,30 @@ footer{
 }
 
 /************************** EVENTOS ***********************************/
+.frmEvento{
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	justify-content: center;
+	align-items: center;
+}
+
+#visualizar_evento{
+	width: 128px;
+	height: 128px;
+}
+
 #txtdesc{
 	overflow: hidden;
 	height: 50px;
+}
+
+.container_data{
+	width: 200px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 /************************* FORMULÁRIO DE PRODUTOS **********************/
@@ -1084,4 +1105,11 @@ footer{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+}
+
+/************************* RETIRADAS *****************************/
+.frmRetirada{
+	width: 300px;
+	height: auto;
+	margin: auto;
 }

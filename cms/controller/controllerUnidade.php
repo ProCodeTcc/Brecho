@@ -1,4 +1,11 @@
 <?php
+	/*
+		Projeto: CMS do Brechó
+		Autor: Lucas Eduardo
+		Data: 17/10/2018
+		Objetivo: controlar as ações da página de eventos
+	*/
+
 	class controllerUnidade{
 		public function __construct(){
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';

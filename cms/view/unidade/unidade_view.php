@@ -112,7 +112,7 @@
 					if($imagem == null){
 						echo('<img src="../imagens/user.png">');
 					}else{
-						echo("<img src='{$imagem}'>");
+						echo("<img src='../arquivos/$imagem'>");
 					}
 				?>
                 <span class="dados_usuario"><?php echo($usuario) ?></span>

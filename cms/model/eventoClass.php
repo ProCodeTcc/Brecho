@@ -6,14 +6,16 @@
 		
 		private $id;
 		private $imagem;
-		private $titulo;
+		private $nome;
 		private $descricao;
 		private $dtInicio;
 		private $dtTermino;
+		private $loja;
+		private $idLoja;
 		private $status;
 		
 		public function setId($id){
-		$this->id = $id;
+			$this->id = $id;
 		}
 
 		public function getId(){
@@ -28,12 +30,12 @@
 			return $this->imagem;
 		}
 
-		public function setTitulo($titulo){
-			$this->titulo = $titulo;
+		public function setNome($nome){
+			$this->nome = $nome;
 		}
 
-		public function getTitulo(){
-			return $this->titulo;
+		public function getNome(){
+			return $this->nome;
 		}
 		
 		public function setDescricao($descricao){
@@ -42,6 +44,22 @@
 		
 		public function getDescricao(){
 			return $this->descricao;
+		}
+		
+		public function setLoja($loja){
+			$this->loja = $loja;
+		}
+		
+		public function getLoja(){
+			return $this->loja;
+		}
+		
+		public function setIdLoja($idLoja){
+			$this->idLoja = $idLoja;
+		}
+		
+		public function getIdLoja(){
+			return $this->idLoja;
 		}
 		
 		public function setDtInicio($dtInicio){

@@ -11,7 +11,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Análise</title>
+        <title>Eventos</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
@@ -20,26 +20,71 @@
 	<script>
 		var url = '../../';
 		
+		//função que exibe o formulário na modal
 		function adicionar(){
 			$.ajax({
-				type: 'POST',
-				url: 'frm_cor.php',
+				type: 'POST', //tipo de requisição
+				url: 'frm_evento.php', //url onde será enviada a requisição
 				success: function(dados){
+					//exibindo os dados na modal
 					$('.modal').html(dados);
 				}
 			});
 		}
 		
+		//função que lista os dados
 		function listar(){
 			$.ajax({
-				type: 'POST',
-				url: 'dados.php',
+				type: 'POST', //tipo de requisição
+				url: 'dados.php', //url onde será enviada a requisição
 				success: function(dados){
+					//colocando os dados na div de consulta
 					$('#consulta').html(dados);
 				}
 			});
 		}
 		
+		//função que exibe o formulário com os dados para edição
+		function buscar(id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: 'frm_evento.php', //url onde será enviada a requisição
+				data: {id:id}, //parâmetros enviados
+				success: function(dados){
+					//colocando os dados na modal
+					$('.modal').html(dados);
+				}
+			});
+		}
+		
+		//função que exclui um evento
+		function excluir(id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, controller: 'evento', modo: 'excluir'}, //parâmetros enviados
+				success: function(dados){
+					//mensagem 
+					alert(dados);
+					
+					//listando os dados atualizados
+					listar();
+				}
+			});
+		}
+		
+		//função que atualiza o status
+		function status(id, status){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, status:status, controller: 'evento', modo: 'status'}, //parâmetros enviados
+				success: function(dados){
+					//listagem dos dados
+					listar();
+				}
+			});
+		}
 		
 		$(document).ready(function(){
 			listar();
@@ -72,7 +117,7 @@
 
     <body>
         <div class="container_modal">
-            <div class="modal" id="modal_cor">
+            <div class="modal">
                 
             </div>
         </div>
@@ -89,7 +134,7 @@
 					if($imagem == null){
 						echo('<img src="../imagens/user.png">');
 					}else{
-						echo("<img src='{$imagem}'>");
+						echo("<img src='../arquivos/$imagem'>");
 					}
 				?>
                 <span class="dados_usuario"><?php echo($usuario) ?></span>

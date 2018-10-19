@@ -13,33 +13,43 @@
         private $nomeEvento;
         private $descricaoEvento;
         private $imagemEvento;
+		private $dataInicio;
+		private $dataTermino;
         private $status;
         
         
         public function __construct(){
-            require_once('dao/EventoDAO.php')
+            require_once('dao/EventoDAO.php');
         }
         
         //Sets
         public function setIdEvento($idEvento){
-            $this->idEvento= $idEvento
+            $this->idEvento= $idEvento;
         }
         
         public function setNomeEvento($nomeEvento){
-            $this->nomeEvento= $nomeEvento
+            $this->nomeEvento= $nomeEvento;
         }
         
         public function setDescricaoEvento($descricaoEvento){
-            $this->descricaoEvento= $descricaoEvento
+            $this->descricaoEvento= $descricaoEvento;
         }
         
         public function setImagemEvento($imagemEvento){
-            $this->imagemEvento= $imagemEvento
+            $this->imagemEvento= $imagemEvento;
         }
         
         public function setStatus($status){
-            $this->status= $status
+            $this->status= $status;
         }
+		
+		public function setDataInicio($dataInicio){
+			$this->dataInicio = $dataInicio;
+		}
+		
+		public function setDataTermino($dataTermino){
+			$this->dataTermino = $dataTermino;
+		}
         
         
         //Gets
@@ -63,8 +73,13 @@
            return $this->status;
         }
         
-        
-        
+        public function getDataInicio(){
+			return $this->dataInicio;
+		}
+		
+		public function getDataTermino(){
+			return $this->dataTermino;
+		}
         
         
         

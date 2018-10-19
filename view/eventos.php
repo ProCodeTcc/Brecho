@@ -115,100 +115,40 @@
                 Eventos
             </div>
             <div class="eventos">
-                <div class="linha_evento">
-                    <div class="imagem_evento">
-                     <img alt="#"  src="imagens/evento.jpg">
-                    </div>
-                    <div class="descricao_evento">
-                        <div class="titulo_evento">
-                            Bazar Especial dia das Mães
-                        </div>
-                        <div class="item_linha_evento">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
-                        <div class="item_linha_evento">
-                            Data Inicio: 00/00/0000
-                        </div>
-                        <div class="item_linha_evento">
-                            Data Fim: 00/00/0000
-                        </div>
-                        <div class="item_linha_evento">
-                            Horario: 07:00 as 20:00
-                        </div>
-                        <div class="descricao_linha_evento">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
-Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.
-Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="linha_evento">
-                    <div class="imagem_evento">
-                     <img alt="#"  src="imagens/evento.jpg">
-                    </div>
-                    <div class="descricao_evento">
-                        <div class="titulo_evento">
-                            Bazar Especial dia das Mães
-                        </div>
-                        <div class="item_linha_evento">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
-                        <div class="item_linha_evento">
-                            Data Inicio: 00/00/0000
-                        </div>
-                        <div class="item_linha_evento">
-                            Data Fim: 00/00/0000
-                        </div>
-                        <div class="item_linha_evento">
-                            Horario: 07:00 as 20:00
-                        </div>
-                        <div class="descricao_linha_evento">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
-Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.
-Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-
-                        </div>
-                        
-                    </div>
-                </div>
                 
-                <div class="linha_evento">
+				<?php
+					$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+					require_once($diretorio.'controller/controllerEvento.php');
+					$listEvento = new controllerEvento();
+					$rsEvento = $listEvento->listarEvento();
+					$cont = 0;
+					while($cont < count($rsEvento)){
+				?>
+				<div class="linha_evento">
                     <div class="imagem_evento">
-                     <img alt="#"  src="imagens/evento.jpg">
+                     <img alt="#"  src="../cms/view/arquivos/<?php echo($rsEvento[$cont]->getImagemEvento()) ?>">
                     </div>
                     <div class="descricao_evento">
                         <div class="titulo_evento">
-                            Bazar Especial dia das Mães
+                            <?php echo($rsEvento[$cont]->getNomeEvento()) ?>
                         </div>
                         <div class="item_linha_evento">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
+                            Data Inicio: <?php echo($rsEvento[$cont]->getDataInicio()) ?>
                         </div>
                         <div class="item_linha_evento">
-                            Data Inicio: 00/00/0000
-                        </div>
-                        <div class="item_linha_evento">
-                            Data Fim: 00/00/0000
-                        </div>
-                        <div class="item_linha_evento">
-                            Horario: 07:00 as 20:00
+                            Data Fim: <?php echo($rsEvento[$cont]->getDataTermino()) ?>
                         </div>
                         <div class="descricao_linha_evento">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
-Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
-Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.
-Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-
+                            <?php echo($rsEvento[$cont]->getDescricaoEvento()) ?>
                         </div>
                         
                     </div>
                 </div>
+				<?php
+				$cont++;
+					}
+				?>				
+				
             </div>
         </main>
         <footer>

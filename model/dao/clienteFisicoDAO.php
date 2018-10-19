@@ -1,4 +1,17 @@
 <?php
+	/*
+		Projeto: Brechó
+		Autor: Felipe Monteiro
+		Data: 08/10/2018
+		Objetivo: Implementado cadastro do cliente
+	*/
+
+	/*
+		Projeto: CMS do Brechó
+		Autor: Lucas Eduardo
+		Data: 18/10/2018
+		Objetivo: Implementado atualização do cadastro
+	*/
 
     class ClienteFisicoDAO{
     

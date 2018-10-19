@@ -1,4 +1,18 @@
 <?php
+	/*
+		Projeto: Brechó
+		Autor: Lucas Eduardo
+		Data: 08/10/2018
+		Objetivo: listagem de produtos e visualização
+	*/
+
+	/*
+		Projeto: CMS do Brechó
+		Autor: Felipe Monteiro
+		Data: 18/10/2018
+		Objetivo: listagem de produtos e visualização por categoria
+	*/
+
 	class ProdutoDAO{
 		public function __construct(){
 			require_once('bdClass.php');

@@ -11,7 +11,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Sobre</title>
+        <title>Análise</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
@@ -19,93 +19,23 @@
 	
 	<script>
 		var url = '../../';
-		//função que exibe os dados na modal
+		
 		function adicionar(){
 			$.ajax({
-				type: 'POST', //tipo de requisição
-				url: 'layouts.php', //url onde será enviada a requisição
+				type: 'POST',
+				url: 'frm_retirada.php',
 				success: function(dados){
-					$('.modal').html(dados); //colocando os dados na modal
+					$('.modal').html(dados);
 				}
 			});
 		}
 		
-		//função que lista os dados na tabela
 		function listar(){
 			$.ajax({
-				type: 'POST', //tipo de requisição
-				url: 'dados.php', //url onde será enviada a requisição
-				success: function(dados){
-					$('#consulta').html(dados); //lista os dados na tabela
-				}
-			});
-		}
-		
-		function buscar(idItem){
-			$.ajax({
 				type: 'POST',
-				url: 'frm_layout1.php',
-				data: {id:idItem},
+				url: 'dados.php',
 				success: function(dados){
-					$('.modal').html(dados);
-				}
-			});
-		}
-		
-		function buscarLayout2(idItem){
-			$.ajax({
-				type: 'POST',
-				url: 'frm_layout2.php',
-				data: {id:idItem},
-				success: function(dados){
-					$('.modal').html(dados);
-				}
-			});
-		}
-		
-		//função para realizar exclusão
-		function excluir(idItem){
-			$.ajax({
-				type: 'POST', //tipo de requisição
-				url: url+'/router.php', //url onde será enviada a requisição
-				data: {id:idItem, controller: 'sobre', modo: 'excluir'}, //parâmetros que serão enviados
-				success: function(dados){
-					alert(dados); //mensagem de sucesso
-					listar(); //listagem dos dados
-				}
-			});
-		}
-		
-		function visualizarLayout1(idItem){
-			$.ajax({
-				type: 'POST',
-				url: 'preview_layout1.php',
-				data: {id:idItem},
-				success: function(dados){
-					$('#previa').html(dados);
-				}
-			});
-		}
-		
-		function visualizarLayout2(idItem){
-			$.ajax({
-				type: 'POST',
-				url: 'preview_layout2.php',
-				data: {id:idItem},
-				success: function(dados){
-					$('#previa').html(dados);
-				}
-			});
-		}
-		
-		//função para alterar o status
-		function status(status, idItem, layout){
-			$.ajax({
-				type: 'POST', //tipo de requisição
-				url: url+'router.php', //url onde será enviada a requisição
-				data: {status:status, id:idItem, layout:layout, controller: 'sobre', modo: 'status'}, //parâmetros enviados
-				success: function(dados){
-					listar(); //listagem dos dados
+					$('#consulta').html(dados);
 				}
 			});
 		}
@@ -126,11 +56,6 @@
 				$('.container_modal').fadeIn(400);
 			});
 			
-			$('#voltar').click(function(){
-				$('#preview').hide();
-				$('#dados').show();
-			});
-			
 			$('#logout').click(function(){
 				$.ajax({
 					type: 'POST',
@@ -146,7 +71,7 @@
 
     <body>
         <div class="container_modal">
-            <div class="modal" id="modal_sobre">
+            <div class="modal">
                 
             </div>
         </div>
@@ -172,7 +97,7 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Enquetes</span>
+            <span class="page_title">Cores</span>
 
             <div class="page_search_container">
                 <input type="text" class="page_search">
@@ -195,24 +120,15 @@
                     </div>
                 </div>
 
-                <div class="users_view" id="dados">
+                <div class="users_view">
                     <div class="users_view_title">
-                        <div class="users_view_itens">Layouts ativos</div>
-						<div class="users_view_itens" id="showLayout1">L1</div>
+                        <div class="users_view_itens">#</div>
+                        <div class="users_view_itens">Nome</div>
+						<div class="users_view_itens">Cor</div>
+                        <div class="users_view_itens">Ações</div>
                     </div>
 
-                    <div id="consulta">						
-						
-                    </div>
-                </div>
-				
-				<div class="users_view" id="preview">
-                    <div class="users_view_title">
-                        <div class="users_view_itens">Prévia</div>
-						<div class="users_view_itens" id="voltar">Voltar</div>
-                    </div>
-
-                    <div id="previa">
+                    <div id="consulta">
 						
                     </div>
                 </div>

@@ -7,6 +7,7 @@
         Objetivo: manipular as ações dos produtos
 
     */
+
 	class controllerProduto{
 		public function __construct(){
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';

@@ -1,52 +1,55 @@
 <?php
 
+	/*
+		Projeto: Brechó
+		Autor: Lucas Eduardo
+		Data: 18/10/2018
+		Objetivo: listagem dos eventos
+	*/
+
     class EventoDAO{
         
         public function __construct(){
             require_once('bdClass.php');
         }
         
-        public function Insert(Evento $evento){
-            
-            //Instancia da classe de conexão com o banco
-            $coneao = new ConexaoMySQL();
-            
-            //chamada da função para conectar o banco
-            $PDO_conexao = conexao->conectarBanco();
-            
-            //criando um statement e preparando a querry que irá inserir os dados no banco.
-            $stm = $PDO_conexao->prepare('inser into evento(nomeEvento, descricaoEvento, imagemEvento, status) values(?,?,?,?)');
-            
-            $stm->bindParam(1, $evento->getNomeEvento());
-            $stm->bindParam(2, $evento->getDescricaoEvento());
-            $stm->bindParam(3, $evento->getImagemEvento());
-            $stm->bindParam(4, $evento->getStatus());
-            
-            if($stm->execute()){
-                header("location:index.php");
-                $idEvento=$PDO_conexao->lastInsertId();
-                return $idEvento;
-                
-            }else{
-                echo('Erro ao Adicionar');
-            }
-        }
-        
-        public function
-        InsertEvento($idEvento){
-            //Instancia da classe de cinexão com o banco
-            $conexao = new ConexaoMySQL();
-            
-            //chamada da função para conectar o banco
-            $PDO_conexao = $conexao->conectarBanco();
-            
-            //criando um statement e preparando a querry que irá inserir os dados no banco.
-            $stm = $PDO_conexao->prepare('insert into evento(idEvento)values(?)');
-            
-            $stm->bindParam(1, $idEvento);
-            
-            $stm->$execute();
-        }
+		//função que busca os eventos do banco
+        public function selectAll(){
+			//instância da classe de conexão com o banco de dados
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que realiza a consulta
+			$sql = 'SELECT e.*, en.* FROM evento as e INNER JOIN evento_nossaloja as en ON en.idEvento = e.idEvento WHERE status = 1';
+			
+			//armazenando o resultado em uma variável
+			$resultado = $PDO_conexao->query($sql);
+			
+			//contador
+			$cont = 0;
+			
+			//percorrendo os dados
+			while($rsEvento = $resultado->fetch(PDO::FETCH_OBJ)){
+				//criando um novo evento
+				$listEvento[] = new Evento();
+				
+				//setando os atributos
+				$listEvento[$cont]->setNomeEvento($rsEvento->nomeEvento);
+				$listEvento[$cont]->setDescricaoEvento($rsEvento->descricaoEvento);
+				$listEvento[$cont]->setImagemEvento($rsEvento->imagemEvento);
+				$listEvento[$cont]->setDataInicio($rsEvento->dataInicio);
+				$listEvento[$cont]->setDataTermino($rsEvento->dataFim);
+				
+				//incrementando o contador
+				$cont++;
+			}
+			
+			//retornando os dados
+			return $listEvento;
+		
+		}
     }
 
 ?>

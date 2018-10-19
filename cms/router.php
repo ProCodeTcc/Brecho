@@ -500,5 +500,70 @@
 				break;
 			}
 		break;
+			
+		case 'evento':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerEvento.php');
+			switch($modo){
+				case 'inserir':
+					$controllerEvento = new controllerEvento();
+					$controllerEvento->inserirEvento();
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerEvento = new controllerEvento();
+					$listEvento = $controllerEvento->buscarEvento($id);
+					
+					echo($listEvento);
+				break;
+					
+				case 'editar':
+					$controllerEvento = new controllerEvento();
+					$controllerEvento->atualizarEvento();
+				break;
+					
+				case 'status':
+					$id = $_POST['id'];
+					$status = $_POST['status'];
+					
+					$controllerEvento = new controllerEvento();
+					$controllerEvento->atualizarStatus($id, $status);
+				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					
+					$controllerEvento = new controllerEvento();
+					$controllerEvento->excluirEvento($id);
+				break;
+			}
+		break;
+			
+		case 'retirada':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerRetirada.php');
+			switch($modo){
+				case 'inserir':
+					$controllerRetirada = new controllerRetirada();
+					$controllerRetirada->inserirRetirada();
+				break;
+					
+				case 'listarLojas':
+					$controllerRetirada = new controllerRetirada();
+					$listLojas = $controllerRetirada->listarLojas();
+					
+					echo($listLojas);
+				break;
+				
+				case 'listarPedidos':
+					$controllerRetirada = new controllerRetirada();
+					$listPedido = $controllerRetirada->listarPedidos();
+					
+					echo($listPedido);
+				break;
+			}
+		break;
     }
 ?>

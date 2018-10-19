@@ -1,5 +1,19 @@
 <?php
 
+	/*
+		Projeto: Brechó
+		Autor: Felipe Monteiro
+		Data: 15/10/2018
+		Objetivo: implementado cadastro de endereço
+	*/
+
+	/*
+		Projeto: Brechó
+		Autor: Lucas Eduardo
+		Data: 17/10/2018
+		Objetivo: Implementado atualização de endereço
+	*/
+
     class EnderecoDAO{
         public function __construct(){
             require_once('bdClass.php');

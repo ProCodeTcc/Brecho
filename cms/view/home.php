@@ -55,7 +55,7 @@
 					if($imagem == null){
 						echo('<img src="imagens/user.png">');
 					}else{
-						echo("<img src='$imagem'>");
+						echo("<img src='arquivos/$imagem'>");
 					}
 				?>
                 <span class="dados_usuario"><?php echo($usuario) ?></span>
@@ -91,6 +91,12 @@
 											Níveis
 										</a>
 									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="unidade/unidade_view.php">
+											Unidades
+										</a>
+									</li>
 								</ul>
 							</li>
 							
@@ -111,6 +117,12 @@
 									<li class="submenu-itens">
 										<a class="paginas_link" href="sobre/sobre_view.php">
 											Sobre nós
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="evento/evento_view.php">
+											Eventos
 										</a>
 									</li>
 									
@@ -145,6 +157,12 @@
 									<li class="submenu-itens">
 										<a class="paginas_link" href="promocao/promocao_view.php">
 											Promoção
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="retirada/retirada_view.php">
+											Retiradas
 										</a>
 									</li>
 								</ul>

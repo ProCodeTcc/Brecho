@@ -1,8 +1,11 @@
 <?php
+	session_start();
+	$genero = $_SESSION['sexo'];
+
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 	require_once($diretorio.'controller/controllerTema.php');
 	$listTema = new controllerTema();
-	$rsTema = $listTema->listarTemas();
+	$rsTema = $listTema->listarTemas($genero);
 ?>
 
 <style>

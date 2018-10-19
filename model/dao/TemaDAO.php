@@ -5,7 +5,7 @@
 		}
 		
 		//função que trás todos os temas
-		public function selectTema(){
+		public function selectTema($genero){
 			//instância da classe de conexão com o banco de dados
 			$conexao = new ConexaoMySQL;
 			
@@ -13,13 +13,16 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//buscando todos os temas do banco onde o status for = 1;
-			$sql = 'SELECT corTema FROM temaSite WHERE status = 1';
+			$stm = $PDO_conexao->prepare('SELECT corTema FROM temaSite WHERE status = 1 and genero = ?');
 			
-			//armazenando o resultado em uma variável
-			$resultado = $PDO_conexao->query($sql);
+			//parâmetro enviado
+			$stm->bindValue(1, $genero, PDO::PARAM_STR);
+			
+			//execução do statement
+			$stm->execute();
 			
 			//armazenando os temas em uma variável
-			$rsTema =  $resultado->fetch(PDO::FETCH_OBJ);
+			$rsTema =  $stm->fetch(PDO::FETCH_OBJ);
 			
 			//criando um novo tema
 			$listTema = new Tema();

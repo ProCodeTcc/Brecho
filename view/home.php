@@ -35,7 +35,9 @@
         </script>
         
 		<?php
-			require_once('tema.php');
+			if(isset($_SESSION['sexo'])){
+				require_once('tema.php');
+			}
 		?>
 		
     </head>
