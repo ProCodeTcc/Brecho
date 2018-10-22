@@ -245,15 +245,6 @@
                             <input class="campo_cadastro_produto" name="txtnome" type="text">
                         </div>
                     </div>
-                    <div class="linha_cadastro">
-                        <div class="titulo_cadastro_produto">
-                            Tipo do Produto:
-                        </div>
-                        <div class="caixa_cadastro_produto">
-                            <select class="campo_cadastro_produto"></select>
-                            
-                        </div>
-                    </div>
 					<div class="linha_cadastro">
                         <div class="titulo_cadastro_produto">
                             Tamanho:
@@ -268,7 +259,8 @@
                         </div>
 						
                         <div class="caixa_cadastro_produto">
-                            <select class="campo_cadastro_produto" name="txttamanho" id="txttamanho"></select>                      
+                            <select class="campo_cadastro_produto" name="txttamanho" id="txttamanho">
+                            </select>                      
                         </div>
                     </div>
                     <div class="linha_cadastro">

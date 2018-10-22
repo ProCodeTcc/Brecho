@@ -32,8 +32,11 @@
             </div>
             <div class="vendas_centro">
                 <form action="cadastro_produto.php">
-                    <div class="caixa_botao_vendas">
-                        <input class="botao_vendas" type="submit" value="Vender Produto">
+                    <div class="linha_vender_produtos_botao">
+                        <a href="../view/perfil.php">
+                            <input class="botao_voltar" type="button" value="Voltar">
+                        </a>
+                        <input class="botao_cadastro" type="submit" value="Vender Produto">
                     </div>
                 </form>
                 <div class="caixa_vendas">
