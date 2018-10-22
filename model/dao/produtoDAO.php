@@ -195,8 +195,16 @@
 
              $cont++;   
             }
-                //retornando um produto
+            
+			if($cont != 0){
+				//retornando um produto
                 return $listProdutoCategoria;
+			}else{
+				echo('Não há produtos nessa categoria');
+			}
+			
+			$conexao->fecharConexao();
+			
         }
 		
 		//função que busca os produtos por classificacao
