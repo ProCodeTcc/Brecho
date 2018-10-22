@@ -195,14 +195,14 @@
 				Nome do Titular*
 			</div>
 			<div class="linha_cadastro_usuario">
-				<input class="campo_cadastro_usuario" type="text" required onkeypress="return validar(event,'number')">
+				<input class="campo_cadastro_usuario" type="text" onkeypress="return validar(event,'number')">
 			</div>
 
 			<div class="titulo_cadastro_usuario">
 				Numero do Cartão*
 			</div>
 			<div class="linha_cadastro_usuario">
-				<input class="campo_cadastro_usuario" type="text"required onkeypress="return validar(event,'caracter')">
+				<input class="campo_cadastro_usuario" type="text" onkeypress="return validar(event,'caracter')">
 
 			</div>
 			<div class="titulo_cadastro_usuario_mini">
@@ -218,7 +218,7 @@
 			 </div>
 
 			<div class="linha_cadastro_usuario_mini">
-				<input class="campo_cadastro_usuario_mini" type="text" required onkeypress="return validar(event,'caracter')" maxlength="4">
+				<input class="campo_cadastro_usuario_mini" type="text" onkeypress="return validar(event,'caracter')" maxlength="4">
 			</div>
 
 			<div class="linha_cadastro_usuario_mini">

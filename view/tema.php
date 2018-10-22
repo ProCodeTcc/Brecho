@@ -125,6 +125,18 @@
 	.titulo_perfil_linha{
 		border-color: <?php echo($rsTema->getCor()) ?>;
 	}
+	
+	.login:hover{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.texto_perfil{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.sub_login{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
 </style>
 
 
