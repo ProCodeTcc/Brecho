@@ -192,10 +192,7 @@
 
                 <div class="users_view">
                     <div class="users_view_title">
-                        <div class="users_view_itens">#</div>
-                        <div class="users_view_itens">Nome</div>
-						<div class="users_view_itens">Cor</div>
-                        <div class="users_view_itens">Ações</div>
+                        <div class="users_view_itens">Sliders</div>
                     </div>
 
                     <div id="consulta">

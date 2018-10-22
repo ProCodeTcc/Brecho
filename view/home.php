@@ -3,6 +3,13 @@
 	if(isset($_SESSION['login'])){
 		$login = 1;
 	}
+
+	if(isset($_SESSION['usuario'])){
+		$usuario = $_SESSION['usuario'];
+	}else{
+		$usuario = 'Entrar';
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +117,7 @@
                                         <img src="view/icones/login.png" alt="#">
                                     </div>
                                     <div class="texto_login">
-                                        Entrar   
+                                        <?php echo($usuario) ?>   
                                     </div>
                                     </a>
                                     <div class="sub_login">

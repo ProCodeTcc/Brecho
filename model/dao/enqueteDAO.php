@@ -30,6 +30,8 @@
 			//chamada da função que conecta com o banco
             $PDO_conexao = $conexao->conectarBanco();
 			 
+			$PDO_conexao->exec("SET CHARACTER SET LATIN1");
+			 
 			//query que seleciona os dados do banco
             $stm = $PDO_conexao->prepare("select * from enquete where status = 1");
 			 

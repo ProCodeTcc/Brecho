@@ -19,6 +19,12 @@
 				checarLogin(<?php echo($login) ?>);
 			});
 		</script>
+		
+		<?php
+			if(isset($_SESSION['sexo'])){
+				require_once('tema.php');
+			}
+		?>
     </head>
     <body>
         <header>

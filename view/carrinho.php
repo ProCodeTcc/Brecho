@@ -15,13 +15,11 @@
 			});
 		</script>
 		
-		<style>
-			<?php
-				if(isset($_SESSION['genero'])){
-					require_once('tema.php');
-				}
-			?>
-		</style>
+		<?php
+			if(isset($_SESSION['sexo'])){
+				require_once('tema.php');
+			}
+		?>
     </head>
     <body>
         <header>
