@@ -52,6 +52,21 @@
 		background-color: <?php echo($rsTema->getCor()) ?>;
 	}
 	
+	.comprar_produto_promocao{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.comprar_produto_promocao:hover{
+		background-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.carrinho_produto_promocao{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.carrinho_produto_promocao:hover{
+		background-color: <?php echo($rsTema->getCor()) ?>;
+	}
 	
 	.botao_login{
 		background-color: <?php echo($rsTema->getCor()) ?>;
@@ -74,9 +89,41 @@
 	.titulo_categoria_primeiro{
 		background-color: <?php echo($rsTema->getCor()) ?>;
 	}
-	
 	.produto_carrinho{
-		background-color: <?php echo($rsTema->getCor()) ?>;
+		border-color: <?php echo($rsTema->getCor()) ?>
+	}
+	
+	.titulo_evento{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.linha_loja{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.categoria_linha{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.perfil_direito{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.perfil_esquerdo{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.imagem_perfil{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+		background-image: radial-gradient(rgba(255, 214, 123, 0.69), <?php echo($rsTema->getCor()) ?>);
+	}
+	
+	.titulo_perfil_pedidos{
+		border-color: <?php echo($rsTema->getCor()) ?>;
+	}
+	
+	.titulo_perfil_linha{
+		border-color: <?php echo($rsTema->getCor()) ?>;
 	}
 </style>
 
