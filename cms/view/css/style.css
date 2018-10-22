@@ -1154,6 +1154,7 @@ footer{
 .slider_imagem{
 	width: 300px;
 	height: 200px;
+	margin-right: 5px;
 }
 
 .slider_imagem img{

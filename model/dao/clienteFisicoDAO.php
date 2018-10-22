@@ -93,17 +93,6 @@
 			
 			$listCliente = $stm->fetch(PDO::FETCH_OBJ);
 			
-//			$listCliente->setIdCliente($rsClientes->idCliente);
-//			$listCliente->setNome($rsClientes->nome);
-//			$listCliente->setSobrenome($rsClientes->sobrenome);
-//			$listCliente->setTelefone($rsClientes->telefone);
-//			$listCliente->setCelular($rsClientes->celular);
-//			$listCliente->setEmail($rsClientes->email);
-//			$listCliente->setCpf($rsClientes->cpf);
-//			$listCliente->setdataNascimento($rsClientes->dataNascimento);
-//			$listCliente->setSenha($rsClientes->senha);
-//			$listCliente->setSexo($rsClientes->sexo);
-			
 			return json_encode($listCliente);
 			
 			$conexao->fecharConexao();
