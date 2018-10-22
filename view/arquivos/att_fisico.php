@@ -299,8 +299,11 @@
 			<div class="linha_cadastro_usuario_meio">
 				<input  class="campo_cadastro_usuario_meio" type="text" id="txtcomplemento" name="txtcomplemento">
 			</div>
-			<div class="linha_cadastro_usuario_botao">
+			<div class="linha_atualizar_dados_botao">
 				<input class="botao_cadastro" type="submit" value="Atualizar">
+                <a href="../view/perfil.php">
+                    <input class="botao_voltar" type="button" value="Voltar">
+                </a>
 			</div>
 
 		</div>

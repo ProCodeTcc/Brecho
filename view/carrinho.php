@@ -178,7 +178,7 @@
                         <div class="linha_valor_total">
                             R$ 300,00
                         </div>
-                        <div class="linha_botao_cadastro">
+                        <div class="linha_botao_comprar_carrinho">
                             <form action="dados_pagamento.php">
                                 <input class="botao_cadastro" type="submit" value="Comprar">
                             </form>
