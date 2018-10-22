@@ -1,6 +1,7 @@
 <?php
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 	require_once($diretorio.'controller/controllerProduto.php');
+	require_once('arquivos/check_login.php');
 ?>
 
 <!DOCTYPE html>

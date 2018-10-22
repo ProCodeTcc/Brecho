@@ -58,7 +58,7 @@
 							</div>
 						</div>
 					</div>
-				<a href="view/carrinho.php">
+				<a href="../view/carrinho.php">
 					<div class="login">
 						<div class="icone_login">
 							<img src="../view/icones/carrinho.png" alt="#">
