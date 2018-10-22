@@ -183,7 +183,7 @@
 		
 		public function checarLogin(){
 			//vericicando se a sessão existe
-			if(!isset($_SESSION['usuario'])){
+			if(!isset($_SESSION['usuario_cms'])){
 				//se não existir, redireciona o usuário pra página de login
 				header("location: ../../index.php");
 			}

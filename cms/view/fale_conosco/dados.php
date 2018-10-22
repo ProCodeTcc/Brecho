@@ -36,11 +36,5 @@
 		</span>
 	</div>
 </div>
-
-<div class="erro_tabela" data-erro="<?php echo($cont) ?>">
-	<h1>Desculpe, não há registros em nosso banco de dados!!</h1>
-
-	<img src="../imagens/sad.png">
-</div>
 <?php $cont ++;
 } ?>

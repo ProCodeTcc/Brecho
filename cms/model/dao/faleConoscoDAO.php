@@ -18,7 +18,9 @@
 			//chamada da função que conecta com o banco de dados
 			$PDO_conexao = $conexao->conectarBanco();
 			
-			//query que
+			$PDO_conexao->exec('SET CHARACTER SET LATIN1');
+			
+			//query que faz a consulta
 			$sql = 'SELECT * FROM faleconosco';
 			
 			$resultado = $PDO_conexao->query($sql);

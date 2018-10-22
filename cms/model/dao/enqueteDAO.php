@@ -101,6 +101,8 @@
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
 			
+			$PDO_conexao->exec('SET CHARACTER SET LATIN1');
+			
             //query que realiza a consulta
             $sql = "SELECT enquete.*, t.tema FROM enquete LEFT JOIN temaenquete AS t ON enquete.idTema = t.idTema";
 
