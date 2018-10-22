@@ -1,12 +1,12 @@
 <?php 
     session_start();
-    $usuario = $_SESSION['usuario'];
+    $usuario = $_SESSION['usuario_cms'];
 	if(isset($_SESSION['imagem'])){
 		//armazenando a imagem na variável de sessão
 		$imagem = $_SESSION['imagem'];
 	}
 
-	if(!isset($_SESSION['usuario'])){
+	if(!isset($_SESSION['usuario_cms'])){
 		//se não existir, redireciona o usuário pra página de login
 		header("location: ../index.php");
 	}

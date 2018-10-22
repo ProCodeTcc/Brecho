@@ -232,7 +232,7 @@
 				//verificando se foram encontrados os dados, se sim, armazena em uma sessão, se não retorna 0 (falso)
 					echo 1;
 					session_start();
-					$_SESSION['usuario'] = $rsUsuarios->login;
+					$_SESSION['usuario_cms'] = $rsUsuarios->login;
 					$_SESSION['imagem'] = $rsUsuarios->imagem;
 					$_SESSION['nivel'] = $rsUsuarios->idNivel;
 				}else{

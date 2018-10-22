@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $usuario = $_SESSION['usuario'];
+    $usuario = $_SESSION['usuario_cms'];
 	$idNivel = $_SESSION['nivel'];
 	$idPagina = 13;
 	if(isset($_SESSION['imagem'])){
