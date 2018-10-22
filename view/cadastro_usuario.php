@@ -243,7 +243,7 @@
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input class="campo_cadastro_usuario_meio txtestado"  type="text" id="txtcidade" name="txtCidade">
+								<input class="campo_cadastro_usuario_meio txtcidade"  type="text" id="txtcidade" name="txtCidade">
 							</div>
 
 							<div class="titulo_cadastro_usuario_meio">
