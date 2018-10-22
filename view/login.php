@@ -104,7 +104,7 @@
                                 E-mail:
                                 <div class="campos">
 
-                                    <input class="campos_login" name="txtemail" type="email" required>
+                                    <input class="campos_login" name="txtemail" type="email">
                                 </div>
                                 <div class="campos">
                                 </div>
