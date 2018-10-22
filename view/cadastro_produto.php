@@ -364,7 +364,6 @@
 							</div>
 						</div>
                     </div>
-                       
                 </div>
                 <div class="linha_botao_cadastro">
                     <input class="botao_cadastro" type="submit" value="Cadastrar">
