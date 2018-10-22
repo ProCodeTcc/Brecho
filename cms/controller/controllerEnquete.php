@@ -157,13 +157,28 @@
 			//instância da classe enqueteDAO
             $enqueteDAO = new EnqueteDAO();
 			
-			//chamada da função que deleta uma enquete
-            $enqueteDAO->Delete($id);
+			//armazenando o número de enquetes em uma variável
+			$enquetesAtivas = $enqueteDAO->checkEnquete();
+			
+			//verificando se o número é igual a um
+			if($enquetesAtivas == 1){
+				//impede a exclusão
+				echo 'limite';
+			}else{
+				//chamada da função que deleta uma enquete
+				$enqueteDAO->Delete($id);
+			}
         }
 
         public function atualizarStatus($id, $status){
             $enqueteDAO = new EnqueteDAO();
-            $enqueteDAO->updateStatus($id, $status);
+            if($status == 1){
+				$enqueteDAO->disableAll($id);
+				$enqueteDAO->activateOne($id);
+			}else{
+				$enqueteDAO->activateOne($id);
+				$enqueteDAO->disableAll($id);
+			}
         }
 
     }

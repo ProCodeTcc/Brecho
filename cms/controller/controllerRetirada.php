@@ -38,6 +38,39 @@
 			$retiradaDAO->Insert($retiradaClass);
 		}
 		
+		//função que atualiza uma retirada
+		public function atualizarRetirada(){
+			//verificando se o método é POST
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){
+				//resgatando os valores das caixas de texto
+				$dtRetirada = $_POST['dtretirada'];
+				$idUnidade = $_POST['txtunidade'];
+				$idPedido = $_POST['txtpedido'];
+				$idRetirada = $_POST['id'];
+			}
+			
+			//criando uma nova retirada
+			$retiradaClass = new Retirada();
+			
+			//setando os atributos
+			$retiradaClass->setIdRetirada($idRetirada);
+			$retiradaClass->setDtRetirada($dtRetirada);
+			$retiradaClass->setIdUnidade($idUnidade);
+			$retiradaClass->setIdPedido($idPedido);
+			
+			//instância da classe RetiradaDAO
+			$retiradaDAO = new RetiradaDAO();
+			
+			//chamada da função que atualiza os dados
+			$retiradaDAO->Update($retiradaClass);
+		}
+		
+		public function excluirRetirada($id){
+			$retiradaDAO = new RetiradaDAO();
+			
+			$retiradaDAO->Delete($id);
+		}
+		
 		//função que lista as retiradas
 		public function listarRetiradas(){
 			//instância da classe RetiradaDAO
@@ -65,6 +98,18 @@
 			return $listRetirada;
 		}
 		
+		//função que busca uma retirada
+		public function buscarRetirada($id){
+			//instância da classe retiradaDAO
+			$retiradaDAO = new RetiradaDAO();
+			
+			//armazenando os dados em uma variável
+			$listRetirada = $retiradaDAO->SelectByID($id);
+			
+			//retornando os dados
+			return $listRetirada;
+		}
+		
 		//função que lista as lojas
 		public function listarLojas(){
 			//instância da classe retiradaDAO
@@ -76,6 +121,7 @@
 			//retornando os dados
 			return $listLojas;
 		}
+		
 		
 		//função que lista os pedidos
 		public function listarPedidos(){

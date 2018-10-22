@@ -97,5 +97,21 @@
 			//chamada da função que exclui um tema
 			$temaDAO->Delete($id);
 		}
+		
+		//função que atualiza o status
+		public function atualizarStatus($status, $id, $genero){
+			//instância da classe temaDAO
+			$temaDAO = new TemaDAO();
+			
+			//verificando o status
+			if($status == 1){
+				$temaDAO->activateOne($id, $genero);
+				$temaDAO->disableAll($id, $genero);
+			}else{
+				$temaDAO->activateOne($id, $genero);
+				$temaDAO->disableAll($id, $genero);
+			}
+		}
+		
 	}
 ?>

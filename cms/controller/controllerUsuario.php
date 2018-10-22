@@ -123,8 +123,19 @@
             //instancia da classe usuarioDAO
             $usuarioDAO = new UsuarioDAO();
 
-			//excluindo o usuário
-            $usuarioDAO->excluir($id);
+			//
+			$usuarios = $usuarioDAO->checkUsuarios();
+
+			//verifica o número de usuários cadastrados
+			if($usuarios == 1){
+				//retorna falso, se houve apenas um
+				echo false;
+			}else{
+				//excluindo o usuário
+				$usuarioDAO->excluir($id);
+			}
+			
+				
         }
 
         public function logarUsuario($usuario, $senha){

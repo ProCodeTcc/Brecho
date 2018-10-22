@@ -41,8 +41,12 @@
 				$cont++;
 			}
 			
-			//reorno dos dados
-			return $listFeedback;
+			if($cont != 0){
+				//reorno dos dados
+				return $listFeedback;
+			}else{
+				require_once('../erro_tabela.php');
+			}
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

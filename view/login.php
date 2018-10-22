@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -64,7 +60,7 @@
                         </div>
                         <form method="POST" id="frmLogin">
                             <div class="caixa_campos">
-                                E-mail:
+                                Usuário:
                                 <div class="campos">
 
                                     <input class="campos_login" type="text" name="txtLogin">
@@ -72,10 +68,18 @@
                                 Senha:
                                 <div class="campos">
                                     <input class="campos_login" type="password" name="txtSenha">
-                                </div> <div class="campos">
-                                <!-- Implementar link para alterar senha do usuário -->
-                                <!-- <a href="#">Esqueci Minha Senha</a> -->
+                                </div> 
+								
+								<div class="campos">
+                                	<label>
+										<input type="radio" name="txtcliente" value="F" id="txtcliente" onClick="mostrarFormulario('F')" checked> Físico
+									</label>
+
+									<label>
+										<input type="radio" name="txtcliente" value="J" id="txtcliente" onClick="mostrarFormulario('J')"> Jurídico
+									</label>
                                 </div>
+								
                                 <div class="campos">
                                     <input class="botao_login" id="logar" type="submit" value="Acessar Conta">
                                 </div>
@@ -94,7 +98,7 @@
                                 E-mail:
                                 <div class="campos">
 
-                                    <input class="campos_login" name="txtemail" type="email">
+                                    <input class="campos_login" name="txtemail" type="email" required>
                                 </div>
                                 <div class="campos">
                                 </div>

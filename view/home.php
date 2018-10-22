@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(isset($_SESSION['login'])){
+		$login = 1;
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -7,8 +14,31 @@
         
         <script src="view/js/jquery.js"> </script>
         <script src="view/js/jquery.cycle.all.js"> </script>
-        <script>		
+        <script>
+			
+			function checarLogin(){
+				var login = $('#logout').data('login');
+				
+				if(login == 1){
+					$('#logout').css('display', 'block');
+				}else{
+					$('#logout').css('display', 'none');
+				}
+			}
+			
+			function logout(){
+				$.ajax({
+					type: 'POST',
+					url: 'router.php?controller=login&modo=deslogar',
+					success: function(dados){
+						window.location.href="view/login.php";
+					}
+				});
+			}
+			
 			$(document).ready(function(){
+				checarLogin();
+				
 				$(function (){
 					$("#slide ul").cycle({
 						fx: 'fade',
@@ -89,6 +119,10 @@
                                                 Perfil   
                                             </div>
                                         </a>
+										
+										<div class="texto_perfil" id="logout" data-login="<?php echo($login) ?>" onClick="logout()">
+											Logout   
+										</div>
                                     </div>
                                 </div>
                             <a href="view/carrinho.php">
@@ -150,9 +184,20 @@
                 </a>
                  <div id="slide" class="slide">
                     <ul>
-                        <li> <img class="foto_slide" src="view/imagens/slide1.jpg" alt="#"/></li>
-                        <li> <img class="foto_slide" src="view/imagens/slide2.jpg" alt="#"/></li>
-                        <li> <img class="foto_slide" src="view/imagens/slide3.jpg" alt="#"/></li>
+						<?php
+							require_once('controller/controllerSlider.php');
+							$listSlider = new controllerSlider();
+							$rsSlider = $listSlider->listarSlider();
+							$cont = 0;
+							while($cont < count($rsSlider)){
+						?>
+							
+							<li> <img class="foto_slide" src="cms/view/arquivos/<?php echo($rsSlider[$cont]->getImagem()) ?>" alt="#"/></li>
+						
+						<?php
+						$cont++;
+							}
+						?>
                     </ul>
                 </div>
                 

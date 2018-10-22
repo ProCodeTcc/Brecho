@@ -1,3 +1,6 @@
+<?php
+	require_once('arquivos/check_login.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -5,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery.js"></script>
 		<script src="js/jquery.form.js"></script>
+		<script src="js/funcoes.js"></script>
 		
 		<script>
 			var url = '../';
@@ -99,6 +103,8 @@
 			}
 			
 			$(document).ready(function(){
+				checarLogin(<?php echo($login) ?>);
+				
 				//listagem da cor
 				listarCor();
 				listarMarca();

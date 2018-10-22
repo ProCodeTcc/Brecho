@@ -63,6 +63,31 @@
 			}
             
 		break;
+		
+		case 'ClienteJuridico':
+			$modo = $_GET['modo'];
+			require_once('controller/controllerClienteJuridico.php');
+			switch($modo){
+				case 'cadastrar':
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$controllerClienteJuridico->inserirCliente();
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$listCliente = $controllerClienteJuridico->buscarCliente($id);
+					
+					echo($listCliente);
+				break;
+					
+				case 'atualizar':
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$controllerClienteJuridico->atualizarCliente();
+				break;
+			}
+		break;
 			
 		case 'avaliação':
 			$modo = $_GET['modo'];
@@ -110,6 +135,11 @@
 				case 'logar':
 					$controllerLogin = new controllerLogin();
 					$controllerLogin->BuscarConta();
+				break;
+					
+				case 'deslogar':
+					$controllerLogin = new controllerLogin();
+					$controllerLogin->deslogar();
 				break;
 			}
             

@@ -1,9 +1,20 @@
 <?php 
     session_start();
     $usuario = $_SESSION['usuario'];
+	$idNivel = $_SESSION['nivel'];
+	$idPagina = 5;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -64,14 +75,20 @@
 		}
 		
 		//função para realizar exclusão
-		function excluir(idItem){
+		function excluir(idItem, layout){
 			$.ajax({
 				type: 'POST', //tipo de requisição
 				url: url+'/router.php', //url onde será enviada a requisição
-				data: {id:idItem, controller: 'sobre', modo: 'excluir'}, //parâmetros que serão enviados
+				data: {id:idItem, layout:layout, controller: 'sobre', modo: 'excluir'}, //parâmetros que serão enviados
 				success: function(dados){
-					alert(dados); //mensagem de sucesso
-					listar(); //listagem dos dados
+					if(dados == 'limite'){
+						alert('Não foi possível realizar a exclusão!! Deve haver ao menos um layout ativo');
+					}else if(dados == 'erro'){
+						alert('Ocorreu um erro ao realizar a exclusão');
+					}else{
+						alert(dados); //mensagem de sucesso
+						listar(); //listagem dos dados
+					}
 				}
 			});
 		}
@@ -172,7 +189,7 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Enquetes</span>
+            <span class="page_title">Sobre nós</span>
 
             <div class="page_search_container">
                 <input type="text" class="page_search">
@@ -217,20 +234,6 @@
                     </div>
                 </div>
 
-            </div>
-
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
             </div>
         </div>
 

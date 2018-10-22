@@ -1,10 +1,4 @@
-<script>
-	var erro = $('.erro_tabela').data('erro');
-	
-	if(erro == 0){
-		$('.erro_tabela').show();
-	}
-	
+<script>	
 	$(document).ready(function(){
 		$('.visualizar').click(function(){
 			$('.container_modal').fadeIn(400);
@@ -19,6 +13,7 @@
 		$listProdutos = new controllerAvaliacao();
 		$rsProdutos = $listProdutos->listarProdutos();
 		$cont = 0;
+	
 		while($cont < count($rsProdutos)){
 	?>
 	<div class="produtos">
@@ -49,10 +44,4 @@
 		$cont++;
 		}
 	?>
-</div>
-
-<div class="erro_tabela" data-erro="<?php echo($cont) ?>">
-	<h1>Desculpe, não há registros em nosso banco de dados!!</h1>
-
-	<img src="../imagens/sad.png">
 </div>

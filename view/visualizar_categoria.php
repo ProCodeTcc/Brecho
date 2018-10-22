@@ -1,116 +1,63 @@
+<?php
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+	require_once($diretorio.'controller/controllerProduto.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-3.2.1.min.js"></script>
+		
+		<script>
+//			function listarProdutos(){
+//				$.ajax({
+//					type: 'POST',
+//					url: 'arquivos/produtos.php',
+//					success: function(dados){
+//						$('#categoria').html(dados);
+//					}
+//				});
+//			}
+			
+			function filtrarClassificacao(classificacao){
+				$.ajax({
+					type: 'POST',
+					url: 'arquivos/produtos.php',
+					data: {tipoFiltro: 'classificacao', filtro: classificacao},
+					success: function(dados){
+						$('#categoria').html(dados);
+					}
+				});
+			}
+			
+			function filtrarTamanho(tamanho){
+				$.ajax({
+					type: 'POST',
+					url: 'arquivos/produtos.php',
+					data: {tipoFiltro: 'tamanho', filtro: tamanho},
+					success: function(dados){
+						$('#categoria').html(dados);
+					}
+				});
+			}
+			
+			$(document).ready(function(){
+				$('.filtrar').click(function(){
+					$('#categoria').children().empty();
+				});
+			});
+		</script>
     </head>
     <body>
-        <header>
-            <div class="menu_paginas">
-                <div class="menu_paginas_site">
-                    <a href="fale_conosco.php" class="link_paginas"> Fale Conosco </a>
-                    <a href="nossas_lojas.php" class="link_paginas"> Nossas Lojas </a>
-                    <a href="sobre.php" class="link_paginas"> Sobre </a>
-                
-                    <div class="pesquisa_cabecalho_icone">
-                        
-                        <img alt="#" src="icones/pesquisa.png">
-                    </div>
-                    
-                <div class="pesquisa_cabecalho">
-                    <input class="campo_pesquisa_cabecalho" type="text">
-                </div>
-                </div>
-            </div>
-            
-            <div class="menu_principal">
-                <div class="menu_principal_site">
-                    <div class="menu_lado_esquerdo">
-                        <div class="menu_responsivo">
-                        
-                        </div>
-                        <a href="../index.php">
-                            <div class="logo">
-                                <img alt="#" src="imagens/logoBrecho3.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="menu_lado_direito">
-                        <div class="login_carrinho">
-                                <div class="login">
-                                    <a  href="login.php">
-                                        <div class="icone_login">
-                                            <img alt="#" src="icones/login.png">
-                                        </div>
-                                        <div class="texto_login">
-                                            Entrar   
-                                        </div>
-                                    </a>
-                                    <div class="sub_login">
-                                        <a href="perfil.php">
-                                            <div class="texto_perfil">
-                                                Perfil   
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            <a href="carrinho.php">
-                                <div class="login">
-                                    <div class="icone_login">
-                                        <img alt="#" src="icones/carrinho.png">
-                                    </div>
-                                    <div class="texto_login">
-                                        Carrinho   
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="menu_categoria">
-                <div class="menu">
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Comum
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Alfaiataria
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Banho
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Pijamas
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Social
-                        </div>
-                    </a>
-                    <a href="promocao.php">
-                        <div class="menu_item">
-                            Promoção
-                        </div> 
-                    </a>
-                    <a href="eventos.php">
-                        <div class="menu_item">
-                            Eventos
-                        </div> 
-                    </a>
-                    
-                </div>
-            </div>
+		<header>
+            <?php
+				require_once('arquivos/header.php');
+			?>
         </header>
-        <main>
+		
+        <main id="categoria">
                 <div class="caixa_categoria">
                     <div class="categoria_pesquisa">
                                 <div class="categoria_pesquisa_centro">
@@ -119,32 +66,52 @@
                                 </div>
                             </div>
                         <div class="categoria">
-                            <div class="titulo_categoria_primeiro">
-                                Subcategorias
-                            </div>
-                            <div class="categoria_linha">
-                                Blusa
-                            </div>
-                            <div class="categoria_linha">
-                                Calças
-                            </div>
                             <div class="titulo_categoria">
                                 Classificação
                             </div>
-                            <div class="categoria_linha">
+                            <div class="categoria_linha filtrar" onClick="filtrarClassificacao('A')">
                                 A
                             </div>
-                            <div class="categoria_linha">
+                            <div class="categoria_linha filtrar" onClick="filtrarClassificacao('B')">
                                 B
                             </div>
-                            <div class="categoria_linha">
+                            <div class="categoria_linha filtrar" onClick="filtrarClassificacao('C')">
                                 C
                             </div>
                             <div class="titulo_categoria">
-                                Tamanhos
+                                Medidas
                             </div>
-                            <div class="categoria_tamanhos">
-                                
+                            <div class="categoria_tamanhos container_tamanho">
+								<?php
+									$listMedidas = new controllerProduto();
+									$rsMedidas = $listMedidas->listarMedidas();
+									$cont = 0;
+									while($cont < count($rsMedidas)){
+								?>
+								
+                                <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>)">
+									<?php echo($rsMedidas[$cont]->getTamanho()) ?>
+								</div>
+							<?php $cont++;
+								} ?>
+                            </div>
+							
+							<div class="titulo_categoria">
+                                Números
+                            </div>
+                            <div class="categoria_tamanhos container_tamanho">
+								<?php
+									$listNumeros = new controllerProduto();
+									$rsNumeros = $listNumeros->listarNumeros();
+									$cont = 0;
+									while($cont < count($rsNumeros)){
+								?>
+								
+                                <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>)">
+									<?php echo($rsNumeros[$cont]->getTamanho()) ?>
+								</div>
+							<?php $cont++;
+								} ?>
                             </div>
                         </div>
                                             
@@ -153,9 +120,6 @@
                                 
                                     if(isset($_GET['idCategoria'])){
                                         $id = $_GET['idCategoria'];
-                                        
-                                        $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-                                        require_once($diretorio.'controller/controllerProduto.php');
 
                                         $listProdutoCategoria = new controllerProduto();
                                         $rsProdutosCategoria = $listProdutoCategoria->listarProdutoCategoria($id);
@@ -202,6 +166,10 @@
                                 ?>
                             </a>
                      </div>
+					
+					<div id="resultado">
+					
+					</div>
                         <div class="botao_categoria_responsivo"> 
                             <img src="icones/categoria.png">
                         </div>

@@ -55,7 +55,7 @@
 					<img src="../imagens/<?php echo($img) ?>"
 				</span>
 
-				<span onClick="excluir(<?php echo($rsLayout[$cont]->getId()) ?>)">
+				<span onClick="excluir(<?php echo($rsLayout[$cont]->getId()) ?>, 1)">
 					<img src="../imagens/delete16.png">
 				</span>
 			</div>
@@ -109,7 +109,7 @@
 					<img src="../imagens/<?php echo($img) ?>">
 				</span>
 
-				<span onClick="excluir(<?php echo($rsLayout2[$cont]->getId()) ?>)">
+				<span onClick="excluir(<?php echo($rsLayout2[$cont]->getId()) ?>, 2)">
 					<img src="../imagens/delete16.png">
 				</span>
 			</div>
@@ -121,12 +121,4 @@
 	?>
 	</div>
 	
-</div>
-
-
-
-<div class="erro_tabela" data-erro="<?php echo($cont) ?>">
-	<h1>Desculpe, não há registros em nosso banco de dados!!</h1>
-
-	<img src="../imagens/sad.png">
 </div>

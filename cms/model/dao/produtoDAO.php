@@ -20,6 +20,14 @@
 		Objetivo: Implementado atualização de imagens
 	*/
 
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 22/10/2018
+        Objetivo: Implementao a função que limita a exclusão de um produto se houver apenas um
+
+    */ 
+
 	class produtoDAO{
 		public function __construct(){
 			require_once('bdClass.php');
@@ -200,7 +208,7 @@
 			if($stm->rowCount() != 0){
 				echo('Produto excluído com sucesso!!');
 			}else{
-				echo('Ocorreu um erro ao realizar a exclusão!');
+				echo ('erro');
 			}
 			
 			//fechando a conexão
@@ -241,7 +249,14 @@
 				$cont++;
 			}
 			
-			return $listProduto;
+			if($cont != 0){
+				//retornando o id do produto
+				return $listProduto;
+			}else{
+				require_once('../erro_tabela.php');
+			}
+			
+			$conexao->fecharConexao();
 		}
 		
 		//função para selecionar um produto pelo id
@@ -424,6 +439,8 @@
 			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
 			
+			$PDO_conexao->exec('SET CHARACTER SET UTF8');
+			
 			//query que realiza a consulta no banco
 			$stm = $PDO_conexao->prepare('SELECT * FROM categoria');
 			
@@ -464,6 +481,29 @@
 			
 		}
 		
+		//verifica o total de produtos cadastrados
+		public function checkProduto(){
+			//instância da classe de conexão com o banco de dados
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que faz a consulta
+			$stm = $PDO_conexao->prepare('SELECT idProduto from produto');
+			
+			//execução do statement
+			$stm->execute();
+			
+			//armazenando o total de linhas
+			$linhas = $stm->rowCount();
+			
+			//retornando as linhas
+			return $linhas;
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 		
 	}
 ?>

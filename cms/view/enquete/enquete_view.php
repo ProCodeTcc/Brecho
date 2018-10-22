@@ -1,9 +1,20 @@
 <?php 
     session_start();
     $usuario = $_SESSION['usuario'];
+	$idNivel = $_SESSION['nivel'];
+	$idPagina = 4;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Home</title>
         <script src="../js/jquery.js"></script>
+		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
     </head>
@@ -67,7 +79,11 @@
                 url: url+'/router.php', //url onde será feita a requisição
                 data: {id:idItem, modo: 'excluir', controller: 'enquete'}, //dados a serem enviados
                 success: function(dados){
-                    listar();
+                    if(dados == 'limite'){
+						alert('Não foi possível realizar a exclusão!! Tem de haver ao menos uma enquete ativa.');
+					}else{
+						listar();
+					}
                 }
             });
         }
@@ -207,20 +223,6 @@
 					</div>
                 </div>
 
-            </div>
-
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
             </div>
         </div>
 

@@ -1,5 +1,6 @@
 <?php
-	session_start();
+	if(isset($_SESSION['sexo'])){
+		
 	$genero = $_SESSION['sexo'];
 
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
@@ -78,3 +79,7 @@
 		background-color: <?php echo($rsTema->getCor()) ?>;
 	}
 </style>
+
+
+<?php
+	}

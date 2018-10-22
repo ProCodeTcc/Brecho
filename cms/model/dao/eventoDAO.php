@@ -6,6 +6,14 @@
 		Objetivo: CRUD de eventos
 	*/
 
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 22/10/2018
+        Objetivo: Implementao a função que limita a exclusão de evento se houver apenas um
+
+    */ 
+
 	class EventoDAO{
 		public function __construct(){
 			require_once("bdClass.php");
@@ -137,8 +145,13 @@
 				$cont++;
 			}
 			
-			//retornando a lista com os eventos
-			return $listEvento;
+			if($cont != 0){
+				return $listEvento;
+			}else{
+				require_once('../erro_tabela.php');
+			}
+			
+			$conexao->fecharConexao();
 		}
 		
 		//função que busca um evento através do ID
@@ -249,7 +262,7 @@
 				echo('Evento excluído com sucesso!!');
 			}else{
 				//caso contrário, mensagem de erro
-				echo('Ocorreu um erro ao excluir o evento');
+				echo 'erro';
 			}
 			
 			//fechando a conexão
@@ -278,6 +291,30 @@
 			
 			//execução do statement
 			$stm->execute();
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+		
+		//função que verifica a quantidade de eventos no banco
+		public function checkEvento(){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que realiza a consulta
+			$stm = $PDO_conexao->prepare('SELECT idEvento FROM evento');
+			
+			//execução do statement
+			$stm->execute();
+			
+			//armazenando o número de linhas
+			$linhas = $stm->rowCount();
+			
+			//retornando
+			return $linhas;
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

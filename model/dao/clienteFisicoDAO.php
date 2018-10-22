@@ -19,7 +19,7 @@
             require_once('bdClass.php');
         }
         
-        public function Insert(ClienteFisico $cliente){
+        public function Insert(Cliente $cliente){
         
             //Instancia da classe de cinexão com o banco 
             $conexao = new ConexaoMySQL();
@@ -46,7 +46,7 @@
 //            var_dump($cliente);
             
             if($stm->execute()){
-//                header("location:index.php")
+                header("location:index.php");
                 $idCliente=$PDO_conexao->lastInsertId();
                 return $idCliente;
             }else{

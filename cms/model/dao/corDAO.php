@@ -100,8 +100,12 @@
 				$cont++;
 			}
 			
-			//retornando as cores
-			return $listCor;
+			if($cont != 0){
+				//retornando as cores
+				return $listCor;
+			}else{
+				require_once('../erro_tabela.php');
+			}
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

@@ -21,7 +21,7 @@
 	?>
 	<div class="produtos">
 		<div class="produtos_imagem">
-			<img src="<?php echo($rsProdutos[$cont]->getImagem()) ?>">
+			<img src="../arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
 		</div>
 
 		<article>

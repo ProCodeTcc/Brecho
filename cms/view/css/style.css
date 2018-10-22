@@ -545,7 +545,7 @@ footer{
     text-align: center;
     box-sizing: border-box;
     padding: 20px;
-    display: none;
+    display: block;
 }
 
 .erro_tabela h1{
@@ -699,6 +699,11 @@ footer{
 }
 
 #visualizar_evento{
+	width: 128px;
+	height: 128px;
+}
+
+#visualizar_evento img{
 	width: 128px;
 	height: 128px;
 }
@@ -1112,4 +1117,46 @@ footer{
 	width: 300px;
 	height: auto;
 	margin: auto;
+}
+
+/************************* SLIDER ******************************/
+.frm_slider{
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+}
+
+.frm_slider img{
+	width: 256px;
+	height: 256px;
+}
+
+.slider_linha{
+	width: 1180px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: auto;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.slider{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.slider_imagem{
+	width: 300px;
+	height: 200px;
+}
+
+.slider_imagem img{
+	width: 300px;
+	height: 200px;
 }

@@ -1,9 +1,20 @@
 <?php 
     session_start();
     $usuario = $_SESSION['usuario'];
+	$idNivel = $_SESSION['nivel'];
+	$idPagina = 12;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +22,9 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Análise</title>
+        <title>Retirada</title>
         <script src="../js/jquery.js"></script>
+		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
     </head>
@@ -36,6 +48,29 @@
 				url: 'dados.php',
 				success: function(dados){
 					$('#consulta').html(dados);
+				}
+			});
+		}
+		
+		function buscar(id){
+			$.ajax({
+				type: 'POST',
+				url: 'frm_retirada.php',
+				data: {id:id},
+				success: function(dados){
+					$('.modal').html(dados);
+				}
+			});
+		}
+		
+		function excluir(id){
+			$.ajax({
+				type: 'POST',
+				url: url+'router.php',
+				data: {id:id, controller: 'retirada', modo: 'excluir'},
+				success: function(dados){
+					alert(dados);
+					listar();
 				}
 			});
 		}
@@ -97,7 +132,7 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Cores</span>
+            <span class="page_title">Retirada</span>
 
             <div class="page_search_container">
                 <input type="text" class="page_search">
@@ -123,8 +158,8 @@
                 <div class="users_view">
                     <div class="users_view_title">
                         <div class="users_view_itens">#</div>
-                        <div class="users_view_itens">Nome</div>
-						<div class="users_view_itens">Cor</div>
+                        <div class="users_view_itens">Data de Retirada</div>
+						<div class="users_view_itens">Pedido</div>
                         <div class="users_view_itens">Ações</div>
                     </div>
 
@@ -132,22 +167,8 @@
 						
                     </div>
                 </div>
-
             </div>
 
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
-            </div>
         </div>
 
         <footer>

@@ -7,6 +7,14 @@
 
     */ 
 
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 22/10/2018
+        Objetivo: Implementao a função que limita a exclusão de um conteúdo da pág sobre se houver apenas um
+
+    */ 
+
 	class SobreDAO{
 		public function __construct(){
 			require_once('bdClass.php');
@@ -79,7 +87,11 @@
 				$cont++;
 			}
 			
-			return $listSobre;
+			if($cont != 0){
+				return $listSobre;
+			}else{
+				require_once('../erro_tabela.php');
+			}
 			
 			$conexao->fecharConexao();
 		}
@@ -160,7 +172,7 @@
 			if($stm->rowCount() != 0){
 				echo('Layout excluído com sucesso!!');
 			}else{
-				echo('Ocorreu um erro ao realizar a exclusão!!');
+				echo('erro');
 			}
 			
 			$conexao->fecharConexao();
@@ -280,7 +292,11 @@
 				$cont++;
 			}
 			
-			return $listSobre;
+			if($cont != 0){
+				return $listSobre;
+			}
+			
+			$conexao->fecharConexao();
 		}
 		
 		//query que atualiza o layout2
@@ -311,6 +327,33 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 			
+		}
+		
+		//função que retorna o total de conteúdos cadastrados
+		public function checkLayout($layout){
+			//instância da classe que conecta com o banco de dados
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que realiza a consulta
+			$stm = $PDO_conexao->prepare('SELECT idSobre FROM sobre WHERE tipoLayout = ?');
+			
+			//parâmetros enviados
+			$stm->bindValue(1, $layout, PDO::PARAM_INT);
+			
+			//execução do statement
+			$stm->execute();
+			
+			//armazenando o total de linhas em uma variável
+			$linhas = $stm->rowCount();
+			
+			//retornando as linhas
+			return $linhas;
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
 		}
 	}
 ?>

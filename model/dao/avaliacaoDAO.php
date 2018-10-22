@@ -27,7 +27,7 @@
 			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
 			
-			$stm = $PDO_conexao->prepare('INSERT INTO produtoavaliacao(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idCor, idTamanho) VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
+			$stm = $PDO_conexao->prepare('INSERT INTO produtoavaliacao(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idCor, idTamanho, naturezaProduto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, 2)');
 			
 			$stm->bindParam(1, $produto->getNome());
 			$stm->bindParam(2, $produto->getDescricao());
@@ -39,6 +39,7 @@
 			$stm->bindParam(8, $produto->getTamanho());
 			
 			if($stm->execute()){
+				header('location: view/cadastro_produto.php');
 				$idProduto = $PDO_conexao->lastInsertId();
 				return $idProduto;
 			}else{
@@ -137,6 +138,8 @@
 			
 			//chamada da função que conecta com o banco de dados
 			$PDO_conexao = $conexao->conectarBanco();
+			
+			$PDO_conexao->exec('SET CHARACTER SET UTF8');
 			
 			//query que realiza a consulta
 			$stm = $PDO_conexao->prepare('SELECT * FROM categoria');

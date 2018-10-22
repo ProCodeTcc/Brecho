@@ -1288,6 +1288,26 @@
         height: 100%;
         float: left;
     }
+	
+	.container_tamanho{
+		width: 260px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding: 5px;
+	}
+	
+	.tamanhos{
+		width: 30px;
+		height: 30px;
+		border: 1px solid black;
+		border-radius: 15px;
+		box-sizing: border-box;
+		padding-top: 4px;
+		font-weight: bold;
+		margin-right: 5px;
+		cursor: pointer;
+	}
 
     .categoria_pesquisa{
         width: 100%;
@@ -1670,7 +1690,7 @@
 /**************************************************/
 
 /************** Cadastro De Usuário ***************/
-
+	
     .caixa_cadastro_usuario{
         width: 1300px;
         min-height: 700px;

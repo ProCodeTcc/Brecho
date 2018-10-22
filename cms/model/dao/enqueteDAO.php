@@ -23,7 +23,15 @@
 
     */ 
 
-    Class EnqueteDAO{
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 22/10/2018
+        Objetivo: Implementao a função que limita a exclusão da enquete se houver apenas uma
+
+    */ 
+
+    class EnqueteDAO{
         public function __construct(){
             require_once('bdClass.php');
         }
@@ -118,11 +126,10 @@
                 $cont++;
             }
 
-            if($cont < 1){
-                return null;
-            }else{
-                //retorno dos dados
+            if($cont != 0){
                 return $listEnquetes;
+            }else{
+                require_once('../erro_tabela.php');
             }
 
             //fechando a conexão
@@ -240,21 +247,16 @@
         }
 
         //função que atualiza o status da enquete no banco de dados
-        public function updateStatus($id, $status){
+        public function activateOne($id){
             //instância da classe de conexão com o banco
             $conexao = new ConexaoMySQL();
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
 			
-			//verifica qual o status atual
-            if($status == 1){
-                //se for 1, atualiza o status no banco para 0
-                $stm = $PDO_conexao->prepare("UPDATE enquete SET status = 0 WHERE idEnquete = ?");
-            }else{
-                //se for 0, atualiza o status no banco para 1
-                $stm = $PDO_conexao->prepare("UPDATE enquete SET status = 1 WHERE idEnquete = ?");
-            }
+			
+			//query que atualiza o status
+			$stm = $PDO_conexao->prepare("UPDATE enquete SET status = 1 WHERE idEnquete = ?");
 			
 			//parâmetro que será enviado
 			$stm->bindParam(1, $id);
@@ -265,5 +267,51 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
+		
+		//função que atualiza o status da enquete no banco de dados
+        public function disableAll($id){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco de dados
+            $PDO_conexao = $conexao->conectarBanco();
+			
+			
+			//query que atualiza o status
+			$stm = $PDO_conexao->prepare("UPDATE enquete SET status = 0 WHERE idEnquete <> ?");
+			
+			//parâmetro que será enviado
+			$stm->bindParam(1, $id);
+
+            //executando o statement
+			$stm->execute();
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+		
+		//função que verifica o total de enquetes
+		public function checkEnquete(){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que faz a consulta
+			$stm = $PDO_conexao->prepare('SELECT idEnquete from enquete');
+			
+			//execução do statement
+			$stm->execute();
+			
+			//armazenando o número de itens
+			$linhas = $stm->rowCount();
+			
+			//retornando
+			return $linhas;
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
     }
 ?>

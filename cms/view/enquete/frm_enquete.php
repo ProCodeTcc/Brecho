@@ -33,7 +33,7 @@
 		});
 	}
 	
-    function validarData(){
+    function validarTermino(){
 		var dtInicio = $('#dtinicio').val();
 		var dtTermino = $('#dttermino').val();
 
@@ -86,7 +86,7 @@
                 processData: false,
                 async: true,
                 success: function(dados){
-                    if(validarData() != false){
+                    if(validarTermino() != false){
                         listar();
                         $('.container_modal').fadeOut(400);
                     }
@@ -172,9 +172,9 @@
         </div>
 
         <div class="form_linha" id="input_data">
-			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio">
+			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio" onBlur="validarData('#dtinicio')">
 			
-			<input type="date" class="cadastro_input" name="dttermino" id="dttermino">
+			<input type="date" class="cadastro_input" name="dttermino" id="dttermino" onBlur="validarData('#dttermino')">
         </div>
 
         <div class="form_linha" id="btn_linha">

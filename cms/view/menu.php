@@ -70,6 +70,12 @@
 			</li>
 			
 			<li class="submenu-itens">
+				<a class="paginas_link" href="../slider/slider_view.php">
+					Slider
+				</a>
+			</li>
+			
+			<li class="submenu-itens">
 				<a class="paginas_link" href="../fale_conosco/fale_conosco_view.php">
 					Fale Conosco
 				</a>

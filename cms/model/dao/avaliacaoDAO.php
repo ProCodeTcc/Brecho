@@ -29,26 +29,28 @@
 			//contador
 			$cont = 0;
 			
-			if($resultado->rowCount() != 0){
-				//percorrendo os dados
-				while($rsProdutos = $resultado->fetch(PDO::FETCH_OBJ)){
-					//criando um novo produto
-					$listProdutos[] = new Avaliacao();
+			//percorrendo os dados
+			while($rsProdutos = $resultado->fetch(PDO::FETCH_OBJ)){
+				//criando um novo produto
+				$listProdutos[] = new Avaliacao();
 
-					//setando os atributos
-					$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
-					$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
-					$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
-					$listProdutos[$cont]->setPreco($rsProdutos->preco);
-					$listProdutos[$cont]->setClassificacao($rsProdutos->classificacao);
-					$listProdutos[$cont]->setImagem($rsProdutos->imagem);
+				//setando os atributos
+				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
+				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setClassificacao($rsProdutos->classificacao);
+				$listProdutos[$cont]->setImagem($rsProdutos->imagem);
 
-					//incrementando o contador
-					$cont++;
-				}
-				
+				//incrementando o contador
+				$cont++;
+			}
+
+			if($cont != 0){
 				//retornando a lista com os produtos
 				return $listProdutos;
+			}else{
+				require_once('../erro_tabela.php');
 			}
 			
 			//fechando a conexão

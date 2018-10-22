@@ -5,6 +5,11 @@
 		//armazenando a imagem na variável de sessão
 		$imagem = $_SESSION['imagem'];
 	}
+
+	if(!isset($_SESSION['usuario'])){
+		//se não existir, redireciona o usuário pra página de login
+		header("location: ../index.php");
+	}
 ?>
 
 <!DOCTYPE html>
@@ -123,6 +128,12 @@
 									<li class="submenu-itens">
 										<a class="paginas_link" href="evento/evento_view.php">
 											Eventos
+										</a>
+									</li>
+									
+									<li class="submenu-itens">
+										<a class="paginas_link" href="slider/slider_view.php">
+											Slider
 										</a>
 									</li>
 									

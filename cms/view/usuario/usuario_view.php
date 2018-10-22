@@ -10,11 +10,11 @@
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
 	require_once($diretorio.'controller/controllerNivel.php');
 	require_once($diretorio.'controller/controllerUsuario.php');
-	//$controllerNivel = new controllerNivel();
-	//$controllerNivel->checarPermissao($idNivel, $idPagina);
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
 	
-	//$controllerUsuario = new controllerUsuario();
-	//$controllerUsuario->checarLogin();
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Home</title>
+        <title>Usuários</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
@@ -61,7 +61,12 @@
                     url: url+'/router.php',
                     data: {modo: 'excluir', id:idItem, controller: 'usuario'},
                     success: function(dados){
-                        listar()
+						console.log(dados);
+                        if(dados == false){
+							alert('Não foi possível realizar a exclusão!! Tem de haver ao menos um usuário cadastrado.');
+						}else{
+							alert('Usuario excluído com sucesso!!');
+						}
                     }
                 });
             }
@@ -166,23 +171,6 @@
                    		<?php require_once('../menu.php') ?>
                     </div>
 					
-					<div class="estatisticas">
-						<div class="dashboard_title_container">
-                        	<span class="page_title">Estatísticas</span>
-                    	</div>
-						
-						<?php
-							$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
-							require_once($diretorio.'controller/controllerUsuario.php');
-							$controllerUsuario = new controllerUsuario();
-							
-							$totalUsuarios = $controllerUsuario->totalUsuarios();
-							
-							$usuariosAtivos = $controllerUsuario->usuariosAtivos();
-						?>
-						<p>Total de Usuários: <?php echo($totalUsuarios)?> </p>
-						<p>Usuários ativos: <?php echo($usuariosAtivos)?> </p>
-					</div>
                 </div>
 
                 <div class="users_view">
@@ -198,20 +186,6 @@
                     </div>
                 </div>
 
-            </div>
-
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
             </div>
         </div>
 

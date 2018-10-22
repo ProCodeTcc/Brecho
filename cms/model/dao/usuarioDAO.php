@@ -94,45 +94,33 @@
             //chamada da função para conectar com o banco
             $PDO_conexao = $conexao->conectarBanco();
 			
-			$PDO_conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
             //query para pegar dados do banco
             $sql = "SELECT usuariocms.*, n.nomeNivel FROM usuariocms LEFT JOIN nivelUsuario as n on usuariocms.idNivel = n.idNivel ORDER BY idUsuario";
 
-            try{
-				//armazenando o retorno da query em uma variável
-				$resultado = $PDO_conexao->query($sql);
-			}//capturando uma exceção
-			catch(PDOException $exception){
-				//mensagem de erro
-				echo('ocorreu um erro em nosso banco de dados');
-				
-				//causa do erro
-				echo($exception->getMessage());
-			}
-            //variavel de contagem
+            
+			//armazenando o retorno da query em uma variável
+			$resultado = $PDO_conexao->query($sql);
+
+			//variavel de contagem
             $cont = 0;
 			
-			if($resultado){
-				//verificando se há algum registro na variável
-				if($resultado->rowCount() == 0){
-					//retorna falso se não houver nenhum registro
-					$resultado = false;
-				}else{ //se houver registro, continua o processo
-					//laço while para percorrer os dados
-					while($rsUsuarios = $resultado->fetch(PDO::FETCH_OBJ)){
-						//criando um novo usuário e armazenando os dados nele
-						$listUsuarios[] = new Usuario();
-						$listUsuarios[$cont]->setId($rsUsuarios->idUsuario);
-						$listUsuarios[$cont]->setNome($rsUsuarios->nomeUsuario);
-						$listUsuarios[$cont]->setUsuario($rsUsuarios->login);
-						$listUsuarios[$cont]->setNivel($rsUsuarios->idNivel);
-						$listUsuarios[$cont]->setNomeNivel($rsUsuarios->nomeNivel);
-						$listUsuarios[$cont]->setStatus($rsUsuarios->status);
-						$cont++;
-					}
-						return $listUsuarios;
-				}
+			//laço while para percorrer os dados
+			while($rsUsuarios = $resultado->fetch(PDO::FETCH_OBJ)){
+				//criando um novo usuário e armazenando os dados nele
+				$listUsuarios[] = new Usuario();
+				$listUsuarios[$cont]->setId($rsUsuarios->idUsuario);
+				$listUsuarios[$cont]->setNome($rsUsuarios->nomeUsuario);
+				$listUsuarios[$cont]->setUsuario($rsUsuarios->login);
+				$listUsuarios[$cont]->setNivel($rsUsuarios->idNivel);
+				$listUsuarios[$cont]->setNomeNivel($rsUsuarios->nomeNivel);
+				$listUsuarios[$cont]->setStatus($rsUsuarios->status);
+				$cont++;
+			}
+				
+			if($cont != 0){
+				return $listUsuarios;
+			}else{
+				require_once('../erro_tabela.php');
 			}
             
             //fechando a conexão com o banco
@@ -280,50 +268,29 @@
 
             //fechando a conexão
             $conexao->fecharConexao();
-        }
+        }		
 		
-		public function totalUsuarios(){
+		//função para verificar a quantidade de usuários ativos
+		public function checkUsuarios(){
+			//instância da classe de conexão com o banco
 			$conexao = new ConexaoMySQL();
 			
+			//chamada da função que conecta com o banco de dados
 			$PDO_conexao = $conexao->conectarBanco();
 			
-			$stm = $PDO_conexao->prepare('SELECT COUNT(idUsuario) AS total FROM usuarioCms');
+			//query que faz a consulta
+			$sql = 'SELECT idUsuario from usuarioCms';
 			
-			$stm->execute();
+			//armazenando os dados em uma variável
+			$resultado = $PDO_conexao->query($sql);
 			
-			$resultado = $stm->fetch(PDO::FETCH_OBJ);
+			//guardando o número de usuários cadastrados
+			$linhas = $resultado->rowCount();
 			
-			$total = $resultado->total;
+			//retornando
+			return $linhas;
 			
-			return $total;
-			
-			$conexao->fecharConexao();
-		}
-		
-		public function usuariosAtivos(){
-			$conexao = new ConexaoMySQL();
-			
-			$PDO_conexao = $conexao->conectarBanco();
-			
-			$PDO_conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-			$stm = $PDO_conexao->prepare('SELECT COUNT(status) AS ativos from usuarioCms WHERE status = 1');
-			
-			try{
-				$stm->execute();
-			}
-			catch(PDOException $exception){
-				echo ('erro');
-				$stm = false;
-			}
-				
-			$resultado = $stm->fetch(PDO::FETCH_OBJ);
-			
-			$ativos = $resultado->ativos;
-			
-			return $ativos;
-			
-			
+			//fechando a conexão
 			$conexao->fecharConexao();
 		}
     }

@@ -1,9 +1,20 @@
 <?php 
     session_start();
     $usuario = $_SESSION['usuario'];
+	$idNivel = $_SESSION['nivel'];
+	$idPagina = 6;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Eventos</title>
         <script src="../js/jquery.js"></script>
+		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
     </head>
@@ -64,11 +76,17 @@
 				url: url+'router.php', //url onde será enviada a requisição
 				data: {id:id, controller: 'evento', modo: 'excluir'}, //parâmetros enviados
 				success: function(dados){
-					//mensagem 
-					alert(dados);
-					
-					//listando os dados atualizados
-					listar();
+					if(dados == 'limite'){
+						alert('Não foi possível realizar a exclusão!! Deve haver ao menos um evento cadastrado.');
+					}else if(dados == 'erro'){
+						alert('Ocorreu um erro ao realizar a exclusão!!');
+					}else{
+						//mensagem 
+						alert(dados);
+
+						//listando os dados atualizados
+						listar();
+					}
 				}
 			});
 		}
@@ -181,19 +199,6 @@
 
             </div>
 
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
-            </div>
         </div>
 
         <footer>

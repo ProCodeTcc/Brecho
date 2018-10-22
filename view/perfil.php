@@ -1,5 +1,6 @@
 <?php
-	session_start();
+	require_once('arquivos/check_login.php');
+
 	if($_SESSION['login'] != 1){
 		header('location: login.php');
 	}
@@ -10,113 +11,22 @@
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/funcoes.js"></script>
+		
+		<script>
+			$(document).ready(function(){
+				checarLogin(<?php echo($login) ?>);
+			});
+		</script>
     </head>
     <body>
         <header>
-            <div class="menu_paginas">
-                <div class="menu_paginas_site">
-                    <a href="fale_conosco.php" class="link_paginas"> Fale Conosco </a>
-                    <a href="nossas_lojas.php" class="link_paginas"> Nossas Lojas </a>
-                    <a href="sobre.php" class="link_paginas"> Sobre </a>
-                
-                    <div class="pesquisa_cabecalho_icone">
-                        
-                        <img alt="#" src="icones/pesquisa.png">
-                    </div>
-                    
-                <div class="pesquisa_cabecalho">
-                    <input class="campo_pesquisa_cabecalho" type="text">
-                </div>
-                </div>
-            </div>
-            
-            <div class="menu_principal">
-                <div class="menu_principal_site">
-                    <div class="menu_lado_esquerdo">
-                        <div class="menu_responsivo">
-                        
-                        </div>
-                        <a href="../index.php">
-                            <div class="logo">
-                                <img alt="#" src="imagens/logoBrecho3.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="menu_lado_direito">
-                        <div class="login_carrinho">
-                                <div class="login">
-                                    <a  href="login.php">
-                                        <div class="icone_login">
-                                            <img alt="#" src="icones/login.png">
-                                        </div>
-                                        <div class="texto_login">
-                                            Entrar   
-                                        </div>
-                                    </a>
-                                    <div class="sub_login">
-                                        <a href="perfil.php">
-                                            <div class="texto_perfil">
-                                                Perfil   
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            <a href="carrinho.php">
-                                <div class="login">
-                                    <div class="icone_login">
-                                        <img alt="#" src="icones/carrinho.png">
-                                    </div>
-                                    <div class="texto_login">
-                                        Carrinho   
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="menu_categoria">
-                <div class="menu">
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Comum
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Alfaiataria
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Banho
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Pijamas
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Social
-                        </div>
-                    </a>
-                    <a href="promocao.php">
-                        <div class="menu_item">
-                            Promoção
-                        </div> 
-                    </a>
-                    <a href="eventos.php">
-                        <div class="menu_item">
-                            Eventos
-                        </div> 
-                    </a>
-                    
-                </div>
-            </div>
+            <?php
+				require_once('arquivos/header.php');
+			?>
         </header>
+		
         <main>
             <div class="perfil_full">
             <div class="linha">

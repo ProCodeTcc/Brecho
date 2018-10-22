@@ -181,9 +181,9 @@
         </div>
 
         <div class="form_linha container_data" id="input_data">
-			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio">
+			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio" onBlur="validarData('#dtinicio')">
 			
-			<input type="date" class="cadastro_input" name="dttermino" id="dttermino">
+			<input type="date" class="cadastro_input" name="dttermino" id="dttermino" onBlur="validarData('#dttermino')">
         </div>
 		
 		<div class="form_linha">

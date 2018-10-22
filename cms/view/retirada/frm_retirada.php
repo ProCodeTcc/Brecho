@@ -49,34 +49,82 @@
 		});
 	}
 	
+	//função para exibir os dados no formulário para edição
+	function exibirDados(id){
+		$.ajax({
+			type: 'POST', //tipo de requisição
+			url: url+'router.php', //url onde será enviada a requisição
+			data: {id:id, controller: 'retirada', modo: 'buscar'}, //parâmetros enviados
+			success: function(dados){
+				//conversão dos dados para json
+				json = JSON.parse(dados);
+				
+				//resgatando os valores das caixas de texto
+				$('#txtpedido').val(json.idPedido);
+				$('#txtunidade').val(json.idUnidade);
+				$('#dtretirada').val(json.dataRetirada);
+			}
+		});
+	}
+	
 	$(document).ready(function(){
+		//resgatando o ID
+		var id = $('#frmRetirada').data('id');
+		
 		//exibindo as lojas
 		exibirLoja();
 		
 		//exibindo os pedidos
 		exibirPedido();
 		
+		//verificando se o ID é diferente de nulo
+		if(id != ""){
+			//exibindo os dados
+			exibirDados(id);
+		}
+		
 		$('.fechar').click(function(){
 			$('.container_modal').fadeOut(400);
 		});
 		
 		$('#frmRetirada').submit(function(e){
+			//desativando o submit do formulário
 			e.preventDefault();
+			
+			//armazenando o formulário em uma variável
 			var formulario = new FormData($('#frmRetirada')[0]);
+			
+			//acrescentando ao formulário o parâmetro retirada
 			formulario.append('controller', 'retirada');
-			formulario.append('modo', 'inserir');
+			
+			//verificando se o id é nulo
+			if(id == ""){
+				//se for, acrescenta ao formulário o modo inserir
+				formulario.append('modo', 'inserir');
+			}else{
+				//caso contrário, acrescenta o modo editar
+				formulario.append('modo', 'editar');
+				
+				//acrescentando o ID ao formulário
+				formulario.append('id', id);
+			}
 			
 			$.ajax({
-				type: 'POST',
-				url: url+'router.php',
-				data: formulario,
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: formulario, //dados enviados
 				cache: false,
                 contentType: false,
                 processData: false,
                 async: true,
 				success: function(dados){
+					//mensagem
 					alert(dados)
+					
+					//listagem dos dados
 					listar();
+					
+					//fechando a modal
 					$('.container_modal').fadeOut(400);
 				}
 			});
@@ -92,7 +140,7 @@
 				Pedido:
 			</label>
 			
-			<select class="cadastro_select" name="txtpedido" id="txtpedido">
+			<select class="cadastro_select" name="txtpedido" id="txtpedido" required>
 	
 			</select>
 		</div>
@@ -118,7 +166,7 @@
 				Loja:
 			</label>
 			
-			<select class="cadastro_select" name="txtunidade" id="txtunidade">
+			<select class="cadastro_select" name="txtunidade" id="txtunidade" required>
 			</select>
 		</div>
 		
@@ -127,7 +175,7 @@
 				Data:
 			</label>
 			
-			<input type="date" name="dtretirada" class="cadastro_input" id="dtretirada">
+			<input type="date" name="dtretirada" class="cadastro_input" id="dtretirada" onBlur="validarData('#dtretirada')" required>
 		</div>
 		
 		<div class="form_linha" id="btn_linha">

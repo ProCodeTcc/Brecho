@@ -133,24 +133,29 @@
 			//contador
 			$cont = 0;
 			
-			//percorrendo os dados
-			while($rsUnidades = $resultado->fetch(PDO::FETCH_OBJ)){
-				//criando uma nova unidade
-				$listUnidades[] = new Unidade();
+			if($resultado){
+				//percorrendo os dados
+				while($rsUnidades = $resultado->fetch(PDO::FETCH_OBJ)){
+					//criando uma nova unidade
+					$listUnidades[] = new Unidade();
+
+					//setando os atributos
+					$listUnidades[$cont]->setIdEndereco($rsUnidades->idEndereco);
+					$listUnidades[$cont]->setId($rsUnidades->idUnidade);
+					$listUnidades[$cont]->setNome($rsUnidades->nomeUnidade);
+					$listUnidades[$cont]->setIdLoja($rsUnidades->idLoja);
+					$listUnidades[$cont]->setCidade($rsUnidades->cidade);
+
+					//incrementando o contador
+					$cont++;
+				}
 				
-				//setando os atributos
-				$listUnidades[$cont]->setIdEndereco($rsUnidades->idEndereco);
-				$listUnidades[$cont]->setId($rsUnidades->idUnidade);
-				$listUnidades[$cont]->setNome($rsUnidades->nomeUnidade);
-				$listUnidades[$cont]->setIdLoja($rsUnidades->idLoja);
-				$listUnidades[$cont]->setCidade($rsUnidades->cidade);
-				
-				//incrementando o contador
-				$cont++;
+				return $listUnidades;
+			}else{
+				require_once('../erro_tabela.php');
 			}
 			
-			//retornando os dados
-			return $listUnidades;
+			$conexao->fecharConexao();
 			
 		}
 		

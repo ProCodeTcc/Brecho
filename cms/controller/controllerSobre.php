@@ -148,12 +148,21 @@
 		}
 		
 		//função que exclui um layout
-		public function excluirLayout($id){
+		public function excluirLayout($id, $layout){
 			//instância da classe sobreDAO
 			$sobreDAO = new SobreDAO();
 			
-			//chamada da função que deleta um layout
-			$sobreDAO->Delete($id);
+			//armazenando o total de conteúdo cadastrado em uma variável
+			$totalLayouts = $sobreDAO->checkLayout($layout);
+			
+			//verificando o total
+			if($totalLayouts == 1){
+				//se for 1, limita a exclusão
+				echo ('limite');
+			}else{
+				//chamada da função que deleta um layout
+				$sobreDAO->Delete($id);
+			}
 		}
 		
 		//função que atualiza o status

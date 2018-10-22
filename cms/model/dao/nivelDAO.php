@@ -75,11 +75,11 @@
                 $cont++;
             }
             
-            if($cont < 1){
-                return null;
-            }else{
-                //retornando os dados
+            if($cont != 0){
+				//retornando os dados
                 return $listNiveis;
+            }else{
+                require_once('../erro_tabela.php');
             }
             
             //fechando a conexão

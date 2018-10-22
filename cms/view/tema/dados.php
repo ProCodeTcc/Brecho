@@ -30,7 +30,7 @@
 			<img src="../imagens/delete16.png">
 		</span>
 		
-		<span onClick="status(<?php echo($rsTema[$cont]->getStatus())?>, <?php echo($rsTema[$cont]->getId()) ?>)">
+		<span onClick="status(<?php echo($rsTema[$cont]->getStatus())?>, <?php echo($rsTema[$cont]->getId()) ?>, '<?php echo($rsTema[$cont]->getGenero()) ?>')">
 			<?php
 				$status = $rsTema[$cont]->getStatus();
 				

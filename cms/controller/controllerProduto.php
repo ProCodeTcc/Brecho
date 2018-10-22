@@ -165,8 +165,17 @@
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//chamada da função que deleta um produto
-			$produtoDAO->Delete($id);
+			//armazenando o total de produtos em uma variável
+			$produtosAtivos = $produtoDAO->checkProduto();
+			
+			//verificando o total de produtos cadastrados
+			if($produtosAtivos == 1){
+				//limita a exclusão
+				echo 'limite';
+			}else{
+				//chamada da função que deleta um produto
+				$produtoDAO->Delete($id);
+			}
 		}
 		
 		//função que insere uma promoção

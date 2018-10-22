@@ -74,5 +74,65 @@
             return $listProdutoCategoria;
         
         }
+		
+		//função que listas os produtos por classificação
+		public function listarProdutoClassificacao($classificacao){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+			
+			//armazenando os dados em uma variável
+			$listProdutos = $produtoDAO->SelectByClassificacao($classificacao);
+			
+			//retornando os dados
+			return $listProdutos;
+		}
+		
+		//função para listar as medidas
+		public function listarMedidas(){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+			
+			//armazenando os dados em uma variável
+			$listMedida = $produtoDAO->selectMedida();
+			
+			//retornando os dados
+			return $listMedida;
+		}
+		
+		//função para listar os números
+		public function listarNumeros(){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+			
+			//armazenando os dados em uma variável
+			$listNumero = $produtoDAO->selectNumero();
+			
+			//retornando os dados
+			return $listNumero;
+		}
+		
+		//função que lista os produtos pelo tamanho
+		public function listarProdutoTamanho($tamanho){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+			
+			//armazenando os dados em uma variável
+			$listProduto = $produtoDAO->SelectByTamanho($tamanho);
+			
+			//retornando os dados
+			return $listProduto;
+		}
+		
+		//função que lista os produtos aleatóriamente
+		public function listarAleatorio(){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+			
+			//armazenando os dados em uma variável
+			$listProduto = $produtoDAO->selectRandom();
+			
+			//retornando os dados
+			return $listProduto;
+		}
 	}
 ?>

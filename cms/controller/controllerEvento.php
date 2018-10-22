@@ -135,8 +135,17 @@
 			//instância da classe eventoDAO
 			$eventoDAO = new EventoDAO();
 			
-			//chamada da função que exclui um evento
-			$eventoDAO->Delete($id);
+			//armazenando o total de eventos em uma variável
+			$eventosAtivos = $eventoDAO->checkEvento();
+			
+			//verificando a quantidade de eventos
+			if($eventosAtivos == 1){
+				//limita a exclusão se houver apenas 1
+				echo 'limite';
+			}else{
+				//chamada da função que exclui um evento
+				$eventoDAO->Delete($id);
+			}
 		}
 		
 		//função que lista as lojas

@@ -15,21 +15,33 @@
             require_once($diretorio.'model/dao/loginDAO.php');
             
         }
-    
+    	
+		//função que busca no banco de dados a conta do cliente
         public function BuscarConta(){
             if($_SERVER['REQUEST_METHOD']=='POST'){
+				//resgatando os valores das caixas de texto
                 $usuario = $_POST['txtLogin'];
                 $senha = $_POST['txtSenha'];
-                
-                $loginDAO = new LoginDAO();
-                
-				$loginDAO->Select($usuario, $senha);
-                
             }  
-          } 
-        }
-    
-
-
+			
+			//instância da classe loginDAO
+			$loginDAO = new LoginDAO();
+			
+			//verifica qual o tipo do cliente
+			if($_POST['txtcliente'] == "F"){
+				//loga o cliente físico
+				$loginDAO->Select($usuario, $senha);
+			}else{
+				//loga o cliente jurídico
+				$loginDAO->logarClienteJuridico($usuario, $senha);
+			}
+			
+          }
+		
+		public function deslogar(){
+			session_start();
+			session_destroy();
+		}
+    }
 
 ?>

@@ -16,16 +16,6 @@
 		$('.visualizar').click(function(){
 			$('#consulta').hide();
 		});
-
-		//criando a variável erro e atribuindo a ela o valor contido
-		//no data-atributo "erro", criado na div
-		var erro = $('.erro_tabela').data('erro');
-
-		//verificando se o valor contido em erro é 0, se for
-		//mostra a mensagem de erro
-		if(erro == 0){
-			$('.erro_tabela').show();
-		}
 	});
 
     
@@ -75,9 +65,3 @@
     <?php 
     $cont++;
     } ?>
-
-    <div class="erro_tabela" data-erro="<?php echo($cont) ?>">
-        <h1>Desculpe, não há registros em nosso banco de dados!!</h1>
-
-        <img src="../imagens/sad.png">
-    </div>

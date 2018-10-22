@@ -1,9 +1,20 @@
 <?php 
     session_start();
     $usuario = $_SESSION['usuario'];
+	$idNivel = $_SESSION['nivel'];
+	$idPagina = 13;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +83,19 @@
 					
 					//fechando a modal
 					$('.container_modal').fadeOut(400);
+				}
+			});
+		}
+		
+		//função para atualizar o status
+		function status(status, id, genero){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {status:status, id:id, genero:genero, controller: 'tema', modo: 'status'}, //parâmetros enviados
+				success: function(dados){
+					//listagem dos dados com o status atualizado
+					listar();
 				}
 			});
 		}
@@ -170,22 +194,8 @@
                 </div>
 
             </div>
-
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
-            </div>
-        </div>
-
+		</div>
+		
         <footer>
             brechó bernadete©
         </footer>

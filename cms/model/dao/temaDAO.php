@@ -74,8 +74,14 @@
 				$cont++;
 			}
 			
-			return $listTemas;
+			if($cont != 0){
+				return $listTemas;
+			}else{
+				require_once('../erro_tabela.php');
+			}
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
 		}
 		
 		public function selectByID($id){
@@ -154,5 +160,50 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+		
+		//função que ativa um tema
+		public function activateOne($id, $genero){
+			//instância da classe de conexão com o banco de dados
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//atualizando o status a partir do id e do genero
+			$stm = $PDO_conexao->prepare('UPDATE temasite SET status = 1 WHERE idTema = ? and genero = ?');
+			
+			//parâmetros enviados
+			$stm->bindParam(1, $id);
+			$stm->bindParam(2, $genero);
+			
+			//execução do statement
+			$stm->execute();
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+		
+		//função que desativa todos os temas, exceto o ativo
+		public function disableAll($id, $genero){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//atualizando o status a partir do id e do genero
+			$stm = $PDO_conexao->prepare('UPDATE temasite SET status = 0 WHERE idTema <> ? and genero = ?');
+			
+			//parâmetros enviados
+			$stm->bindParam(1, $id);
+			$stm->bindParam(2, $genero);
+			
+			//executando o statement
+			$stm->execute();
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+		
 	}
 ?>

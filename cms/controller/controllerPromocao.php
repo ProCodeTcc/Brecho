@@ -70,8 +70,17 @@
 			//instância da classe PromocaoDAO
 			$promocaoDAO = new PromocaoDAO();
 			
-			//chamada da função que deleta do banco
-			$promocaoDAO->Delete($id);
+			//armazena o total de promoções cadastradas
+			$promocaoAtiva = $promocaoDAO->checkPromocao();
+			
+			//verificando o total
+			if($promocaoAtiva == 1){
+				//se for igual a 1, limita a exclusão
+				echo('limite');
+			}else{
+				//chamada da função que deleta do banco
+				$promocaoDAO->Delete($id);
+			}
 		}
 		
 		//função que atualiza o status

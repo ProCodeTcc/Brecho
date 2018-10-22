@@ -7,6 +7,14 @@
 
     */
 
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 22/10/2018
+        Objetivo: Implementao a função que limita a exclusão de uma promoção se houver apenas uma
+
+    */ 
+
 	class PromocaoDAO{
 		public function __construct(){
 			require_once('bdClass.php');
@@ -42,8 +50,14 @@
 				$cont++;
 			}
 			
-			//retornando os dados
-			return $listProdutos;
+			if($cont != 0){
+				//retornando os dados
+				return $listProdutos;
+			}else{
+				require_once('../erro_tabela.php');
+			}
+			
+			$conexao->fecharConexao();
 		}
 		
 	
@@ -121,7 +135,7 @@
 			if($stm->rowCount() != 0){
 				echo('Promoção excluída com sucesso!!');
 			}else{
-				echo('Ocorreu um erro ao excluir a promoção');
+				echo('erro');
 			}
 			
 			//fechando a conexão
@@ -147,6 +161,29 @@
 			
 			//executando o statement
 			$stm->execute();
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+		
+		public function checkPromocao(){
+			//instância da classe que conecta com o banco de dados
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco;
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que realiza a consulta
+			$stm = $PDO_conexao->prepare('SELECT idPromocao FROM promocao');
+			
+			//execução do statement
+			$stm->execute();
+			
+			//armazenando o número de linhas retornadas
+			$linhas = $stm->rowCount();
+			
+			//retornando
+			return $linhas;
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

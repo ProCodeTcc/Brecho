@@ -1,9 +1,20 @@
 <?php 
     session_start();
     $usuario = $_SESSION['usuario'];
+	$idNivel = $_SESSION['nivel'];
+	$idPagina = 10;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -84,8 +95,14 @@
 					url: url+'router.php', //url onde será enviada a requisição
 					data: {id:idItem, controller: 'produto', modo: 'excluir'}, //dados enviados
 					success: function(dados){
-						alert(dados); //mensagem de sucesso
-						listar(); //recarregando os dados
+						if(dados == 'limite'){
+							alert('Não foi possível realizar a exclusão!! Deve haver ao menos um produto ativo');
+						}else if(dados == 'erro'){
+							alert('Ocorreu um erro ao excluir o produto');
+						}else{
+							alert(dados); //mensagem de sucesso
+							listar(); //recarregando os dados
+						}
 					}
 				});
 			}
@@ -192,19 +209,6 @@
 
             </div>
 
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
-            </div>
         </div>
 
         <footer>

@@ -219,9 +219,10 @@
 						
 					case 'excluir':
 						$id = $_POST['id'];
+						$layout = $_POST['layout'];
 						
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->excluirLayout($id);
+						$controllerSobre->excluirLayout($id, $layout);
 					break;
 						
 					case 'status':
@@ -295,6 +296,15 @@
 					
 					$controllerTema = new controllerTema();
 					$controllerTema->excluirTema($id);
+				break;
+					
+				case 'status':
+					$id = $_POST['id'];
+					$status = $_POST['status'];
+					$genero = $_POST['genero'];
+					
+					$controllerTema = new controllerTema();
+					$controllerTema->atualizarStatus($status, $id, $genero);
 				break;
 			}
 		break;
@@ -540,6 +550,46 @@
 				break;
 			}
 		break;
+		
+		case 'slider':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerSlider.php');
+			switch($modo){
+				case 'inserir':
+					$controllerSlider = new controllerSlider();
+					$controllerSlider->inserirSlider();
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerSlider = new controllerSlider();
+					$listSlider = $controllerSlider->buscarSlider($id);
+					
+					echo($listSlider);
+				break;
+					
+				case 'editar':
+					$controllerSlider = new controllerSlider();
+					$controllerSlider->atualizarSlider();
+				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					
+					$controllerSlider = new controllerSlider();
+					$controllerSlider->excluirSlider($id);
+				break;
+					
+				case 'status':
+					$status = $_POST['status'];
+					$id = $_POST['id'];
+					
+					$controllerSlider = new controllerSlider();
+					$controllerSlider->atualizarStatus($status, $id);
+				break;
+			}
+		break;
 			
 		case 'retirada':
 			$modo = $_POST['modo'];
@@ -548,6 +598,27 @@
 				case 'inserir':
 					$controllerRetirada = new controllerRetirada();
 					$controllerRetirada->inserirRetirada();
+				break;
+					
+				case 'buscar':
+					$id = $_POST['id'];
+					
+					$controllerRetirada = new controllerRetirada();
+					$listRetirada = $controllerRetirada->buscarRetirada($id);
+					
+					echo($listRetirada);
+				break;
+					
+				case 'editar':
+					$controllerRetirada = new controllerRetirada();
+					$controllerRetirada->atualizarRetirada();
+				break;
+					
+				case 'excluir':
+					$id = $_POST['id'];
+					
+					$controllerRetirada = new controllerRetirada();
+					$controllerRetirada->excluirRetirada($id);
 				break;
 					
 				case 'listarLojas':

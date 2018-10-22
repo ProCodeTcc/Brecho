@@ -1,9 +1,20 @@
 <?php 
     session_start();
     $usuario = $_SESSION['usuario'];
+	$idNivel = $_SESSION['nivel'];
+	$idPagina = 9;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
+
+	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+	require_once($diretorio.'controller/controllerNivel.php');
+	require_once($diretorio.'controller/controllerUsuario.php');
+	$controllerNivel = new controllerNivel();
+	$controllerNivel->checarPermissao($idNivel, $idPagina);
+	
+	$controllerUsuario = new controllerUsuario();
+	$controllerUsuario->checarLogin();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +22,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Análise</title>
+        <title>Avaliação</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
@@ -122,15 +133,11 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Enquetes</span>
+            <span class="page_title">Avaliação</span>
 
             <div class="page_search_container">
                 <input type="text" class="page_search">
             </div>
-
-            <button class="page_btn" onclick="Adicionar();" id="adicionar" data-modo="novo">
-                Adicionar
-            </button>
         </div>
 
         <div class="content">
@@ -161,20 +168,6 @@
 						
 					</div>
 				</div>
-            </div>
-
-            <div class="next_itens">
-                <div class="next_itens_btn" id="pages">
-                    1
-                </div>
-
-                <div class="next_itens_btn" id="pages">
-                    2
-                </div>
-                
-                <div class="next_itens_btn" id="pages">
-                    3
-                </div>
             </div>
         </div>
 

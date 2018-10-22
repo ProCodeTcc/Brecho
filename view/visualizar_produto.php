@@ -1,7 +1,16 @@
 <?php
+	session_start();
+	if(isset($_SESSION['login'])){
+		$login = 1;
+	}else{
+		$login = 0;
+	}
+
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
-		$pagina = $_GET['pagina'];
+		if(isset($_GET['pagina'])){
+			$pagina = $_GET['pagina'];
+		}
 	}else{
 		header('location: erro.php');
 	}
@@ -17,6 +26,7 @@
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery.js"></script>
+		<script src="js/funcoes.js"></script>
 		
 		<script>
 			function visualizarImagem(imagem){
@@ -31,6 +41,10 @@
 					}
 				});
 			}
+			
+			$(document).ready(function(){
+				checarLogin(<?php echo($login) ?>);
+			});
 		</script>
 		
     </head>
@@ -40,111 +54,13 @@
 			
 			</div>
 		</div>
-        <header>
-            <div class="menu_paginas">
-                <div class="menu_paginas_site">
-                    <a href="fale_conosco.php" class="link_paginas"> Fale Conosco </a>
-                    <a href="nossas_lojas.php" class="link_paginas"> Nossas Lojas </a>
-                    <a href="sobre.php" class="link_paginas"> Sobre </a>
-                
-                    <div class="pesquisa_cabecalho_icone">
-                        
-                        <img alt="#" src="icones/pesquisa.png">
-                    </div>
-                    
-                <div class="pesquisa_cabecalho">
-                    <input class="campo_pesquisa_cabecalho" type="text">
-                </div>
-                </div>
-            </div>
-            
-            <div class="menu_principal">
-                <div class="menu_principal_site">
-                    <div class="menu_lado_esquerdo">
-                        <div class="menu_responsivo">
-                        
-                        </div>
-                        <a href="../index.php">
-                            <div class="logo">
-                                <img alt="#" src="imagens/logoBrecho3.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="menu_lado_direito">
-                        <div class="login_carrinho">
-                                <div class="login">
-                                    <a  href="login.php">
-                                        <div class="icone_login">
-                                            <img alt="#" src="icones/login.png">
-                                        </div>
-                                        <div class="texto_login">
-                                            Entrar   
-                                        </div>
-                                    </a>
-                                    <div class="sub_login">
-                                        <a href="perfil.php">
-                                            <div class="texto_perfil">
-                                                Perfil   
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            <a href="carrinho.php">
-                                <div class="login">
-                                    <div class="icone_login">
-                                        <img alt="#" src="icones/carrinho.png">
-                                    </div>
-                                    <div class="texto_login">
-                                        Carrinho   
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="menu_categoria">
-                <div class="menu">
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Comum
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Alfaiataria
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Banho
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Pijamas
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Social
-                        </div>
-                    </a>
-                    <a href="promocao.php">
-                        <div class="menu_item">
-                            Promoção
-                        </div> 
-                    </a>
-                    <a href="eventos.php">
-                        <div class="menu_item">
-                            Eventos
-                        </div> 
-                    </a>
-                    
-                </div>
-            </div>
+        
+		<header>
+            <?php
+				require_once('arquivos/header.php');
+			?>
         </header>
+		
         <main>
             <div class="visualizar_produto">
 				<?php
@@ -173,10 +89,13 @@
 					}else if($pagina == 'promoção'){
 						$listProduto = new controllerPromocao();
 						$rsProduto = $listProduto->buscarProduto($id);
-					}elseif($pagina == 'categoria'){
+					}else if($pagina == 'categoria'){
                         $listProduto = new controllerProduto();
 						$rsProduto = $listProduto->buscarProduto($id);
-                    }
+                    }else if($pagina == 'sugestão'){
+						$listProduto = new controllerProduto();
+						$rsProduto = $listProduto->buscarProduto($id);
+					}
 				?>
 				
                 <div class="visualizar_produto_detalhes">
@@ -217,17 +136,23 @@
                 Veja Também
             </div>
             <div class="veja_tambem">
-               <a href="visualizar_produto.php">
+				<?php
+					$listProduto = new controllerProduto();
+					$rsProdutos = $listProduto->listarAleatorio();
+					$cont = 0;
+					while($cont < count($rsProdutos)){
+				?>
+               <a href="visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=sugestão">
                     <div class="produto_veja">
                         <div class="imagem_produto">
-                            <img alt="#" src="imagens/tenis.jpg">
+                            <img alt="#" src="../cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
                         </div>
                         <div class="descritivo_produto">
                             <div class="titulo_produto">
-                                Tênis Cano Alto Adidas Vs Set Mid Masculino
+                                <?php echo($rsProdutos[$cont]->getNome()) ?>
                             </div>
                             <div class="preco">
-                                R$ 249,99
+                                R$ <?php echo($rsProdutos[$cont]->getPreco()) ?>
                             </div>
                             <div class="opcoes">
                                 <div class="comprar_produto">
@@ -238,48 +163,11 @@
                         </div>
                     </div>
                 </a>
-                <a href="visualizar_produto.php">
-                    <div class="produto_veja">
-                        <div class="imagem_produto">
-                            <img alt="#" src="imagens/tenis.jpg">
-                        </div>
-                        <div class="descritivo_produto">
-                            <div class="titulo_produto">
-                                Tênis Cano Alto Adidas Vs Set Mid Masculino
-                            </div>
-                            <div class="preco">
-                                R$ 249,99
-                            </div>
-                            <div class="opcoes">
-                                <div class="comprar_produto">
-                                    Conferir
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="visualizar_produto.php">
-                    <div class="produto_veja">
-                        <div class="imagem_produto">
-                            <img alt="#" src="imagens/tenis.jpg">
-                        </div>
-                        <div class="descritivo_produto">
-                            <div class="titulo_produto">
-                                Tênis Cano Alto Adidas Vs Set Mid Masculino
-                            </div>
-                            <div class="preco">
-                                R$ 249,99
-                            </div>
-                            <div class="opcoes">
-                                <div class="comprar_produto">
-                                    Conferir
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </div>
-                </a>
+				
+				<?php
+				$cont++;
+					}
+				?>
             </div>
         </main>
         <footer>
