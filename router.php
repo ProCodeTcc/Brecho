@@ -60,6 +60,35 @@
 					$controllerClienteFisico = new controllerClienteFisico();
 					$controllerClienteFisico->atualizarCliente();
 				break;
+
+				case 'validarUsuario':
+					$usuario = $_POST['campo'];
+
+					$controllerClienteFisico = new controllerClienteFisico();
+					$resultado = $controllerClienteFisico->validarUsuario($usuario);
+
+					echo($resultado);
+				break;
+				
+				case 'validarEmail':
+					$email = $_POST['campo'];
+
+					$controllerClienteFisico = new controllerClienteFisico();
+
+					$resultado = $controllerClienteFisico->validarEmail($email);
+
+					echo($resultado);
+				break;
+
+				case 'validarCpf':
+					$cpf = $_POST['campo'];
+
+					$controllerClienteFisico = new controllerClienteFisico();
+
+					$resultado = $controllerClienteFisico->validarCpf($cpf);
+
+					echo($resultado);
+				break;
 			}
             
 		break;
@@ -86,6 +115,34 @@
 					$controllerClienteJuridico = new controllerClienteJuridico();
 					$controllerClienteJuridico->atualizarCliente();
 				break;
+
+				case 'validarUsuario':
+					$usuario = $_POST['campo'];
+
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$resultado = $controllerClienteJuridico->validarUsuario($usuario);
+
+					echo $resultado;
+				break;
+
+				case 'validarEmail':
+					$email = $_POST['campo'];
+
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$resultado = $controllerClienteJuridico->validarEmail($email);
+
+					echo($resultado);
+				break;
+
+				case 'validarCnpj':
+					$cnpj = $_POST['campo'];
+
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$resultado = $controllerClienteJuridico->validarCnpj($cnpj);
+
+					echo($resultado);
+				break;
+				
 			}
 		break;
 			

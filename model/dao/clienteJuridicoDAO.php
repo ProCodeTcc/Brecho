@@ -6,6 +6,13 @@
 		Objetivo: cadastro e atualização do cliente
 	*/
 
+	/*
+		Projeto: Brechó
+		Autor: Lucas Eduardo
+		Data: 23/10/2018
+		Objetivo: validação dos campos de email, cpf, e usuário
+	*/
+
 	class ClienteJuridicoDAO{
 		public function __construct(){
 			require_once('bdClass.php');
@@ -125,6 +132,96 @@
 			}else{
 				//false se der errado
 				echo false;
+			}
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que verifica o campo de usuário
+		public function checkUsuario($usuario){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que faz a consulta
+			$stm = $PDO_conexao->prepare('SELECT login FROM clientejuridico WHERE login = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $usuario);
+
+			//execução do statement
+			$stm->execute();
+
+			//retornar as linhas
+			if($stm->rowCount() != 0){
+				//retorna falso se houver usuário igual
+				echo 'false';
+			}else{
+				//retorna true se não houver
+				echo 'true';
+			}
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que valida o campo de email
+		public function checkEmail($email){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que realiza a consulta
+			$stm = $PDO_conexao->prepare('SELECT email FROM clientejuridico WHERE email = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $email);
+
+			//execução do statement
+			$stm->execute();
+
+			//verificando o retorno das linhas
+			if($stm->rowCount() != 0){
+				//retorna falso se houver usuário igual
+				echo 'false';
+			}else{
+				//retorna true se não houver
+				echo 'true';
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que valida o CNPJ
+		public function checkCnpj($cnpj){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que realiza a consulta
+			$stm = $PDO_conexao->prepare('SELECT cnpj FROM clientejuridico WHERE cnpj = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $cnpj);
+
+			//execução do statement
+			$stm->execute();
+
+			//retornando as linhas
+			if($stm->rowCount() != 0){
+				//retorna falso se houver CNPJ igual
+				echo 'false';
+			}else{
+				//retorna true se não houver
+				echo 'true';
 			}
 			
 			//fechando a conexão

@@ -1770,7 +1770,13 @@
         outline-color: darkorange;
     }
 
-
+    #erro_campo{
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 15px;
+        display: none;
+        color: red;
+    }
 
     .titulo_cadastro_usuario_meio{
         width: 300px;
