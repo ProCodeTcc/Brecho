@@ -134,6 +134,7 @@
                                 </div>
                             <a href="view/carrinho.php">
                                 <div class="login">
+                                    <div class="bolinha">0</div>
                                     <div class="icone_login">
                                         <img src="view/icones/carrinho.png" alt="#">
                                     </div>
