@@ -145,6 +145,30 @@
             
             
 		break;
+			
+			
+		case 'NossasLojas':
+			require_once('controller/controllerNossasLojas.php');
+			$modo = $_GET['modo'];
+			switch($modo){
+				case 'buscarCidade':
+					$estado = $_POST['estado'];
+					$controllerNossasLojas = new ControllerNossasLojas();
+					$listCidade = $controllerNossasLojas->listarCidades($estado);
+					
+					echo($listCidade);
+				break;
+					
+				case 'buscarLoja':
+					$cidade = $_POST['cidade'];
+					
+					$controllerNossasLojas = new ControllerNossasLojas();
+					$listLoja = $controllerNossasLojas->listarLojas($cidade);
+					
+					echo($listLoja);
+				break;
+			}
+		break;
         
     }
 ?>

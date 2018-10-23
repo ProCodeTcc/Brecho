@@ -168,7 +168,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que realiza a consulta
-			$stm = $PDO_conexao->prepare('SELECT u.*, e.* FROM nossaloja_unidade as u INNER JOIN unidade_endereco as ue ON u.idUnidade = u.idUnidade INNER JOIN endereco as e ON e.idEndereco = ue.idEndereco WHERE u.idUnidade = ?');
+			$stm = $PDO_conexao->prepare('SELECT u.*, e.* FROM nossaloja_unidade as u INNER JOIN unidade_endereco as ue ON u.idUnidade = ue.idUnidade INNER JOIN endereco as e ON e.idEndereco = ue.idEndereco WHERE u.idUnidade = ?');
 			
 			//parâmetros enviados
 			$stm->bindValue(1, $id, PDO::PARAM_INT);

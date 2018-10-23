@@ -8,10 +8,106 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery-3.2.1.min.js"></script>
 		<script src="js/funcoes.js"></script>
-		
+		<script src="js/OpenLayers.js"></script>
 		<script>
+			//função para listar os estados
+			function mostrarEstados(){
+				//consultando a API do IBGE
+				$.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados', function(dados){
+					//percorrendo os dados
+					for(var i = 0; i < dados.length; i++){
+						//colocando os dados no select
+						$('#txtestado').append(new Option(dados[i].sigla, dados[i].sigla));
+					}
+				});
+			}
+			
+			//função para mostrar as cidades de um estado
+			function mostrarCidade(){
+				var estado = $('#txtestado').val();
+				
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: '../router.php?controller=NossasLojas&modo=buscarCidade', //url onde será enviada a requisição
+					data: {estado:estado}, //dados enviados
+					success: function(dados){
+						//verifica se há alguma cidade
+						if(dados == 'false'){
+							//se não houver, limpa o select
+							$('#txtcidade').empty();
+							
+							//mostra mensagem de erro
+							$('#txtcidade').append(new Option("nenhuma loja disponível", 'a'));
+						}else{
+							//se houver, converte os dados para JSON
+							json = JSON.parse(dados);
+							
+							//limpa o select
+							$('#txtcidade').empty();
+							
+							//mostra a cidade
+							$('#txtcidade').append(new Option(json.cidade));
+							
+							//mostra as lojas
+							mostrarLojas();
+						}
+					}
+				});
+			}
+			
+			//função para mostrar as lojas
+			function mostrarLojas(){
+				//pegando a cidade selecionada
+				var cidade = $('#txtcidade option:selected').val();
+				
+				$.ajax({
+					type: 'POST', //tipo de requisição
+					url: '../router.php?controller=NossasLojas&modo=buscarLoja', //url onde será enviada a requisição
+					data: {cidade: cidade}, //dados enviados
+					success: function(dados){
+						//conversão dos dados para JSON
+						json = JSON.parse(dados);
+						
+						//iniciando a variável
+						var lojas = "";
+						
+						//percorrendo os dados
+						for(var i = 0; i < json.length; i++){
+							//criando o conteúdo a ser exibido
+							lojas += '<div class="linha_loja">';
+							lojas += json[i].logradouro+', '+json[i].numero+' - '+json[i].bairro+', '+json[i].cidade+' - '+json[i].estado+', '+json[i].cep+'<img src=icones/pesquisa.png class=pesquisa onClick=mostrarMapa('+json[i].latitude+','+json[i].longitude+')>';
+							lojas += '</div>';
+							
+							//exibindo as lojas na div
+							$('.resultado_loja').html(lojas);
+							
+						}
+					}
+				});
+			}
+			
+			function mostrarMapa(longitude, latitude){
+				$('#mapa').empty();
+				map = new OpenLayers.Map("mapa");
+				var mapnik         = new OpenLayers.Layer.OSM();
+				var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+				var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+				var position       = new OpenLayers.LonLat(longitude, latitude).transform( fromProjection, toProjection);
+				var zoom           = 15; 
+
+				map.addLayer(mapnik);
+				map.setCenter(position, zoom );
+			}
+			
+			
 			$(document).ready(function(){
 				checarLogin(<?php echo($login) ?>);
+				
+				//mostra os estados
+				mostrarEstados();
+				
+				//mostra mapa genérico ao abrir a página
+				mostrarMapa('-46.6333094','-23.5505199');
 			});
 		</script>
 		
@@ -37,39 +133,23 @@
                         Encontre as lojas mais próximas
                     </div>
                     <div class="campos_loja">
-                        <select class="select_uf_lojas">
-                            <option>SP</option>
+                        <select class="select_uf_lojas" id="txtestado" onChange="mostrarCidade()">
+                            
                         </select>
-                        <select class="select_cidade_lojas">
-                            <option>BARUERI</option>
+                        <select class="select_cidade_lojas" id="txtcidade">
+                            <option>selecione um estado</option>
                         </select>
                     </div>
                     <div class="resultado_loja">
-                        <div class="linha_loja">
+<!--
+                        <div class="linha_loja" id="lojas">
                             Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
                         </div>
-                        <div class="linha_loja">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
-                        <div class="linha_loja">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
-                        <div class="linha_loja">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
-                        <div class="linha_loja">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
-                        <div class="linha_loja">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
-                        <div class="linha_loja">
-                            Rua Elton Silva, 905 - Centro, Jandira - SP, 06600-025
-                        </div>
+-->
                     </div>
                 </div>
-                <div class="mapa_loja">
-                    <img alt="#" src="imagens/mapa.PNG">
+                <div class="mapa_loja" id="mapa">
+                    
                 </div>
             </div>
         </main>

@@ -930,7 +930,7 @@
     }
 
     .pesquisa_loja{
-        width: 40%;
+        width: 41%;
         min-height: 500px;
         border-left: solid 2px #cccccc;
         border-right: solid 2px #cccccc;
@@ -939,7 +939,7 @@
     }
 
     .mapa_loja{
-        width: 750px;
+        width: 720px;
         height: 450px;
         float: right;
         border: solid 2px #cccccc;

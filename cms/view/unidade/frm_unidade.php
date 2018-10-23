@@ -27,6 +27,8 @@
 				$('#txtestado').val(json.estado);
 				$('#txtnumero').val(json.numero);
 				$('#txtlogradouro').val(json.logradouro);
+				$('#txtlat').val(json.latitude);
+				$('#txtlong').val(json.longitude);
 				
 				//armazenando o ID do endereço num data-atributo do formulário
 				$('#frmUnidade').data('idEndereco', json.idEndereco);
@@ -63,6 +65,8 @@
 				$('#txtbairro').val(dados.bairro);
 				$('#txtcidade').val(dados.localidade);
 				$('#txtestado').val(dados.uf);
+				
+				getLatLon(dados.logradouro);
 			});
 		});
 		
@@ -153,6 +157,14 @@
 
 						<input type="text" class="cadastro_input" name="txtestado" id="txtestado">
 					</div>
+					
+					<div class="form_linha">
+						<label>
+							Latitude:
+						</label>
+						
+						<input type="text" class="cadastro_input" name="txtlat" id="txtlat" readonly="readonly">
+					</div>
 				</div>
 
 				<div class="unidade_col2">
@@ -204,6 +216,14 @@
 						</label>
 
 						<input type="number" class="cadastro_input" name="txtnumero" id="txtnumero">
+					</div>
+					
+					<div class="form_linha">
+						<label>
+							Longitude:
+						</label>
+						
+						<input type="text" class="cadastro_input" name="txtlong" id="txtlong" readonly="readonly">
 					</div>
 				</div>
 		</div>
