@@ -203,6 +203,34 @@
             
 		break;
 			
+		case 'produto':
+			require_once('controller/controllerProduto.php');
+			$modo = $_GET['modo'];
+			switch($modo){
+				case 'adicionarCarrinho':
+					$id = $_POST['id'];
+
+					$controllerProduto = new controllerProduto();
+					$listProduto = $controllerProduto->adicionarCarrinho($id);
+
+					echo($listProduto);
+				break;
+
+				case 'listarProdutos':
+					$controllerProduto = new controllerProduto();
+					$listProduto = $controllerProduto->listarProdutosCarrinho();
+
+					return $listProduto;
+				break;
+
+				case 'removerItem':
+					$id = $_POST['id'];
+
+					$controllerProduto = new controllerProduto();
+					$controllerProduto->removerItemCarrinho($id);
+				break;
+			}
+		break;
 			
 		case 'NossasLojas':
 			require_once('controller/controllerNossasLojas.php');
