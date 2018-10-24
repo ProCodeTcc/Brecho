@@ -17,3 +17,26 @@ function logout(){
 		}
 	});
 }
+
+function checkDados(controller, campo, input){
+	txtvalor = $(input).val();
+	
+	$.ajax({
+		type: 'POST',
+		url: '../router.php?controller='+controller+'&modo=validar'+campo,
+		data: {campo:txtvalor},
+		success: function(dados){
+			if(dados == 'false'){
+				lowCampo = campo.toLowerCase();
+				$(input).css('border', '1px solid red');
+				$('#erro_campo').show();
+				$('#erro_campo').html('O '+lowCampo+' '+txtvalor+' já está cadastrado!!');
+				$(input).val('');
+			}else{
+				$('#erro_campo').empty();
+				$('#erro_campo').hide();
+				$(input).css('border', '1px solid lightgray');
+			}
+		}
+	});
+}

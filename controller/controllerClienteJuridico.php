@@ -112,5 +112,41 @@
 			
 			return $listCliente;
 		}
+
+		//função que valida o email
+		public function validarUsuario($usuario){
+			//instância da classe CLienteJuridicoDAO
+			$clienteDAO = new ClienteJuridicoDAO();
+
+			//armazenando os dados em uma variável
+			$resultado = $clienteDAO->checkUsuario($usuario);
+
+			//retornando os dados
+			return $resultado;
+		}
+
+		//função que valida o email
+		public function validarEmail($email){
+			//instância da classe CLienteJuridicoDAO
+			$clienteDAO = new ClienteJuridicoDAO();
+
+			//armazenando os dados em uma variável
+			$resultado = $clienteDAO->checkEmail($email);
+
+			//retornando os dados
+			return $resultado;
+		}
+
+		//função que valida o CNPJ
+		public function validarCnpj($cnpj){
+			//instância da classe CLienteJuridicoDAO
+			$clienteDAO = new ClienteJuridicoDAO();
+			
+			//armazenando os dados em uma variável
+			$resultado = $clienteDAO->checkCnpj($cnpj);
+
+			//retornando os dados
+			return $resultado;
+		}
 	}
 ?>

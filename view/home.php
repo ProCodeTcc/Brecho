@@ -10,6 +10,12 @@
 		$usuario = 'Entrar';
 	}
 
+    if(isset($_SESSION['carrinho'])){
+        $qtdItems = count($_SESSION['carrinho']);
+        // echo($qtdItems);
+    }else{
+        $qtdItems = 0;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +48,25 @@
 					}
 				});
 			}
+
+            //função para adicionar um item ao carrinho
+            function adicionarCarrinho(id){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: 'router.php?controller=produto&modo=adicionarCarrinho', //url onde será enviada a requisição
+                    data: {id:id}, //parâmetros enviados
+                    success: function(dados){
+                        //verifica se o item já existe
+                        if(dados == 'existe'){
+                            //se existir, manda uma mensagem de erro
+                            alert('Esse item já foi adicionado ao carrinho!!');
+                        }else{
+                            //se não, adiciona o item ao carrinho
+                            $('#carrinho').html(dados);
+                        }
+                    }
+                });
+            }
 			
 			$(document).ready(function(){
 				checarLogin();
@@ -55,6 +80,10 @@
 						next: '#next',
 					   });
 				});
+
+                $('.carrinho').click(function(e){
+                    e.preventDefault();
+                });
 				
 				$('.enquete_pesquisa').on('submit', function(e){
 					e.preventDefault(); //desativando o submit do formulário
@@ -134,6 +163,7 @@
                                 </div>
                             <a href="view/carrinho.php">
                                 <div class="login">
+                                    <div class="bolinha" id="carrinho"><?php echo($qtdItems) ?></div>
                                     <div class="icone_login">
                                         <img src="view/icones/carrinho.png" alt="#">
                                     </div>
@@ -254,7 +284,7 @@
                                         <div class="comprar_produto">
                                             Conferir
                                         </div>
-                                    <div class="carrinho_produto">
+                                    <div class="carrinho_produto carrinho" onClick="adicionarCarrinho(<?php echo($rsProdutos[$cont]->getId()) ?>)">
                                         <img alt="#" src="view/icones/carrinho.png">
                                     </div>
                                 </div>

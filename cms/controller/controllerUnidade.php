@@ -27,6 +27,8 @@
 				$estado = $_POST['txtestado'];
 				$numero = $_POST['txtnumero'];
 				$loja = $_POST['txtloja'];
+				$latitude = $_POST['txtlat'];
+				$longitude = $_POST['txtlong'];
 			}
 			
 			//instância da classe Unidade
@@ -46,6 +48,8 @@
 			$enderecoClass->setCidade($cidade);
 			$enderecoClass->setEstado($estado);
 			$enderecoClass->setNumero($numero);
+			$enderecoClass->setLatitude($latitude);
+			$enderecoClass->setLongitude($longitude);
 			
 			//instância da classe unidadeDAO
 			$unidadeDAO = new UnidadeDAO();

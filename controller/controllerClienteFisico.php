@@ -8,6 +8,14 @@
         
     */
 
+    /*
+        Projeto: Brechó
+        Autor:  Lucas Eduardo
+        Data: 23/10/2018
+        Objetivo: validação de usuário, email e cpf
+        
+    */
+
     class controllerClienteFisico{
         public function __construct(){
             $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
@@ -140,12 +148,54 @@
            	$clienteFisicoDAO->Update($clienteFisicoClass);
 			$enderecoDAO->Update($enderecoClass);
 		}
-		
+        
+        //função que lista os dados do cliente
 		public function listarCliente($id){
-			$clienteFisicoDAO = new ClienteFisicoDAO();
-			$listCliente = $clienteFisicoDAO->selectByID($id);
+            //instância da classe ClienteFisicoDAO
+            $clienteFisicoDAO = new ClienteFisicoDAO();
+            
+            //armazenando os dados em uma variável
+            $listCliente = $clienteFisicoDAO->selectByID($id);
+            
+            //retornando os dados
 			return $listCliente;
-		}
+        }
+        
+        //função para validar o usuario
+        public function validarUsuario($usuario){
+            //instância da classe ClienteFisicoDAO
+            $clienteFisicoDAO = new ClienteFisicoDAO();
+
+            //armazenando os dados em uma variável
+            $resultado = $clienteFisicoDAO->checkUsuario($usuario);
+
+            //retornando os dados
+            return $resultado;
+        }
+
+        //função para validar o email
+        public function validarEmail($email){
+            //instância da classe ClienteFisicoDAO
+            $clienteFisicoDAO = new ClienteFisicoDAO();
+
+            //armazenando os dados em uma variável
+            $resultado = $clienteFisicoDAO->checkEmail($email);
+
+            //retornando os dados
+            return $resultado;
+        }
+
+        //função para validar o CPF
+        public function validarCpf($cpf){
+            //instância da classe ClienteFisicoDAO
+            $clienteFisicoDAO = new ClienteFisicoDAO();
+
+            //armazenando os dados em uma variável
+            $resultado = $clienteFisicoDAO->checkCpf($cpf);
+
+            //retornando os dados
+            return $resultado;
+        }
     
     }
 

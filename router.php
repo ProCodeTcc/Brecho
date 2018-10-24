@@ -60,6 +60,35 @@
 					$controllerClienteFisico = new controllerClienteFisico();
 					$controllerClienteFisico->atualizarCliente();
 				break;
+
+				case 'validarUsuario':
+					$usuario = $_POST['campo'];
+
+					$controllerClienteFisico = new controllerClienteFisico();
+					$resultado = $controllerClienteFisico->validarUsuario($usuario);
+
+					echo($resultado);
+				break;
+				
+				case 'validarEmail':
+					$email = $_POST['campo'];
+
+					$controllerClienteFisico = new controllerClienteFisico();
+
+					$resultado = $controllerClienteFisico->validarEmail($email);
+
+					echo($resultado);
+				break;
+
+				case 'validarCpf':
+					$cpf = $_POST['campo'];
+
+					$controllerClienteFisico = new controllerClienteFisico();
+
+					$resultado = $controllerClienteFisico->validarCpf($cpf);
+
+					echo($resultado);
+				break;
 			}
             
 		break;
@@ -86,6 +115,34 @@
 					$controllerClienteJuridico = new controllerClienteJuridico();
 					$controllerClienteJuridico->atualizarCliente();
 				break;
+
+				case 'validarUsuario':
+					$usuario = $_POST['campo'];
+
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$resultado = $controllerClienteJuridico->validarUsuario($usuario);
+
+					echo $resultado;
+				break;
+
+				case 'validarEmail':
+					$email = $_POST['campo'];
+
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$resultado = $controllerClienteJuridico->validarEmail($email);
+
+					echo($resultado);
+				break;
+
+				case 'validarCnpj':
+					$cnpj = $_POST['campo'];
+
+					$controllerClienteJuridico = new controllerClienteJuridico();
+					$resultado = $controllerClienteJuridico->validarCnpj($cnpj);
+
+					echo($resultado);
+				break;
+				
 			}
 		break;
 			
@@ -144,6 +201,58 @@
 			}
             
             
+		break;
+			
+		case 'produto':
+			require_once('controller/controllerProduto.php');
+			$modo = $_GET['modo'];
+			switch($modo){
+				case 'adicionarCarrinho':
+					$id = $_POST['id'];
+
+					$controllerProduto = new controllerProduto();
+					$listProduto = $controllerProduto->adicionarCarrinho($id);
+
+					echo($listProduto);
+				break;
+
+				case 'listarProdutos':
+					$controllerProduto = new controllerProduto();
+					$listProduto = $controllerProduto->listarProdutosCarrinho();
+
+					return $listProduto;
+				break;
+
+				case 'removerItem':
+					$id = $_POST['id'];
+
+					$controllerProduto = new controllerProduto();
+					$controllerProduto->removerItemCarrinho($id);
+				break;
+			}
+		break;
+			
+		case 'NossasLojas':
+			require_once('controller/controllerNossasLojas.php');
+			$modo = $_GET['modo'];
+			switch($modo){
+				case 'buscarCidade':
+					$estado = $_POST['estado'];
+					$controllerNossasLojas = new ControllerNossasLojas();
+					$listCidade = $controllerNossasLojas->listarCidades($estado);
+					
+					echo($listCidade);
+				break;
+					
+				case 'buscarLoja':
+					$cidade = $_POST['cidade'];
+					
+					$controllerNossasLojas = new ControllerNossasLojas();
+					$listLoja = $controllerNossasLojas->listarLojas($cidade);
+					
+					echo($listLoja);
+				break;
+			}
 		break;
         
     }

@@ -134,5 +134,77 @@
 			//retornando os dados
 			return $listProduto;
 		}
+
+		//função para adicionar os itens no carrinho
+		public function adicionarCarrinho($id){
+			//inicia a sessão
+			session_start();
+
+			//verifica se a sessão já existe
+			if(!isset($_SESSION['carrinho'])){
+				//se não, cria a sessão
+				$_SESSION['carrinho'] = array();
+			}
+
+			//verifica se o item já existe no carrinho
+			if(array_key_exists($id, $_SESSION['carrinho'])){
+				//se existe, retorna a mensagem
+				echo('existe');
+			}else{
+				//se não, adiciona o item ao carrinho
+				$_SESSION['carrinho'][$id] = 1;
+	
+				//armazenando o total de itens no carrinho
+				$total = count($_SESSION['carrinho']);
+
+				//retornando o total
+				return $total;
+			}
+		}
+
+		//função para listar os produtos do carrinho
+		public function listarProdutosCarrinho(){
+			//instância da classe ProdutoDAO();
+			$produtoDAO = new ProdutoDAO();
+
+			//verifica se existe a sessão
+			if(isset($_SESSION['carrinho'])){
+				//cria uma array
+				$ids = array();
+
+				//precorrendo o ID dos produtos
+				foreach($_SESSION['carrinho'] as $id => $valor){
+					//armazenando os valores num array de IDs
+					$id = array_push($ids, $id);
+				}
+
+				//armazenando os produtos em uma variável
+				$listProduto = $produtoDAO->selectCartItens($ids);
+
+				//retornando os produtos
+				return $listProduto;
+			}
+		}
+
+		//função para remover itens do carrinho
+		public function removerItemCarrinho($id){
+			//verifica se a sessão já existe
+			if(session_id() == ''){
+				//se não existir, inicia ela
+				session_start();
+
+				//verifica se o ID do produto está no carrinho
+				if(isset($_SESSION['carrinho'][$id])){
+					//se estiver, armazena em uma variável o total de itens
+					$item = count($_SESSION['carrinho'][$id]);
+					
+					//se for diferente de 0
+					if($item != 0){
+						//remove o item
+						unset($_SESSION['carrinho'][$id]);
+					}
+				}
+			}
+		}
 	}
 ?>

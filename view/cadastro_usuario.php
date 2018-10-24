@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="caixa_cadastro_usuario">
-					
+					<div id="erro_campo"></div>
 					<div class="escolha_cliente">
 						<div class="linha_cadastro_usuario">
 							<label>
@@ -136,7 +136,7 @@
 								E-mail*
 							</div>
 							<div class="linha_cadastro_usuario">
-								<input class="campo_cadastro_usuario" type="email" name="txtEmail" required>
+								<input class="campo_cadastro_usuario" type="email" onBlur="checkDados('ClienteFisico', 'Email', this)" name="txtEmail" required>
 							</div>
 
 							<div class="titulo_cadastro_usuario_meio">
@@ -147,7 +147,7 @@
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input class="campo_cadastro_usuario_meio" type="text" name="txtUsuario" required>
+								<input class="campo_cadastro_usuario_meio" type="text" name="txtUsuario" onBlur="checkDados('ClienteFisico', 'Usuario', this)" required>
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
@@ -165,7 +165,7 @@
 								<input class="campo_cadastro_usuario_meio" type="date" name="txtDataNasc" required>
 							</div>
 							<div class="linha_cadastro_usuario_meio">
-								<input id="txt_cpf" class="campo_cadastro_usuario_meio" type="text" name="txtCpf"required onkeypress="return validar(event,'caracter')">
+								<input id="txt_cpf" class="campo_cadastro_usuario_meio" type="text" onBlur="checkDados('ClienteFisico', 'Cpf', this)" name="txtCpf"required onkeypress="return validar(event,'caracter')">
 								<script type="text/javascript">$("#txt_cpf").mask("000.000.000-00");</script>
 							</div>
 

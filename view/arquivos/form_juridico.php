@@ -15,6 +15,7 @@
 		});
 </script>
 
+<div id="erro_campo"></div>
 <form method="POST" action="../router.php?controller=ClienteJuridico&modo=cadastrar" id="juridico">
 	<div class="titulo_cadastro_usuario">
 		Razão Social*
@@ -29,7 +30,7 @@
 		E-mail*
 	</div>
 	<div class="linha_cadastro_usuario">
-		<input class="campo_cadastro_usuario" type="email" name="txtEmail" required>
+		<input class="campo_cadastro_usuario" type="email" name="txtEmail" onBlur="checkDados('ClienteJuridico', 'Email', this)" required>
 	</div>
 
 	<div class="titulo_cadastro_usuario_meio">
@@ -40,7 +41,7 @@
 	</div>
 
 	<div class="linha_cadastro_usuario_meio">
-		<input class="campo_cadastro_usuario_meio" type="text" name="txtUsuario" required>
+		<input class="campo_cadastro_usuario_meio" type="text" name="txtUsuario" onBlur="checkDados('ClienteJuridico', 'Usuario', this)" required>
 	</div>
 
 	<div class="linha_cadastro_usuario_meio">
@@ -68,7 +69,7 @@
 		CNPJ*
 	</div>
 	 <div class="linha_cadastro_usuario">
-		<input id="txt_cnpj" class="campo_cadastro_usuario" type="text" name="txtCnpj"required onkeypress="return validar(event,'caracter')">
+		<input id="txt_cnpj" class="campo_cadastro_usuario" type="text" name="txtCnpj"required onBlur="checkDados('ClienteJuridico', 'Cnpj', this)" onkeypress="return validar(event,'caracter')">
 		<script type="text/javascript">$("#txt_cnpj").mask("00.000.000/0000-00");</script>
 	</div>
 

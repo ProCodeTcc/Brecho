@@ -1,5 +1,13 @@
 <?php
-	require_once('arquivos/check_login.php');
+    require_once('arquivos/check_login.php');
+    
+    $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+
+    require_once($diretorio.'controller/controllerProduto.php');
+
+    $listProdutos = new controllerProduto();
+    $rsProdutos = $listProdutos->listarProdutosCarrinho();
+    
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +20,20 @@
 		<script>
 			$(document).ready(function(){
 				checarLogin(<?php echo($login) ?>);
-			});
+            });
+            
+            //função para remover o item do carrinho
+            function removerItem(id){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: '../router.php?controller=produto&modo=removerItem', //url onde será enviada a requisição
+                    data: {id:id}, //parâmetros enviados
+                    success: function(dados){
+                        //removendo o item do HTML
+                        $('#remover').parent().remove();
+                    }
+                });
+            }
 		</script>
 		
 		<?php
@@ -38,135 +59,41 @@
                        
                         <div class="itens_carrinho">
 
+                            <?php
+                                $cont = 0;
+                                $total = 0;
+                                while($cont < count($rsProdutos)){
+                                $total += $rsProdutos[$cont]->getPreco();
+                            ?>
+
                             <div class="produto_carrinho">
+                                <img src="icones/fechar.png" id="remover" onClick="removerItem(<?php echo($rsProdutos[$cont]->getId()) ?>)">
                                 <div class="foto_carrinho">
-                                    <img alt="#"  src="imagens/blusa.jpg">
+                                    <img alt="#"  src="../cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
                                 </div>
                                 <div class="informacao_carrinho">
                                     <div class="informacao_carrinho">
                                         <div class="informacao_linha">
-                                            Produto: Blusa Masculina Dixie Tricot Gola V
+                                            Produto: <?php echo($rsProdutos[$cont]->getNome()) ?>
                                         </div>
                                         <div class="informacao_linha">
-                                            Tamanho: [M]
+                                            Tamanho: <?php echo($rsProdutos[$cont]->getTamanho()) ?>
                                         </div>
                                         <div class="informacao_linha">
-                                            Cor: Vermelha
+                                            Cor: <?php echo($rsProdutos[$cont]->getCor()) ?>
                                         </div>
                                         <div class="informacao_linha">
-                                            R$ 129,90
+                                            R$ <?php echo($rsProdutos[$cont]->getPreco()) ?>
                                         </div>
                                     </div> 
                                 </div>
                             </div>
-                            <div class="produto_carrinho">
-                                <div class="foto_carrinho">
-                                    <img alt="#"  src="imagens/blusa.jpg">
-                                </div>
-                                <div class="informacao_carrinho">
-                                    <div class="informacao_carrinho">
-                                        <div class="informacao_linha">
-                                            Produto: Blusa Masculina Dixie Tricot Gola V
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Tamanho: [M]
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Cor: Vermelha
-                                        </div>
-                                        <div class="informacao_linha">
-                                            R$ 129,90
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                            <div class="produto_carrinho">
-                                <div class="foto_carrinho">
-                                    <img alt="#"  src="imagens/blusa.jpg">
-                                </div>
-                                <div class="informacao_carrinho">
-                                    <div class="informacao_carrinho">
-                                        <div class="informacao_linha">
-                                            Produto: Blusa Masculina Dixie Tricot Gola V
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Tamanho: [M]
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Cor: Vermelha
-                                        </div>
-                                        <div class="informacao_linha">
-                                            R$ 129,90
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="produto_carrinho">
-                                <div class="foto_carrinho">
-                                    <img alt="#"  src="imagens/blusa.jpg">
-                                </div>
-                                <div class="informacao_carrinho">
-                                    <div class="informacao_carrinho">
-                                        <div class="informacao_linha">
-                                            Produto: Blusa Masculina Dixie Tricot Gola V
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Tamanho: [M]
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Cor: Vermelha
-                                        </div>
-                                        <div class="informacao_linha">
-                                            R$ 129,90
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="produto_carrinho">
-                                <div class="foto_carrinho">
-                                    <img alt="#"  src="imagens/blusa.jpg">
-                                </div>
-                                <div class="informacao_carrinho">
-                                    <div class="informacao_carrinho">
-                                        <div class="informacao_linha">
-                                            Produto: Blusa Masculina Dixie Tricot Gola V
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Tamanho: [M]
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Cor: Vermelha
-                                        </div>
-                                        <div class="informacao_linha">
-                                            R$ 129,90
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="produto_carrinho">
-                                <div class="foto_carrinho">
-                                    <img alt="#"  src="imagens/blusa.jpg">
-                                </div>
-                                <div class="informacao_carrinho">
-                                    <div class="informacao_carrinho">
-                                        <div class="informacao_linha">
-                                            Produto: Blusa Masculina Dixie Tricot Gola V
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Tamanho: [M]
-                                        </div>
-                                        <div class="informacao_linha">
-                                            Cor: Vermelha
-                                        </div>
-                                        <div class="informacao_linha">
-                                            R$ 129,90
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>  
+
+                        <?php
+                            $cont++;
+                            }
+                        ?> 
+
                         </div> 
                     </div>
                     <div class="caixa_total_carrinho">
@@ -174,7 +101,7 @@
                             Total
                         </div> 
                         <div class="linha_valor_total">
-                            R$ 300,00
+                            R$ <?php echo($total) ?>
                         </div>
                         <div class="linha_botao_comprar_carrinho">
                             <form action="dados_pagamento.php">
