@@ -1344,6 +1344,11 @@
 		margin-right: 5px;
 		cursor: pointer;
 		font-size: 12px;
+        padding-top: 8px;
+	}
+    
+    .tamanhos:hover{
+		background-color: darkorange;
 	}
 
     .categoria_pesquisa{

@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         <div class="categoria">
-                            <div class="titulo_categoria">
+                            <div class="titulo_categoria_primeiro">
                                 Classificação
                             </div>
                             <div class="categoria_linha filtrar" onClick="filtrarClassificacao('A')">

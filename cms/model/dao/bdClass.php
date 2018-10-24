@@ -6,7 +6,7 @@
         private $databaseName;
 
         public function __construct(){
-            $this->server = 'localhost';
+            $this->server = '10.107.144.27';
             $this->user = 'root';
             $this->password = 'bcd127';
             $this->databaseName = 'brecho';
