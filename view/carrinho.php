@@ -2,11 +2,6 @@
     require_once('arquivos/check_login.php');
     
     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-
-    require_once($diretorio.'controller/controllerProduto.php');
-
-    $listProdutos = new controllerProduto();
-    $rsProdutos = $listProdutos->listarProdutosCarrinho();
     
 ?>
 
@@ -30,7 +25,10 @@
                     data: {id:id}, //parâmetros enviados
                     success: function(dados){
                         //removendo o item do HTML
-                        $('#remover').parent().remove();
+                        $('#item'+id).parent().remove();
+                        
+                        //atualizando o valor
+                        $('#total').html('R$ '+dados);
                     }
                 });
             }
@@ -61,29 +59,27 @@
 
                             <?php
                                 $cont = 0;
-                                $total = 0;
-                                while($cont < count($rsProdutos)){
-                                $total += $rsProdutos[$cont]->getPreco();
+                                foreach($_SESSION['carrinho'] as $produtos){
                             ?>
 
                             <div class="produto_carrinho">
-                                <img src="icones/fechar.png" id="remover" onClick="removerItem(<?php echo($rsProdutos[$cont]->getId()) ?>)">
+                                <img src="icones/fechar.png" id="item<?php echo($produtos['id']) ?>" onClick="removerItem(<?php echo($produtos['id']) ?>)">
                                 <div class="foto_carrinho">
-                                    <img alt="#"  src="../cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
+                                    <img alt="#"  src="../cms/view/arquivos/<?php echo($produtos['imagem']) ?>">
                                 </div>
                                 <div class="informacao_carrinho">
                                     <div class="informacao_carrinho">
                                         <div class="informacao_linha">
-                                            Produto: <?php echo($rsProdutos[$cont]->getNome()) ?>
+                                            Produto: <?php echo($produtos['nome']) ?>
                                         </div>
                                         <div class="informacao_linha">
-                                            Tamanho: <?php echo($rsProdutos[$cont]->getTamanho()) ?>
+                                            Tamanho: <?php echo($produtos['tamanho']) ?>
                                         </div>
                                         <div class="informacao_linha">
-                                            Cor: <?php echo($rsProdutos[$cont]->getCor()) ?>
+                                            Cor: <?php echo($produtos['cor']) ?>
                                         </div>
                                         <div class="informacao_linha">
-                                            R$ <?php echo($rsProdutos[$cont]->getPreco()) ?>
+                                            R$ <?php echo($produtos['preco']) ?>
                                         </div>
                                     </div> 
                                 </div>
@@ -100,8 +96,8 @@
                         <div class="linha_titilo_total">
                             Total
                         </div> 
-                        <div class="linha_valor_total">
-                            R$ <?php echo($total) ?>
+                        <div class="linha_valor_total" id="total">
+                            R$ <?php echo($_SESSION['total']) ?>
                         </div>
                         <div class="linha_botao_comprar_carrinho">
                             <form action="dados_pagamento.php">

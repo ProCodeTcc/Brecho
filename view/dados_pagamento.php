@@ -1,3 +1,7 @@
+<?php
+    require_once('arquivos/check_login.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -80,46 +84,24 @@
                                 Valor
                             </div>
                         </div>
+
+                        <?php
+                            foreach($_SESSION['carrinho'] as $produtos){                  
+                        ?>
                         <div class="linha_item_produtos">
                             <div class="coluna_tabela_produto_maior">
-                                Blusa Masculina Dixie Tricot Gola V
+                                <?php echo($produtos['nome']) ?>
                             </div>
                             <div class="coluna_tabela_produto_menor">
-                                R$: 129,90
+                                <?php
+                                    $total = $_SESSION['total'];
+                                    echo('R$'.number_format($total, 2, ',', '.'));
+                                ?>
                             </div>
                         </div>
-                        <div class="linha_item_produtos">
-                            <div class="coluna_tabela_produto_maior">
-                                Blusa Masculina Dixie Tricot Gola V
-                            </div>
-                            <div class="coluna_tabela_produto_menor">
-                                R$: 129,90
-                            </div>
-                        </div>
-                        <div class="linha_item_produtos">
-                            <div class="coluna_tabela_produto_maior">
-                                Blusa Masculina Dixie Tricot Gola V
-                            </div>
-                            <div class="coluna_tabela_produto_menor">
-                                R$: 129,90
-                            </div>
-                        </div>
-                        <div class="linha_item_produtos">
-                            <div class="coluna_tabela_produto_maior">
-                                Blusa Masculina Dixie Tricot Gola V
-                            </div>
-                            <div class="coluna_tabela_produto_menor">
-                                R$: 129,90
-                            </div>
-                        </div>
-                        <div class="linha_item_produtos">
-                            <div class="coluna_tabela_produto_maior">
-                                Blusa Masculina Dixie Tricot Gola V
-                            </div>
-                            <div class="coluna_tabela_produto_menor">
-                                R$: 129,90
-                            </div>
-                        </div>
+                    <?php
+                        }
+                    ?>
                     </div>
                     <div class="linha_botao_dados">
                         <form action="pedido_finalizado.php">

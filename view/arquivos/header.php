@@ -4,6 +4,8 @@
 	}else{
 		$usuario = 'Entrar';
 	}
+
+	require_once('check_carrinho.php');
 ?>
 
 <div class="menu_paginas">
@@ -60,6 +62,7 @@
 					</div>
 				<a href="../view/carrinho.php">
 					<div class="login">
+						<div class="bolinha" id="carrinho"><?php echo($qtdItems) ?></div>
 						<div class="icone_login">
 							<img src="../view/icones/carrinho.png" alt="#">
 						</div>

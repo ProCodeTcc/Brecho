@@ -84,6 +84,7 @@
 			$listProduto = new Produto();
 			
 			//adicionando os dados do produto
+			$listProduto->setId($rsProduto->idProduto);
 			$listProduto->setNome($rsProduto->nome);
 			$listProduto->setPreco($rsProduto->preco);
 			$listProduto->setCor($rsProduto->cor);

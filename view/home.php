@@ -10,12 +10,7 @@
 		$usuario = 'Entrar';
 	}
 
-    if(isset($_SESSION['carrinho'])){
-        $qtdItems = count($_SESSION['carrinho']);
-        // echo($qtdItems);
-    }else{
-        $qtdItems = 0;
-    }
+    require_once('arquivos/check_carrinho.php');
 ?>
 
 <!DOCTYPE html>

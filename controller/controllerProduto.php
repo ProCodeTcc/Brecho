@@ -140,23 +140,30 @@
 			//inicia a sessão
 			session_start();
 
-			//verifica se a sessão já existe
-			if(!isset($_SESSION['carrinho'])){
-				//se não, cria a sessão
-				$_SESSION['carrinho'] = array();
-			}
-
 			//verifica se o item já existe no carrinho
 			if(array_key_exists($id, $_SESSION['carrinho'])){
 				//se existe, retorna a mensagem
 				echo('existe');
 			}else{
-				//se não, adiciona o item ao carrinho
-				$_SESSION['carrinho'][$id] = 1;
-	
+				//criando um novo produto
+				$produtoDAO = new ProdutoDAO();
+
+				//armazenando os dados do produto em uma variável
+				$listProduto = $produtoDAO->selectByID($id);
+
+				//armazenando os dados da imagem em uma variável
+				$listImagem = $produtoDAO->selectImages($id);
+
+				//se não, adiciona o item ao carrinho com as informações do produto
+				$_SESSION['carrinho'][$id] = array('id'=>$listProduto->getId(), 'nome'=>$listProduto->getNome(), 'tamanho'=>$listProduto->getTamanho(),
+				'cor'=>$listProduto->getCor(),'preco'=>$listProduto->getPreco(),'imagem'=>$listImagem[0]->getImagem());
+				
+				//criando uma variável de sessão com total e somando ela com o preço dos produtos
+				$_SESSION['total'] += $listProduto->getPreco();
+				
 				//armazenando o total de itens no carrinho
 				$total = count($_SESSION['carrinho']);
-
+				
 				//retornando o total
 				return $total;
 			}
@@ -200,8 +207,14 @@
 					
 					//se for diferente de 0
 					if($item != 0){
-						//remove o item
+						//atualizando o total subtraindo ele com o preço do produto a ser removido
+						$_SESSION['total'] -= $_SESSION['carrinho'][$id]['preco'];
+
+						//removendo o produto
 						unset($_SESSION['carrinho'][$id]);
+
+						//retornando o total atualizado
+						echo($_SESSION['total']);
 					}
 				}
 			}
