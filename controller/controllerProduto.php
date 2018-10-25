@@ -169,30 +169,6 @@
 			}
 		}
 
-		//função para listar os produtos do carrinho
-		public function listarProdutosCarrinho(){
-			//instância da classe ProdutoDAO();
-			$produtoDAO = new ProdutoDAO();
-
-			//verifica se existe a sessão
-			if(isset($_SESSION['carrinho'])){
-				//cria uma array
-				$ids = array();
-
-				//precorrendo o ID dos produtos
-				foreach($_SESSION['carrinho'] as $id => $valor){
-					//armazenando os valores num array de IDs
-					$id = array_push($ids, $id);
-				}
-
-				//armazenando os produtos em uma variável
-				$listProduto = $produtoDAO->selectCartItens($ids);
-
-				//retornando os produtos
-				return $listProduto;
-			}
-		}
-
 		//função para remover itens do carrinho
 		public function removerItemCarrinho($id){
 			//verifica se a sessão já existe

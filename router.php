@@ -254,6 +254,21 @@
 				break;
 			}
 		break;
+
+		case 'pedido':
+			require_once('controller/controllerPedido.php');
+			$modo = $_GET['modo'];
+			switch($modo){
+				case 'gerar':
+					$controllerPedido = new controllerPedido();
+					$status = $controllerPedido->gerarPedido();
+
+					if($status == 'sucesso'){
+						header('location: view/pedido_finalizado.php');
+					}
+				break;
+			}
+		break;
         
     }
 ?>

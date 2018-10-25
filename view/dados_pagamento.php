@@ -1,5 +1,13 @@
 <?php
     require_once('arquivos/check_login.php');
+
+    if(isset($_SESSION['login'])){
+        if(!$_SESSION['total'] > 0){
+            header('location: login.php');
+        }
+    }else{
+        header('location: login.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -7,6 +15,33 @@
     <head>
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="js/jquery-3.2.1.min.js"></script>
+        
+        <script>
+            $(document).ready(function(){
+                $('#frmPedido').submit(function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        type: 'POST',
+                        url: '../router.php?controller=pedido&modo=gerar',
+                        data: new FormData($('#frmPedido')[0]),
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        async: true,
+                        success: function(dados){
+                            if(dados == 'sucesso'){
+                                window.location.href="pedido_finalizado.php";
+                            }else if(dados == 'erro'){
+                                alert('Ocorreu um erro ao gerar o pedido!!');
+
+                                window.location.href="carrinho.php";
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -104,7 +139,7 @@
                     ?>
                     </div>
                     <div class="linha_botao_dados">
-                        <form action="pedido_finalizado.php">
+                        <form method="POST" id="frmPedido">
                             <input class="botao_login" type="submit" value="Comprar">
                         </form>
                     </div>
