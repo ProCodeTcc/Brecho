@@ -826,6 +826,9 @@
         float: right;
     }
     
+    .filtro_pedidos{
+        float: left;
+    }
     
     .vendas_centro{
         width: 1110px;

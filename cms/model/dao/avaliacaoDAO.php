@@ -9,11 +9,11 @@
 
 	class AvaliacaoDAO{
 		public function __construct(){
-			require_once('bdClass.php');	
+            require_once('bdClass.php');	
 		}
 		
 		//função que lista os produtos
-		public function selectAll(){
+		public function selectAllCF(){
 			//instância da classe de conexão com o banco de dados
 			$conexao = new ConexaoMySQL();
 			
@@ -21,7 +21,9 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que realiza a consulta
-			$sql = 'SELECT p.*, f.caminhoImagem as imagem FROM produtoavaliacao as p INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto GROUP BY p.idProdutoAvaliacao;';
+			$sql = 'SELECT cp.idClienteFisico, p.*, f.caminhoImagem as imagem FROM clientefisico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
+			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientefisico as cf on cp.idClienteFisico = cf.idCliente';
 			
 			//armazenando o resultado em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -35,6 +37,55 @@
 				$listProdutos[] = new Avaliacao();
 
 				//setando os atributos
+				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteFisico);
+				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
+				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setClassificacao($rsProdutos->classificacao);
+				$listProdutos[$cont]->setImagem($rsProdutos->imagem);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			if($cont != 0){
+				//retornando a lista com os produtos
+				return $listProdutos;
+			}else{
+				require_once('../erro_tabela.php');
+			}
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que lista os produtos
+		public function selectAllCJ(){
+			//instância da classe de conexão com o banco de dados
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+			
+			//query que realiza a consulta
+			$sql = 'SELECT cp.idClienteJuridico, p.*, f.caminhoImagem as imagem FROM clientejuridico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
+			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientejuridico as cj on cp.idClienteJuridico = cj.idCliente';
+			
+			//armazenando o resultado em uma variável
+			$resultado = $PDO_conexao->query($sql);
+			
+			//contador
+			$cont = 0;
+			
+			//percorrendo os dados
+			while($rsProdutos = $resultado->fetch(PDO::FETCH_OBJ)){
+				//criando um novo produto
+				$listProdutos[] = new Avaliacao();
+
+				//setando os atributos
+				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteJuridico);
 				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
 				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
 				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);

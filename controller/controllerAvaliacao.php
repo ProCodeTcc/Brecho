@@ -13,6 +13,8 @@
 			require_once($diretorio.'model/avaliacaoClass.php');
 			require_once($diretorio.'model/dao/avaliacaoDAO.php');
 			require_once($diretorio.'model/imagemClass.php');
+			require_once($diretorio.'model/dao/clienteFisicoDAO.php');
+			require_once($diretorio.'model/dao/clienteJuridicoDAO.php');
 		}
 		
 		//função que insere um produto
@@ -58,11 +60,33 @@
 				
 				//inserindo o ID do produto e da imagem em uma variável
 				$avaliacaoDAO->insertProdutoImagem($idProduto, $idImagem);
-				// checar se a imagem está vazia				
-//				if(empty($_FILES['fleimage'])){
-//					
-//				}
-//			
+
+				//verificando se a sessão ainda não foi iniciada
+				if(session_id() == ''){
+					//inicia a sessão
+					session_start();
+					
+					//setando o horário padrão para São Paulo
+					date_default_timezone_set('America/Sao_Paulo');
+
+					//armazenando a data atual
+					$dataAtual = date('Y-m-d');
+
+					//verifica qual o tipo do cliente
+					if($_SESSION['tipoCliente'] == 'F'){
+						//instância da classe ClienteFisicoDAO
+						$clienteFisicoDAO = new ClienteFisicoDAO();
+
+						//relacionando o produto com o cliente
+						$clienteFisicoDAO->insertClienteProduto($_SESSION['idCliente'], $idProduto, $dataAtual);
+					}else{
+						//instância da classe ClienteJuridicoDAO
+						$clienteJuridicoDAO = new ClienteJuridicoDAO();
+
+						//relacionando o cliente com o produto
+						$clienteJuridicoDAO->insertClienteProduto($_SESSION['idCliente'], $idProduto, $dataAtual);
+					}
+				}
 			}
 		}
 		
@@ -112,6 +136,42 @@
 			
 			//retornando os dados
 			return $listTamanho;
+		}
+
+		//função para filtrar o pedido de um cliente
+		public function filtrarPedido($tipoCliente, $idCliente){
+			//verifica qual o tipo do cliente
+			if($tipoCliente == 'F'){
+				//instância da classe ClienteFisicoDAO
+				$clienteFisicoDAO = new ClienteFisicoDAO();
+
+				//armazenando o produto em uma variável
+				$listProduto = $clienteFisicoDAO->selectProduto($idCliente);
+			}else{
+				//instância da classe CLienteJuridicoDAO
+				$clienteJuridicoDAO = new ClienteJuridicoDAO();
+
+				//armazenando o produto em uma variável
+				$listProduto = $clienteJuridicoDAO->selectProduto($idCliente);
+			}
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($cont < count($listProduto)){
+				//convertendo a data para o padrão brasileiro
+				$data = date('d/m/Y', strtotime($listProduto[$cont]->getData()));
+				
+				//setando a data convertida
+				$listProduto[$cont]->setData($data);
+				
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os produtos
+			return $listProduto;
 		}
 	}
 ?>

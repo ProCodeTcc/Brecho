@@ -10,6 +10,8 @@
             $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
             require_once($diretorio.'model/pedidoClass.php');
             require_once($diretorio.'model/dao/pedidoDAO.php');
+            require_once($diretorio.'model/dao/clienteFisicoDAO.php');
+            require_once($diretorio.'model/dao/clienteJuridicoDAO.php');
         }
 
         public function gerarPedido(){
@@ -24,7 +26,9 @@
 
                     //instância da classe Pedido
                     $pedidoClass = new Pedido();
-        
+                    
+                    date_default_timezone_set('America/Sao_Paulo');
+
                     //armazenando a data atual no formato do banco
                     $dataAtual = date('Y-m-d');
                     
@@ -71,6 +75,79 @@
                     }
                 }
             }
+        }
+
+        //função para listar as compras do cliente
+        public function filtrarCompra($tipoCliente, $idCliente){
+
+            //verificando o tipo de cliente
+            if($tipoCliente == 'F'){
+                //instância da classe ClienteFisicoDAO
+                $clienteFisicoDAO = new ClienteFisicoDAO();
+
+                //armazenando os produtos do cliente
+                $listProduto = $clienteFisicoDAO->selectCompra($idCliente);
+            }else{
+                //instância da classe ClienteJuridicoDAO
+                $clienteJuridicoDAO = new ClienteJuridicoDAO();
+
+                //armazenando os produtos em uma variável
+                // $listProduto = $clienteJuridicoDAO->selectCompra($idCliente);
+            }
+
+            //contador
+            $cont = 0;
+
+            //percorrendo os dados
+            while($cont < count($listProduto)){
+                //formatando a data para o padrão brasileiro
+                $data = date('d/m/Y', strtotime($listProduto[$cont]->getDtPedido()));
+
+                //setando a data formatada
+                $listProduto[$cont]->setDtPedido($data);
+
+                //incrementando o contador
+                $cont++;
+            }
+
+            //retornando os dados
+            return $listProduto;
+        }
+
+        //função para listar as vendas concretizadas através de uma compra direta pelo brechó
+        public function filtrarVenda($tipoCliente, $idCliente){
+            //verificando o tipo de cliente
+            if($tipoCliente == 'F'){
+                //instância da classe ClienteFisicoDAO
+                $clienteFisicoDAO = new ClienteFisicoDAO();
+
+                //armazenando os dados em uma variável
+                $listProduto = $clienteFisicoDAO->selectVenda($idCliente);
+            }else{
+                //instância da classe ClienteJuridicoDAO
+                $clienteJuridicoDAO = new ClienteJuridicoDAO();
+
+                //armazenando os dados em uma variável
+                $listProduto = $clienteJuridicoDAO->selectVenda($idCliente);
+            }
+
+            //contador
+            $cont = 0;
+
+            //percorrendo os dados
+            while($cont < count($listProduto)){
+                //convertendo a data para o formato brasileiro
+                $data = date('d/m/Y', strtotime($listProduto[$cont]->getDtPedido()));
+
+                //setando a data formatada
+                $listProduto[$cont]->setDtPedido($data);
+
+                //armazenando o contador
+                $cont++;
+            }
+
+            //retornando os dados
+            return $listProduto;
         }
     }
 ?>

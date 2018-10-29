@@ -138,6 +138,114 @@
 			$conexao->fecharConexao();
 		}
 
+		//função que relaciona o cliente com o produto em avaliação
+		public function insertClienteProduto($idCliente, $idProduto, $data){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que insere os dados
+			$stm = $PDO_conexao->prepare('INSERT INTO clientejuridico_produtoavaliacao(idClienteJuridico, idProdutoAvaliacao, data) VALUES(?,?,?)');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $idCliente);
+			$stm->bindParam(2, $idProduto);
+			$stm->bindParam(3, $data);
+
+			//execução do statement
+			$stm->execute();
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que busca os produtos em avaliação do cliente jurídico
+		public function selectProduto($idCliente){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que faz a consulta
+			$stm = $PDO_conexao->prepare('SELECT p.nomeProduto AS nome, p.preco, cjp.data FROM produtoAvaliacao AS p INNER JOIN clientejuridico_produtoavaliacao AS cjp
+			 ON p.idProdutoAvaliacao = cjp.idProdutoAvaliacao INNER JOIN clientejuridico AS cj ON cj.idCliente = cjp.idClienteJuridico WHERE cj.idCliente = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $idCliente);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+				//instância da classe Avaliaçao
+				$listProdutos[] = new Avaliacao();
+				
+				//setando os atributos
+				$listProdutos[$cont]->setNome($rsProdutos->nome);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setData($rsProdutos->data);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listProdutos;
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que busca as vendas concretizadas através de uma compra pelo brechó
+		public function selectVenda($idCliente){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que faz a consulta
+			$stm = $PDO_conexao->prepare('SELECT p.nomeProduto AS nome, p.preco, pc.data FROM produto AS p INNER JOIN produto_pedidocompra AS pp ON pp.idProduto = p.idProduto
+			INNER JOIN pedidocompra AS pc ON pc.idPedidoCompra = pp.idPedidoCompra INNER JOIN clientejuridico_pedidocompra AS cjc ON cjc.idPedidoCompra = pc.idPedidoCompra 
+			INNER JOIN clientejuridico AS cj ON cj.idCliente = cjc.idClienteJuridico WHERE cj.idCliente = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $idCliente);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+				//instância da classe Pedido
+				$listProdutos[] = new Pedido();
+
+				//setando os atributos
+				$listProdutos[$cont]->setNome($rsProdutos->nome);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setDtPedido($rsProdutos->data);
+				
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listProdutos;
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
 		//função que verifica o campo de usuário
 		public function checkUsuario($usuario){
 			//instância da classe de conexão com o banco

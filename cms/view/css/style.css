@@ -597,6 +597,16 @@ footer{
 }
 
 /***************************** ANÁLISE **********************************/
+.frmAvaliacao{
+	width: 220px;
+	margin: auto;
+	margin-top: 60px;
+}
+
+#consignacao{
+	display: none;
+}
+
 .produtos_linha{
 	width: 1200px;
 	height: auto;

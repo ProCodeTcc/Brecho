@@ -3,7 +3,9 @@
 
 	if($_SESSION['login'] != true){
 		header('location: login.php');
-	}
+    }
+    
+    $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +19,22 @@
 		<script>
 			$(document).ready(function(){
 				checarLogin(<?php echo($login) ?>);
-			});
+            });
+            
+            function filtrarPedidos(){
+                var tipoFiltro = $('#txtfiltro').val();
+
+                if(tipoFiltro == 1){
+                    $('#produtos').find('.itens_vendas').not('.avaliacao').hide();
+                    $('.avaliacao').show();
+                }else if(tipoFiltro == 2){
+                    $('#produtos').find('.itens_vendas').not('.compra').hide();
+                    $('.compra').show();
+                }else{
+                    $('#produtos').find('.itens_vendas').not('.venda').hide();
+                    $('.venda').show();
+                }
+            }
 		</script>
 		
 		<?php
@@ -38,14 +55,22 @@
             </div>
             <div class="vendas_centro">
                 <form action="cadastro_produto.php">
-                    <div class="linha_vender_produtos_botao">
+                    <div class="filtro_pedidos">
+                        <select id="txtfiltro" onChange="filtrarPedidos()">
+                            <option value="0">filtrar pedidos</option>
+                            <option value="1">Avaliação</option>
+                            <option value="2">Compras</option>
+                            <option value="3">Vendas</option>
+                        </select>
+                    </div>
+                    <div class="linha_vender_produtos_botao">    
                         <a href="../view/perfil.php">
                             <input class="botao_voltar" type="button" value="Voltar">
                         </a>
                         <input class="botao_cadastro" type="submit" value="Vender Produto">
                     </div>
                 </form>
-                <div class="caixa_vendas">
+                <div class="caixa_vendas" id="produtos">
                     <div class="titulo_vendas">
                         <div class="titulo_produtos_vendas">
                             Produtos
@@ -60,178 +85,94 @@
                             Status
                         </div>
                     </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
+
+                    <?php
+                        require_once($diretorio.'/controller/controllerAvaliacao.php');
+                        $listProduto = new controllerAvaliacao();
+                        $cont = 0;
+                        $rsProduto = $listProduto->filtrarPedido($_SESSION['tipoCliente'], $_SESSION['idCliente']);
+
+                        while($cont < count($rsProduto)){
+                    ?>
                     
+                    <div class="itens_vendas avaliacao">
+                        <div class="produto_vendas">
+                            <?php echo($rsProduto[$cont]->getNome()) ?>
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: <?php echo($rsProduto[$cont]->getPreco()) ?>
+                        </div>
+                         <div class="detalhe_vendas">
+                            <?php echo($rsProduto[$cont]->getData()) ?>
+                        </div>
+                         <div class="detalhe_vendas">
+                            Vendido
+                        </div>
+                    </div>
+
+                <?php
+                    $cont ++;
+                        }
+                ?>
+
+                <?php
+                        require_once($diretorio.'/controller/controllerPedido.php');
+                        $listProduto = new controllerPedido();
+                        $cont = 0;
+                        $rsProduto = $listProduto->filtrarCompra($_SESSION['tipoCliente'], $_SESSION['idCliente']);
+
+                        while($cont < count($rsProduto)){
+                    ?>
                     
-                    <div class="itens_vendas">
+                    <div class="itens_vendas compra">
                         <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
+                            <?php echo($rsProduto[$cont]->getNome()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            R$: 129,90
+                            R$: <?php echo($rsProduto[$cont]->getPreco()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            00/00/0000
+                            <?php echo($rsProduto[$cont]->getDtPedido()) ?>
                         </div>
                          <div class="detalhe_vendas">
                             Vendido
                         </div>
                     </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
+
+                <?php
+                    $cont ++;
+                        }
+                ?>
+
+                <?php
+                        require_once($diretorio.'/controller/controllerPedido.php');
+                        $listProduto = new controllerPedido();
+                        $cont = 0;
+                        $rsProduto = $listProduto->filtrarVenda($_SESSION['tipoCliente'], $_SESSION['idCliente']);
+
+                        while($cont < count($rsProduto)){
+                    ?>
                     
-                    
-                    <div class="itens_vendas">
+                    <div class="itens_vendas venda">
                         <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
+                            <?php echo($rsProduto[$cont]->getNome()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            R$: 129,90
+                            R$: <?php echo($rsProduto[$cont]->getPreco()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            00/00/0000
+                            <?php echo($rsProduto[$cont]->getDtPedido()) ?>
                         </div>
                          <div class="detalhe_vendas">
                             Vendido
                         </div>
                     </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
-                    <div class="itens_vendas">
-                        <div class="produto_vendas">
-                            Blusa Masculina Dixie Tricot Gola V
-                        </div>
-                         <div class="detalhe_vendas">
-                            R$: 129,90
-                        </div>
-                         <div class="detalhe_vendas">
-                            00/00/0000
-                        </div>
-                         <div class="detalhe_vendas">
-                            Vendido
-                        </div>
-                    </div>
+
+                <?php
+                    $cont ++;
+                        }
+                ?>
+
                 </div>
             </div>
         </main>

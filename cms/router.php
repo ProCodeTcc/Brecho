@@ -446,16 +446,28 @@
 		break;
 			
 		case 'avaliação':
-			$modo = $_POST{'modo'};
+			$modo = $_POST['modo'];
 			require_once('controller/controllerAvaliacao.php');
 			switch($modo){
-				case 'aprovar':
-					$id = $_POST['id'];
+				case 'consignado':
+					$tipoCliente = $_POST['tipoCliente'];
+					$idCliente = $_POST['idCliente'];
+					$idProdutoAvaliacao = $_POST['idProduto'];
 					
 					$controllerAvaliacao = new controllerAvaliacao();
-					$controllerAvaliacao->aprovarProduto($id);
+					$controllerAvaliacao->inserirConsignacao($tipoCliente, $idCliente, $idProdutoAvaliacao);
 				break;
-					
+				
+				case 'compra':
+					$tipoCliente = $_POST['tipoCliente'];
+					$idCliente = $_POST['idCliente'];
+
+					$idProdutoAvaliacao = $_POST['idProduto'];
+
+					$controllerAvaliacao = new controllerAvaliacao();
+					$controllerAvaliacao->inserirCompra($tipoCliente, $idCliente, $idProdutoAvaliacao);
+				break;
+
 				case 'buscar':
 					$id = $_POST['id'];
 					

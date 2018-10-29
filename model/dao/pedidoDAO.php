@@ -3,7 +3,21 @@
 		Projeto: Brechó
 		Autor: Lucas Eduardo
 		Data: 25/10/2018
-		Objetivo: implementada funcionalidade de gerar o pedido
+		Objetivo: implementada funcionalidade de gerar o pedido de compra de um produto
+    */
+    
+    /*
+		Projeto: Brechó
+		Autor: Lucas Eduardo
+		Data: 26/10/2018
+		Objetivo: implementada funcionalidade de listar os pedidos de compra
+    */
+    
+    /*
+		Projeto: Brechó
+		Autor: Lucas Eduardo
+		Data: 27/10/2018
+		Objetivo: implementada funcionalidade de listar os produtos vendidos através da compra direta
 	*/
 
     class PedidoDAO{
@@ -66,7 +80,7 @@
         }
 
         //função que insere relaciona o cliente fisico e o pedido
-        public function insertPedidoFisico($idPedido, $idCliente){
+        public function insertVendaFisico($idPedido, $idCliente){
             //instância da classe de conexão com o banco
             $conexao = new ConexaoMySQL();
 
@@ -86,5 +100,7 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
+
+        
     }
 ?>

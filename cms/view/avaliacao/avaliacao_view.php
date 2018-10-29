@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     $usuario = $_SESSION['usuario_cms'];
 	$idNivel = $_SESSION['nivel'];
@@ -42,14 +42,13 @@
 		}
 		
 		//função para aprovar um produto
-		function aprovar(id){
+		function aprovar(id, idCliente, preco, tipoCliente){
 			$.ajax({
-				type: 'POST', //tipo de requisição
-				url: url+'router.php', //url onde será enviada a requisição
-				data: {id:id, controller: 'avaliação', modo: 'aprovar'}, //parâmetros enviados
+				type: 'POST',
+				url: 'frm_avaliacao.php',
+				data: {id:id, idCliente:idCliente, preco:preco, tipoCliente:tipoCliente},
 				success: function(dados){
-					alert(dados);
-					listar();
+					$('.modal').html(dados);
 				}
 			});
 		}
