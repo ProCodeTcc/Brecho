@@ -117,25 +117,25 @@
 
                 <?php
                         require_once($diretorio.'/controller/controllerPedido.php');
-                        $listProduto = new controllerPedido();
+                        $listPedido = new controllerPedido();
                         $cont = 0;
-                        $rsProduto = $listProduto->filtrarCompra($_SESSION['tipoCliente'], $_SESSION['idCliente']);
+                        $rsPedido = $listPedido->filtrarCompra($_SESSION['tipoCliente'], $_SESSION['idCliente']);
 
-                        while($cont < count($rsProduto)){
+                        while($cont < count($rsPedido)){
                     ?>
                     
                     <div class="itens_vendas compra">
                         <div class="produto_vendas">
-                            <?php echo($rsProduto[$cont]->getNome()) ?>
+                            <?php echo($rsPedido[$cont]->getIdPedido()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            R$: <?php echo($rsProduto[$cont]->getPreco()) ?>
+                            R$: <?php echo($rsPedido[$cont]->getValor()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            <?php echo($rsProduto[$cont]->getDtPedido()) ?>
+                            <?php echo($rsPedido[$cont]->getDtPedido()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            Vendido
+                            <?php echo($rsPedido[$cont]->getStatus()) ?>
                         </div>
                     </div>
 
@@ -155,10 +155,10 @@
                     
                     <div class="itens_vendas venda">
                         <div class="produto_vendas">
-                            <?php echo($rsProduto[$cont]->getNome()) ?>
+                            <?php echo($rsProduto[$cont]->getIdPedido()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            R$: <?php echo($rsProduto[$cont]->getPreco()) ?>
+                            R$: <?php echo($rsProduto[$cont]->getValor()) ?>
                         </div>
                          <div class="detalhe_vendas">
                             <?php echo($rsProduto[$cont]->getDtPedido()) ?>

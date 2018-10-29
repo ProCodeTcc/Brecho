@@ -161,6 +161,28 @@
 			$conexao->fecharConexao();
 		}
 
+		//função que relaciona o cliente como pedido
+		public function insertPedidoCliente($idPedido, $idCliente){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//função que insere os dados
+			$stm = $PDO_conexao->prepare('INSERT INTO clientejuridico_pedidovenda(idClienteJuridico, idPedidoVenda) VALUES(?,?)');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $idCliente);
+			$stm->bindParam(2, $idPedido);
+
+			//execução do statement
+			$stm->execute();
+
+			//fechandoa conexão
+			$conexao->fecharConexao();
+		}
+
 		//função que busca os produtos em avaliação do cliente jurídico
 		public function selectProduto($idCliente){
 			//instância da classe de conexão com o banco
@@ -196,9 +218,55 @@
 				$cont++;
 			}
 
-			//retornando os dados
-			return $listProdutos;
+			if($cont != 0){
+				//retornando os dados
+				return $listProdutos;
+			}
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que lista os pedidos do cliente
+		public function selectCompra($idCliente){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que faz a consulta
+			$stm = $PDO_conexao->prepare('SELECT pv.idPedidoVenda as idPedido, pv.valorPedidoVenda as valor, pv.dataPedidoVenda as data FROM pedidovenda AS pv INNER JOIN clientejuridico_pedidovenda 
+			AS cjp ON pv.idPedidoVenda = cjp.idPedidoVenda INNER JOIN clientejuridico AS cj ON cj.idCliente = cjp.idClienteJuridico WHERE cj.idCliente = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $idCliente);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsPedidos = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo pedido
+				$listPedidos[] = new Pedido();
+
+				//setando os atributos
+				$listPedidos[$cont]->setIdPedido($rsPedidos->idPedido);
+				$listPedidos[$cont]->setValor($rsPedidos->valor);
+				$listPedidos[$cont]->setDtPedido($rsPedidos->data);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			if($cont != 0){
+				//retornando os dados
+				return $listPedidos;
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
@@ -212,9 +280,8 @@
 			$PDO_conexao = $conexao->conectarBanco();
 
 			//query que faz a consulta
-			$stm = $PDO_conexao->prepare('SELECT p.nomeProduto AS nome, p.preco, pc.data FROM produto AS p INNER JOIN produto_pedidocompra AS pp ON pp.idProduto = p.idProduto
-			INNER JOIN pedidocompra AS pc ON pc.idPedidoCompra = pp.idPedidoCompra INNER JOIN clientejuridico_pedidocompra AS cjc ON cjc.idPedidoCompra = pc.idPedidoCompra 
-			INNER JOIN clientejuridico AS cj ON cj.idCliente = cjc.idClienteJuridico WHERE cj.idCliente = ?');
+			$stm = $PDO_conexao->prepare('SELECT pc.idPedidoCompra AS idPedido, pc.valorPedido AS valor, pc.data FROM pedidocompra AS pc INNER JOIN clientejuridico_pedidocompra 
+			AS cjp ON cjp.idPedidoCompra = pc.idPedidoCompra INNER JOIN clientejuridico AS cj ON cj.idCliente = cjp.idClienteJuridico WHERE cj.idCliente = ?');
 
 			//parâmetros enviados
 			$stm->bindParam(1, $idCliente);
@@ -226,21 +293,23 @@
 			$cont = 0;
 
 			//percorrendo os dados
-			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+			while($rsPedidos = $stm->fetch(PDO::FETCH_OBJ)){
 				//instância da classe Pedido
-				$listProdutos[] = new Pedido();
+				$listPedidos[] = new Pedido();
 
 				//setando os atributos
-				$listProdutos[$cont]->setNome($rsProdutos->nome);
-				$listProdutos[$cont]->setPreco($rsProdutos->preco);
-				$listProdutos[$cont]->setDtPedido($rsProdutos->data);
+				$listPedidos[$cont]->setIdPedido($rsPedidos->idPedido);
+				$listPedidos[$cont]->setValor($rsPedidos->valor);
+				$listPedidos[$cont]->setDtPedido($rsPedidos->data);
 				
 				//incrementando o contador
 				$cont++;
 			}
 
-			//retornando os dados
-			return $listProdutos;
+			if($cont != 0){
+				//retornando os dados
+				return $listPedidos;
+			}
 
 			//fechando a conexão
 			$conexao->fecharConexao();

@@ -22,6 +22,7 @@
         
         <script src="view/js/jquery.js"> </script>
         <script src="view/js/jquery.cycle.all.js"> </script>
+        <script src="view/js/jquery.film_roll.js"></script>
         <script>
 			
 			function checarLogin(){
@@ -75,6 +76,12 @@
 						next: '#next',
 					   });
 				});
+
+                $(function() {
+                    var film_roll = new FilmRoll({
+                        container: '#film_row',
+                    });
+                });
 
                 $('.carrinho').click(function(e){
                     e.preventDefault();
@@ -239,23 +246,24 @@
                     </div>
                 </a>
             </div>
-            <div class="produto_full">
-                <div class="linha">
-                    Novidades
-                </div>
+
+            <div class="linha">
+                Novidades
+            </div>
+
+            <div class="produto_full" id="film_row">
+                <?php
+                    $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                    require_once($diretorio.'controller/controllerProduto.php');
                 
+                    $listProduto = new controllerProduto();
+                    $rsProdutos = $listProduto->listarProdutos();
+                    
+                    $cont = 0;
+                
+                    while($cont < count($rsProdutos)){
+                ?>
                 <div class="caixa_produto">
-					<?php
-						$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-						require_once($diretorio.'controller/controllerProduto.php');
-					
-						$listProduto = new controllerProduto();
-						$rsProdutos = $listProduto->listarProdutos();
-						
-						$cont = 0;
-					
-						while($cont < count($rsProdutos)){
-					?>
                         <div class="produto">
                             <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=home">
 
@@ -286,117 +294,58 @@
                             </div>
                             </a>
                         </div>
-                    <?php
-					$cont++;
-						}
-					?>
-                    <!--<a href="view/visualizar_produto.php">
-                        <div class="produto">
-                            <div class="imagem_produto">
-                                <img src="view/imagens/tenis.jpg" alt="#">
-                            </div>
-                            <div class="descritivo_produto">
-                                <div class="titulo_produto">
-                                    Tênis Cano Alto Adidas Vs Set Mid Masculino
-                                </div>
-                                <div class="descricao">
-                                    Oferecendo pegada esportiva para compor seus looks urbanos, o Tênis Cano Alto Adidas Vs Set Mid Masculino é a pedida certa para seu street style. Conta com palmilha confortável e cabedal em lona.
-                                </div>
-                                <div class="tamanho">
-                                   Tamanho: [41]
-                                </div>
-                                <div class="preco">
-                                    R$ 249,99
-                                </div>
-                                <div class="opcoes">
-                                        <div class="comprar_produto">
-                                            Conferir
-                                        </div>
-                                    <div class="carrinho_produto">
-                                        <img alt="#" src="view/icones/carrinho.png">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
                     
-                    <a href="view/visualizar_produto.php">
-                        <div class="produto">
-                            <div class="imagem_produto">
-                                <img src="view/imagens/jaqueta.jpg" alt="#">
-                            </div>
-                            <div class="descritivo_produto">
-                                <div class="titulo_produto">
-                                    Jaqueta de Couro Feminina estilo Biker
-                                </div>
-                                <div class="descricao">
-                                    Peça confeccionada individualmente sob medida, exclusivamente para cada cliente.
-    Disponível em couro bovino e em couro pelica (de cabra), em diversas cores.
-                                </div>
-                                <div class="tamanho">
-                                   Tamanho: [M]
-                                </div>
-                                <div class="preco">
-                                    R$ 576,00
-                                </div>
-                                <div class="opcoes">
-                                        <div class="comprar_produto">
-                                            Conferir
-                                        </div>
-                                    <div class="carrinho_produto">
-                                        <img src="view/icones/carrinho.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>-->
                 </div>
                 
-                <div class="linha">
-                    Participe da Nossa Enquete
-                </div>
-                
-                <div class="enquete_full">
-                    <div class="caixa_enquete">
-						<?php
-                                $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                <?php
+                $cont++;
+                    }
+                ?>
+            </div>
+
+            <div class="linha">
+                Participe da Nossa Enquete
+            </div>
+            
+            <div class="enquete_full">
+                <div class="caixa_enquete">
+                    <?php
+                            $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                        
+                            require_once($diretorio.'/controller/controllerEnquete.php');
+                        
+                            $listar = new controllerEnquete();
+                            $rsLista = $listar->selecionarEnquete();
                             
-                                require_once($diretorio.'/controller/controllerEnquete.php');
-                            
-                                $listar = new controllerEnquete();
-                                $rsLista = $listar->selecionarEnquete();
-                                
-                            ?>
-                        <form method="POST" class="enquete_pesquisa" name="frmEnquete" id="frmEnquete">
-                            <div class="pergunta_enquete">
-                                <h1 id="txt_pergunta"> <?php echo($rsLista->pergunta)?> </h1>
-                            </div>
-                            <div class="resposta_enquete">
-                                <div class="resposta">
-                                    <label><input class="radio" id="qtdA" name="txtenquete" type="radio" checked value="<?php echo($rsLista->qtdAlternativaA)?>"> <?php echo($rsLista->alternativaA)?> </label>
-                                </div>
-                                <div class="resposta">
-                                    <label><input class="radio" id="qtdB" name="txtenquete" type="radio" value="<?php echo($rsLista->qtdAlternativaB)?>"> <?php echo($rsLista->alternativaB)?></label>
-                                </div>
-                                <div class="resposta">
-                                    <label><input class="radio" id="qtdC" name="txtenquete" type="radio" value="<?php echo($rsLista->qtdAlternativaC)?>"> <?php echo($rsLista->alternativaC)?> </label>
-                                </div>
-                                <div class="resposta">
-                                    <label><input class="radio" id="qtdD" name="txtenquete" type="radio" value="<?php echo($rsLista->qtdAlternativaD)?>"> <?php echo($rsLista->alternativaD)?> </label>
-                                </div>
-                                
-                                <div class="caixa_botao">
-                                    <input class="enviar_resposta" type="submit" value="Enviar">
-                                </div>
-                                
-                            </div>
-                        </form>
-                        <div class="enquete_foto">
-                            <img src="view/imagens/enquete2.png" alt="#">
+                        ?>
+                    <form method="POST" class="enquete_pesquisa" name="frmEnquete" id="frmEnquete">
+                        <div class="pergunta_enquete">
+                            <h1 id="txt_pergunta"> <?php echo($rsLista->pergunta)?> </h1>
                         </div>
+                        <div class="resposta_enquete">
+                            <div class="resposta">
+                                <label><input class="radio" id="qtdA" name="txtenquete" type="radio" checked value="<?php echo($rsLista->qtdAlternativaA)?>"> <?php echo($rsLista->alternativaA)?> </label>
+                            </div>
+                            <div class="resposta">
+                                <label><input class="radio" id="qtdB" name="txtenquete" type="radio" value="<?php echo($rsLista->qtdAlternativaB)?>"> <?php echo($rsLista->alternativaB)?></label>
+                            </div>
+                            <div class="resposta">
+                                <label><input class="radio" id="qtdC" name="txtenquete" type="radio" value="<?php echo($rsLista->qtdAlternativaC)?>"> <?php echo($rsLista->alternativaC)?> </label>
+                            </div>
+                            <div class="resposta">
+                                <label><input class="radio" id="qtdD" name="txtenquete" type="radio" value="<?php echo($rsLista->qtdAlternativaD)?>"> <?php echo($rsLista->alternativaD)?> </label>
+                            </div>
+                            
+                            <div class="caixa_botao">
+                                <input class="enviar_resposta" type="submit" value="Enviar">
+                            </div>
+                            
+                        </div>
+                    </form>
+                    <div class="enquete_foto">
+                        <img src="view/imagens/enquete2.png" alt="#">
                     </div>
                 </div>
-                
             </div>
         </main>
         <footer>

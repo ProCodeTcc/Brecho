@@ -51,8 +51,10 @@
 
                     //verificando se existe o ID do cliente
                     if($_SESSION['tipoCliente'] == 'F'){
+                        $clienteFisicoDAO = new ClienteFisicoDAO();
+
                         //inserindo o ID do Cliente e do Pedido na tabela de relacionamento
-                        $pedidoDAO->insertPedidoFisico($idPedido, $_SESSION['idCliente']);
+                        $clienteFisicoDAO->insertPedidoCliente($idPedido, $_SESSION['idCliente']);
                         
                         //zerando a sessão do carrinho
                         unset($_SESSION['carrinho']);
@@ -62,8 +64,10 @@
 
                         echo('sucesso');
                     }else{
+                        $clienteJuridicoDAO = new ClienteJuridicoDAO();
+
                         //inserindo o ID do Cliente e do Pedido na tabela de relacionamento
-                        $pedidoDAO->insertPedidoJuridico($idPedido, $_SESSION['idCliente']);
+                        $clienteJuridicoDAO->insertPedidoCliente($idPedido, $_SESSION['idCliente']);
 
                         //zerando a sessão do carrinho
                         unset($_SESSION['carrinho']);
@@ -86,32 +90,42 @@
                 $clienteFisicoDAO = new ClienteFisicoDAO();
 
                 //armazenando os produtos do cliente
-                $listProduto = $clienteFisicoDAO->selectCompra($idCliente);
+                $listPedido = $clienteFisicoDAO->selectCompra($idCliente);
             }else{
                 //instância da classe ClienteJuridicoDAO
                 $clienteJuridicoDAO = new ClienteJuridicoDAO();
 
                 //armazenando os produtos em uma variável
-                // $listProduto = $clienteJuridicoDAO->selectCompra($idCliente);
+                $listPedido = $clienteJuridicoDAO->selectCompra($idCliente);
             }
 
             //contador
             $cont = 0;
 
             //percorrendo os dados
-            while($cont < count($listProduto)){
+            while($cont < count($listPedido)){
                 //formatando a data para o padrão brasileiro
-                $data = date('d/m/Y', strtotime($listProduto[$cont]->getDtPedido()));
+                $data = date('d/m/Y', strtotime($listPedido[$cont]->getDtPedido()));
 
                 //setando a data formatada
-                $listProduto[$cont]->setDtPedido($data);
+                $listPedido[$cont]->setDtPedido($data);
+
+                if($listPedido[$cont]->getStatus() == 0){
+                    $status = 'aguardando pagamento';
+                }else if($listPedido[$cont]->getStatus() == 1){
+                    $status = 'concluído';
+                }else{
+                    $status = 'pagamento recusado';
+                }
+
+                $listPedido[$cont]->setStatus($status);
 
                 //incrementando o contador
                 $cont++;
             }
 
             //retornando os dados
-            return $listProduto;
+            return $listPedido;
         }
 
         //função para listar as vendas concretizadas através de uma compra direta pelo brechó
@@ -122,32 +136,32 @@
                 $clienteFisicoDAO = new ClienteFisicoDAO();
 
                 //armazenando os dados em uma variável
-                $listProduto = $clienteFisicoDAO->selectVenda($idCliente);
+                $listPedido = $clienteFisicoDAO->selectVenda($idCliente);
             }else{
                 //instância da classe ClienteJuridicoDAO
                 $clienteJuridicoDAO = new ClienteJuridicoDAO();
 
                 //armazenando os dados em uma variável
-                $listProduto = $clienteJuridicoDAO->selectVenda($idCliente);
+                $listPedido = $clienteJuridicoDAO->selectVenda($idCliente);
             }
 
             //contador
             $cont = 0;
 
             //percorrendo os dados
-            while($cont < count($listProduto)){
+            while($cont < count($listPedido)){
                 //convertendo a data para o formato brasileiro
-                $data = date('d/m/Y', strtotime($listProduto[$cont]->getDtPedido()));
+                $data = date('d/m/Y', strtotime($listPedido[$cont]->getDtPedido()));
 
                 //setando a data formatada
-                $listProduto[$cont]->setDtPedido($data);
+                $listPedido[$cont]->setDtPedido($data);
 
                 //armazenando o contador
                 $cont++;
             }
 
             //retornando os dados
-            return $listProduto;
+            return $listPedido;
         }
     }
 ?>

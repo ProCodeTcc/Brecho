@@ -204,6 +204,28 @@
 			$conexao->fecharConexao();
 		}
 
+		//função que insere relaciona o cliente fisico e o pedido
+        public function insertPedidoCliente($idPedido, $idCliente){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que insere os dados
+            $stm = $PDO_conexao->prepare('INSERT INTO clientefisico_pedidovenda(idClienteFisico, idPedidoVenda) VALUES(?,?)');
+
+            //parâmetros enviados
+            $stm->bindParam(1, $idCliente);
+            $stm->bindParam(2, $idPedido);
+
+            //execução do statement
+            $stm->execute();
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+
 		//função que trás os produtos em avaliação de um cliente
 		public function selectProduto($idCliente){
 			//instância da classe de conexão com o banco
@@ -239,15 +261,17 @@
 				$cont++;
 			}
 
-			//retornando os dados
-			return $listProdutos;
+			if($cont != 0){
+				//retornando os produtos
+				return $listProdutos;
+			}
 
 			//fechando a conexão
 			$conexao->fecharConexao();
 
 		}
 
-		//função que lista as compras do cliente físico
+		//função que lista os pedidos do cliente físico
 		public function selectCompra($idCliente){
 			//instância da classe de conexão com o banco
 			$conexao = new ConexaoMySQL();
@@ -256,9 +280,9 @@
 			$PDO_conexao = $conexao->conectarBanco();
 
 			//query que faz a consulta
-			$stm = $PDO_conexao->prepare('SELECT p.nomeProduto as nome, p.preco, pv.dataPedidoVenda as data FROM produto as p INNER JOIN pedidovenda_produto AS pp ON pp.idProduto = p.idProduto
-			INNER JOIN pedidovenda AS pv ON pv.idPedidoVenda = pp.idPedidoVenda INNER JOIN clientefisico_pedidovenda AS cp ON cp.idPedidoVenda = pv.idPedidoVenda
-			 INNER JOIN clientefisico AS cf ON cf.idCliente = cp.idClienteFisico WHERE cf.idCliente = ?');
+			$stm = $PDO_conexao->prepare('SELECT pv.idPedidoVenda as idPedido, pv.valorPedidoVenda as valor, pv.dataPedidoVenda as data, pv.status FROM pedidovenda AS pv 
+			INNER JOIN clientefisico_pedidovenda AS cfp ON pv.idPedidoVenda = cfp.idPedidoVenda INNER JOIN clientefisico AS cf ON cf.idCliente = cfp.idClienteFisico
+			WHERE cf.idCliente = ?');
 
 			//parâmetros enviados
 			$stm->bindParam(1, $idCliente);
@@ -270,21 +294,24 @@
 			$cont = 0;
 
 			//percorrendo os dados
-			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+			while($rsPedidos = $stm->fetch(PDO::FETCH_OBJ)){
 				//instância da classe pedido
-				$listProdutos[] = new Pedido();
+				$listPedidos[] = new Pedido();
 
 				//setando os atributos
-				$listProdutos[$cont]->setNome($rsProdutos->nome);
-				$listProdutos[$cont]->setPreco($rsProdutos->preco);
-				$listProdutos[$cont]->setDtPedido($rsProdutos->data);
+				$listPedidos[$cont]->setIdPedido($rsPedidos->idPedido);
+				$listPedidos[$cont]->setValor($rsPedidos->valor);
+				$listPedidos[$cont]->setDtPedido($rsPedidos->data);
+				$listPedidos[$cont]->setStatus($rsPedidos->status);
 
 				//contador
 				$cont++;
 			}
 
-			//retornado os produtos
-			return $listProdutos;
+			if($cont != 0){
+				//retornando os produtos
+				return $listPedidos;
+			}
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -299,9 +326,8 @@
             $PDO_conexao = $conexao->conectarBanco();
 
 			//query que faz a consulta
-            $stm = $PDO_conexao->prepare('SELECT p.nomeProduto as nome,p.preco, pc.data FROM produto AS p INNER JOIN produto_pedidocompra AS pp ON p.idProduto = pp.idProduto INNER JOIN pedidocompra AS
-            pc ON pc.idPedidoCompra = pp.idPedidoCompra INNER JOIN clientefisico_pedidocompra AS cfp ON cfp.idPedidoCompra = pc.idPedidoCompra
-            INNER JOIN clientefisico as cf ON cf.idCliente = cfp.idClienteFisico WHERE cf.idCliente = ?');
+            $stm = $PDO_conexao->prepare('SELECT pc.idPedidoCompra AS idPedido, pc.valorPedido AS valor, pc.data FROM pedidocompra AS pc INNER JOIN clientefisico_pedidocompra 
+			AS cfp ON cfp.idPedidoCompra = pc.idPedidoCompra INNER JOIN clientefisico AS cf ON cf.idCliente = cfp.idClienteFisico WHERE cf.idCliente = ?');
 
 			//parâmetros enviados
             $stm->bindParam(1, $idCliente);
@@ -313,21 +339,23 @@
             $cont = 0;
 
 			//percorrendo os dados
-            while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+            while($rsPedidos = $stm->fetch(PDO::FETCH_OBJ)){
 				//instância da classe Pedido
-                $listProdutos[] = new Pedido();
+                $listPedidos[] = new Pedido();
 
 				//setando os atributos
-                $listProdutos[$cont]->setNome($rsProdutos->nome);
-                $listProdutos[$cont]->setPreco($rsProdutos->preco);
-                $listProdutos[$cont]->setDtPedido($rsProdutos->data);
+                $listPedidos[$cont]->setIdPedido($rsPedidos->idPedido);
+                $listPedidos[$cont]->setValor($rsPedidos->valor);
+                $listPedidos[$cont]->setDtPedido($rsPedidos->data);
 
 				//incrementando o contador
                 $cont++;
             }
 
-			//retornando os produtos
-            return $listProdutos;
+			if($cont != 0){
+				//retornando os produtos
+				return $listPedidos;
+			}
 
 			//fechando a conexão
             $conexao->fecharConexao();

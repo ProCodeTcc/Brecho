@@ -96,10 +96,10 @@
 					Percentual da Loja:
 				</label>
 				
-				<input type="text" name="txtpercentualloja" class="cadastro_input" id="percentualloja" value="<?php echo($preco) ?>" onBlur="calcularPercentual()">
+				<input type="text" name="txtpercentualloja" class="cadastro_input" id="percentualloja" value="50" onBlur="calcularPercentual()">
 			</div>
 			
-			<div class="form_linha">
+			<div class="form_linha" style="display: none;">
 				<label class="lbl_cadastro">
 					Percentual do Cliente:
 				</label>

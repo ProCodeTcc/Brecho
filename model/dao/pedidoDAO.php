@@ -78,29 +78,5 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
-
-        //função que insere relaciona o cliente fisico e o pedido
-        public function insertVendaFisico($idPedido, $idCliente){
-            //instância da classe de conexão com o banco
-            $conexao = new ConexaoMySQL();
-
-            //chamada da função que conecta com o banco
-            $PDO_conexao = $conexao->conectarBanco();
-
-            //query que insere os dados
-            $stm = $PDO_conexao->prepare('INSERT INTO clientefisico_pedidovenda(idClienteFisico, idPedidoVenda) VALUES(?,?)');
-
-            //parâmetros enviados
-            $stm->bindParam(1, $idCliente);
-            $stm->bindParam(2, $idPedido);
-
-            //execução do statement
-            $stm->execute();
-
-            //fechando a conexão
-            $conexao->fecharConexao();
-        }
-
-        
     }
 ?>
