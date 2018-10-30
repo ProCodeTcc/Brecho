@@ -1,5 +1,6 @@
 <?php
-    class Consignacao{
+    require_once('produtoClass.php');
+    class Consignacao extends Produto{
         public function __construct(){
             
         }
@@ -8,6 +9,7 @@
         private $valor;
         private $dtInicio;
         private $dtTermino;
+        private $idProduto;
 
         public function setId($id){
             $this->id = $id;
@@ -39,6 +41,14 @@
 
         public function getDtTermino(){
             return $this->dtTermino;
+        }
+
+        public function setIdProduto($idProduto){
+            $this->idProduto = $idProduto;
+        }
+
+        public function getIdProduto(){
+            return $this->idProduto;
         }
     }
 ?>

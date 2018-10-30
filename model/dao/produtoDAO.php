@@ -423,6 +423,47 @@
 			$conexao->fecharConexao();
 		}
 
+		//função para selecionar os produtos mais clicados
+		public function selectByClick(){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que faz a consulta
+			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 GROUP BY p.idProduto ORDER BY p.cliques DESC';
+
+			//armazenando os dados em uma variável
+			$resultado = $PDO_conexao->query($sql);
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProduto = $resultado->fetch(PDO::FETCH_OBJ)){
+				//instância da classe Produto
+				$listProduto[] = new Produto();
+				
+				//setando os atributos
+				$listProduto[$cont]->setId($rsProduto->idProduto);
+				$listProduto[$cont]->setImagem($rsProduto->imagem);
+				$listProduto[$cont]->setNome($rsProduto->nome);
+				$listProduto[$cont]->setTamanho($rsProduto->tamanho);
+				$listProduto[$cont]->setPreco($rsProduto->preco);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listProduto;
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+			
+		}
+
 		public function selectCartItens($ids){
 			//instância da classe de conexão com o banco de dados
 			$conexao = new ConexaoMySQL();

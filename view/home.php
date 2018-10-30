@@ -68,21 +68,10 @@
 			$(document).ready(function(){
 				checarLogin();
 				
-				$(function (){
-					$("#slide ul").cycle({
-						fx: 'fade',
-						speed: 1000,
-						timeout: 2000,
-						prev: '#previous',
-						next: '#next',
-					   });
-				});
-
-                $(function() {
-                    var film_roll = new FilmRoll({
-                        container: '#film_row',
-                    });
-                });
+				
+                sliderPrincipal('#slider');
+                sliderProduto('#film_row');
+                sliderProduto('#produto_clique');
 
                 $('.carrinho').click(function(e){
                     e.preventDefault();
@@ -217,35 +206,18 @@
         </header>
         <main>
             <div id="slider" class="slider">
-                <a href="#" id="previous">
-                    <div class="btn_slide">
-                        &laquo;
-                    </div>
-                </a>
-                 <div id="slide" class="slide">
-                    <ul>
-						<?php
-							require_once('controller/controllerSlider.php');
-							$listSlider = new controllerSlider();
-							$rsSlider = $listSlider->listarSlider();
-							$cont = 0;
-							while($cont < count($rsSlider)){
-						?>
-							
-							<li> <img class="foto_slide" src="cms/view/arquivos/<?php echo($rsSlider[$cont]->getImagem()) ?>" alt="#"/></li>
-						
-						<?php
-						$cont++;
-							}
-						?>
-                    </ul>
-                </div>
-                
-                 <a href="#" id="next">
-                    <div class="btn_slide">
-                        &raquo;
-                    </div>
-                </a>
+            <?php
+                require_once('controller/controllerSlider.php');
+                $listSlider = new controllerSlider();
+                $rsSlider = $listSlider->listarSlider();
+                $cont = 0;
+                while($cont < count($rsSlider)){
+            ?>
+                 <div class="slide" style="background-image: url('cms/view/arquivos/<?php echo($rsSlider[$cont]->getImagem()) ?>')"></div>
+                <?php
+                $cont++;
+                    }
+                ?>
             </div>
 
             <div class="linha">
@@ -259,6 +231,62 @@
                 
                     $listProduto = new controllerProduto();
                     $rsProdutos = $listProduto->listarProdutos();
+                    
+                    $cont = 0;
+                
+                    while($cont < count($rsProdutos)){
+                ?>
+                <div class="caixa_produto">
+                        <div class="produto">
+                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=home" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
+
+                            <div class="imagem_produto">
+                                <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
+                            </div>
+                            <div class="descritivo_produto">
+                                <div class="titulo_produto">
+                                    <?php echo($rsProdutos[$cont]->getNome()) ?>
+                                </div>
+                                <div class="descricao">
+                                    <?php echo($rsProdutos[$cont]->getDescricao()) ?>
+                                </div>
+                                <div class="tamanho">
+                                   Tamanho: <?php echo($rsProdutos[$cont]->getTamanho()) ?>
+                                </div>
+                                <div class="preco">
+                                    R$ <?php echo($rsProdutos[$cont]->getPreco()) ?>
+                                </div>
+                                <div class="opcoes">
+                                        <div class="comprar_produto">
+                                            Conferir
+                                        </div>
+                                    <div class="carrinho_produto carrinho" onClick="adicionarCarrinho(<?php echo($rsProdutos[$cont]->getId()) ?>)">
+                                        <img alt="#" src="view/icones/carrinho.png">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    
+                </div>
+                
+                <?php
+                $cont++;
+                    }
+                ?>
+            </div>
+
+            <div class="linha">
+                Os Mais Vistos
+            </div>
+
+            <div class="produto_full" id="produto_clique">
+                <?php
+                    $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                    require_once($diretorio.'controller/controllerProduto.php');
+                
+                    $listProduto = new controllerProduto();
+                    $rsProdutos = $listProduto->listarProdutosClique();
                     
                     $cont = 0;
                 

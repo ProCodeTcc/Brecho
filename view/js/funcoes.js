@@ -55,3 +55,20 @@ function atualizarClique(element, event, idProduto){
 		}
 	});
 }
+
+function sliderProduto(local){
+	$(function() {
+		var film_roll = new FilmRoll({
+			container: local,
+			position: 'left',
+		});
+	});
+}
+
+function sliderPrincipal(local){
+	$(function() {
+		var film_roll = new FilmRoll({
+			container: local,
+		});
+	});
+}

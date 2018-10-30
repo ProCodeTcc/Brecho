@@ -144,6 +144,18 @@
 			$produtoDAO->updateClick($id);
 		}
 
+		//função para listar os produtos
+		public function listarProdutosClique(){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $produtoDAO->selectByClick();
+
+			//retornando os dados
+			return $listProduto;
+		}
+
 		//função para adicionar os itens no carrinho
 		public function adicionarCarrinho($id){
 			//inicia a sessão

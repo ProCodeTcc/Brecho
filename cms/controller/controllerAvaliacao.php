@@ -26,7 +26,6 @@
 				$dtinicio = $_POST['dtinicio'];
 				$dttermino = $_POST['dttermino'];
 				$percentualLoja = $_POST['txtpercentualloja'];
-				$percentualCliente = $_POST['txtpercentualcliente'];
 			}
 
 			//instância da classe ConsignacaoDAO
@@ -74,7 +73,7 @@
 						$avaliacaoDAO->Delete($idProdutoAvaliacao);
 
 						//relacionando a consignação com o produto
-						$consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja, $percentualCliente);
+						$consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
 					}
 				}
 			}else{
@@ -108,7 +107,7 @@
 						$avaliacaoDAO->Delete($idProdutoAvaliacao);
 
 						//relacionando a consignação com o produto
-						$consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja, $percentualCliente);
+						$consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
 					}
 				}
 			}

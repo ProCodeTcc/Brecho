@@ -98,6 +98,12 @@
 			</li>
 
 			<li class="submenu-itens">
+				<a class="paginas_link" href="../consignacao/consignacao_view.php">
+					Consignação
+				</a>
+			</li>
+
+			<li class="submenu-itens">
 				<a class="paginas_link" href="../roupa/roupa_view.php">
 					Roupas
 				</a>
