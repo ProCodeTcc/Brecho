@@ -23,6 +23,7 @@
         <script src="view/js/jquery.js"> </script>
         <script src="view/js/jquery.cycle.all.js"> </script>
         <script src="view/js/jquery.film_roll.js"></script>
+        <script src="view/js/funcoes.js"></script>
         <script>
 			
 			function checarLogin(){
@@ -265,7 +266,7 @@
                 ?>
                 <div class="caixa_produto">
                         <div class="produto">
-                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=home">
+                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=home" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
 
                             <div class="imagem_produto">
                                 <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">

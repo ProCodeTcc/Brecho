@@ -207,6 +207,14 @@
 			require_once('controller/controllerProduto.php');
 			$modo = $_GET['modo'];
 			switch($modo){
+				case 'clique':
+					$id = $_POST['id'];
+
+					$controllerProduto = new controllerProduto();
+
+					$controllerProduto->atualizarClique($id);
+				break;
+
 				case 'adicionarCarrinho':
 					$id = $_POST['id'];
 

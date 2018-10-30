@@ -135,6 +135,15 @@
 			return $listProduto;
 		}
 
+		//função para atualizar os cliques do produto
+		public function atualizarClique($id){
+			//instância da classe ProdutoDAO();
+			$produtoDAO = new ProdutoDAO();
+
+			//chamada da função que atualiza o clique
+			$produtoDAO->updateClick($id);
+		}
+
 		//função para adicionar os itens no carrinho
 		public function adicionarCarrinho($id){
 			//inicia a sessão

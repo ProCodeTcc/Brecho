@@ -402,6 +402,27 @@
 			$conexao->fecharConexao();
 		}
 
+		//função que atualiza a qtd de cliques de um produto
+		public function updateClick($id){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que atualiza os cliques
+			$stm = $PDO_conexao->prepare('UPDATE produto SET cliques = cliques+1 WHERE idProduto = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $id);
+
+			//execução do statement
+			$stm->execute();
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
 		public function selectCartItens($ids){
 			//instância da classe de conexão com o banco de dados
 			$conexao = new ConexaoMySQL();

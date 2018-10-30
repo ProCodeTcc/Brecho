@@ -40,3 +40,18 @@ function checkDados(controller, campo, input){
 		}
 	});
 }
+
+function atualizarClique(element, event, idProduto){
+	event.preventDefault();
+
+	url = $(element).attr('href');
+	
+	$.ajax({
+		type: 'POST',
+		url: '/brecho/router.php?controller=produto&modo=clique',
+		data: {id:idProduto},
+		success: function(dados){
+			window.location.href=url;
+		}
+	});
+}
