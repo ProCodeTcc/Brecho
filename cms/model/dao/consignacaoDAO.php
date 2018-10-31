@@ -3,12 +3,12 @@
 		Projeto: CMS do Brechó
 		Autor: Lucas Eduardo
 		Data: 26/10/2018
-        Objetivo: Implementado função que gera uma consignação
+        Objetivo: Implementada função que gera uma consignação
         
         Projeto: CMS do Brechó
 		Autor: Lucas Eduardo
 		Data: 30/10/2018
-		Objetivo: ???? 
+		Objetivo: Implementada função que atualiza a consignação
     */
     
     class ConsignacaoDAO{
@@ -191,21 +191,62 @@
             $conexao->fecharConexao();
         }
 
-        selectConsignacao($idConsignacao){
+        //função que seleciona os dados de uma consignação através do ID
+        public function selectConsignacao($idConsignacao){
+            //instância da classe de conexão com o banco
             $conexao = new ConexaoMySQL();
 
+            //chamada da função que conecta com o banco
             $PDO_conexao = $conexao->conectarBanco();
 
-            $stm = $PDO_conexao->prepare('SELECT c.*, pc.percentualLoja as percentual FROM pedidoconsignacao AS c INNER JOIN produto_consignacao AS pc ON pc.idConsignacao = ?');
+            //query que realiza a consulta
+            $stm = $PDO_conexao->prepare('SELECT c.*, pc.percentualLoja as percentual FROM pedidoconsignacao AS c INNER JOIN produto_consignacao AS pc 
+            ON pc.idConsignacao = c.idConsignacao WHERE pc.idConsignacao = ?');
 
+            //parâmetros enviados
             $stm->bindParam(1, $idConsignacao);
 
+            //execução do statement
             $stm->execute();
 
+            //armazenando os dados em uma variável
             $listConsignacao = $stm->fetch(PDO::FETCH_OBJ);
 
+            //retornando os dados em JSON
             return json_encode($listConsignacao);
 
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+
+        //função para atualizar uma consignação
+        public function Update(Consignacao $consignacaoClass){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que atualiza os dados
+            $stm = $PDO_conexao->prepare('UPDATE pedidoconsignacao AS p INNER JOIN produto_consignacao AS pc ON p.idConsignacao = pc.idConsignacao SET pc.percentualLoja = ?, 
+            p.dataInicial = ?, p.dataFinal = ? WHERE pc.idConsignacao = ?');
+
+            // $stm->bindParam(1, $consignacaoClass->getValor());
+            $stm->bindParam(1, $consignacaoClass->getPercentual());
+            $stm->bindParam(2, $consignacaoClass->getDtInicio());
+            $stm->bindParam(3, $consignacaoClass->getDtTermino());
+            $stm->bindParam(4, $consignacaoClass->getId());
+
+            //verificando se deu certo
+            if($stm->execute()){
+                //retorna true se der certo
+                echo('true');
+            }else{
+                //false se der erro
+                echo('false');
+            }
+
+            //fechando a conexão
             $conexao->fecharConexao();
         }
     }

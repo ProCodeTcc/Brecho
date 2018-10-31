@@ -9,6 +9,7 @@
         private $valor;
         private $dtInicio;
         private $dtTermino;
+        private $percentual;
         private $idProduto;
 
         public function setId($id){
@@ -49,6 +50,14 @@
 
         public function getIdProduto(){
             return $this->idProduto;
+        }
+
+        public function setPercentual($percentual){
+            $this->percentual = $percentual;
+        }
+
+        public function getPercentual(){
+            return $this->percentual;
         }
     }
 ?>

@@ -8,47 +8,79 @@
 <script>
 	var url = '../../';
 
+	//função que exibe os dados de uma consignação
+	function exibirDados(id){
+		$.ajax({
+			type: 'POST', //tipo de requisição
+			url: url+'router.php', //url onde será enviada a requisição
+			data: {id:id, controller: 'consignação', modo: 'buscar'}, //parâmetros enviados
+			success: function(dados){
+				//convertendo os dados para JSON
+				json = JSON.parse(dados);
+	
+				//colocando os valores nas caixas de texto
+				$('#percentualloja').val(json.percentual);
+				$('#dtinicio').val(json.dataInicial);
+				$('#dttermino').val(json.dataFinal);
+			}
+		});
+	}
+
 	$(document).ready(function(){
-		// $('#frmAvaliacao').submit(function(e){
-		// 	e.preventDefault();
+		var id = $('#frmConsignacao').data('id');
 
-		// 	var tipoCliente = $('#frmAvaliacao').data('tipocliente');
-		// 	var idProduto = $('#frmAvaliacao').data('idproduto');
-		// 	var idCliente = $('#frmAvaliacao').data('idcliente');
-		// 	var negocio = $('input[name=txttipo]:checked').val()
-		// 	var formulario = new FormData($('#frmAvaliacao')[0]);
+		if(id != ""){
+			exibirDados(id);
+		}
 
-		// 	formulario.append('controller', 'avaliação');
-		// 	formulario.append('tipoCliente', tipoCliente);
-		// 	formulario.append('idProduto', idProduto);
-		// 	formulario.append('idCliente', idCliente);
+		//função no submit do formulário
+		$('#frmConsignacao').submit(function(e){
+			//desativando o submit
+			e.preventDefault();
 			
-		// 	if(negocio == 'consignado'){
-		// 		formulario.append('modo', 'consignado');
-		// 	}else{
-		// 		formulario.append('modo', 'compra');
-		// 	}
-
-		// 	$.ajax({
-		// 		type: 'POST',
-		// 		url: url+'router.php',
-		// 		data: formulario,
-		// 		cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         async: true,
-		// 		success: function(dados){
-		// 			alert(dados);
-		// 		}
-		// 	});
+			//armazenando o formulário em uma variável
+			formulario = new FormData($('#frmConsignacao')[0]);
 			
-		// });
+			//acrescentando ao formulário o parâmetro controller
+			formulario.append('controller', 'consignação');
+			
+			//acrescentando ao formulário o parâmetro modo
+			formulario.append('modo', 'editar');
+
+			//acrescentando ao formulário o parâmetro ID
+			formulario.append('id', id);
+
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: formulario,
+				cache: false,
+                contentType: false,
+                processData: false,
+                async: true,
+				success: function(dados){
+					//verificando o retorno
+					if(dados == 'true'){
+						//mensagem de sucesso
+						alert('Consignação atualizada com sucesso!!');
+
+						//fechamento da modal
+						$('.container_modal').fadeOut();
+					}else{
+						//mensagem de erro
+						alert('Ocorreu um erro ao atualizar a consignação!!');
+					}
+					
+				}
+			});
+			
+		});
 	});
 </script>
 
 <div class="form_container">
 	<img class="fechar" src="../imagens/fechar.png">
-	<form class="frmAvaliacao" method="POST" data-id="<?php echo($id) ?>" id="frmAvaliacao" name="frmAvaliacao">	
+	<form class="frmAvaliacao" method="POST" data-id="<?php echo($id) ?>" id="frmConsignacao" name="frmConsignacao">	
 		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Valor:
@@ -62,7 +94,7 @@
 				Percentual da Loja:
 			</label>
 			
-			<input type="text" name="txtpercentualloja" class="cadastro_input" id="percentualloja" value="50" onBlur="calcularPercentual()">
+			<input type="text" name="txtpercentualloja" class="cadastro_input" id="percentualloja">
 		</div>
 
 		<div class="form_linha" id="lbl_data">

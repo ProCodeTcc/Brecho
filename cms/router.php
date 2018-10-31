@@ -648,5 +648,25 @@
 				break;
 			}
 		break;
+
+		case 'consignação':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerConsignacao.php');
+			switch($modo){
+				case 'buscar':
+					$id = $_POST['id'];
+
+					$controllerConsignacao = new controllerConsignacao();
+					$listConsignacao = $controllerConsignacao->buscarConsignacao($id);
+
+					echo($listConsignacao);
+				break;
+
+				case 'editar':
+					$controllerConsignacao = new controllerConsignacao();
+					$controllerConsignacao->atualizarConsignacao();
+				break;
+			}
+		break;
     }
 ?>

@@ -12,6 +12,33 @@
             require_once($diretorio.'/model/dao/consignacaoDAO.php');
         }
 
+        //função que atualiza a consignação
+        public function atualizarConsignacao(){
+            //verificando se o método é POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //resgatando os dados das caixas de texto
+                $percentual = $_POST['txtpercentualloja'];
+                $dtInicio = $_POST['dtinicio'];
+                $dtTermino = $_POST['dttermino'];
+                $id = $_POST['id'];
+            }
+
+            //instância da classe Consignacao
+            $consignacaoClass = new Consignacao();
+
+            //setando os atributos
+            $consignacaoClass->setId($id);
+            $consignacaoClass->setPercentual($percentual);
+            $consignacaoClass->setDtInicio($dtInicio);
+            $consignacaoClass->setDtTermino($dtTermino);
+
+            //instância da classe ConsignacaoDAO
+            $consignacaoDAO = new ConsignacaoDAO();
+
+            //chamada da função que atualiza a consignação
+            $consignacaoDAO->Update($consignacaoClass);
+        }
+
         //função para listar os produtos
         public function listarProdutos(){
             //instância da classe ConsignacaoDAO
@@ -22,6 +49,18 @@
 
             //retornando os dados
             return $listProdutos;
+        }
+
+        //função que busca uma consignação
+        public function buscarConsignacao($id){
+            //instância da classe ConsignacaoDAO
+            $consignacaoDAO = new ConsignacaoDAO();
+
+            //armazenando os dados em uma variável
+            $listConsignacao = $consignacaoDAO->selectConsignacao($id);
+
+            //retornando os dados
+            return $listConsignacao;
         }
     }
 ?>
