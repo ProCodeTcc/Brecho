@@ -114,6 +114,10 @@
                     
                 <div class="pesquisa_cabecalho">
                     <input class="campo_pesquisa_cabecalho" type="text">
+                    <input id="teste" class="campo_pesquisa_cabecalho" type="text" placeholder="Pesquise aqui...">
+                    <div class="caixa_pesquisa">
+                    
+                    </div>
                 </div>
                 </div>
             </div>
