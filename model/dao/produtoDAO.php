@@ -464,6 +464,36 @@
 			
 		}
 
+		public function searchByName($pequisa){
+			$conexao = new ConexaoMySQL();
+			
+			$PDO_conexao = $conexao->conectarBanco();
+
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 and p.nomeProduto like ? GROUP BY p.idProduto');
+
+			$stm->bindParam(1, $pequisa);
+
+			$stm->execute();
+
+			$cont = 0;
+
+			while($rsProduto = $stm->fetch(PDO::FETCH_OBJ)){
+				$listProduto[] = new Produto();
+
+				$listProduto[$cont]->setId($rsProduto->idProduto);
+				$listProduto[$cont]->setImagem($rsProduto->imagem);
+				$listProduto[$cont]->setNome($rsProduto->nome);
+				$listProduto[$cont]->setPreco($rsProduto->preco);
+				$listProduto[$cont]->setTamanho($rsProduto->tamanho);
+
+				$cont++;
+			}
+
+			return $listProduto;
+
+			$conexao->fecharConexao();
+		}
+
 		public function selectCartItens($ids){
 			//instância da classe de conexão com o banco de dados
 			$conexao = new ConexaoMySQL();

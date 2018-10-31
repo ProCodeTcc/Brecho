@@ -108,14 +108,12 @@
                     <a href="view/sobre.php" class="link_paginas"> Sobre </a>
                 
                     <div class="pesquisa_cabecalho_icone">
+                        
                         <img src="view/icones/pesquisa.png" alt="#">
                     </div>
                     
                 <div class="pesquisa_cabecalho">
-                    <input id="teste" class="campo_pesquisa_cabecalho" type="text" placeholder="Pesquise aqui...">
-                    <div class="testediv">
-                    
-                    </div>
+                    <input class="campo_pesquisa_cabecalho" type="text">
                 </div>
                 </div>
             </div>
