@@ -413,8 +413,6 @@ footer{
 /*************************** FORMULARIO USUARIO ************************/
 .fechar{
     float: right;
-    cursor: pointer;
-    margin: 10px;
 }
 
 .form_container{
@@ -516,6 +514,30 @@ footer{
     background-color: rgba(0,0,0,0.5);
     position: absolute;
     display: none;
+}
+
+.icones{
+	margin: 10px;
+	cursor: pointer;
+}
+
+.idiomas{
+	float: left;
+}
+
+.mensagem-info{
+	position: absolute;
+	width: 400px;
+	height: 50px;
+	background-color: #17a2b8;
+	color: white;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding-top: 10px;
+	text-align: center;
+	left: 50%;
+	transform: translate(-50%, 0);
+	display: none;
 }
 
 .modal{

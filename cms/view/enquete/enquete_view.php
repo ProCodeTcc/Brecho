@@ -150,6 +150,10 @@
 
     <body>
         <div class="container_modal">
+            <div class="mensagem-info">
+            
+            </div>
+
             <div class="modal">
                 
             </div>
