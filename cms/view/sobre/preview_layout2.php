@@ -8,11 +8,11 @@
 	var url = '../../';
 	
 	//função para exibir os dados
-	function exibirDados(id){
+	function exibirDados(id, idioma){
 		$.ajax({
 			type: 'POST', //tipo de requisição
 			url: url+'router.php', //url onde será enviada a requisição
-			data: {id:id, modo: 'buscar', controller: 'sobre'}, //parâmetros que serão enviados
+			data: {id:id, idioma:idioma, modo: 'buscar', controller: 'sobre'}, //parâmetros que serão enviados
 			success: function(dados){
 				json = JSON.parse(dados);
 				
@@ -26,7 +26,7 @@
 	}
 	
 	var id = $('#preview_layout2').data('id');
-	exibirDados(id);
+	exibirDados(id, 'pt');
 </script>
 
 <div id="preview_layout2" data-id="<?php echo($id) ?>">

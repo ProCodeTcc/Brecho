@@ -21,12 +21,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Eventos</title>
         <script src="../js/jquery.js"></script>
 		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
+		<script src="../js/jquery-ui.js"></script>
     </head>
 	
 	<script>
@@ -40,6 +42,7 @@
 				success: function(dados){
 					//exibindo os dados na modal
 					$('.modal').html(dados);
+					$('.form').attr('data-modo', 'inserir');
 				}
 			});
 		}
@@ -65,6 +68,8 @@
 				success: function(dados){
 					//colocando os dados na modal
 					$('.modal').html(dados);
+
+					$('#tabs').tabs('enable', 1);
 				}
 			});
 		}
@@ -106,7 +111,7 @@
 		
 		$(document).ready(function(){
 			listar();
-			
+
 			//evento no click de um item do menu
 			$('.menu .menu_itens').click(function(e){
 				//mostrando o submenu somente do item clicado

@@ -52,7 +52,7 @@
 						}
 					?>
 
-					<img src="../imagens/<?php echo($img) ?>"
+					<img src="../imagens/<?php echo($img) ?>">
 				</span>
 
 				<span onClick="excluir(<?php echo($rsLayout[$cont]->getId()) ?>, 1)">

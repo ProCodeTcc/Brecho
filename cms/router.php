@@ -127,14 +127,17 @@
         switch($modo){
             case 'inserir':
                 $controllerEnquete = new controllerEnquete();
-                $controllerEnquete->inserirEnquete();
+				$retorno = $controllerEnquete->inserirEnquete();
+				
+				echo($retorno);
             break;
 
             case 'buscar':
-                $id = $_POST['id'];
+				$id = $_POST['id'];
+				$idioma = $_POST['idioma'];
 
                 $controllerEnquete = new controllerEnquete();
-                $listEnquetes = $controllerEnquete->buscarEnquete($id);
+                $listEnquetes = $controllerEnquete->buscarEnquete($id, $idioma);
                 
                 echo($listEnquetes);
 
@@ -151,10 +154,10 @@
 			break;
 
             case 'editar':
-                $id = $_POST['id'];
-
                 $controllerEnquete = new controllerEnquete();
-                $controllerEnquete->atualizarEnquete($id);
+				$retorno = $controllerEnquete->atualizarEnquete();
+				
+				echo($retorno);
             break;
 
             case 'excluir':
@@ -199,21 +202,26 @@
 				switch($modo){
 					case 'inserirLayout':
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->inserirLayout();
+						$retorno = $controllerSobre->inserirLayout();
+
+						echo($retorno);
 					break;
 					
 					case 'buscar':
 						$id = $_POST['id'];
+						$idioma = $_POST['idioma'];
 						
 						$controllerSobre = new controllerSobre();
-						$listLayout = $controllerSobre->buscarLayout($id);
+						$listLayout = $controllerSobre->buscarLayout($id, $idioma);
 						
 						echo $listLayout;
 					break;
 					
 					case 'atualizarLayout':
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->atualizarLayout();
+						$retorno = $controllerSobre->atualizarLayout();
+
+						echo($retorno);
 					break;
 						
 						
@@ -529,21 +537,26 @@
 			switch($modo){
 				case 'inserir':
 					$controllerEvento = new controllerEvento();
-					$controllerEvento->inserirEvento();
+					$retorno = $controllerEvento->inserirEvento();
+
+					echo($retorno);
 				break;
 					
 				case 'buscar':
 					$id = $_POST['id'];
+					$idioma = $_POST['idioma'];
 					
 					$controllerEvento = new controllerEvento();
-					$listEvento = $controllerEvento->buscarEvento($id);
+					$listEvento = $controllerEvento->buscarEvento($id, $idioma);
 					
 					echo($listEvento);
 				break;
 					
 				case 'editar':
 					$controllerEvento = new controllerEvento();
-					$controllerEvento->atualizarEvento();
+					$retorno = $controllerEvento->atualizarEvento();
+
+					echo($retorno);
 				break;
 					
 				case 'status':

@@ -21,11 +21,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Sobre</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		<script src="../js/funcoes.js"></script>
     </head>
 	
 	<script>
@@ -52,24 +55,34 @@
 			});
 		}
 		
+		//função que busca o layout 1
 		function buscar(idItem){
 			$.ajax({
-				type: 'POST',
-				url: 'frm_layout1.php',
-				data: {id:idItem},
+				type: 'POST', //tipo de requisição
+				url: 'frm_layout1.php', //url onde será enviada a requisição
+				data: {id:idItem}, //parâmetros enviados
 				success: function(dados){
+					//listando o form
 					$('.modal').html(dados);
+
+					//habilitando a aba em inglês para edição
+					$('#tabs').tabs('enable', 1);
 				}
 			});
 		}
 		
+		//função que busca o layout 2
 		function buscarLayout2(idItem){
 			$.ajax({
-				type: 'POST',
-				url: 'frm_layout2.php',
-				data: {id:idItem},
+				type: 'POST', //tipo de requisição
+				url: 'frm_layout2.php', //url onde será enviada a requisição
+				data: {id:idItem}, //parâmetros enviados
 				success: function(dados){
+					//listando o form
 					$('.modal').html(dados);
+
+					//habilitando a aba em inglês para edição
+					$('#tabs').tabs('enable', 1);
 				}
 			});
 		}

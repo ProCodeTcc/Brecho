@@ -12,7 +12,14 @@
         Data: 22/10/2018
         Objetivo: Implementao a função que limita a exclusão de evento se houver apenas um
 
-    */ 
+	*/
+	
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 04/11/2018
+        Objetivo: Implementao a função que traduz um evento
+    */
 
 	class EventoDAO{
 		public function __construct(){
@@ -79,8 +86,9 @@
 				//armazenando o id do evento inserido
 				$idEvento = $PDO_conexao->lastInsertId();
 				
-				//retornando o ID do evento
-				return $idEvento;
+				$retorno = array('id' => $idEvento, 'retorno' => 'inserido');
+
+				return json_encode($retorno);
 			}
 			
 			//fechando a conexão
@@ -107,6 +115,39 @@
 			//execução do statement
 			$stm->execute();
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para traduzir um evento
+		public function insertTranslate(Evento $evento, $idEvento, $idioma){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que insere os dados
+			$stm = $PDO_conexao->prepare('INSERT INTO evento_traducao(nomeEvento, descricaoEvento, idEvento, codigo_idioma) VALUES(?,?,?,?)');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $evento->getNome());
+			$stm->bindParam(2, $evento->getDescricao());
+			$stm->bindParam(3, $idEvento);
+			$stm->bindParam(4, $idioma);
+
+			//execução do statement
+			$stm->execute();
+
+			//verificando retorno
+			if($stm->rowCount() != 0){
+				//armazenando a mensagem em uma variável
+				$retorno = array('retorno' => 'traduzido');
+
+				//retornando a msg em JSON
+				return json_encode($retorno);
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
@@ -183,6 +224,33 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+
+		//função que seleciona um evento traduzido
+		public function selectTranslate($id){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT * FROM evento_traducao WHERE idEvento = ?');
+
+			//parâmetros enviados
+			$stm->bindValue(1, $id, PDO::PARAM_INT);
+
+			//execução do statement
+			$stm->execute();
+
+			//armazenando os dados em uma variável
+			$listEvento = $stm->fetch(PDO::FETCH_OBJ);
+
+			//retornando os dados em JSON
+			return json_encode($listEvento);
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 		
 		//função que atualiza um evento
 		public function Update($evento){
@@ -201,13 +269,10 @@
 			$stm->bindParam(3, $evento->getDescricao());
 			$stm->bindParam(4, $evento->getId());
 			
-			//execução do statement
 			if($stm->execute()){
-				//mensagem de sucesso
-				echo('Evento atualizado com sucesso!!');
-			}else{
-				//mensagem de erro
-				echo('Ocorreu um erro ao atualizar os dados do evento');
+				$retorno = array('retorno' => 'atualizado');
+
+				return json_encode($retorno);
 			}
 			
 			//fechando a conexão
@@ -235,6 +300,35 @@
 				echo('Ocorreu um erro ao atualizar a data');
 			}
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para atualizar a tradução
+		public function updateTranslate(Evento $evento){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que atualiza os dados
+			$stm = $PDO_conexao->prepare('UPDATE evento_traducao SET nomeEvento = ?, descricaoEvento = ? WHERE idEvento = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $evento->getNome());
+			$stm->bindParam(2, $evento->getDescricao());
+			$stm->bindParam(3, $evento->getId());
+
+			//verificando se deu certo
+			if($stm->execute()){
+				//armazenando a mensagem em uma variável
+				$retorno = array('retorno' => 'atualizado');
+
+				//retornando os dados em JSON
+				return json_encode($retorno);
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

@@ -9,24 +9,27 @@
 <script>
 	
 	//função para exibir os dados no formulário
-	function exibirDados(id){
+	function exibirDados(id, idioma){
 		$.ajax({
 			type: 'POST', //tipo de requisição
 			url: url+'router.php', //url onde será enviada a requisição
-			data: {id:id, modo: 'buscar', controller: 'sobre'}, //dados enviados
+			data: {id:id, idioma:idioma, modo: 'buscar', controller: 'sobre'}, //dados enviados
 			success: function(dados){
+				$('.form').attr('data-modo', 'atualizarLayout');
+				$('.form').attr('data-lang', idioma);
+
 				json = JSON.parse(dados);
 				
 				//colocando os valores nas caixas de texto
-				$('#txttitulo').val(json.titulo);
-				$('#txtdesc').val(json.descricao);
-				$('#txtdesc2').val(json.descricao2);
+				$('.txttitulo').val(json.titulo);
+				$('.txtdesc').val(json.descricao);
+				$('.txtdesc2').val(json.descricao2);
 				
 				//verificando se a imagem não está vazia, e então mostra ela na div
 				//de visualizar
 				if(json.imagem != null){
 					$('#imgSobre').attr('src', '../arquivos/'+json.imagem);
-					$('#frm_sobreLayout2').data('imagem', json.imagem);
+					$('#frm_sobreLayout2').attr('data-imagem', json.imagem);
 				}
 			}
 		});
@@ -45,45 +48,56 @@
 	}
 	
 	$(document).ready(function(){
-		var id = $('#frm_sobreLayout2').data('id');
-		
-		if(id != ""){
-			exibirDados(id);
-		}
+		$('#tabs').tabs();
+		$('#tabs').tabs('disable', 1);
 		
 		$('.fechar').click(function(){
 			$('.container_modal').fadeOut(400);
 		});
 		
-		$('#imagem').change(function(){
+		$('#imagem').live('change', function(){
 			mostrarPrevia(this);
 		});
 		
 		$('#frm_sobreLayout2').submit(function(e){
-			//desabilitando função de submit
+			//desabilitando o submit do botão
 			e.preventDefault();
-			
+
 			//armazenando o formulario em uma variável
-			var formulario = new FormData($('#frm_sobreLayout2')[0]);
+			var formulario =  new FormData($('#frm_sobreLayout2')[0]);
 			
-			//armazenando o layout em uma variável
-			var layout = $('#frm_sobreLayout2').data('layout');
+			//armazenando o tipo de layout numa variável
+			var layout = $('#frm_sobreLayout2').attr('data-layout');
+
+			//atribuindo ao formulário o parâmetro layout
+			formulario.set('layout', layout);
 			
-			//atribuindo ao formulario o parâmetro layout
-			formulario.append('layout', layout);
-			
+			//armazenando o modo em uma variável
+			var modo = $('#frm_sobreLayout2').attr('data-modo');
+
+			//atribuindo ao formulário o parâmetro modo
+			formulario.set('modo', modo);
+
+			//armazenando o idioma em uma variável
+			var idioma = $('#frm_sobreLayout2').attr('data-lang');
+
+			//atribuindo ao formulário o idioma
+			formulario.set('idioma', idioma);
+
+			//armazenando o ID em uma variável
+			var id = $('#frm_sobreLayout2').attr('data-id');
+
+			//atribuindo ao formulário o ID
+			formulario.set('id', id);
+
 			//atribuindo ao formulário o parâmetro controller
-			formulario.append('controller', 'sobre');
+			formulario.set('controller', 'sobre');
 			
-			if(id == ""){
-				formulario.append('modo', 'inserirLayout');
-			}else{
-				var imagem = $('#frm_sobreLayout2').data('imagem');
-				
-				formulario.append('imagem', imagem);
-				formulario.append('modo', 'atualizarLayout');
-				formulario.append('id', id);
-			}
+			//armazenando a imagem em uma variável
+			var imagem = $('#frm_sobreLayout2').attr('data-imagem');
+			
+			//atribuindo ao formulário o parâmetro imagem
+			formulario.set('imagem', imagem);
 			
 			$.ajax({
 				type: 'POST', //tipo de requisição
@@ -94,9 +108,33 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					alert(dados); //mensagem de sucesso
-					listar(); //listagem dos dados
-					$('.container_modal').fadeOut(400);
+					//conversão dos dados para JSON
+					json = JSON.parse(dados);
+
+					//verificando o modo
+					if(modo == 'inserirLayout'){
+						//se for inserirido, troca de aba e atualiza as informações do form
+						if(json.retorno == 'inserido'){
+							$('#frm_sobreLayout2').attr('data-submit', true);
+							$('#frm_sobreLayout2').attr('data-id', json.id);
+							$('#frm_sobreLayout2').attr('data-lang', 'en');
+
+							verificarSubmit();
+						}else if(json.retorno == 'traduzido'){
+							//se for traduzido, mostra uma msg de sucesso e fecha o form
+							alert('Layout inserido com sucesso!!');
+							
+							listar();
+
+							$('.container_modal').fadeOut(400);
+						}
+					}else{
+						if(json.retorno == 'atualizado'){
+							alert('Layout atualizado com sucesso!!');
+							listar();
+							$('.container_modal').fadeOut(400);
+						}
+					}
 				}
 			});
 		});
@@ -105,41 +143,17 @@
 
 <div class="frm_container">
 	<img class="fechar" src="../imagens/fechar.png">
-	<form method="POST" class="sobre_layout" data-id="<?php echo($id) ?>" enctype="multipart/form-data" data-layout="2" name="frmSobre" id="frm_sobreLayout2">
-		<div id="visualizar_sobre">
-			<label for="imagem" title="clique aqui para selecionar uma imagem">
-				<img id="imgSobre" src="../imagens/picture.png">
-			</label>
-			<input type="file" id="imagem" name="fleimagem">
-		</div>
-		
-		<div class="form_linha">
-			<label class="lbl_cadastro">
-				Titulo:
-			</label>
-			
-			<input class="cadastro_input" type="text" id="txttitulo" name="txttitulo" required>
-			<input type="hidden" id="txtimagem" name="txtimagem">
-		</div>
-		
-		<div class="form_linha">
-			<label class="lbl_cadastro">
-				Descrição 1:
-			</label>
-			
-			<textarea name="txtdesc" class="cadastro_text" id="txtdesc" required></textarea>
-		</div>
-		
-		<div class="form_linha">
-			<label class="lbl_cadastro">
-				Descrição 2:
-			</label>
-			
-			<textarea name="txtdesc2" class="cadastro_text" id="txtdesc2" required></textarea>
-		</div>
-		
-		<div class="form_linha" id="btn_linha">
-			<input type="submit" class="sub_btn" value="CADASTRAR">
+	<form method="POST" class="form" data-id="<?php echo($id) ?>" enctype="multipart/form-data" data-lang="pt" data-layout="2" name="frmSobre" id="frm_sobreLayout2">
+		<div id="tabs">
+			<ul>
+				<li>
+					<a href="frm_layout2_pt.php">PT</a>
+				</li>
+
+				<li>
+					<a href="frm_layout2_en.php">EN</a>
+				</li>
+			</ul>
 		</div>
 	</form>
 </div>

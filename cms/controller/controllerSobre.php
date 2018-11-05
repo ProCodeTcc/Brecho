@@ -23,6 +23,7 @@
 				$titulo = $_POST['txttitulo'];
 				$descricao = $_POST['txtdesc'];
 				$layout = $_POST['layout'];
+				$idioma = $_POST['idioma'];
 				
 				if(isset($_POST['txtdesc2'])){
 					$descricao2 = $_POST['txtdesc2'];
@@ -52,10 +53,32 @@
 			
 			//verifica qual o layout que é pra ser inserido
 			if($layout == 1){
-				$sobreDAO->Insert($sobre);
-			}else{
-				$sobreDAO->InsertLayout2($sobre);
+				//verifica qual o idioma
+				if($idioma == 'pt'){
+					//insere o layout em PT
+					$retorno = $sobreDAO->Insert($sobre);
+				}else{
+					//resgata o ID
+					$idSobre = $_POST['id'];
+
+					//insere o layout em EN
+					$retorno = $sobreDAO->insertTranslateLayout1($sobre, $idSobre, $idioma);
+				}
+			}else if($layout == 2){
+				if($idioma == 'pt'){
+					//insere o layout 2 em PT
+					$retorno = $sobreDAO->InsertLayout2($sobre);
+				}else{
+					//resgata o ID
+					$idSobre = $_POST['id'];
+
+					//insere o layout 2 em EN
+					$retorno = $sobreDAO->insertTranslateLayout2($sobre, $idSobre, $idioma);
+				}
 			}
+
+			//retornando a mensagem
+			return $retorno;
 		}
 		
 		//função que atualiza um layout
@@ -67,7 +90,8 @@
 				$descricao = $_POST['txtdesc'];
 				$layout = $_POST['layout'];
 				$id = $_POST['id'];
-				
+				$idioma = $_POST['idioma'];
+
 				if(isset($_POST['txtdesc2'])){
 					$descricao2 = $_POST['txtdesc2'];
 				}
@@ -102,12 +126,29 @@
 			//instância da classe sobreDAO
 			$sobreDAO = new SobreDAO();
 			
-			//verifica qual o layout que deve ser atualizado
+			//verifica qual o layout que é pra ser atualizado
 			if($layout == 1){
-				$sobreDAO->UpdateLayout1($sobre);
-			}else{
-				$sobreDAO->UpdateLayout2($sobre);
+				//verifica o idioma
+				if($idioma == 'pt'){
+					//atualiza o layout 1 em PT
+					$retorno = $sobreDAO->UpdateLayout1($sobre);
+				}else{
+					//atualiza o layout 1 em EN
+					$retorno = $sobreDAO->updateTranslateLayout1($sobre);
+				}
+			}else if($layout == 2){
+				//verifica o idioma
+				if($idioma == 'pt'){
+					//atualiza o layout 2 em PT
+					$retorno = $sobreDAO->UpdateLayout2($sobre);
+				}else{
+					//atualiza o layout 2 em EN
+					$retorno = $sobreDAO->updateTranslateLayout2($sobre);
+				}
 			}
+
+			//retornando a mensagem
+			return $retorno;
 		}
 		
 		//listar o layout 1
@@ -123,12 +164,17 @@
 		}
 		
 		//busca um layout
-		public function buscarLayout($id){			
+		public function buscarLayout($id, $idioma){			
 			//instância da classe sobreDAO
 			$sobreDAO = new SobreDAO();
 			
-			//armazenando o retorno da consulta em uma variável
-			$listLayout = $sobreDAO->SelectLayoutByID($id);
+			if($idioma == 'pt'){
+				//armazenando o retorno da consulta em uma variável
+				$listLayout = $sobreDAO->SelectLayoutByID($id);
+			}else{
+				//armazenando o retorno da consulta em uma variável
+				$listLayout = $sobreDAO->selectTranslate($id);
+			}
 			
 			//retornando a lista com o layout
 			return $listLayout;

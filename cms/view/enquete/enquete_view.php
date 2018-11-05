@@ -21,12 +21,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Home</title>
         <script src="../js/jquery.js"></script>
 		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
+        <script src="../js/jquery-ui.js"></script>
     </head>
 
     <script>
@@ -37,7 +39,8 @@
 				type: 'POST',
 				url: 'frm_enquete.php',
 				success: function(dados){
-					$('.modal').html(dados);
+                    $('.modal').html(dados);
+                    $('.form').attr('data-modo', 'inserir');
 				}
 			});
 		}
@@ -96,6 +99,8 @@
                 data: {id:idItem}, //dados a serem enviados
                 success: function(dados){
                     $('.modal').html(dados);
+                    $('.form').attr('data-modo', 'buscar');
+                    $('#tabs').tabs('enable', 1);
                 }
             });
         }

@@ -31,6 +31,14 @@
 
     */ 
 
+    /*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 02/11/2018
+        Objetivo: Implementao a função que traduz uma enquete
+
+    */
+
     class EnqueteDAO{
         public function __construct(){
             require_once('bdClass.php');
@@ -58,9 +66,114 @@
 			$stm->bindParam(8, $enquete->getIdTema());
             
             //executando o statement
-			$stm->execute();
+            $stm->execute();
+            
+            if($stm->rowCount() != 0){
+                $idEnquete = $PDO_conexao->lastInsertId();
+                $retorno = array('id' => $idEnquete, 'retorno' => 'inserido');
+
+                return json_encode($retorno);
+            }
 
             //fechando a conexãp
+            $conexao->fecharConexao();
+        }
+
+        //função que insere a tradução de uma enquete
+        public function insertTranslate(Enquete $enquete, $idEnquete, $idioma){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que insere os dados
+            $stm = $PDO_conexao->prepare('INSERT INTO enquete_traducao(pergunta, alternativaA, alternativaB, alternativaC, alternativaD, idEnquete, codigo_idioma) VALUES(?,?,?,?,?,?,?)');
+
+            //parâmetros enviados
+            $stm->bindParam(1, $enquete->getPergunta());
+            $stm->bindParam(2, $enquete->getAlternativaA());
+            $stm->bindParam(3, $enquete->getAlternativaB());
+            $stm->bindParam(4, $enquete->getAlternativaC());
+            $stm->bindParam(5, $enquete->getAlternativaD());
+            $stm->bindParam(6, $idEnquete);
+            $stm->bindParam(7, $idioma);
+
+            //execução do statement
+            $stm->execute();
+            
+            //verificando retorno das linhas
+            if($stm->rowCount() != 0){
+                //armazenando uma mensagem na variável
+                $retorno = array('retorno' => 'traduzido');
+
+                //retornando a mensagem em JSON
+                return json_encode($retorno);
+            }
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+
+        //função que busca uma enquete traduzida peo ID
+        public function selectTranslate($idEnquete){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que realiza a consulta
+            $stm = $PDO_conexao->prepare('SELECT * FROM enquete_traducao WHERE idEnquete = ?');
+
+            //parâmetros enviados
+            $stm->bindValue(1, $idEnquete, PDO::PARAM_INT);
+
+            //execução do statement
+            $stm->execute();
+
+            //armazenando os dados em uma variável
+            $listEnquete = $stm->fetch(PDO::FETCH_OBJ);
+
+            //retornando os dados em JSON
+            return json_encode($listEnquete);
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+
+        //função que atualiza a tradução da enquete
+        public function updateTranslate(Enquete $enquete){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que atualiza os dados
+            $stm = $PDO_conexao->prepare('UPDATE enquete_traducao SET pergunta = ?, alternativaA = ?, alternativaB = ?, alternativaC = ?, alternativaD = ? WHERE idEnquete = ?');
+
+            //parâmetros enviados
+            $stm->bindParam(1, $enquete->getPergunta());
+            $stm->bindParam(2, $enquete->getAlternativaA());
+            $stm->bindParam(3, $enquete->getAlternativaB());
+            $stm->bindParam(4, $enquete->getAlternativaC());
+            $stm->bindParam(5, $enquete->getAlternativaD());
+            $stm->bindParam(6, $enquete->getId());
+
+            //verificando se foi executado com sucesso
+            if($stm->execute()){
+                //mensagem de sucesso
+                $retorno = array('retorno' => 'atualizado');
+            }else{
+                //mensagem de erro
+                $retorno = array('retorno' => 'erro');
+            }
+
+            //retorna a mensagem em JSON
+            return json_encode($retorno);
+
+            //fechando a conexão
             $conexao->fecharConexao();
         }
 

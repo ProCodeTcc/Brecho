@@ -10,25 +10,29 @@
     var url = '../../';
 	
 	//função que exibe os dados
-	function exibirDados(id){
+	function exibirDados(id, idioma){
 		$.ajax({
 			type: 'POST', //tipo de requisição
 			url: url+'/router.php', //url para onde será enviada a requisição
-			data: {id:id, modo: 'buscar', controller: 'enquete'}, //dados a serem enviados
+			data: {id:id, idioma:idioma, modo: 'buscar', controller: 'enquete'}, //dados a serem enviados
 			success: function(dados){
+                //mudando o modo para editar
+                $('#frm_enquete').attr('data-modo', 'editar');
+                $('#frm_enquete').attr('data-lang', idioma);
+
 				//conversão dos dados para JSON
 				json = JSON.parse(dados);
 
 				//atribuindo os valores para as caixas de texto
 				$('#frm_enquete').data('id', json.idEnquete);
-				$('#txtpergunta').val(json.pergunta);
-				$('#txttema').val(json.idNivel);
-				$('#alternativa_a').val(json.alternativaA);
-				$('#alternativa_b').val(json.alternativaB);
-				$('#alternativa_c').val(json.alternativaC);
-				$('#alternativa_d').val(json.alternativaD);
-				$('#dtinicio').val(json.dataInicial);
-				$('#dttermino').val(json.dataFinal);
+				$('.txtpergunta').val(json.pergunta);
+				$('.txttema').val(json.idNivel);
+				$('.alternativa_a').val(json.alternativaA);
+				$('.alternativa_b').val(json.alternativaB);
+				$('.alternativa_c').val(json.alternativaC);
+				$('.alternativa_d').val(json.alternativaD);
+				$('.dtinicio').val(json.dataInicial);
+				$('.dttermino').val(json.dataFinal);
 			}
 		});
 	}
@@ -42,16 +46,12 @@
 			$('#dttermino').css('border', '1px solid red');
 			return false;
 		}
-    }
+    } 
 	
     $(document).ready(function(){
-		//resgatando o id do formulário e armazenando em uma variável
-        var id = $('#frm_enquete').data('id');
-		
-		if(id != ""){
-			exibirDados(id);
-		}
-		
+        $('#tabs').tabs();
+        $('#tabs').tabs('disable', 1);
+        
         $('.fechar').click(function(){
             $('.container_modal').fadeOut(400);
         });
@@ -62,20 +62,27 @@
 
             //armazenando os dados do formulário em uma variável
             var formulario = new FormData($('#frm_enquete')[0]);
-            
+
+            //armazenando o idioma do form em uma variável
+            var idioma = $('#frm_enquete').attr('data-lang');
+
+            //armazenando o ID da enquete em uma variável
+            var id = $('#frm_enquete').attr('data-id');
+
+            //armazenando o modo da enquete em uma variável
+            var modo = $('#frm_enquete').attr('data-modo');
+
             //atribuindo o id ao formulário
-            formulario.append('id', id);
-            
-            //verificando se o ID é nulo, se sim, atribui á variável modo o parâmetro de inserir
-            //caso contráriom atribui o parâmetro de editar
-            if(id == ""){
-                formulario.append('modo', 'inserir');
-            }else{
-                formulario.append('modo', 'editar');
-            }
+            formulario.set('id', id);
+
+            //atribuindo o idioma ao formulário
+            formulario.set('idioma', idioma);
+
+            //atribuindo o modo ao formulário
+            formulario.set('modo', modo);
             
             //atribuindo a variável controller com o parâmetro enquete
-            formulario.append('controller', 'enquete');
+            formulario.set('controller', 'enquete');
 
             $.ajax({
                 type: 'POST', //tipo de requisição
@@ -86,99 +93,44 @@
                 processData: false,
                 async: true,
                 success: function(dados){
-                    if(validarTermino() != false){
-                        listar();
-                        $('.container_modal').fadeOut(400);
+                    // if(validarTermino() != false){
+                    //     listar();
+                    //     $('.container_modal').fadeOut(400);
+                    // }
+
+                    json = JSON.parse(dados);
+    
+                    if(modo == 'inserir'){
+                        if(json.retorno == 'inserido'){
+                            $('#frm_enquete').attr('data-submit', true);
+                            $('#frm_enquete').attr('data-lang', 'en');
+                            $('#frm_enquete').attr('data-id', json.id);
+                            
+                            verificarSubmit();
+                        }else if(json.retorno == 'traduzido'){
+                            alert('Enquete inserida com sucesso!!');
+                        }
+                    }else{
+                        if(json.retorno == 'atualizado'){
+                            alert('Enquete atualizada com sucesso!!');
+                        }
                     }
                 }
             });
         });
     });
 </script>
+    <form class="form" data-id="<?php echo($id) ?>" data-submit="false" data-lang="pt" method="post" name="form" id="frm_enquete" action="enquete_view.php">
+        <div id="tabs">
+            <ul>
+                <li>
+                    <a href="frm_enquete_pt.php">PT</a>
+                </li>
 
-<div class="form_container">
-    <img class="fechar" src="../imagens/fechar.png">
-    <form class="frm_enquete" data-id="<?php echo($id) ?>" method="post" name="frmEnquete" id="frm_enquete" action="enquete_view.php">
-        <div class="form_linha">
-            <label class="lbl_cadastro">
-                Pergunta:
-            </label>
-
-            <input type="text" class="cadastro_input" name="txtpergunta" id="txtpergunta">
+                <li>
+                    <a href="frm_enquete_en.php">EN</a>
+                </li>
+                <img class="fechar" src="../imagens/fechar.png">
+            </ul>
         </div>
-
-        <div class="form_linha">
-            <label class="lbl_cadastro">
-                Tema:
-            </label>
-
-            <select class='cadastro_select' name="txttema" id="txttema">
-
-                <?php
-                    $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
-                    require_once($diretorio.'/controller/controllerEnquete.php');
-                    $listTemas = new controllerEnquete();
-                    $rsTemas = $listTemas->listarTemas();
-                    $cont = 0;
-                    while($cont < count($rsTemas)){
-                ?>
-            
-                <option value="<?php echo($rsTemas[$cont]->getIdTema())?>">
-                    <?php echo($rsTemas[$cont]->getTema())?>
-                </option>
-
-                <?php
-                    $cont++;
-                    }
-                ?>
-
-            </select>
-        </div>
-
-        <div class="form_linha">
-                <label class="lbl_cadastro">
-                    Alternativa A:
-                </label>
-
-                <input type="text" class="cadastro_input" name="txtalta" id="alternativa_a">
-
-                <label class="lbl_cadastro">
-                    Alternativa B:
-                </label>
-
-                <input type="text" class="cadastro_input" name="txtaltb" id="alternativa_b">
-
-                <label class="lbl_cadastro">
-                    Alternativa C:
-                </label>
-
-                <input type="text" class="cadastro_input" name="txtaltc" id="alternativa_c">
-
-                <label class="lbl_cadastro">
-                    Alternativa D:
-                </label>
-
-                <input type="text" class="cadastro_input" name="txtaltd" id="alternativa_d">
-        </div>
-
-        <div class="form_linha" id="lbl_data">
-            <label class="lbl_cadastro">
-                Início:
-            </label>
-
-             <label class="lbl_cadastro">
-                Término:
-            </label>
-        </div>
-
-        <div class="form_linha" id="input_data">
-			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio" onBlur="validarData('#dtinicio')">
-			
-			<input type="date" class="cadastro_input" name="dttermino" id="dttermino" onBlur="validarData('#dttermino')">
-        </div>
-
-        <div class="form_linha" id="btn_linha">
-            <input type="submit" class="sub_btn" value="CADASTRAR">
-        <div> 
     </form>
-</div>

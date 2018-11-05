@@ -19,3 +19,21 @@ function validarData(input){
 		return false;
 	}
 }
+
+//função que verifica se o form em pt foi submetido
+function verificarSubmit(){
+	//armazenando o valor em uma variável
+	var submit = $('.form').data('submit');
+	
+	//verificando se é verdadeiro
+	if(submit == true){
+		//habilita a guia em inglês
+		$('#tabs').tabs('enable', 1);
+
+		//desabilita em português
+		$('#tabs').tabs('disable', 0);
+
+		//seta a guia em inglês como ativa
+		$('#tabs').tabs('option', 'active', 1);
+	}
+}   

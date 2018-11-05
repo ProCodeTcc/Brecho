@@ -27,6 +27,7 @@
                 $alternativa_d = $_POST['txtaltd'];
                 $dtInicio = $_POST['dtinicio'];
                 $dtTermino = $_POST['dttermino'];
+                $idioma = $_POST['idioma'];
 
                 if($dtInicio > $dtTermino){
                     $dtInicio = null;
@@ -50,11 +51,19 @@
             $enqueteDAO = new EnqueteDAO();
 			
 			//chamada da função que insere uma nova enquete
-            $enqueteDAO->Insert($enqueteClass);
+            if($idioma == 'pt'){
+                $retorno = $enqueteDAO->Insert($enqueteClass);
+            }else{
+                $idEnquete = $_POST['id'];
+                $retorno = $enqueteDAO->insertTranslate($enqueteClass, $idEnquete, $idioma);
+            }
+
+            //retorna a mensagem
+            return $retorno;
         }
 		
 		//função que atualiza uma enquete
-        public function atualizarEnquete($id){
+        public function atualizarEnquete(){
 			//verifica se o método é POST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				//resgatando os valores da caixas de texto
@@ -66,6 +75,8 @@
                 $alternativa_d = $_POST['txtaltd'];
                 $dtInicio = $_POST['dtinicio'];
                 $dtTermino = $_POST['dttermino'];
+                $idioma = $_POST['idioma'];
+                $id = $_POST['id'];
             }
 			
 			//instância da classe enquete
@@ -84,9 +95,18 @@
 			
 			//instância da classe EnqueteDAO
             $enqueteDAO = new EnqueteDAO();
-			
-			//chamada da função que atualiza a enquete
-            $enqueteDAO->Update($enqueteClass);
+            
+            //verificando qual o idioma
+			if($idioma == 'pt'){
+                //chamada da função que atualiza a enquete
+                $retorno = $enqueteDAO->Update($enqueteClass);
+            }else{
+                //chamada da função que atualiza a enquete
+                $retorno = $enqueteDAO->updateTranslate($enqueteClass);
+            }
+
+            //retorna a mensagem
+            return $retorno;
         }
 
 		//função que lista os temas
@@ -129,12 +149,18 @@
         }
 
 		//função que busca uma enquete através do ID
-        public function buscarEnquete($id){
+        public function buscarEnquete($id, $idioma){
 			//instância da classe enqueteDAO
             $enqueteDAO = new EnqueteDAO();
 			
-			//armazenando o retorno dos dados em uma variável
-            $resultado = $enqueteDAO->selectByID($id);
+			//verifica qual o idioma da enquete
+            if($idioma == 'pt'){
+                //armazena os dados em uma variável
+                $resultado = $enqueteDAO->selectByID($id);
+            }else{
+                //armazena os dados em uma variável
+                $resultado = $enqueteDAO->selectTranslate($id);
+            }
 			
 			//retornando os dados
             return $resultado;

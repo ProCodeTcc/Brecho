@@ -15,6 +15,14 @@
 
     */ 
 
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 22/10/2018
+        Objetivo: Implementao a função que traduz os layouts 1 e 2
+
+	*/ 
+	
 	class SobreDAO{
 		public function __construct(){
 			require_once('bdClass.php');
@@ -27,9 +35,6 @@
 			
 			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
-			
-			
-			$PDO_conexao->exec('SET CHARACTER SET UTF8');
 				
 			//query para inserir os dados
 			$stm = $PDO_conexao->prepare('INSERT INTO sobre(titulo, descricao, imagem, tipoLayout) VALUES(?,?,?,?)');
@@ -45,13 +50,50 @@
 			
 			//verificando o retorno
 			if($stm->rowCount() != 0){
-				echo('Layout inserido com sucesso!!');
+				$id = $PDO_conexao->lastInsertId();
+
+				$retorno = array('id' => $id, 'retorno' => 'inserido');
+
+				return json_encode($retorno);
 			}
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
 		
+		//função que insere a traduçãdo do layout 1
+		public function insertTranslateLayout1(Sobre $sobre, $idSobre, $idioma){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada de conexão com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que insere os dados
+			$stm = $PDO_conexao->prepare('INSERT INTO sobre_traducao(titulo, descricao, idSobre, codigo_idioma) VALUES(?,?,?,?)');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $sobre->getTitulo());
+			$stm->bindParam(2, $sobre->getDescricao());
+			$stm->bindParam(3, $idSobre);
+			$stm->bindParam(4, $idioma);
+
+			//execução do statement
+			$stm->execute();
+
+			//verificando retorno
+			if($stm->rowCount() != 0){
+				//armazenando a mensagem uma variável
+				$retorno = array('retorno' => 'traduzido');
+
+				//retornando em JSON
+				return json_encode($retorno);
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
 		//função que busca no banco todos os dados na tabela de layout
 		public function SelectAllLayout1(){
 			//instância da classe de conexão com o banco de dados
@@ -124,6 +166,33 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+
+		//função que busca uma tradução
+		public function selectTranslate($id){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que faz a consulta
+			$stm = $PDO_conexao->prepare('SELECT * FROM sobre_traducao WHERE idSobre = ?');
+
+			//parâmetro enviado
+			$stm->bindValue(1, $id, PDO::PARAM_INT);
+
+			//execução do statement
+			$stm->execute();
+
+			//armazenando os dados em uma variável
+			$listLayout = $stm->fetch(PDO::FETCH_OBJ);
+
+			//retornando os dados em JSON
+			return json_encode($listLayout);
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 		
 		//query que atualiza o layout 1
 		public function UpdateLayout1(Sobre $sobre){
@@ -145,9 +214,40 @@
 			$stm->bindParam(4, $sobre->getId());
 			
 			if($stm->execute()){
-				echo('Layout atualizado com sucesso!!');
+				$retorno = array('retorno' => 'atualizado');
+
+				return json_encode($retorno);
 			}
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para traduzir um layout
+		public function updateTranslateLayout1(Sobre $sobre){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que atualiza os dados
+			$stm = $PDO_conexao->prepare('UPDATE sobre_traducao SET titulo = ?, descricao = ? WHERE idSobre = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $sobre->getTitulo());
+			$stm->bindParam(2, $sobre->getDescricao());
+			$stm->bindParam(3, $sobre->getId());
+
+			//verificando se deu certo
+			if($stm->execute()){
+				//armazenando a mensagem em uma variável
+				$retorno = array('retorno' => 'atualizado');
+
+				//retornando os dados em JSON
+				return json_encode($retorno);
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
@@ -249,9 +349,47 @@
 			
 			//verificando o número de linhas
 			if($stm->rowCount() != 0){
-				echo('Layout inserido com sucesso!!');
+				$id = $PDO_conexao->lastInsertId();
+
+				$retorno = array('id' => $id, 'retorno' => 'inserido');
+
+				return json_encode($retorno);
 			}
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função que insere a tradução do layout2
+		public function insertTranslateLayout2(Sobre $sobre, $idSobre, $idioma){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que insere os dados
+			$stm = $PDO_conexao->prepare('INSERT INTO sobre_traducao(titulo, descricao, descricao2, idSobre, codigo_idioma) VALUES(?,?,?,?,?)');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $sobre->getTitulo());
+			$stm->bindParam(2, $sobre->getDescricao());
+			$stm->bindParam(3, $sobre->getDescricao2());
+			$stm->bindParam(4, $idSobre);
+			$stm->bindParam(5, $idioma);
+
+			//execução do statement
+			$stm->execute();
+
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//armazenando a mensagem em uma variável
+				$retorno = array('retorno' => 'traduzido');
+
+				//retornando a msg em JSON
+				return json_encode($retorno);
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
@@ -321,12 +459,44 @@
 			
 			//executando o statement
 			if($stm->execute()){
-				echo('Layout atualizado com sucesso!!');
+				$retorno = array('retorno' => 'atualizado');
+
+				return json_encode($retorno);
 			}
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
 			
+		}
+
+		//função que atualiza a tradução do layout2
+		public function updateTranslateLayout2(Sobre $sobre){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que atualiza os dados
+			$stm = $PDO_conexao->prepare('UPDATE sobre_traducao SET titulo = ?, descricao = ?, descricao2 = ? WHERE idSobre = ?');
+
+			//parâmetros que serão enviados
+			$stm->bindParam(1, $sobre->getTitulo());
+			$stm->bindParam(2, $sobre->getDescricao());
+			$stm->bindParam(3, $sobre->getDescricao2());
+			$stm->bindParam(4, $sobre->getId());
+
+			//verificando se deu certo
+			if($stm->execute()){
+				//armazenando a mensagem em uma variável
+				$retorno = array('retorno' => 'atualizado');
+
+				//retornando a msg em JSON
+				return json_encode($retorno);
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
 		}
 		
 		//função que retorna o total de conteúdos cadastrados

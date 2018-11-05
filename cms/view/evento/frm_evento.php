@@ -25,20 +25,22 @@
 	}
 	
 	//função que exibe os dados no formulário
-	function exibirDados(id){
+	function exibirDados(id, idioma){
 		$.ajax({
 			type: 'POST', //tipo de requisição
 			url: url+'router.php', //url onde será enviada a requisição
-			data: {id:id, controller: 'evento', modo: 'buscar'}, //parâmetros enviados
+			data: {id:id, idioma:idioma, controller: 'evento', modo: 'buscar'}, //parâmetros enviados
 			success: function(dados){
+				$('#frmEvento').attr('data-modo', 'editar');
+				$('#frmEvento').attr('data-lang', idioma);
 				//conversão dos dados para JSON
 				json = JSON.parse(dados);
 				
 				//resgatando os valores das caixas de texto
-				$('#txtnome').val(json.nomeEvento);
-				$('#txtdesc').val(json.descricaoEvento);
-				$('#dtinicio').val(json.dataInicio);
-				$('#dttermino').val(json.dataFim);
+				$('.txtnome').val(json.nomeEvento);
+				$('.txtdesc').val(json.descricaoEvento);
+				$('.dtinicio').val(json.dataInicio);
+				$('.dttermino').val(json.dataFim);
 				
 				//verificando se a imagem é nula
 				if(json.imagemEvento != null){
@@ -46,19 +48,17 @@
 					$('#img').attr('src', '../arquivos/'+json.imagemEvento);
 					
 					//colocando o caminho no data-atributo
-					$('#frmEvento').data('imagem', json.imagemEvento);
+					$('#frmEvento').attr('data-imagem', json.imagemEvento);
 				}
 			}
 		});
 	}
 	
 	$(document).ready(function(){
-		var id = $('#frmEvento').data('id');
-		
-		if(id != ""){
-			exibirDados(id);
-		}
-		
+		$('#tabs').tabs();
+	
+		$('#tabs').tabs('disable', 1);
+
 		$('.fechar').click(function(){
 			$('.container_modal').fadeOut(400);
 		});
@@ -76,25 +76,33 @@
 			var formulario = new FormData($('#frmEvento')[0]);
 			
 			//atribuindo ao formulário o parâmetro controller
-			formulario.append('controller', 'evento');
+			formulario.set('controller', 'evento');
+		
+			//resgatando o caminho da imagem do data-atributo
+			var imagem = $('#frmEvento').attr('data-imagem');
+
+			//atribuindo ao formulário o parâmetro imagem
+			formulario.set('imagem', imagem);
 			
-			//verificando se o ID está nulo
-			if(id == ""){
-				//se estiver, atribui ao formulário o modo de inserir
-				formulario.append('modo', 'inserir');
-			}else{
-				//resgatando o caminho da imagem do data-atributo
-				var imagem = $('#frmEvento').data('imagem');
-				
-				//atribuindo ao formulário o parâmetro de editar
-				formulario.append('modo', 'editar');
-				
-				//atribuindo ao formulário o parâmetro ID
-				formulario.append('id', id);
-				
-				//atribuindo ao formulário o parâmetro imagem
-				formulario.append('imagem', imagem);
-			}
+			//armazenando o modo em uma variável
+			var modo = $('#frmEvento').attr('data-modo')
+
+			//atribuindo o modo ao formulário
+			formulario.set('modo', modo);
+			
+			//armazenando o ID em uma variável
+			var id = $('#frmEvento').attr('data-id');
+
+			//atribuindo ao formulário o parâmetro ID
+			formulario.set('id', id);
+			
+
+			//armazenando o idioma em uma variável
+			var idioma = $('#frmEvento').attr('data-lang');
+			
+			//atribuindo o idioma ao formulário
+			formulario.set('idioma', idioma);
+			
 			
 			$.ajax({
 				type: 'POST',
@@ -105,9 +113,47 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					alert(dados);
-					listar();
-					$('.container_modal').fadeOut(400);
+					//conversão dos dados para JSON
+					json = JSON.parse(dados);
+					
+					//verificando se o modo é pra inserir
+					if(modo == 'inserir'){
+						//verificando se foi inserido
+						if(json.retorno == 'inserido'){
+							//muda o submit pra true
+							$('#frmEvento').attr('data-submit', true);
+
+							//troca o idioma pra inglês
+							$('#frmEvento').attr('data-lang', 'en');
+
+							//troca o ID inserido
+							$('#frmEvento').attr('data-id', json.id);
+
+							//muda de aba
+							verificarSubmit();
+						}else if(json.retorno == 'traduzido'){ //verificando se foi traduzido
+							//mensagem de sucesso
+							alert('Evento inserido com sucesso!!');
+							
+							//listando os dados
+							listar();
+							
+							//fechando a modal
+							$('.container_modal').fadeOut(400);
+						}
+					}else{
+						//verifica se foi atualizado
+						if(json.retorno == 'atualizado'){
+							//mensagem de sucesso
+							alert('Evento atualizado com sucesso!!');
+							
+							//listagem dos dados
+							listar();
+
+							//fechando a modal
+							$('.container_modal').fadeOut(400);
+						}
+					}
 				}
 			});
 		});
@@ -116,78 +162,17 @@
 
 <div class="form_container">
 	<img class="fechar" src="../imagens/delete.png">
-	<form method="post" id="frmEvento" data-id="<?php echo($id) ?>" class="frmEvento" name="frmEvento">
-		<div class="form_linha">
-			<div id="visualizar_evento">
-				<label for="imagem">
-					<img id="img" src="../imagens/image.png">
-				</label>
-				
-				<input type="file" id="imagem" name="fleimagem">
-			</div>
-		</div>
-		
-		<div class="form_linha">
-			<label>
-				Nome:
-			</label>
-			
-			<input type="text" class="cadastro_input" name="txtnome" id="txtnome">
-		</div>
-		
-		<div class="form_linha">
-			<label>
-				Descrição:
-			</label>
-			
-			<textarea class="cadastro_text" name="txtdesc" id="txtdesc"></textarea>
-		</div>
-		
-		<div class="form_linha">
-			<label>
-				Loja
-			</label>
-			
-			<select class="cadastro_select" name="txtloja">
-			
-				<?php
-					$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
-		  			require_once($diretorio.'controller/controllerEvento.php');
-		  			$listLojas = new controllerEvento();
-		  			$rsLojas = $listLojas->listarLojas();
-		  			$cont = 0;
-		  			while($cont < count($rsLojas)){
-				?>
-				
-				<option value="<?php echo($rsLojas[$cont]->getIdLoja()) ?>">
-					<?php echo($rsLojas[$cont]->getLoja()) ?>
-				</option>
-				
-				<?php
-				$cont++;
-		  			}
-				?>
-			</select>
-		</div>
-		
-		<div class="form_linha container_data" id="lbl_data">
-            <label class="lbl_cadastro">
-                Início:
-            </label>
+	<form method="post" id="frmEvento" data-id="<?php echo($id) ?>" data-lang="pt" class="form" name="frmEvento">
+		<div id="tabs">
+			<ul>
+				<li>
+					<a href="frm_evento_pt.php">PT</a>
+				</li>
 
-             <label class="lbl_cadastro">
-                Término:
-            </label>
-        </div>
-
-        <div class="form_linha container_data" id="input_data">
-			<input type="date" class="cadastro_input" name="dtinicio" id="dtinicio" onBlur="validarData('#dtinicio')">
-			
-			<input type="date" class="cadastro_input" name="dttermino" id="dttermino" onBlur="validarData('#dttermino')">
-        </div>
-		
-		<div class="form_linha">
-			<input type="submit" class="sub_btn" value="ENVIAR">
+				<li>
+					<a href="frm_evento_en.php">EN</a>
+				</li>
+			</ul>
 		</div>
 	</form>
 </div>

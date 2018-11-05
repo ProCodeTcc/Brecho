@@ -6,6 +6,7 @@
 			success: function(dados){
 				$('.modal').show();
 				$('.modal').html(dados);
+				$('.form').attr('data-modo', 'inserirLayout');
 			}
 		});
 	}
@@ -17,6 +18,7 @@
 			success: function(dados){
 				$('.modal').show();
 				$('.modal').html(dados);
+				$('.form').attr('data-modo', 'inserirLayout');
 			}
 		});
 	}
