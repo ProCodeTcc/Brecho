@@ -37,3 +37,25 @@ function verificarSubmit(){
 		$('#tabs').tabs('option', 'active', 1);
 	}
 }   
+
+function mostrarErro(mensagem){
+	$('.mensagens').fadeIn(400);
+	$('#erro').append(mensagem);
+	$('#erro').fadeIn(400);
+}
+
+function mostrarInfo(mensagem){
+	$('.mensagens').fadeIn(400);
+	$('#info').append(mensagem);
+	$('#info').fadeIn(400);
+}
+
+function mostrarSucesso(mensagem){
+	$('.mensagens').fadeIn(400);
+	$('#sucesso').append(mensagem);
+	$('#sucesso').fadeIn(400);
+}
+
+function fecharModal(){
+	$('.mensagens').fadeOut(400);
+}

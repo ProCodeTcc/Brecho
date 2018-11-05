@@ -415,6 +415,39 @@
 					
 			}
 		break;
+
+		case 'categoria':
+			$modo = $_POST['modo'];
+			require_once('controller/controllerCategoria.php');
+			switch($modo){
+				case 'inserir':
+					$controllerCategoria = new controllerCategoria();
+
+					$retorno = $controllerCategoria->inserirCategoria();
+
+					echo $retorno;
+				break;
+
+				case 'excluir':
+					$id = $_POST['id'];
+
+					$controllerCategoria = new controllerCategoria();
+
+					$controllerCategoria->excluirCategoria($id);
+				break;
+
+				case 'status':
+					$id = $_POST['id'];
+					$status = $_POST['status'];
+
+					$controllerCategoria = new controllerCategoria();
+
+					$retorno = $controllerCategoria->atualizarStatus($status, $id);
+
+					echo($retorno);
+				break;
+			}
+		break;
 			
 		case 'promoção':
 			$modo = $_POST['modo'];

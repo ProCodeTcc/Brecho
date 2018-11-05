@@ -525,21 +525,6 @@ footer{
 	float: left;
 }
 
-.mensagem-info{
-	position: absolute;
-	width: 400px;
-	height: 50px;
-	background-color: #17a2b8;
-	color: white;
-	border-radius: 5px;
-	box-sizing: border-box;
-	padding-top: 10px;
-	text-align: center;
-	left: 50%;
-	transform: translate(-50%, 0);
-	display: none;
-}
-
 .modal{
     width: 800px;
     height: 600px;
@@ -554,6 +539,83 @@ footer{
 #modal_nivel{
 	width: 300px;
 	height: 200px;
+}
+
+/************************* MENSAGENS **********************************/
+
+.mensagens{
+	width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    display: none;
+}
+
+.mensagem-info{
+	position: relative;
+	width: 400px;
+	height: 50px;
+	background-color: #D9EDF7;
+	color: #31708F;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding-top: 10px;
+	text-align: center;
+	margin: auto;
+	top: 50%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transform: translate(-50%, 0);
+	display: none;
+}
+
+.mensagem-sucesso{
+	position: relative;
+	width: 400px;
+	height: 50px;
+	background-color: #DFF0D8;
+	color: #3C763D;
+	border-radius: 2px;
+	box-sizing: border-box;
+	padding-top: 10px;
+	text-align: center;
+	margin: auto;
+	top: 50%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+}
+
+.mensagem-erro{
+	position: relative;
+	width: 400px;
+	height: 50px;
+	background-color: #F2DEDE;
+	color: #A94442;
+	border-radius: 2px;
+	box-sizing: border-box;
+	padding-top: 15px;
+	text-align: center;
+	margin: auto;
+	top: 50%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+}
+
+.close{
+	font-size: 25px;
+	font-family: fantasy;
+	color: gray;
+	float: right;
+	box-sizing: border-box;
+	position: relative;
+	margin-top: -8px;
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 /************************* FORMULARIO DE NIVEIS *************************/
