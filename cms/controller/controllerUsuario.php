@@ -187,6 +187,21 @@
 				//se não existir, redireciona o usuário pra página de login
 				header("location: ../../index.php");
 			}
-		}
+        }
+        
+        //função para pesquisar o usuário
+        public function pesquisarUsuario($pesquisa){
+            //formatando a pesquisa
+            $termo = '%'.$pesquisa.'%';
+
+            //instância da classe UsuarioDAO
+            $usuarioDAO = new UsuarioDAO();
+
+            //armazenando os dados em uma variável
+            $listUsuarios = $usuarioDAO->searchUser($termo);
+
+            //retornando os dados
+            return $listUsuarios;
+        }
     }
 ?>

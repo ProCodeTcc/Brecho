@@ -21,6 +21,13 @@
 		Data: 01/10/2018
 		Objetivo: Implementado sistema de permissões
 	*/
+
+	/*
+		Projeto: CMS do Brechó - Atualização
+		Autor: Lucas Eduardo
+		Data: 06/11/2018
+		Objetivo: Implementado pesquisa de níveis
+	*/
     
     Class NivelDAO{
         public function __construct(){
@@ -298,6 +305,53 @@
 				header('location: ../../index.php');
 			}
 			
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar um nível
+		public function searchNivel($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da classe de conexão com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os níveis
+			$stm = $PDO_conexao->prepare('SELECT * from nivelusuario WHERE nomeNivel like ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsNiveis = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo nível
+				$listNiveis[] = new Nivel();
+
+				//setando os atributos
+				$listNiveis[$cont]->setId($rsNiveis->idNivel);
+				$listNiveis[$cont]->setNome($rsNiveis->nomeNivel);
+				$listNiveis[$cont]->setStatus($rsNiveis->status);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há algum resultado
+			if($cont != 0){
+				//retornando os dados
+				return $listNiveis;
+			}else{
+				//mensagem se não encontrar nenhum
+				echo('nenhum nível encontrado');
+			}
+
+			//fechando a conexão
 			$conexao->fecharConexao();
 		}
     }

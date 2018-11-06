@@ -24,6 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Unidades</title>
 		<script src="../js/latlon.js"></script>
+		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
@@ -136,7 +137,10 @@
             <span class="page_title">Unidades</span>
 
             <div class="page_search_container">
-                <input type="text" class="page_search">
+            	<input type="search" class="page_search" id="pesquisar" onkeydown="pesquisar(event)">
+                <div class="img_pesquisa">
+                    <img src="../imagens/search.png" onmousedown="pesquisar(event)">
+                </div>
             </div>
 			
 			 <button class="page_btn" onclick="adicionar();" id="adicionar" data-modo="novo">
@@ -168,6 +172,10 @@
 						
 						
                     </div>
+
+					<div id="pesquisa">
+					
+					</div>
                 </div>
             </div>
 		</div>

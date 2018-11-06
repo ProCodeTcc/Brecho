@@ -284,7 +284,8 @@ footer{
     border: none;
     height: 20px;
     margin-left: 60px;
-    cursor: pointer;
+	cursor: pointer;
+	margin-right: 5px;
 }
 
 .page_btn:hover{
@@ -294,15 +295,28 @@ footer{
 
 .page_search_container{
     width: 80%;
-    height: auto;
-    text-align: center;
+    height: 20px;
+	text-align: center;
+	display: flex;
+	margin: 0 auto;
+	justify-content: center;
 }
 
 .page_search{
-    width: 30%;
-    border-radius: 5px;
+	width: 30%;
+	height: 20px;
     border: none;
-    text-indent: 10px;
+	text-indent: 10px;
+}
+
+.img_pesquisa{
+	background-color: #a287bb;
+	cursor: pointer;
+	width: 20px;
+}
+
+.img_pesquisa img{
+	margin-top: 2px;
 }
 
 .dashboard{
@@ -410,9 +424,24 @@ footer{
     transition: 0.5s;
 }
 
+#pesquisa{
+	display: none;
+	position: relative;
+	height: auto;
+	min-height: 400px;
+}
+
+.voltar{
+	position: absolute;
+	bottom: 0;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
 /*************************** FORMULARIO USUARIO ************************/
 .fechar{
-    float: right;
+	float: right;
+	cursor: pointer;
 }
 
 .form_container{
@@ -476,8 +505,8 @@ footer{
 .sub_btn{
 	border-radius: 2px;
 	border: none;
-	width: 100px;
-	height: 50px;
+	width: 120px;
+	height: 40px;
 	background-color: #A287BB;
 	color: white;
 	cursor: pointer;
@@ -1162,7 +1191,7 @@ footer{
 
 /************************* PROMOÇÃO ***************************/
 .frmPromocao{
-	width: 230px;
+	width: 270px;
 	height: auto;
 	display: flex;
 	flex-direction: column;

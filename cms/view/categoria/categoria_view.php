@@ -151,13 +151,13 @@
 		
 		<div class="mensagens">
 			<div class="mensagem-sucesso" id="sucesso">
-				<div class="close" onclick="fecharModal()">
+				<div class="close" onclick="fecharMensagem()">
 					x
 				</div>
 			</div>
 	
 			<div class="mensagem-erro" id="erro">
-				<div class="close" onclick="fecharModal()">
+				<div class="close" onclick="fecharMensagem()">
 					x
 				</div>
 				

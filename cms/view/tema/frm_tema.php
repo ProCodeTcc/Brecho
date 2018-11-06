@@ -24,6 +24,7 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('350','400');
 		var id = $('#frmTema').data('id');
 		
 		if(id != ""){
@@ -61,6 +62,7 @@
 	});
 </script>
 
+<img class="fechar" src="../imagens/delete.png" onclick="fecharModal()">
 <div class="form_container">
 	<form class="frm_tema" data-id="<?php echo($id) ?>" id="frmTema" name="frm_tema">
 		<div class="form_linha">

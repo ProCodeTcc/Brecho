@@ -46,12 +46,9 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('600', '400');
 		$('#tabs').tabs();
 		$('#tabs').tabs('disable', 1);
-
-		$('.fechar').click(function(){
-			$('.container_modal').fadeOut(400);
-		});
 		
 		$('#imagem').live('change', function(){
 			mostrarPrevia(this);
@@ -143,7 +140,6 @@
 </script>
 
 <div class="frm_container">
-	<img class="fechar" src="../imagens/fechar.png">
 	<form method="POST" data-id="<?php echo($id) ?>" data-layout="1" data-lang="pt" enctype="multipart/form-data" class="form" name="frmSobre" id="frm_sobreLayout1">
 		<div id="tabs">
 			<ul>
@@ -154,6 +150,8 @@
 				<li>
 					<a href="frm_layout1_en.php">EN</a>
 				</li>
+
+				<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 			</ul>
 		</div>
 	</form>

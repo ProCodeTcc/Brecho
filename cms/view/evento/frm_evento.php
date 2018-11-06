@@ -55,13 +55,10 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('650', '400');
 		$('#tabs').tabs();
 	
 		$('#tabs').tabs('disable', 1);
-
-		$('.fechar').click(function(){
-			$('.container_modal').fadeOut(400);
-		});
 		
 		$('#imagem').live('change', function(){
 			mostrarPrevia(this);
@@ -161,7 +158,6 @@
 </script>
 
 <div class="form_container">
-	<img class="fechar" src="../imagens/delete.png">
 	<form method="post" id="frmEvento" data-id="<?php echo($id) ?>" data-lang="pt" class="form" name="frmEvento">
 		<div id="tabs">
 			<ul>
@@ -172,6 +168,8 @@
 				<li>
 					<a href="frm_evento_en.php">EN</a>
 				</li>
+
+				<img class="fechar" src="../imagens/delete.png" onclick="fecharModal()">
 			</ul>
 		</div>
 	</form>

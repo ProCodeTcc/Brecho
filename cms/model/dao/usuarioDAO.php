@@ -19,6 +19,13 @@
 		Autor: Lucas Eduardo
 		Data: 28/09/2018
 		Objetivo: Implementado sistema de logout
+    */
+    
+    /*
+		Projeto: CMS do Brechó - Atualização
+		Autor: Lucas Eduardo
+		Data: 06/11/2018
+		Objetivo: Implementado pesquisa de usuários
 	*/
 
     class UsuarioDAO{
@@ -292,6 +299,56 @@
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
-		}
+        }
+        
+        //função que que pesquisa o usuário no banco
+        public function searchUser($pesquisa){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que faz a consulta
+            $stm = $PDO_conexao->prepare("SELECT usuariocms.*, n.nomeNivel FROM usuariocms LEFT JOIN nivelUsuario as n on usuariocms.idNivel = n.idNivel WHERE concat_ws(',', nomeUsuario, login) like ? ORDER BY idUsuario");
+
+            //parâmetros enviados
+            $stm->bindParam(1, $pesquisa);
+
+            //execução do statement
+            $stm->execute();
+
+            //contador
+            $cont = 0;
+
+            //percorrendo os dados
+            while($rsUsuarios = $stm->fetch(PDO::FETCH_OBJ)){
+                //criando um novo usuário
+                $listUsuarios[] = new Usuario();
+
+                //setando os atributos
+                $listUsuarios[$cont]->setId($rsUsuarios->idUsuario);
+				$listUsuarios[$cont]->setNome($rsUsuarios->nomeUsuario);
+				$listUsuarios[$cont]->setUsuario($rsUsuarios->login);
+				$listUsuarios[$cont]->setNivel($rsUsuarios->idNivel);
+				$listUsuarios[$cont]->setNomeNivel($rsUsuarios->nomeNivel);
+                $listUsuarios[$cont]->setStatus($rsUsuarios->status);
+                
+                //incrementando o contador
+                $cont++;
+            }
+
+            //verifica se há algum resultado
+            if($cont != 0){
+                //retorna os usuários
+                return $listUsuarios;
+            }else{
+                //mensagem de erro
+                echo('nenhum usuário encontrado');
+            }
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
     }
 ?>

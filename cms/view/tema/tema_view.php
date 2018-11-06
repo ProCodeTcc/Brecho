@@ -26,6 +26,7 @@
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
+		<script src="../js/funcoes.js"></script>
     </head>
 	
 	<script>
@@ -131,7 +132,7 @@
 
     <body>
         <div class="container_modal">
-            <div class="modal" id="modal_tema">
+            <div class="modal">
                 
             </div>
         </div>

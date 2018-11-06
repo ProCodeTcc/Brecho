@@ -37,15 +37,12 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('500', '600');
 		var id = $('#frmUnidade').data('id');
 		
 		if(id != ""){
 			exibirDados(id);
 		}
-		
-		$('.fechar').click(function(){
-			$('.container_modal').fadeOut(400);
-		});
 		
 		//função no momento em que o campo de CEP sair do foco
 		$('#txtcep').blur(function(){
@@ -122,7 +119,7 @@
 </script>
 
 <div class="form_container">
-	<img class="fechar" src="../imagens/delete.png">
+	<img class="fechar" src="../imagens/delete.png" onclick="fecharModal()">
 	<form method="post" id="frmUnidade" data-id="<?php echo($id) ?>" class="frmUnidade" name="frmUnidade">
 		<div class="unidades_container">
 				<div class="unidade_col1">

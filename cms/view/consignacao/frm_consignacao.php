@@ -27,6 +27,7 @@
 	}
 
 	$(document).ready(function(){
+		mudarModal('400', '400');
 		var id = $('#frmConsignacao').data('id');
 
 		if(id != ""){
@@ -79,7 +80,7 @@
 </script>
 
 <div class="form_container">
-	<img class="fechar" src="../imagens/fechar.png">
+	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 	<form class="frmAvaliacao" method="POST" data-id="<?php echo($id) ?>" id="frmConsignacao" name="frmConsignacao">	
 		<div class="form_linha">
 			<label class="lbl_cadastro">

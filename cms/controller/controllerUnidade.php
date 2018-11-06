@@ -161,5 +161,20 @@
 			//chamada da função que deleta uma unidade
 			$unidadeDAO->Delete($id, $idEndereco);
 		}
+
+		//função para pesquisar uma unidade
+		public function pesquisarUnidade($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe UnidadeDAO
+			$unidadeDAO = new UnidadeDAO();
+
+			//armazenando os dados em uma variável
+			$listUnidade = $unidadeDAO->searchUnidade($termo);
+
+			//retornando os dados
+			return $listUnidade;
+		}
 	}
 ?>

@@ -146,6 +146,7 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('650', '600');
 		var id = $('#frmRoupa').data('id');
 		listarCategoria();
 		listarMarca();
@@ -180,10 +181,6 @@
 			});
 		});
 		
-		$('.fechar').click(function(){
-			$('.container_modal').fadeOut(400);
-		});
-		
 		$('#txtnumero').click(function(){
 			//exibindo os tamanhos
 			buscarNumero(2);
@@ -197,7 +194,7 @@
 </script>
 
 <div class="form_container" id="form_container_roupa">
-	<img class="fechar" src="../imagens/fechar.png">
+	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
     
 	<form method="post" class="frm_imagem" id="frmImagem" name="frmImagem" enctype="multipart/form-data" action="upload.php">
 		

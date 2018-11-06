@@ -27,6 +27,7 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('400','400');
 		var id = $('#frmCor').data('id');
 		
 		if(id != ""){
@@ -63,6 +64,7 @@
 	});
 </script>
 
+<img class="fechar" src="../imagens/delete.png" onclick="fecharModal()">
 <div class="form_container">
 	<form class="frm_cor" data-id="<?php echo($id) ?>" id="frmCor" name="frm_cor">
 		<div class="form_linha">

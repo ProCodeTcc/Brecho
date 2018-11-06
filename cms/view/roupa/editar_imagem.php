@@ -51,26 +51,12 @@
 	}
 	
 	$(document).ready(function(){
-		$('.modal').height(400);
-		
-//		$('.editar_imagem').click(function(){
-//			$('.container_imagens').hide('fast');
-//			$('.modal').show();
-//		});
-		
-		$('.fechar').click(function(){
-			$.ajax({
-				type: 'POST',
-				success: function(dados){
-					$('.container_modal').fadeOut(400);
-				}
-			});
-		});
+		mudarModal('400','800');
 	});
 </script>
 
 <div class="container_imagens">
-	<img class="fechar" src="../imagens/fechar.png">
+	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 	<div class="dados_imagens">
 		<?php
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';

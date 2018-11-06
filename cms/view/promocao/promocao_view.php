@@ -24,6 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Promoção</title>
         <script src="../js/jquery.js"></script>
+		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
 		

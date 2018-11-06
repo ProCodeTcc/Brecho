@@ -139,5 +139,20 @@
 			//chamada da função que deleta um nível
 			$nivelDAO->checarPermissao($idNivel, $idPagina);
 		}
+
+		//função para pesquisar um nível
+		public function pesquisarNivel($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe NivelDAO
+			$nivelDAO = new NivelDAO();
+
+			//armazenando os dados em uma variável
+			$listNiveis = $nivelDAO->searchNivel($termo);
+
+			//retornando os dados
+			return $listNiveis;
+		}
     }
 ?>

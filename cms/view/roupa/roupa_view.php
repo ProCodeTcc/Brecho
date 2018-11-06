@@ -26,6 +26,7 @@
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
+		<script src="../js/funcoes.js"></script>
 		
 		<script>
 			var url = '../../';

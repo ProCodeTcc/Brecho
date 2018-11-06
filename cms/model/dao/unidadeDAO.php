@@ -6,6 +6,13 @@
 		Objetivo: Implementado CRUD de unidades
 	*/
 
+	/*
+		Projeto: CMS do Brechó
+		Autor: Lucas Eduardo
+		Data: 17/10/2018
+		Objetivo: Implementado pesquisa de unidades
+	*/
+
 	class UnidadeDAO{
 		public function __construct(){
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
@@ -233,6 +240,56 @@
 				echo('Ocorreu um erro ao excluir a unidade');
 			}
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar uma unidade no banco
+		public function searchUnidade($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta no banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare("SELECT u.*, e.* FROM nossaloja_unidade as u INNER JOIN unidade_endereco as ue ON u.idUnidade = ue.idUnidade INNER JOIN endereco as e ON
+			e.idEndereco = ue.idEndereco WHERE concat_ws(',', u.nomeUnidade, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) LIKE ?");
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsUnidades = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando uma nova unidade
+				$listUnidade[] = new Unidade();
+
+				//setando os dados
+				$listUnidade[$cont]->setIdEndereco($rsUnidades->idEndereco);
+				$listUnidade[$cont]->setId($rsUnidades->idUnidade);
+				$listUnidade[$cont]->setNome($rsUnidades->nomeUnidade);
+				$listUnidade[$cont]->setIdLoja($rsUnidades->idLoja);
+				$listUnidade[$cont]->setCidade($rsUnidades->cidade);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há resultado
+			if($cont != 0){
+				//retornando os dados
+				return $listUnidade;
+			}else{
+				//mensagem se não houver
+				echo('nenhuma unidade encontrada');
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

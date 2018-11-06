@@ -65,6 +65,7 @@
                 processData: false,
                 async: true,
 				success: function(dados){
+					alert(dados);
 					//conversão dos dados para JSON
 					json = JSON.parse(dados);
 

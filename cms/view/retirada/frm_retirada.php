@@ -68,6 +68,7 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('500', '400');
 		//resgatando o ID
 		var id = $('#frmRetirada').data('id');
 		
@@ -82,10 +83,6 @@
 			//exibindo os dados
 			exibirDados(id);
 		}
-		
-		$('.fechar').click(function(){
-			$('.container_modal').fadeOut(400);
-		});
 		
 		$('#frmRetirada').submit(function(e){
 			//desativando o submit do formulário
@@ -133,7 +130,7 @@
 </script>
 
 <div class="form_container">
-	<img class="fechar" src="../imagens/fechar.png">
+	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 	<form class="frmRetirada" data-id="<?php echo($id) ?>" id="frmRetirada" name="frmRetirada">
 		<div class="form_linha">
 			<label class="lbl_cadastro">

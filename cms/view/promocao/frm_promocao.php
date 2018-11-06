@@ -45,6 +45,7 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('350', '400');
 		var id = $('#frmPromocao').data('id');
 		
 		exibirDados(id);
@@ -76,8 +77,8 @@
 	});
 </script>
 
+<img class="fechar" src="../imagens/delete.png">
 <div class="form_container">
-	<img class="fechar" src="../imagens/delete.png">
 	<form method="post" id="frmPromocao" data-id="<?php echo($id) ?>" class="frmPromocao" name="frmPromocao">
 		<div class="form_linha">
 			<label>

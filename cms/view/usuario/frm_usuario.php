@@ -54,6 +54,8 @@
 	});
 	
     $(document).ready(function(){
+        mudarModal('500', '400');
+        
 		//resgatando o id do usuario
 		var idUsuario = $('#frmUsuario').data('id');
 		
@@ -62,10 +64,6 @@
 			exibirDados(idUsuario);
 		}
 		   
-        $('.fechar').click(function(){
-            $('.container_modal').fadeOut(400);
-        });
-
         $('#frmUsuario').submit(function(event){
             //criando uma variavel e armazenando o formulário nela
             var formulario = new FormData($('#frmUsuario')[0]);
@@ -120,7 +118,7 @@
 </script>
 
 <div class="form_container">
-    <img class="fechar" src="../imagens/fechar.png">
+    <img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
     <form class="frm_usuario" data-id="<?php echo($id)?>" id="frmUsuario" method="post" enctype="multipart/form-data" name="frmUsuario" action="usuario_view.php">
 		<div id="visualizar">
             <label for="imagem" title="clique aqui para selecionar uma imagem">

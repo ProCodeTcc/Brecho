@@ -44,6 +44,7 @@
 	}
 	
 	$(document).ready(function(){
+		mudarModal('400', '400');
 		var id = $('#frmSlider').data('id');
 		
 		if(id != ""){

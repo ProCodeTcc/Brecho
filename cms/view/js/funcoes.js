@@ -56,6 +56,37 @@ function mostrarSucesso(mensagem){
 	$('#sucesso').fadeIn(400);
 }
 
-function fecharModal(){
+function fecharMensagem(){
 	$('.mensagens').fadeOut(400);
+}
+
+function fecharModal(){
+	$('.container_modal').fadeOut(400);
+}
+
+function mudarModal(altura, largura){
+	$('.modal').height(altura);
+	$('.modal').width(largura);
+}
+
+function voltar(){
+	$('#pesquisa').hide();
+	$('#consulta').show();
+}
+
+function pesquisar(e){
+	if(e.keyCode == 13 || e.button == 0){
+		var termo = $('#pesquisar').val();
+		
+		$.ajax({
+			type: 'POST',
+			url: 'pesquisa.php',
+			data: {pesquisa:termo},
+			success: function(dados){
+				$('#consulta').hide();
+				$('#pesquisa').show();
+				$('#pesquisa').html(dados);
+			}
+		});
+	}
 }
