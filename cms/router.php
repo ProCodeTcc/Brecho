@@ -428,12 +428,31 @@
 					echo $retorno;
 				break;
 
+				case 'buscar':
+					$id = $_POST['id'];
+					$controllerCategoria = new controllerCategoria();
+
+					$listCategoria = $controllerCategoria->buscarCategoria($id);
+
+					echo($listCategoria);
+				break;
+
+				case 'editar':
+					$controllerCategoria = new controllerCategoria();
+
+					$status = $controllerCategoria->atualizarCategoria();
+
+					echo $status;
+				break;
+
 				case 'excluir':
 					$id = $_POST['id'];
 
 					$controllerCategoria = new controllerCategoria();
 
-					$controllerCategoria->excluirCategoria($id);
+					$status = $controllerCategoria->excluirCategoria($id);
+
+					return $status;
 				break;
 
 				case 'status':

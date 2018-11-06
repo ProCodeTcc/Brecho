@@ -22,7 +22,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Temas</title>
+        <title>Categoria</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
@@ -56,31 +56,58 @@
 			});
 		}
 
-		function excluir(id){
+		//função para buscar uma categoria
+		function buscar(id){
 			$.ajax({
-				type:'POST',
-				url: url+'router.php',
-				data: {id:id, controller: 'categoria', modo: 'excluir'},
+				type: 'POST', //tipo de requisição
+				url: 'frm_categoria.php', //url onde será enviada a requisição
+				data: {id:id}, //parâmetros enviados
 				success: function(dados){
-					listar();
-
-					$('.container_modal').fadeOut(400);
+					//colocando os dados na modal
+					$('.modal').html(dados);
 				}
 			});
 		}
 
-		function status(status, id){
+		//função para excluir uma categoria
+		function excluir(id){
 			$.ajax({
-				type: 'POST',
-				url: url+'router.php',
-				data: {id:id, status:status, controller: 'categoria', modo: 'status'},
+				type:'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, controller: 'categoria', modo: 'excluir'}, //parâmetros enviados
 				success: function(dados){
+					//conversão dos dados para JSON
 					json = JSON.parse(dados);
 					
+					//verificando se foi excluido
+					if(json.status == 'sucesso'){
+						//mensagem de sucesso
+						mostrarSucesso('Categoria excluída com sucesso!!');
+					}else{
+						//mensagem de erro
+						mostrarErro('Ocorreu um erro ao realizar a exclusão!!');
+					}
+				}
+			});
+		}
+
+		//função para atualizar o status
+		function status(status, id){
+			$.ajax({
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, status:status, controller: 'categoria', modo: 'status'}, //parâmetros enviados
+				success: function(dados){
+					//conversão dos dados para JSON
+					json = JSON.parse(dados);
+					
+					//verificando se o limite foi atingido
 					if(json.limite == 'true'){
+						//mensagem de erro
 						mostrarErro('O limite de categorias ativas foi atingido!!');
 					}
 
+					//listando os dados
 					listar();
 				}
 			});
@@ -158,7 +185,7 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Temas</span>
+            <span class="page_title">Categorias</span>
 
             <div class="page_search_container">
                 <input type="text" class="page_search">

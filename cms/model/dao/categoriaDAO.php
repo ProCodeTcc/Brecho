@@ -101,6 +101,80 @@
             //execução do statement
             $stm->execute();
 
+            //verificando se foi excluído
+            if($stm->rowCount() != 0){
+                //mensagem de sucesso
+                $status = array('status' => 'sucesso');
+            }else{
+                //mensagem de erro
+                $status = array('status' => 'erro');
+            }
+
+            //retornando o status
+            return json_encode($status);
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+
+        //função que trás uma categoria
+        public function selectById($id){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que faz a consulta
+            $stm = $PDO_conexao->prepare('SELECT * FROM categoria WHERE idCategoria = ?');
+
+            //parâmetro enviado
+            $stm->bindValue(1, $id, PDO::PARAM_INT);
+
+            //execução do statement
+            $stm->execute();
+
+            //armazenando o retorno dos dados
+            $listCategoria = $stm->fetch(PDO::FETCH_OBJ);
+
+            //retornando os dados em JSON
+            return json_encode($listCategoria);
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+
+        //função para atualizar uma categoria
+        public function Update(Categoria $categoria){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que atualiza os dados
+            $stm = $PDO_conexao->prepare('UPDATE categoria SET nomeCategoria = ?, genero = ? WHERE idCategoria = ?');
+
+            //parâmetros enviados
+            $stm->bindParam(1, $categoria->getNome());
+            $stm->bindParam(2, $categoria->getGenero());
+            $stm->bindParam(3, $categoria->getId());
+
+            //verificando se foi executado
+            if($stm->execute()){
+                //armazenando a mensagem de sucesso em uma variável
+                $retorno = array('status' => 'atualizado');
+
+                //retornando a msg em JSON
+                return json_encode($retorno);
+            }else{
+                //armazenando a mensagem de erro em uma variável
+                $retorno = array('status' => 'erro');
+
+                //retornando a msg em JSON
+                return json_encode($retorno);
+            }
+
             //fechando a conexão
             $conexao->fecharConexao();
         }

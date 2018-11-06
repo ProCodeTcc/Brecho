@@ -39,6 +39,32 @@
             return $retorno;
         }
 
+        //função para atualizar uma categoria
+        public function atualizarCategoria(){
+            //verifica se o método é POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //resgatando os valores das caixas de texto
+                $nome = $_POST['txtnome'];
+                $genero = $_POST['txtgenero'];
+            }
+
+            //instância da classe Categoria
+            $categoriaClass = new Categoria();
+
+            //setando os atributos
+            $categoriaClass->setNome($nome);
+            $categoriaClass->setGenero($genero);
+
+            //instância da classe CategoriaDAO
+            $categoriaDAO = new CategoriaDAO();
+
+            //chamada da função que atualiza a categoria
+            $status = $categoriaDAO->Update($categoriaClass);
+
+            //retornando o status
+            return $status;
+        }
+
         //função que lista as categorias
         public function listarCategoria(){
             //instância da classe CategoriaDAO
@@ -51,13 +77,23 @@
             return $listCategoria;
         }
 
+        public function buscarCategoria($id){
+            $categoriaDAO = new CategoriaDAO();
+
+            $listCategoria = $categoriaDAO->selectById($id);
+
+            return $listCategoria;
+        }
+
         //função que exclui uma categoria
         public function excluirCategoria($id){
             //instância da classe CategoriaDAO
             $categoriaDAO = new CategoriaDAO();
 
             //chamada da função que exclui a categoria
-            $categoriaDAO->Delete($id);
+            $status = $categoriaDAO->Delete($id);
+
+            return $status;
         }
 
         //função que atualiza o status
