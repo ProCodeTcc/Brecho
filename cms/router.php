@@ -324,7 +324,9 @@
 				case 'inserir':
 					$controllerProduto = new controllerProduto();
 					
-					$controllerProduto->inserirProduto();
+					$status = $controllerProduto->inserirProduto();
+
+					echo($status);
 				break;
 					
 				case 'editar':
@@ -332,7 +334,9 @@
 					
 					$controllerProduto = new controllerProduto();
 					
-					$controllerProduto->atualizarProduto($id);
+					$status = $controllerProduto->atualizarProduto($id);
+
+					echo($status);
 				break;
 					
 				case 'buscar':

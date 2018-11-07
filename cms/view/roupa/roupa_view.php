@@ -21,12 +21,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Produtos</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
 		<script src="../js/funcoes.js"></script>
+		<script src="../js/jquery-ui.js"></script>
 		
 		<script>
 			var url = '../../';
@@ -85,6 +87,7 @@
 					data: {id:idItem}, //dados enviados
 					success: function(dados){
 						$('.modal').html(dados); //carregando os dados
+						$('#tabs').tabs('enable', 1);
 					}
 				});
 			}
@@ -128,6 +131,7 @@
 						url: 'frm_roupa.php',
 						success: function(dados){
 							$('.modal').html(dados);
+							$('#frmRoupa').attr('data-modo', 'inserir');
 						}
 					});
 				});
@@ -152,6 +156,21 @@
                 
             </div>
         </div>
+
+		<div class="mensagens">
+			<div class="mensagem-sucesso" id="sucesso">
+				<div class="close" onclick="fecharMensagem()">
+					x
+				</div>
+			</div>
+	
+			<div class="mensagem-erro" id="erro">
+				<div class="close" onclick="fecharMensagem()">
+					x
+				</div>
+				
+			</div>
+		</div>
 
         <header>
             <div class="logo">

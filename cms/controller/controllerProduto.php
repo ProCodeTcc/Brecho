@@ -28,6 +28,7 @@
 				$categoria = $_POST['txtcategoria'];
 				$cor = $_POST['txtcor'];
 				$tamanho = $_POST['txttamanho'];
+				$idioma = $_POST['idioma'];
 				
 				if(!empty($_FILES['fleimagem'])){
 					$imagemClass = new Imagem();
@@ -51,14 +52,35 @@
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//armazenando o ID do produto em uma variável
-			$idProduto = $produtoDAO->Insert($produtoClass);
-			
-			//armazenando o ID da imagem em uma variável
-			$idImagem = $produtoDAO->insertImagem($imagens);
-			
-			//inserindo o ID do produto e da imagem na tabela de relacionamento
-			$produtoDAO->InsertProdutoImagem($idProduto, $idImagem);
+			//verifica qual o idioma
+			if($idioma == 'pt'){
+				//armazenando o ID do produto em uma variável
+				$idProduto = $produtoDAO->Insert($produtoClass);
+				
+				//armazenando o ID da imagem em uma variável
+				$idImagem = $produtoDAO->insertImagem($imagens);
+
+				//verifica se existe a imagem
+				if(empty($idImagem)){
+					//armazena a mensagem de erro se não existir
+					$status = array('status' => 'erro-imagem');
+				}
+				
+				//verifica se existe o id do produto e da imagem
+				if(isset($idProduto) && !empty($idImagem)){
+					//inserindo o ID do produto e da imagem na tabela de relacionamento
+					$status = $produtoDAO->InsertProdutoImagem($idProduto, $idImagem);
+				}
+			}else{
+				//armazena o ID do produto em PT na variável
+				$idProduto = $_POST['id'];
+
+				//insere o produto traduzido
+				$status = $produtoDAO->insertTranslate($produtoClass, $idProduto, $idioma);
+			}
+
+			//retorna o status
+			return $status;
 		}
 		
 		//função que atualiza um produto
@@ -75,6 +97,7 @@
 				$cor = $_POST['txtcor'];
 				$tamanho = $_POST['txttamanho'];
 				$id = $_POST['id'];
+				$idioma = $_POST['idioma'];
 			}
 			
 			//instância da classe produto
@@ -94,8 +117,17 @@
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//chamando a função que atualiza um produto
-			$produtoDAO->Update($produtoClass);
+			//verifica o idioma
+			if($idioma == 'pt'){
+				//chamando a função que atualiza um produto e armazenando o status
+				$status = $produtoDAO->Update($produtoClass);
+			}else{
+				//chamando a função que atualiza um produto e armazenando o status
+				$status = $produtoDAO->updateTranslate($produtoClass);
+			}
+
+			//retornando o status
+			return $status;
 		}
 		
 		//função que atualiza o status do produto

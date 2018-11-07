@@ -26,6 +26,14 @@
         Data: 22/10/2018
         Objetivo: Implementao a função que limita a exclusão de um produto se houver apenas um
 
+	*/
+	
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 07/11/2018
+        Objetivo: Implementao a função que traduz um produto
+
     */ 
 
 	class produtoDAO{
@@ -58,11 +66,12 @@
 			//execução do statement
 			$stm->execute();
 			
-			//armazenando o ID do produto em uma variável
-			$idProduto = $PDO_conexao->lastInsertId();
-			
-			//retornando o id do produto
-			return $idProduto;
+			if($stm->rowCount() != 0){
+				//armazenando o ID do produto em uma variável
+				$idProduto = $PDO_conexao->lastInsertId();
+
+				return $idProduto;
+			}
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -94,8 +103,6 @@
 			if($stm->rowCount() != 0){
 				//retornando os IDs
 				return $idImagem;
-			}else{
-				echo('Ocorreu um erro ao inserir as imagens!!');
 			}
 			
 			//fechando a conexão
@@ -124,11 +131,47 @@
 			}
 			
 			if($stm->rowCount() != 0){
-				echo('Produto inserido com sucesso!!');
-			}else{
-				echo('Erro ao inserir o produto');
+				$status = array('status' => 'inserido', 'id' => $idProduto);
 			}
+
+			return json_encode($status);
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para inserir a tradução do produto
+		public function insertTranslate($produto, $idProduto, $idioma){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que insere os dados
+			$stm = $PDO_conexao->prepare('INSERT INTO produto_traducao(nomeProduto, descricao, idProduto, codigo_idioma) VALUES(?,?,?,?)');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $produto->getNome());
+			$stm->bindParam(2, $produto->getDescricao());
+			$stm->bindParam(3, $idProduto);
+			$stm->bindParam(4, $idioma);
+
+			//execução do statement
+			$stm->execute();
+
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//mensagem de sucesso
+				$status = array('status'=> 'traduzido');
+			}else{
+				///mensagem de erro
+				$status = array('status' => 'erro');
+			}
+
+			//retornando o status me json
+			return json_encode($status);
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
@@ -178,13 +221,50 @@
 			$stm->bindParam(8, $produto->getTamanho());
 			$stm->bindParam(9, $produto->getId());
 			
-			//execução do statement
+			//verifica se executou
 			if($stm->execute()){
-				echo('Produto atualizado com sucesso!!');
+				//armazenando a mensagem de sucesso e uma variável
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('Ocorreu um erro ao atualizar o produto!!');
+				//armazenando a mensagem de erro em uma variável
+				$status = array('status' => 'erro');
 			}
+
+			//retornando os status em JSON
+			return json_encode($status);
 				
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para atualizar a tradução
+		public function updateTranslate(Produto $produto){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que atualiza os dados
+			$stm = $PDO_conexao->prepare('UPDATE produto SET nomeProduto = ?, descricao = ? WHERE idProduto = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $produto->getNome());
+			$stm->bindParam(2, $produto->getDescricao());
+			$stm->bindParam(3, $produto->getId());
+
+			//verifica se executou
+			if($stm->execute()){
+				//armazenando a mensagem de sucesso e uma variável
+				$status = array('status' => 'atualizado');
+			}else{
+				//armazenando a mensagem de erro em uma variável
+				$status = array('status' => 'erro');
+			}
+
+			//retornando os status em JSON
+			return json_encode($status);
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
