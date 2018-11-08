@@ -1,10 +1,16 @@
 <?php
 	/*
-        Projeto: CMS do Brechó
+ 	    Projeto: CMS do Brechó
         Autor: Lucas Eduardo
         Data: 02/10/2018
         Objetivo: ações da página do fale conosco
-
+	*/
+	
+	/*
+        Projeto: CMS do Brechó
+        Autor: Lucas Eduardo
+        Data: 08/11/2018
+        Objetivo: implementada função para pesquisar os feedbacks
     */
 	class FaleConoscoDAO{
 		public function __construct(){
@@ -96,6 +102,57 @@
 			//executando o statement
 			$stm->execute();
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar os feedbacks
+		public function searchFeedback($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare("SELECT * FROM faleconosco WHERE concat_ws(',', nomePessoa, assunto, email, comentario) LIKE ?");
+
+			//parâmetro enviado
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsFaleConosco = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo feedback
+				$listFeedback[] = new FaleConosco();
+
+				//setando os atributos
+				$listFeedback[$cont]->setId($rsFaleConosco->idRegistro);
+				$listFeedback[$cont]->setNome($rsFaleConosco->nomePessoa);
+				$listFeedback[$cont]->setEmail($rsFaleConosco->email);
+				$listFeedback[$cont]->setTelefone($rsFaleConosco->telefone);
+				$listFeedback[$cont]->setSexo($rsFaleConosco->sexo);
+				$listFeedback[$cont]->setAssunto($rsFaleConosco->assunto);
+				$listFeedback[$cont]->setComentario($rsFaleConosco->comentario);
+				
+				//contador
+				$cont++;
+			}
+
+			//verificando se há resultados
+			if($cont != 0){
+				//se houver, retorna os dados
+				return $listFeedback;
+			}else{
+				//se não, mostra mensagem
+				echo('Nenhum registro encontrado..');
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

@@ -150,6 +150,50 @@
 			//retornando a mensagem
 			return $retorno;
 		}
+
+		//função que atualiza um layout
+		public function atualizarTraducao(){
+			//verificando se o método é POST
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){
+				//resgatando os valores das caixas de texto
+				$titulo = $_POST['txttitulo'];
+				$descricao = $_POST['txtdesc'];
+				$layout = $_POST['layout'];
+				$id = $_POST['id'];
+				$idioma = $_POST['idioma'];
+
+				if(isset($_POST['txtdesc2'])){
+					$descricao2 = $_POST['txtdesc2'];
+				}
+			}
+			
+			//instância da classe Sobre
+			$sobre = new Sobre();
+	
+			//setando os atributos
+			$sobre->setId($id);
+			$sobre->setTitulo($titulo);
+			$sobre->setDescricao($descricao);
+			
+			if(isset($descricao2)){
+				$sobre->setDescricao2($descricao2);
+			}
+			
+			//instância da classe sobreDAO
+			$sobreDAO = new SobreDAO();
+			
+			//verifica qual o layout que é pra ser atualizado
+			if($layout == 1){
+				//chamada da função que atualiza a tradução do layout
+				$retorno = $sobreDAO->updateTranslateLayout1($sobre);
+			}else if($layout == 2){
+				//chamada da função que atualiza a tradução do layout
+				$retorno = $sobreDAO->updateTranslateLayout2($sobre);
+			}
+
+			//retornando a mensagem
+			return $retorno;
+		}
 		
 		//listar o layout 1
 		public function listarLayout1(){
@@ -230,6 +274,36 @@
 				//e ativa só um
 				$sobreDAO->activateOne($id, $layout);
 			}
+		}
+
+		//função para pesquisar um layout 1
+		public function pesquisarLayout1($pesquisa){
+			//formatando o termo a ser pesquisado
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe SobreDAO
+			$sobreDAO = new SobreDAO();
+
+			//armazenando os dados em uma variável
+			$listLayout = $sobreDAO->searchLayout1($termo);
+
+			//retornando os dados
+			return $listLayout;
+		}
+
+		//função para pesquisar um layout 1
+		public function pesquisarLayout2($pesquisa){
+			//formatando o termo a ser pesquisado
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe SobreDAO
+			$sobreDAO = new SobreDAO();
+
+			//armazenando os dados em uma variável
+			$listLayout = $sobreDAO->searchLayout2($termo);
+
+			//retornando os dados
+			return $listLayout;
 		}
 	}
 ?>

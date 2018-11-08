@@ -3,7 +3,8 @@
         var id = $('#frmRoupa').data('id');
 		
 		if(id != ""){
-			buscarProduto(id, 'pt');
+            buscarProduto(id, 'pt');
+            $('#frmRoupa').attr('data-modo', 'editar');
 		}
 
         listarCategoria();
@@ -49,12 +50,12 @@
         <div id="roupas_col1">
             <div class="form_linha">
                 <label class="lbl_cadastro">Nome: </label>
-                <input type="text" class="cadastro_input" name="txtnome" id="txtnome">
+                <input type="text" class="cadastro_input txtnome" name="txtnome" id="txtnome">
             </div>
 
             <div class="form_linha">
                 <label class="lbl_cadastro">Descrição: </label>
-                <textarea name="txtdescricao" class="cadastro_text" id="txtdesc"></textarea>
+                <textarea name="txtdescricao" class="cadastro_text txtdesc" id="txtdesc"></textarea>
             </div>
 
             <div class="form_linha" id="radio_linha">
@@ -71,7 +72,7 @@
 
             <div class="form_linha">
                 <select name="txttamanho" class="cadastro_select" id="txttamanho">
-                
+                    <option></option>
                 </select>
             </div>
 

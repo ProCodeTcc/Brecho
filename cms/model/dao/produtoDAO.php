@@ -246,7 +246,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 
 			//query que atualiza os dados
-			$stm = $PDO_conexao->prepare('UPDATE produto SET nomeProduto = ?, descricao = ? WHERE idProduto = ?');
+			$stm = $PDO_conexao->prepare('UPDATE produto_traducao SET nomeProduto = ?, descricao = ? WHERE idProduto = ?');
 
 			//parâmetros enviados
 			$stm->bindParam(1, $produto->getNome());
@@ -362,6 +362,33 @@
 			//retornando os dados em json
 			return json_encode($listProduto);
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+		
+		//função que busca uma tradução
+		public function selectTranslate($id){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca produto
+			$stm = $PDO_conexao->prepare('SELECT * FROM produto_traducao WHERE idProduto = ?');
+
+			//parâmetro enviado
+			$stm->bindValue(1, $id, PDO::PARAM_INT);
+
+			//execução do statement
+			$stm->execute();
+
+			//armazenando os dados
+			$listProduto = $stm->fetch(PDO::FETCH_OBJ);
+			
+			//retornando os dados em JSON
+			return json_encode($listProduto);
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

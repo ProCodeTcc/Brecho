@@ -15,7 +15,6 @@
 			url: url+'router.php', //url onde será enviada a requisição
 			data: {id:id, idioma:idioma, modo: 'buscar', controller: 'sobre'}, //dados enviados
 			success: function(dados){
-				$('.form').attr('data-modo', 'atualizarLayout');
 				$('.form').attr('data-lang', idioma);
 
 				json = JSON.parse(dados);

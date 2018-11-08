@@ -158,7 +158,16 @@
 				$retorno = $controllerEnquete->atualizarEnquete();
 				
 				echo($retorno);
-            break;
+			break;
+			
+			case 'atualizarTraducao':
+				
+				$controllerEnquete = new controllerEnquete();
+
+				$status = $controllerEnquete->atualizarTraducao();
+				
+				echo($status);
+			break;
 
             case 'excluir':
                 $id = $_POST['id'];
@@ -220,6 +229,14 @@
 					case 'atualizarLayout':
 						$controllerSobre = new controllerSobre();
 						$retorno = $controllerSobre->atualizarLayout();
+
+						echo($retorno);
+					break;
+
+					case 'atualizarTraducao':
+						$controllerSobre = new controllerSobre();
+
+						$retorno = $controllerSobre->atualizarTraducao();
 
 						echo($retorno);
 					break;
@@ -338,13 +355,24 @@
 
 					echo($status);
 				break;
+
+				case 'atualizarTraducao':
+					$id = $_POST['id'];
+
+					$controllerProduto = new controllerProduto();
+
+					$status = $controllerProduto->atualizarTraducao($id);
+
+					echo($status);
+				break;
 					
 				case 'buscar':
 					$id = $_POST['id'];
-					
+					$idioma = $_POST['idioma'];
+
 					$controllerProduto = new controllerProduto();
 					
-					$listProduto = $controllerProduto->buscarProduto($id);
+					$listProduto = $controllerProduto->buscarProduto($id, $idioma);
 					
 					echo($listProduto);
 				break;
@@ -613,6 +641,14 @@
 					$retorno = $controllerEvento->atualizarEvento();
 
 					echo($retorno);
+				break;
+
+				case 'atualizarTraducao':
+					$controllerEvento = new controllerEvento();
+
+					$status = $controllerEvento->atualizarTraducao();
+
+					echo($status);
 				break;
 					
 				case 'status':

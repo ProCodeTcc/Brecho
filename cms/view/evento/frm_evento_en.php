@@ -2,6 +2,7 @@
     var id = $('#frmEvento').data('id');
             
     if(id != ""){
+        $('#frmEvento').attr('data-modo', 'atualizarTraducao');
         exibirDados(id, 'en');
     }
 </script>

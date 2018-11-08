@@ -119,15 +119,14 @@
 			url: url+'/router.php', //url onde será enviada a requisição
 			data: {id:id, idioma:idioma, controller: 'produto', modo: 'buscar'}, //parâmetros enviados
 			success: function(dados){
-				$('#frmRoupa').attr('data-modo', 'editar');
 				$('#frmRoupa').attr('data-lang', idioma);
 
 				//conversão dos dados para json
 				json = JSON.parse(dados);
 				
 				//colocando os valores nas caixas de texto
-				$(this).find($('#txtnome')).val(json.nomeProduto);
-				$('#txtdesc').val(json.descricao);
+				$('.txtnome').val(json.nomeProduto);
+				$('.txtdesc').val(json.descricao);
 				$('#txtcor').val(json.idCor);
 				$('#txtmarca').val(json.idMarca);
 				$('#txtcategoria').val(json.idCategoria);

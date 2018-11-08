@@ -2,6 +2,7 @@
     var id = $('#frm_enquete').data('id');
 		
     if(id != ""){
+        $('#frm_enquete').attr('data-modo', 'editar');
         exibirDados(id, 'pt');
     }
 		

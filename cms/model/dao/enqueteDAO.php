@@ -39,6 +39,14 @@
 
     */
 
+    /*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 07/11/2018
+        Objetivo: Implementao a função que pesquisa as enquetes
+
+    */
+
     class EnqueteDAO{
         public function __construct(){
             require_once('bdClass.php');
@@ -199,8 +207,17 @@
 			$stm->bindParam(8, $enquete->getIdTema());
 			$stm->bindParam(9, $enquete->getId());
 
-            //executando  o statement
-			$stm->execute();
+            //verificando se foi executado com sucesso
+            if($stm->execute()){
+                //mensagem de sucesso
+                $retorno = array('retorno' => 'atualizado');
+            }else{
+                //mensagem de erro
+                $retorno = array('retorno' => 'erro');
+            }
+
+            //retorna a mensagem em JSON
+            return json_encode($retorno);
 
             //fechando a conexão
             $conexao->fecharConexao();
@@ -425,6 +442,57 @@
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
-		}
+        }
+        
+        //função para pesquisar as enquetes do banco
+        public function searchEnquete($pesquisa){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que busca os dados
+            $stm = $PDO_conexao->prepare("SELECT * FROM enquete WHERE concat_ws(',', pergunta, alternativaA, alternativaB, alternativaC, alternativaD) LIKE ?");
+
+            //parâmetros enviados
+            $stm->bindParam(1, $pesquisa);
+
+            //execução do statement
+            $stm->execute();
+
+            //contador
+            $cont = 0;
+
+            //percorrendo os dados
+            while($rsEnquetes = $stm->fetch(PDO::FETCH_OBJ)){
+                //instância da classe Enquete
+                $listEnquete[] = new Enquete();
+
+                //setando os atributos
+                $listEnquete[$cont]->setId($rsEnquetes->idEnquete);
+                $listEnquete[$cont]->setPergunta($rsEnquetes->pergunta);
+                $listEnquete[$cont]->setAlternativaA($rsEnquetes->alternativaA);
+                $listEnquete[$cont]->setAlternativaB($rsEnquetes->alternativaB);
+                $listEnquete[$cont]->setAlternativaC($rsEnquetes->alternativaC);
+                $listEnquete[$cont]->setAlternativaD($rsEnquetes->alternativaD);
+                $listEnquete[$cont]->setStatus($rsEnquetes->status);
+
+                //incrementando o contador
+                $cont++;
+            }
+
+            //verificando se há resultados
+            if($cont != 0){
+                //se houver, retorna a lista
+                return $listEnquete;
+            }else{
+                //se não, mensagem 
+                echo('nenhuma enquete encontrada');
+            }
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
     }
 ?>

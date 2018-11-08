@@ -31,7 +31,6 @@
 			url: url+'router.php', //url onde será enviada a requisição
 			data: {id:id, idioma:idioma, controller: 'evento', modo: 'buscar'}, //parâmetros enviados
 			success: function(dados){
-				$('#frmEvento').attr('data-modo', 'editar');
 				$('#frmEvento').attr('data-lang', idioma);
 				//conversão dos dados para JSON
 				json = JSON.parse(dados);

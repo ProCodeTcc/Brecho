@@ -46,5 +46,15 @@
 			//chamada da função que exclui um feedback
 			$fconoscoDAO->Delete($id);
 		}
+
+		public function pesquisarFeedback($pesquisa){
+			$termo = '%'.$pesquisa.'%';
+
+			$fconoscoDAO = new FaleConoscoDAO();
+
+			$listFeedback = $fconoscoDAO->searchFeedback($termo);
+
+			return $listFeedback;
+		}
 	}
 ?>

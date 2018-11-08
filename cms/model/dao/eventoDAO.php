@@ -19,6 +19,13 @@
         Autor: Lucas Eduardo
         Data: 04/11/2018
         Objetivo: Implementao a função que traduz um evento
+	*/
+	
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 08/11/2018
+        Objetivo: Implementao a função que pesquisa os eventos
     */
 
 	class EventoDAO{
@@ -409,6 +416,47 @@
 			
 			//retornando
 			return $linhas;
+			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar por um evento
+		public function searchEvento($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare("SELECT * FROM evento WHERE concat_ws(',', nomeEvento, descricaoEvento) LIKE ?");
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsEventos = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo Evento
+				$listEvento[] = new Evento;
+
+				//setando os atributos
+				$listEvento[$cont]->setNome($rsEventos->nomeEvento);
+				$listEvento[$cont]->setDescricao($rsEventos->descricaoEvento);
+				$listEvento[$cont]->setStatus($rsEventos->status);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listEvento;
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

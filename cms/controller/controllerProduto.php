@@ -116,15 +116,37 @@
 			
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
-			
-			//verifica o idioma
-			if($idioma == 'pt'){
-				//chamando a função que atualiza um produto e armazenando o status
-				$status = $produtoDAO->Update($produtoClass);
-			}else{
-				//chamando a função que atualiza um produto e armazenando o status
-				$status = $produtoDAO->updateTranslate($produtoClass);
+
+			//chamando a função que atualiza um produto e armazenando o status
+			$status = $produtoDAO->Update($produtoClass);
+
+
+			//retornando o status
+			return $status;
+		}
+
+		//função para atualizar uma tradução
+		public function atualizarTraducao($id){
+			//verificando se o método é POST
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){
+				//resgatando os valores das caixas de texto
+				$nome = $_POST['txtnome'];
+				$descricao = $_POST['txtdescricao'];
 			}
+
+			//instância da classe Produto
+			$produtoClass = new Produto();
+
+			//setando os atributos
+			$produtoClass->setId($id);
+			$produtoClass->setNome($nome);
+			$produtoClass->setDescricao($descricao);
+
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//atualizando o produto
+			$status = $produtoDAO->updateTranslate($produtoClass);
 
 			//retornando o status
 			return $status;
@@ -181,12 +203,16 @@
 		}
 		
 		//função que busca um produto a partir do ID
-		public function buscarProduto($id){
+		public function buscarProduto($id, $idioma){
 			//instância da classe produtoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//armazenando o retorno da consulta em uma variável
-			$listProduto = $produtoDAO->selectByID($id);
+			if($idioma == 'pt'){
+				//armazenando o retorno da consulta em uma variável
+				$listProduto = $produtoDAO->selectByID($id);
+			}else{
+				$listProduto = $produtoDAO->selectTranslate($id);
+			}
 			
 			//retornando a lista com o produto
 			return $listProduto;

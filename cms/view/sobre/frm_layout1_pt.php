@@ -2,6 +2,7 @@
     var id = $('#frm_sobreLayout1').data('id');
 		
     if(id != ""){
+        $('.form').attr('data-modo', 'atualizarLayout');
         exibirDados(id, 'pt');
     }
 </script>

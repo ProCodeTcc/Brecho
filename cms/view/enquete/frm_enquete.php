@@ -16,8 +16,6 @@
 			url: url+'/router.php', //url para onde será enviada a requisição
 			data: {id:id, idioma:idioma, modo: 'buscar', controller: 'enquete'}, //dados a serem enviados
 			success: function(dados){
-                //mudando o modo para editar
-                $('#frm_enquete').attr('data-modo', 'editar');
                 $('#frm_enquete').attr('data-lang', idioma);
 
 				//conversão dos dados para JSON

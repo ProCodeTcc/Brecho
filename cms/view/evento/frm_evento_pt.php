@@ -2,6 +2,7 @@
     var id = $('#frmEvento').data('id');
 		
     if(id != ""){
+        $('#frmEvento').attr('data-modo', 'editar');
         exibirDados(id, 'pt');
     }
 </script>

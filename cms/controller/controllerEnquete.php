@@ -96,17 +96,46 @@
 			//instância da classe EnqueteDAO
             $enqueteDAO = new EnqueteDAO();
             
-            //verificando qual o idioma
-			if($idioma == 'pt'){
-                //chamada da função que atualiza a enquete
-                $retorno = $enqueteDAO->Update($enqueteClass);
-            }else{
-                //chamada da função que atualiza a enquete
-                $retorno = $enqueteDAO->updateTranslate($enqueteClass);
-            }
+            //chamada da função que atualiza a enquete
+            $retorno = $enqueteDAO->Update($enqueteClass);
+            
 
             //retorna a mensagem
             return $retorno;
+        }
+
+        //função que atualiza a tradução da enquete
+        public function atualizarTraducao(){
+			//verifica se o método é POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+				//resgatando os valores da caixas de texto
+                $pergunta = $_POST['txtpergunta'];
+                $alternativa_a = $_POST['txtalta'];
+                $alternativa_b = $_POST['txtaltb'];
+                $alternativa_c = $_POST['txtaltc'];
+                $alternativa_d = $_POST['txtaltd'];
+                $id = $_POST['id'];
+            }
+			
+			//instância da classe enquete
+            $enqueteClass = new Enquete();
+
+			//setando os atributos
+            $enqueteClass->setId($id);
+            $enqueteClass->setPergunta($pergunta);
+            $enqueteClass->setAlternativaA($alternativa_a);
+            $enqueteClass->setAlternativaB($alternativa_b);
+            $enqueteClass->setAlternativaC($alternativa_c);
+            $enqueteClass->setAlternativaD($alternativa_d);
+			
+			//instância da classe EnqueteDAO
+            $enqueteDAO = new EnqueteDAO();
+            
+            //chamada da função que atualiza a enquete
+            $status = $enqueteDAO->updateTranslate($enqueteClass);
+            
+            //retorna a mensagem
+            return $status;
         }
 
 		//função que lista os temas
@@ -205,6 +234,21 @@
 				$enqueteDAO->activateOne($id);
 				$enqueteDAO->disableAll($id);
 			}
+        }
+
+        //função para pesquisar as enquetes
+        public function pesquisarEnquete($pesquisa){
+            //formatando o termo a ser pesquisado
+            $termo = '%'.$pesquisa.'%';
+
+            //instância da classe EnqueteDAO
+            $enqueteDAO = new EnqueteDAO();
+
+            //armazenando os dados em uma variável
+            $listEnquetes = $enqueteDAO->searchEnquete($termo);
+
+            //retornando os dados
+            return $listEnquetes;
         }
 
     }

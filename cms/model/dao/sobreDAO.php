@@ -22,6 +22,13 @@
         Objetivo: Implementao a função que traduz os layouts 1 e 2
 
 	*/ 
+
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 07/11/2018
+        Objetivo: Implementao a função que pesquisa os layouts 1 e 2
+	*/ 
 	
 	class SobreDAO{
 		public function __construct(){
@@ -522,6 +529,105 @@
 			//retornando as linhas
 			return $linhas;
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar os layouts 1 no banco
+		public function searchLayout1($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare("SELECT * FROM sobre WHERE tipoLayout = 1 AND concat_ws(',', titulo, descricao) LIKE ?");
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsSobre = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo objeto
+				$listLayout[] = new Sobre();
+
+				//setando os atributos
+				$listLayout[$cont]->setId($rsSobre->idSobre);
+				$listLayout[$cont]->setImagem($rsSobre->imagem);
+				$listLayout[$cont]->setTitulo($rsSobre->titulo);
+				$listLayout[$cont]->setDescricao($rsSobre->descricao);
+				$listLayout[$cont]->setStatus($rsSobre->status);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há resultados
+			if($cont != 0){
+				//se houver, retorna os dados
+				return $listLayout;
+			}else{
+				//se não, mostra mensagem
+				echo('nenhum layout encontrado..');
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar o layout 2
+		public function searchLayout2($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare("SELECT * FROM sobre WHERE tipoLayout = 2 AND concat_ws(',', titulo, descricao, descricao2) LIKE ?");
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//incrementando o contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsSobre = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo objeto
+				$listLayout[] = new Sobre();
+
+				//setando os atributos
+				$listLayout[$cont]->setId($rsSobre->idSobre);
+				$listLayout[$cont]->setImagem($rsSobre->imagem);
+				$listLayout[$cont]->setTitulo($rsSobre->titulo);
+				$listLayout[$cont]->setDescricao($rsSobre->descricao);
+				$listLayout[$cont]->setDescricao2($rsSobre->descricao2);
+				$listLayout[$cont]->setStatus($rsSobre->status);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há resultados
+			if($cont != 0){
+				//se houver, retornando os dados
+				return $listLayout;
+			}else{
+				//se não, mostra mensagem
+				echo('nenhum layout encontrado..');
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

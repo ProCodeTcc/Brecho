@@ -103,17 +103,46 @@
 			//instância da classe EventoDAO
 			$eventoDAO = new EventoDAO();
 			
-			//verifica qual o idioma
-			if($idioma == 'pt'){
-				//atualizando o evento em PT
-				$retorno = $eventoDAO->Update($eventoClass);
-				
-				//atualizando a data
-				$eventoDAO->UpdateData($eventoClass);
-			}else{
-				//atualizando o evento em EN
-				$retorno = $eventoDAO->updateTranslate($eventoClass);
+			//chamada da função que atualiza o evento
+			$retorno = $eventoDAO->Update($eventoClass);
+			
+			//atualizando a data
+			$eventoDAO->UpdateData($eventoClass);
+
+			//retorna a mensagem
+			return $retorno;
+		}
+
+		//função que atualiza a tradução do evento
+		public function atualizarTraducao(){
+			//verificando se o método é POST
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){
+				//resgatando os dados das caixas de texto
+				$nome = $_POST['txtnome'];
+				$descricao = $_POST['txtdesc'];
+				$id = $_POST['id'];
 			}
+			
+			//instância da classe Evento
+			$eventoClass = new Evento();
+			
+			if($_FILES['fleimagem']['size'] == 0){
+				$imagem = $_POST['imagem'];
+			}else{
+				$imagemClass = new Imagem();
+				$imagem = $imagemClass->uploadImagem();
+			}
+			
+			//setando os atributos
+			$eventoClass->setId($id);
+			$eventoClass->setNome($nome);
+			$eventoClass->setDescricao($descricao);
+			
+			//instância da classe EventoDAO
+			$eventoDAO = new EventoDAO();
+			
+			//atualizando o evento em EN
+			$retorno = $eventoDAO->updateTranslate($eventoClass);
 
 			//retorna a mensagem
 			return $retorno;
@@ -186,6 +215,21 @@
 			
 			//retornando os dados
 			return $listLojas;
+		}
+
+		//função que pesquisa um evento
+		public function pesquisarEvento($pesquisa){
+			//formatando o termo a ser pesquisado
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe EventoDAO
+			$eventoDAO = new EventoDAO();
+
+			//armazenando os dados em uma varíavel
+			$listEvento = $eventoDAO->searchEvento($termo);
+
+			//retornando os dados
+			return $listEvento;
 		}
 	}
 ?>
