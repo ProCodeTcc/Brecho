@@ -62,5 +62,20 @@
             //retornando os dados
             return $listConsignacao;
         }
+
+        //função para pesquisar os produtos em consignação
+        public function pesquisarProduto($pesquisa){
+            //formatando a pesquisa
+            $termo = '%'.$pesquisa.'%';
+
+            //instância da classe ConsignacaoDAO
+            $consignacaoDAO = new ConsignacaoDAO();
+
+            //armazenando os dados em uma variável
+            $listProdutos = $consignacaoDAO->searchConsignacao($termo);
+
+            //retornando os dados
+            return $listProdutos;
+        }
     }
 ?>

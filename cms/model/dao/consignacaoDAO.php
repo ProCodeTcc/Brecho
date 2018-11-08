@@ -249,5 +249,54 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
+
+        //função para pesquisar os produtos em consignação
+        public function searchConsignacao($pesquisa){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+
+            //query que busca os dados
+            $stm = $PDO_conexao->prepare('SELECT p.*, pc.idConsignacao, f.caminhoImagem AS imagem FROM produto AS p INNER JOIN produto_fotoproduto AS pf ON pf.idProduto = p.idProduto
+            INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN produto_consignacao AS pc ON pc.idProduto = p.idProduto 
+            INNER JOIN pedidoconsignacao AS c ON c.idConsignacao = pc.idConsignacao WHERE p.nomeProduto LIKE ? GROUP BY p.idProduto');
+
+            //parâmetro enviado
+            $stm->bindParam(1, $pesquisa);
+
+            //execução do statement
+            $stm->execute();
+
+            //contador
+            $cont = 0;
+
+            //percorrendo os dados
+            while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+                //instância da classe Consignacao
+                $listProdutos[] = new Consignacao();
+
+                //setando os atributos
+                $listProdutos[$cont]->setId($rsProdutos->idConsignacao);
+                $listProdutos[$cont]->setIdProduto($rsProdutos->idProduto);
+                $listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
+                $listProdutos[$cont]->setPreco($rsProdutos->preco);
+                $listProdutos[$cont]->setImagem($rsProdutos->imagem);
+                $listProdutos[$cont]->setStatus($rsProdutos->status);
+
+                //incrementando o contador
+                $cont++;
+            }
+
+            //verificando se há dados
+            if($cont != 0){
+                //se houver, retorna os dados
+                return $listProdutos;
+            }
+
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
     }
 ?>

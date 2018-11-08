@@ -112,6 +112,21 @@
 				$temaDAO->disableAll($id, $genero);
 			}
 		}
+
+		//função para pesquisar os temas 
+		public function pesquisarTema($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe TemaDAO
+			$temaDAO = new TemaDAO();
+
+			//armazenando os dados em uma variável
+			$listTema = $temaDAO->searchTema($termo);
+
+			//retornando os dados
+			return $listTema;
+		}
 		
 	}
 ?>

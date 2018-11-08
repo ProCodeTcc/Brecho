@@ -204,6 +204,51 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+
+		//função para pesquisar os temas
+		public function searchTema($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT * FROM temasite WHERE nomeTema LIKE ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsTemas = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo Tema
+				$listTema[] = new Tema();
+
+				//setando os atributos
+				$listTema[$cont]->setId($rsTemas->idTema);
+				$listTema[$cont]->setNome($rsTemas->nomeTema);
+				$listTema[$cont]->setCor($rsTemas->corTema);
+				$listTema[$cont]->setGenero($rsTemas->genero);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há algum resultado
+			if($cont != 0){
+				//se houver, retorna os dados
+				return $listTema;
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 		
 	}
 ?>

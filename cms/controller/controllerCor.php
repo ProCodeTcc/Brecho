@@ -94,5 +94,20 @@
 			//chamada da função que exclui uma cor
 			$corDAO->Delete($id);
 		}
+
+		//função para pesquisar as cores
+		public function pesquisarCor($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe CorDAO
+			$corDAO = new CorDAO();
+
+			//armazenando os dados em uma variável
+			$listCor = $corDAO->searchCor($termo);
+
+			//retornando os dados
+			return $listCor;
+		}
 	}
 ?>

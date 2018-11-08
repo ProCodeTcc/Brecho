@@ -91,5 +91,20 @@
 			//chamada da função que atualiza o status
 			$promocaoDAO->updateStatus($status, $id);
 		}
+
+		//função para pesquisar os produtos em promoção
+		public function pesquisarProduto($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			///instância da classe PromocaoDAO
+			$promocaoDAO = new PromocaoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $promocaoDAO->searchProduto($termo);
+
+			//retornando os dados
+			return $listProduto;
+		}
 	}
 ?>

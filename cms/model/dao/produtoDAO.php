@@ -34,6 +34,13 @@
         Data: 07/11/2018
         Objetivo: Implementao a função que traduz um produto
 
+	*/ 
+	
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 08/11/2018
+        Objetivo: Implementao a função que pesquisa os produtos
     */ 
 
 	class produtoDAO{
@@ -608,6 +615,52 @@
 			//retornando as linhas
 			return $linhas;
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar os produtos
+		public function searchProduto($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT DISTINCT produto.*, f.caminhoImagem as imagem from produto INNER JOIN fotoproduto as f INNER JOIN produto_fotoproduto as pi ON produto.idProduto = pi.idProduto and pi.idImagemProduto = f.idImagemProduto WHERE produto.nomeProduto LIKE ? GROUP BY idProduto');
+
+			//parâmetro enviado
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo produto
+				$listProduto[] = new Produto();
+
+				//setando os atributos
+				$listProduto[$cont]->setId($rsProdutos->idProduto);
+				$listProduto[$cont]->setNome($rsProdutos->nomeProduto);
+				$listProduto[$cont]->setPreco($rsProdutos->preco);
+				$listProduto[$cont]->setImagem($rsProdutos->imagem);
+				$listProduto[$cont]->setStatus($rsProdutos->status);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há resultados
+			if($cont != 0){
+				//se houver, retorna o produto
+				return $listProduto;
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

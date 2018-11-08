@@ -5,6 +5,13 @@
         Data: 04/10/2018
         Objetivo: CRUD das cores
 
+	*/ 
+	
+	/*
+        Projeto: CMS do Brechó
+        Autor: Lucas Eduardo
+        Data: 08/11/2018
+        Objetivo: implementada a função para pesquisar as cores
     */ 
 
 	class corDAO{
@@ -159,6 +166,50 @@
 				echo('Ocorreu um erro ao realizar a exclusão');
 			}
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar a cores
+		public function searchCor($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT * FROM corroupa WHERE nome LIKE ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsCor = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando uma nova Cor
+				$listCor[] = new Cor();
+
+				//setando os atributos
+				$listCor[$cont]->setId($rsCor->idCor);
+				$listCor[$cont]->setNome($rsCor->nome);
+				$listCor[$cont]->setCor($rsCor->cor);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há algum resultado
+			if($cont != 0){
+				//retorna a cor
+				return $listCor;
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

@@ -304,5 +304,20 @@
 			//retornando a lista com as categorias
 			return $listCategoria;
 		}
+
+		//função para pesquisar um produto
+		public function pesquisarProduto($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $produtoDAO->searchProduto($termo);
+
+			//retornando os dados
+			return $listProduto;
+		}
 	}
 ?>

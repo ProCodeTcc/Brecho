@@ -7,6 +7,13 @@
 		Objetivo: Implementado função que transfere os dados do produto em caso de aprovação
 	*/
 
+	/*
+		Projeto: CMS do Brechó
+		Autor: Lucas Eduardo
+		Data: 08/11/2018
+		Objetivo: Implementado função que pesquisa os produtos em avaliação
+	*/
+
 	class AvaliacaoDAO{
 		public function __construct(){
             require_once('bdClass.php');	
@@ -288,5 +295,106 @@
 			$conexao->fecharConexao();
 		}
 		
+		//função para pesquisar o produto do cliente físico
+		public function searchProdutoCF($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca o produto
+			$stm = $PDO_conexao->prepare("SELECT cp.idClienteFisico, p.*, f.caminhoImagem as imagem FROM clientefisico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
+			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientefisico as cf on cp.idClienteFisico = cf.idCliente 
+			WHERE p.nomeProduto LIKE ?");
+
+			//parâmetros enviados
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+				//instância da classe Avaliacao
+				$listProdutos[] = new Avaliacao();
+
+				//setando os atributos
+				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteFisico);
+				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
+				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setClassificacao($rsProdutos->classificacao);
+				$listProdutos[$cont]->setImagem($rsProdutos->imagem);
+
+				//contador
+				$cont++;
+			}
+
+			//verificando se há resultados
+			if($cont != 0){
+				//retornando os dados
+				return $listProdutos;
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar os produtos em avaliação do cliente juridico
+		public function searchProdutoCJ($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare("SELECT cp.idClienteJuridico, p.*, f.caminhoImagem as imagem FROM clientejuridico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
+			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientejuridico as cj on cp.idClienteJuridico = cj.idCliente 
+			WHERE p.nomeProduto LIKE ?");
+
+			//parâmetro enviado
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+				//instância da classe Avaliacao
+				$listProdutos[] = new Avaliacao();
+
+				//setando os atributos
+				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteJuridico);
+				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
+				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setClassificacao($rsProdutos->classificacao);
+				$listProdutos[$cont]->setImagem($rsProdutos->imagem);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há resultados
+			if($cont != 0){
+				//se houver, retorna a lista com os produtos
+				return $listProdutos;
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 	}
 ?>

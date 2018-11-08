@@ -282,5 +282,35 @@
 				$cont++;
 			}
 		}
+
+		//função para pesquisar os produtos dos clientes físico
+		public function pesquisarProdutoCF($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe AvaliacaoDAO
+			$avaliacaoDAO = new AvaliacaoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $avaliacaoDAO->searchProdutoCF($termo);
+
+			//retornando os dados
+			return $listProduto;
+		}
+
+		//função para pesquisar os produtos do cliente jurídico
+		public function pesquisarProdutoCJ($pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe AvaliacaoDAO
+			$avaliacaoDAO = new AvaliacaoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $avaliacaoDAO->searchProdutoCJ($termo);
+
+			//retornando os dados
+			return $listProduto;
+		}
 	}
 ?>

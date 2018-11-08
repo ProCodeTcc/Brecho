@@ -13,6 +13,13 @@
         Data: 22/10/2018
         Objetivo: Implementao a função que limita a exclusão de uma promoção se houver apenas uma
 
+	*/ 
+	
+	/*
+        Projeto: CMS do Brechó - Atualização
+        Autor: Lucas Eduardo
+        Data: 08/11/2018
+        Objetivo: Implementado a função para pesquisar os produtos em promoção
     */ 
 
 	class PromocaoDAO{
@@ -185,6 +192,53 @@
 			//retornando
 			return $linhas;
 			
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para pesquisar os produtos em promoção
+		public function searchProduto($pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT DISTINCT p.idProduto, p.nomeProduto, p.preco, f.caminhoImagem as imagem, pr.idPromocao, pr.status from produto as p INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto INNER JOIN promocao as pr ON pr.idProduto = p.idProduto WHERE p.nomeProduto LIKE ? GROUP BY idPromocao');
+
+			//parâmetro enviado
+			$stm->bindParam(1, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando uma nova promoção
+				$listProdutos[] = new Promocao();
+
+				//setando os atributos
+				$listProdutos[$cont]->setId($rsProdutos->idPromocao);
+				$listProdutos[$cont]->setIdProduto($rsProdutos->idProduto);
+				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setImagem($rsProdutos->imagem);
+				$listProdutos[$cont]->setStatus($rsProdutos->status);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//verificando se há resultados
+			if($cont != 0){
+				//se houver, retorna os dados
+				return $listProdutos;
+			}
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

@@ -196,7 +196,10 @@
             <span class="page_title">Produtos</span>
 
             <div class="page_search_container">
-                <input type="text" class="page_search">
+				<input type="search" class="page_search" id="pesquisar" onkeydown="pesquisar(event)">
+                <div class="img_pesquisa">
+                    <img src="../imagens/search.png" onmousedown="pesquisar(event)">
+                </div>
             </div>
 
             <button class="page_btn" onclick="Adicionar();" id="adicionar" data-modo="novo">
@@ -225,6 +228,10 @@
 						
 						
                     </div>
+
+					<div id="pesquisa">
+					
+					</div>
                 </div>
 
             </div>
