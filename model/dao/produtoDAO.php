@@ -7,7 +7,7 @@
 	*/
 
 	/*
-		Projeto: CMS do Brechó
+		Projeto:Brechó
 		Autor: Felipe Monteiro
 		Data: 18/10/2018
 		Objetivo: listagem de produtos e visualização por categoria
@@ -18,6 +18,13 @@
 		Autor: Lucas Eduardo
 		Data: 20/10/2018
 		Objetivo: filtro de produtos e sugestão de produtos
+	*/
+
+	/*
+		Projeto: Brechó
+		Autor: Lucas Eduardo
+		Data: 09/11/2018
+		Objetivo: adicionado pesquisa por nome junto com o filtro de produtos
 	*/
 
 	class ProdutoDAO{
@@ -34,7 +41,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que faz a consulta no banco
-			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 GROUP BY p.idProduto';
+			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 GROUP BY p.idProduto';
 			
 			//armazenando os dados em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -209,7 +216,7 @@
         }
 		
 		//função que busca os produtos por classificacao
-		public function SelectByClassificacao($classificacao){
+		public function SelectByClassificacao($classificacao, $pesquisa){
 			//instância da classe de conexão com o banco de dados
 			$conexao = new ConexaoMySQL();
 			
@@ -217,10 +224,11 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que busca o produto
-			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 AND p.classificacao = ? GROUP BY p.idProduto');
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 AND p.classificacao = ? AND p.nomeProduto LIKE ? GROUP BY p.idProduto');
 			
 			//parâmetro enviado
 			$stm->bindValue(1, $classificacao, PDO::PARAM_STR);
+			$stm->bindValue(2, $pesquisa, PDO::PARAM_STR);
 			
 			//execução do statement
 			$stm->execute();
@@ -328,7 +336,7 @@
 			$conexao->fecharConexao();
 		}
 		
-		public function SelectByTamanho($tamanho){
+		public function SelectByTamanho($tamanho, $pesquisa){
 			//instância da classe de conexão com o banco
 			$conexao = new ConexaoMySQL();
 			
@@ -336,10 +344,11 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que faz a consulta
-			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 AND p.idTamanho = ? GROUP BY p.idProduto');
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 AND p.idTamanho = ? AND p.nomeProduto LIKE ? GROUP BY p.idProduto');
 			
 			//parâmetros enviados
 			$stm->bindValue(1, $tamanho, PDO::PARAM_INT);
+			$stm->bindValue(2, $pesquisa, PDO::PARAM_STR);
 			
 			//execução do statement
 			$stm->execute();
@@ -432,7 +441,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 
 			//query que faz a consulta
-			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 GROUP BY p.idProduto ORDER BY p.cliques DESC';
+			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 GROUP BY p.idProduto ORDER BY p.cliques DESC';
 
 			//armazenando os dados em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -469,7 +478,7 @@
 			
 			$PDO_conexao = $conexao->conectarBanco();
 
-			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 and p.nomeProduto like ? GROUP BY p.idProduto');
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 and p.nomeProduto like ? GROUP BY p.idProduto');
 
 			$stm->bindParam(1, $pequisa);
 
@@ -489,7 +498,37 @@
 				$cont++;
 			}
 
-			return $listProduto;
+			if($cont != 0){
+				return $listProduto;
+			}else{
+				echo('nenhum produto encontrado...');
+			}
+
+			$conexao->fecharConexao();
+		}
+
+		public function selectCores(){
+			$conexao = new ConexaoMySQL();
+			
+			$PDO_conexao = $conexao->conectarBanco();
+
+			$stm = $PDO_conexao->prepare('SELECT * FROM corroupa');
+
+			$stm->execute();
+
+			$cont = 0;
+
+			while($rsCor = $stm->fetch(PDO::FETCH_OBJ)){
+				$listCor[] = new Cor();
+
+				$listCor[$cont]->setId($rsCor->idCor);
+				$listCor[$cont]->setNome($rsCor->nome);
+				$listCor[$cont]->setCor($rsCor->cor);
+
+				$cont++;
+			}
+
+			return $listCor;
 
 			$conexao->fecharConexao();
 		}

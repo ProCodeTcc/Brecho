@@ -2,6 +2,7 @@
 	if(isset($_POST['tipoFiltro'])){
 		$tipoFiltro = $_POST['tipoFiltro'];
 		$filtro = $_POST['filtro'];
+		$pesquisa = $_POST['termo'];
 	}
 
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
@@ -70,9 +71,9 @@
 				$listProdutoCategoria = new controllerProduto();
 
 				if($tipoFiltro == 'classificacao'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoClassificacao($filtro);
+					$rsFiltro = $listProdutoCategoria->listarProdutoClassificacao($filtro, $pesquisa);
 				}else if($tipoFiltro == 'tamanho'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoTamanho($filtro);
+					$rsFiltro = $listProdutoCategoria->listarProdutoTamanho($filtro, $pesquisa);
 				}
 
 

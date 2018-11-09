@@ -76,12 +76,15 @@
         }
 		
 		//função que listas os produtos por classificação
-		public function listarProdutoClassificacao($classificacao){
+		public function listarProdutoClassificacao($classificacao, $pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
 			//armazenando os dados em uma variável
-			$listProdutos = $produtoDAO->SelectByClassificacao($classificacao);
+			$listProdutos = $produtoDAO->SelectByClassificacao($classificacao, $termo);
 			
 			//retornando os dados
 			return $listProdutos;
@@ -112,12 +115,15 @@
 		}
 		
 		//função que lista os produtos pelo tamanho
-		public function listarProdutoTamanho($tamanho){
+		public function listarProdutoTamanho($tamanho, $pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
 			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->SelectByTamanho($tamanho);
+			$listProduto = $produtoDAO->SelectByTamanho($tamanho, $termo);
 			
 			//retornando os dados
 			return $listProduto;
@@ -153,6 +159,16 @@
 			$listProduto = $produtoDAO->selectByClick();
 
 			//retornando os dados
+			return $listProduto;
+		}
+
+		public function pesquisarProduto($pesquisa){
+			$termo = '%'.$pesquisa.'%';
+
+			$produtoDAO = new ProdutoDAO();
+
+			$listProduto = $produtoDAO->searchByName($termo);
+
 			return $listProduto;
 		}
 

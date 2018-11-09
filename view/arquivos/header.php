@@ -20,7 +20,9 @@
 		</div>
 
 	<div class="pesquisa_cabecalho">
-		<input class="campo_pesquisa_cabecalho" type="text">
+		<form name="search" method="POST" action="pesquisa.php">
+			<input class="campo_pesquisa_cabecalho" id="pesquisa" name="txtpesquisa" type="text">
+		</form>
 	</div>
 	</div>
 </div>
