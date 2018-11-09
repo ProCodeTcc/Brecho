@@ -16,31 +16,69 @@
 		<script src="js/jquery-3.2.1.min.js"></script>
 		
 		<script>
+            //função para filtrar por classificação
 			function filtrarClassificacao(classificacao){
+                //pegando o nome do produto
                 var pesquisa = $('#categoria').data('pesquisa');
 
 				$.ajax({
-					type: 'POST',
-					url: 'arquivos/produtos.php',
-					data: {tipoFiltro: 'classificacao', filtro: classificacao, termo:pesquisa},
+					type: 'POST', //tipo de requisição
+					url: 'arquivos/produtos.php', //url onde será enviada a requisição
+					data: {tipoFiltro: 'classificacao', filtro: classificacao, termo:pesquisa}, //dados enviados
 					success: function(dados){
+                        //colocando os dados na div
 						$('#categoria').html(dados);
 					}
 				});
 			}
 			
+            //função para filtrar por tamanho
 			function filtrarTamanho(tamanho){
+                //pegando o nome do produto
                 var pesquisa = $('#categoria').data('pesquisa');
 
                 $.ajax({
-					type: 'POST',
-					url: 'arquivos/produtos.php',
-					data: {tipoFiltro: 'tamanho', filtro: tamanho, termo:pesquisa},
+					type: 'POST', //tipo de requisição
+					url: 'arquivos/produtos.php', //url onde será enviada a requisição
+					data: {tipoFiltro: 'tamanho', filtro: tamanho, termo:pesquisa}, //dados enviados
 					success: function(dados){
+                        //colocando o conteúdo na div
 						$('#categoria').html(dados);
 					}
 				});
 			}
+
+            //função para filtrar por cor
+            function filtrarCor(cor){
+                //pegando o conteúdo da pesquisa
+                var pesquisa = $('#categoria').data('pesquisa');
+
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: 'arquivos/produtos.php', //url onde será enviada a requisição
+                    data: {tipoFiltro: 'cor', filtro:cor, termo:pesquisa}, //dados enviados
+                    success: function(dados){
+                        //colocando o conteúdo na div
+                        $('#categoria').html(dados);
+                    }
+                });
+            }
+
+            //função para filtrar por marca
+            function filtrarMarca(marca){
+                //pegando o conteúdo da pesquisa
+                var pesquisa = $('#categoria').data('pesquisa');
+
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: 'arquivos/produtos.php', //url onde será enviada a requisição
+                    data: {tipoFiltro: 'marca', filtro:marca, termo:pesquisa}, //dados enviados
+                    success: function(dados){
+                        //colocando o conteúdo na div
+                        $('#categoria').html(dados);
+                    }
+                });
+            }
 			
 			$(document).ready(function(){
 				$('.filtrar').click(function(){
@@ -66,8 +104,10 @@
                 <div class="caixa_categoria">
                     <div class="categoria_pesquisa">
                                 <div class="categoria_pesquisa_centro">
-                                   <input type="search" class="campo_pesquisa_categoria"> 
-                                   <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar"> 
+                                <form name="search" method="POST" action="pesquisa.php">
+                                   <input type="search" name="txtpesquisa" class="campo_pesquisa_categoria"> 
+                                   <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar">
+                                </form>
                                 </div>
                             </div>
                         <div class="categoria">
@@ -118,6 +158,47 @@
 							<?php $cont++;
 								} ?>
                             </div>
+                            <div class="titulo_categoria">
+                                Cores
+                            </div>
+                            <div class="container_cor">
+                            <?php
+                                $listCor =  new controllerProduto();
+                                $rsCor = $listCor->listarCores();
+                                $cont = 0;
+                                while($cont < count($rsCor)){
+                            ?>
+                                <div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>)">
+                                    <span class="nome_cor">
+                                        <?php echo($rsCor[$cont]->getNome()) ?>
+                                    </span>
+                                </div>                       
+
+                            <?php
+                            $cont++;
+                                }
+                            ?>         
+                            </div>
+
+                            <div class="titulo_categoria">
+                                Marcas
+                            </div>
+
+                        <?php
+                            $listMarca = new controllerProduto();
+                            $rsMarca = $listMarca->listarMarca();
+                            $cont = 0;
+                            while($cont < count($rsMarca)){
+                        ?>
+                            <div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>)">
+                                <?php
+                                    echo($rsMarca[$cont]->getMarca());
+                                ?>
+                            </div>
+                        <?php
+                        $cont++;
+                            }
+                        ?>
                         </div>
                                             
                         <div class="filtro_categoria">

@@ -139,37 +139,6 @@
 			return $listImagens;
 		}
         
-        public function selectCategorias(){
-            //instancia da classe do banco de dados.
-            $conexao = new ConexaoMySQL();
-        
-            //chamada da função que conecta com o banco.
-            $PDO_conexao = $conexao->conectarBanco();
-            
-			$PDO_conexao->exec('SET CHARACTER SET UTF8');
-			
-            //query  que realiza a busca de categorias.
-            $sql ='select * from categoria';
-            
-            $resultado = $PDO_conexao->query($sql);
-            
-            $cont = 0;
-            
-            while($rsCategoria = $resultado->fetch(PDO::FETCH_OBJ)){
-                
-            //Criando lista de categoria
-            $listCategoria[] = new Produto();
-                            
-            //Adicionando os dados da categoria
-            $listCategoria[$cont]->setId($rsCategoria->idCategoria);
-            $listCategoria[$cont]->setNome($rsCategoria->nomeCategoria);
-                
-                $cont++;
-            }
-            
-            return $listCategoria;
-        }
-        
         public function selectProdutoCategoria($id){
             //instância da classe de conexão com o banco de dados
 			$conexao = new ConexaoMySQL();
@@ -178,7 +147,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
             
             //query que realiza a consulta
-			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 AND p.idCategoria = ? GROUP BY p.idProduto');
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 AND p.idCategoria = ? GROUP BY p.idProduto');
             
             //parâmetros enviados
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
@@ -335,6 +304,174 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+
+		//função para listar as cores
+		public function selectCor(){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+			
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT * FROM corroupa');
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsCor = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando uma nova cor
+				$listCor[] = new Cor();
+
+				//setando os atributos
+				$listCor[$cont]->setId($rsCor->idCor);
+				$listCor[$cont]->setNome($rsCor->nome);
+				$listCor[$cont]->setCor($rsCor->cor);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listCor;
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		public function selectByCor($cor, $pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto, p.preco, p.descricao, t.tamanho, p.preco, f.caminhoImagem as imagem FROM produto AS p INNER JOIN tamanho AS t ON 
+			t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto AS pi ON pi.idProduto = p.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto 
+			WHERE p.status = 1 AND p.idCor = ? AND p.nomeProduto LIKE ? GROUP BY p.idProduto');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $cor);
+			$stm->bindParam(2, $pesquisa);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProduto = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo Produto
+				$listProduto[] = new Produto();
+
+				//setando os atributos
+				$listProduto[$cont]->setId($rsProduto->idProduto);
+				$listProduto[$cont]->setNome($rsProduto->nomeProduto);
+				$listProduto[$cont]->setDescricao($rsProduto->descricao);
+				$listProduto[$cont]->setImagem($rsProduto->imagem);
+				$listProduto[$cont]->setTamanho($rsProduto->tamanho);
+				$listProduto[$cont]->setPreco($rsProduto->preco);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listProduto;
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+		
+		//função para listar as marcas
+		public function selectMarca(){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT * FROM marca');
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsMarca = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo Produto
+				$listMarca[] = new Produto;
+				
+				//setando os atributos
+				$listMarca[$cont]->setId($rsMarca->idMarca);
+				$listMarca[$cont]->setMarca($rsMarca->nomeMarca);
+
+				//incrementando o contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listMarca;
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
+
+		//função para filtrar o produto por marca
+		public function selectByMarca($marca, $pesquisa){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto, p.preco, p.descricao, t.tamanho, p.preco, f.caminhoImagem as imagem FROM produto AS p INNER JOIN tamanho AS t ON 
+			t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto AS pi ON pi.idProduto = p.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto 
+			WHERE p.status = 1 AND p.idMarca = ? AND p.nomeProduto LIKE ? GROUP BY p.idProduto');
+
+			//parâmetro enviado
+			$stm->bindParam(1, $marca);
+			$stm->bindParam(2, $pesquisa);
+			
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
+				//criando um novo produto
+				$listProdutos[] = new Produto();
+
+				//setando os atributos
+				$listProdutos[$cont]->setId($rsProdutos->idProduto);
+				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
+				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
+				$listProdutos[$cont]->setPreco($rsProdutos->preco);
+				$listProdutos[$cont]->setTamanho($rsProdutos->tamanho);
+				$listProdutos[$cont]->setImagem($rsProdutos->imagem);
+
+				//contador
+				$cont++;
+			}
+
+			//retornando os dados
+			return $listProdutos;
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 		
 		public function SelectByTamanho($tamanho, $pesquisa){
 			//instância da classe de conexão com o banco
@@ -384,30 +521,42 @@
 			$conexao->fecharConexao();
 		}
 		
+		//função para listar os produtos aleatóriamente
 		public function selectRandom(){
+			//instância da classe de conexão com o banco
 			$conexao = new ConexaoMySQL();
 			
+			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
 			
+			//quey que faz a consulta
 			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 GROUP BY p.idProduto ORDER BY rand() limit 3';
 			
+			//armazenando o resultado em uma variável
 			$resultado = $PDO_conexao->query($sql);
 			
+			//contador
 			$cont = 0;
 			
+			//percorrendo os dados
 			while($rsProdutos = $resultado->fetch(PDO::FETCH_OBJ)){
+				//criando um novo produto
 				$listProduto[] = new Produto();
 				
+				//setando os atributos
 				$listProduto[$cont]->setId($rsProdutos->idProduto);
 				$listProduto[$cont]->setNome($rsProdutos->nome);
 				$listProduto[$cont]->setPreco($rsProdutos->preco);
 				$listProduto[$cont]->setImagem($rsProdutos->imagem);
 				
+				//incrementando o contador
 				$cont++;
 			}
 			
+			//retornando os dados
 			return $listProduto;
 			
+			//fechando a conexão
 			$conexao->fecharConexao();
 		}
 
@@ -503,32 +652,6 @@
 			}else{
 				echo('nenhum produto encontrado...');
 			}
-
-			$conexao->fecharConexao();
-		}
-
-		public function selectCores(){
-			$conexao = new ConexaoMySQL();
-			
-			$PDO_conexao = $conexao->conectarBanco();
-
-			$stm = $PDO_conexao->prepare('SELECT * FROM corroupa');
-
-			$stm->execute();
-
-			$cont = 0;
-
-			while($rsCor = $stm->fetch(PDO::FETCH_OBJ)){
-				$listCor[] = new Cor();
-
-				$listCor[$cont]->setId($rsCor->idCor);
-				$listCor[$cont]->setNome($rsCor->nome);
-				$listCor[$cont]->setCor($rsCor->cor);
-
-				$cont++;
-			}
-
-			return $listCor;
 
 			$conexao->fecharConexao();
 		}

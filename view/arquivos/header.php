@@ -82,9 +82,9 @@
 	<div class="menu">
 		<?php
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-			require_once($diretorio.'controller/controllerProduto.php');
+			require_once($diretorio.'controller/controllerCategoria.php');
 
-			$listCategoria = new controllerProduto();
+			$listCategoria = new controllerCategoria();
 			$rsCategoria = $listCategoria->listarCategoria();
 
 			$cont = 0;

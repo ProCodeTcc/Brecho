@@ -173,9 +173,9 @@
             <div class="menu_categoria">
                 <div class="menu">
                     <?php
-                        require_once('controller/controllerProduto.php');
-                            
-                        $listCategoria = new controllerProduto();
+                        require_once('controller/controllerCategoria.php');
+
+                        $listCategoria = new controllerCategoria();
                         $rsCategoria = $listCategoria->listarCategoria();
                             
                         $cont = 0;

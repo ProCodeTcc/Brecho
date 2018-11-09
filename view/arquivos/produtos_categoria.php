@@ -2,11 +2,18 @@
 	if(isset($_POST['tipoFiltro'])){
 		$tipoFiltro = $_POST['tipoFiltro'];
 		$filtro = $_POST['filtro'];
-		$pesquisa = $_POST['termo'];
+        $idCategoria = $_POST['id'];
+
+        if(!empty($_POST['termo'])){
+            $pesquisa = $_POST['termo'];
+        }else{
+            $pesquisa = '';
+        }
 	}
 
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-	require_once($diretorio.'controller/controllerProduto.php');
+    require_once($diretorio.'controller/controllerProduto.php');
+    require_once($diretorio.'controller/controllerCategoria.php');
 ?>
 
 <div class="caixa_categoria">
@@ -20,13 +27,13 @@
 			<div class="titulo_categoria_primeiro">
 				Classificação
 			</div>
-			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('A')">
+			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('A', <?php echo($idCategoria) ?>)">
 				A
 			</div>
-			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('B')">
+			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('B', <?php echo($idCategoria) ?>)">
 				B
 			</div>
-			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('C')">
+			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('C', <?php echo($idCategoria) ?>)">
 				C
 			</div>
 			<div class="titulo_categoria">
@@ -97,7 +104,7 @@
 			$cont = 0;
 			while($cont < count($rsMarca)){
 		?>
-			<div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getMarca()) ?>)">
+			<div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>)">
 				<?php
 					echo($rsMarca[$cont]->getMarca());
 				?>
@@ -110,16 +117,16 @@
 
 		<div class="filtro_categoria">
 			<?php
-				$listProdutoCategoria = new controllerProduto();
+				$listCategoria = new controllerCategoria();
 
 				if($tipoFiltro == 'classificacao'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoClassificacao($filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaClassificacao($idCategoria, $filtro, $pesquisa);
 				}else if($tipoFiltro == 'tamanho'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoTamanho($filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaTamanho($filtro, $pesquisa);
 				}else if($tipoFiltro == 'cor'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoCor($filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaCor($filtro, $pesquisa);
 				}else if($tipoFiltro == 'marca'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoMarca($filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaMarca($filtro, $pesquisa);
 				}
 
 

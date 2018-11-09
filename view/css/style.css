@@ -372,6 +372,35 @@
         color: black;
     }
 
+    .container_cor{
+        display: flex;
+        flex-direction: column;
+        width: 260px;
+        height: auto;
+        min-height: 50px;
+        overflow: visible;
+    }
+
+    .cores{
+        width: 20px;
+        height: 20px;
+        border-radius: 15px;
+        box-sizing: border-box;
+        padding-top: 4px;
+        font-weight: bold;
+        margin-right: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        padding-top: 5px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    .nome_cor{
+        box-sizing: border-box;
+        padding-left: 25px;
+    }
+
     .preco{
         width: 100%;
         height: 20px;

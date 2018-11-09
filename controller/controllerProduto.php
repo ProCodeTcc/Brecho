@@ -13,6 +13,7 @@
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 			require_once($diretorio.'model/produtoClass.php');
 			require_once($diretorio.'model/dao/produtoDAO.php');
+			require_once($diretorio.'model/corClass.php');
 		}
 		
 		//função que lista um produto
@@ -50,17 +51,6 @@
 			//retornando a lista com as imagens
 			return $listImagens;
 		}
-        
-        public function listarCategoria(){
-            
-            $categoriaDAO = new ProdutoDAO();
-            
-            $listCategoria = $categoriaDAO ->selectCategorias();
-            
-            return $listCategoria;
-            
-            
-        }
         
         public function listarProdutoCategoria($id){
         
@@ -125,6 +115,60 @@
 			//armazenando os dados em uma variável
 			$listProduto = $produtoDAO->SelectByTamanho($tamanho, $termo);
 			
+			//retornando os dados
+			return $listProduto;
+		}
+
+		//função pra listar as cores
+		public function listarCores(){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listCor = $produtoDAO->selectCor();
+
+			//retornando os dados
+			return $listCor;
+		}
+		
+		//função para listar o produto a partir da cor
+		public function listarProdutoCor($cor, $pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $produtoDAO->selectByCor($cor, $pesquisa);
+
+			//retornando os dados
+			return $listProduto;
+		}
+
+		//função que lista as marcas
+		public function listarMarca(){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listMarca = $produtoDAO->selectMarca();
+
+			//retornando os dados
+			return $listMarca;
+		}
+
+		//função para listar o produto a partir da marca
+		public function listarProdutoMarca($marca, $pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $produtoDAO->selectByMarca($marca, $termo);
+
 			//retornando os dados
 			return $listProduto;
 		}
