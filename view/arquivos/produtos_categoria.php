@@ -47,7 +47,7 @@
 					while($cont < count($rsMedidas)){
 				?>
 
-				<div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>)">
+				<div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>, <?php echo($idCategoria) ?>)">
 					<?php echo($rsMedidas[$cont]->getTamanho()) ?>
 				</div>
 			<?php $cont++;
@@ -65,7 +65,7 @@
 					while($cont < count($rsNumeros)){
 				?>
 
-				<div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>)">
+				<div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>, <?php echo($idCategoria) ?>)">
 					<?php echo($rsNumeros[$cont]->getTamanho()) ?>
 				</div>
 			<?php $cont++;
@@ -82,7 +82,7 @@
 				$cont = 0;
 				while($cont < count($rsCor)){
 			?>
-				<div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>)">
+				<div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>, <?php echo($idCategoria) ?>)">
 					<span class="nome_cor">
 						<?php echo($rsCor[$cont]->getNome()) ?>
 					</span>
@@ -104,7 +104,7 @@
 			$cont = 0;
 			while($cont < count($rsMarca)){
 		?>
-			<div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>)">
+			<div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>, <?php echo($idCategoria) ?>)">
 				<?php
 					echo($rsMarca[$cont]->getMarca());
 				?>
@@ -122,11 +122,11 @@
 				if($tipoFiltro == 'classificacao'){
 					$rsFiltro = $listCategoria->listarCategoriaClassificacao($idCategoria, $filtro, $pesquisa);
 				}else if($tipoFiltro == 'tamanho'){
-					$rsFiltro = $listCategoria->listarCategoriaTamanho($filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaTamanho($idCategoria, $filtro, $pesquisa);
 				}else if($tipoFiltro == 'cor'){
-					$rsFiltro = $listCategoria->listarCategoriaCor($filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaCor($idCategoria, $filtro, $pesquisa);
 				}else if($tipoFiltro == 'marca'){
-					$rsFiltro = $listCategoria->listarCategoriaMarca($filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaMarca($idCategoria, $filtro, $pesquisa);
 				}
 
 
@@ -173,7 +173,7 @@
 	 </div>
 
 	<div id="resultado">
-
+	
 	</div>
 		<div class="botao_categoria_responsivo"> 
 			<img src="icones/categoria.png">

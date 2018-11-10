@@ -22,13 +22,58 @@
 			$termo = '%'.$pesquisa.'%';
 
 			//instância da classe ProdutoDAO
-			$produtoDAO = new CategoriaDAO();
+			$categoriaDAO = new CategoriaDAO();
 			
 			//armazenando os dados em uma variável
-			$listProdutos = $produtoDAO->SelectByClassificacao($idCategoria, $classificacao, $termo);
+			$listProdutos = $categoriaDAO->SelectByClassificacao($idCategoria, $classificacao, $termo);
 			
 			//retornando os dados
 			return $listProdutos;
+        }
+        
+        //função que lista os produtos pelo tamanho e categoria
+		public function listarCategoriaTamanho($idCategoria, $tamanho, $pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$categoriaDAO = new CategoriaDAO();
+			
+			//armazenando os dados em uma variável
+			$listProduto = $categoriaDAO->SelectByTamanho($idCategoria, $tamanho, $termo);
+			
+			//retornando os dados
+			return $listProduto;
+        }
+        
+        //função para listar o produto a partir da cor e categoria
+		public function listarCategoriaCor($idCategoria, $cor, $pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$categoriaDAO = new CategoriaDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $categoriaDAO->selectByCor($idCategoria, $cor, $termo);
+
+			//retornando os dados
+			return $listProduto;
+        }
+        
+        //função para listar o produto a partir da marca e categoria
+		public function listarCategoriaMarca($idCategoria, $marca, $pesquisa){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$categoriaDAO = new CategoriaDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $categoriaDAO->selectByMarca($idCategoria, $marca, $termo);
+
+			//retornando os dados
+			return $listProduto;
 		}
     }
 ?>

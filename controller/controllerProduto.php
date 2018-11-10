@@ -140,7 +140,7 @@
 			$produtoDAO = new ProdutoDAO();
 
 			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->selectByCor($cor, $pesquisa);
+			$listProduto = $produtoDAO->selectByCor($cor, $termo);
 
 			//retornando os dados
 			return $listProduto;

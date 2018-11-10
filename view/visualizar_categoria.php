@@ -30,13 +30,13 @@
 			}
 			
             //função para filtrar por tamanho
-			function filtrarTamanho(tamanho){
+			function filtrarTamanho(tamanho, idCategoria){
                 //pegando o nome do produto
                 var pesquisa = $('#categoria').data('pesquisa');
 
                 $.ajax({
 					type: 'POST', //tipo de requisição
-					url: 'arquivos/produtos.php', //url onde será enviada a requisição
+					url: 'arquivos/produtos_categoria.php', //url onde será enviada a requisição
 					data: {tipoFiltro: 'tamanho', filtro: tamanho, termo:pesquisa, id:idCategoria}, //dados enviados
 					success: function(dados){
                         //colocando o conteúdo na div
@@ -46,13 +46,13 @@
 			}
 
             //função para filtrar por cor
-            function filtrarCor(cor){
+            function filtrarCor(cor, idCategoria){
                 //pegando o conteúdo da pesquisa
                 var pesquisa = $('#categoria').data('pesquisa');
 
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos.php', //url onde será enviada a requisição
+                    url: 'arquivos/produtos_categoria.php', //url onde será enviada a requisição
                     data: {tipoFiltro: 'cor', filtro:cor, termo:pesquisa, id:idCategoria}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
@@ -62,13 +62,13 @@
             }
 
             //função para filtrar por marca
-            function filtrarMarca(marca){
+            function filtrarMarca(marca, idCategoria){
                 //pegando o conteúdo da pesquisa
                 var pesquisa = $('#categoria').data('pesquisa');
 
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos.php', //url onde será enviada a requisição
+                    url: 'arquivos/produtos_categoria.php', //url onde será enviada a requisição
                     data: {tipoFiltro: 'marca', filtro:marca, termo:pesquisa, id:idCategoria}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
@@ -80,7 +80,7 @@
 			$(document).ready(function(){
 				$('.filtrar').click(function(){
 					$('#categoria').children().empty();
-				});
+                });
 			});
 		</script>
 		
@@ -131,7 +131,7 @@
 									while($cont < count($rsMedidas)){
 								?>
 								
-                                <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>)">
+                                <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>, <?php echo($id) ?>)">
 									<?php echo($rsMedidas[$cont]->getTamanho()) ?>
 								</div>
 							<?php $cont++;
@@ -149,7 +149,7 @@
 									while($cont < count($rsNumeros)){
 								?>
 								
-                                <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>)">
+                                <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>, <?php echo($id) ?>)">
 									<?php echo($rsNumeros[$cont]->getTamanho()) ?>
 								</div>
 							<?php $cont++;
@@ -165,7 +165,7 @@
                                 $cont = 0;
                                 while($cont < count($rsCor)){
                             ?>
-                                <div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>)">
+                                <div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>, <?php echo($id) ?>)">
                                     <span class="nome_cor">
                                         <?php echo($rsCor[$cont]->getNome()) ?>
                                     </span>
@@ -187,7 +187,7 @@
                             $cont = 0;
                             while($cont < count($rsMarca)){
                         ?>
-                            <div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>)">
+                            <div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>, <?php echo($id) ?>)">
                                 <?php
                                     echo($rsMarca[$cont]->getMarca());
                                 ?>
