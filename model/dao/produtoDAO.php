@@ -182,7 +182,55 @@
 			
 			$conexao->fecharConexao();
 			
-        }
+		}
+		
+		//função para listar os produtos de uma categoria
+		public function selectProdutoSubcategoria($id){
+			//instância da classe de conexão com o banco de dados
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.descricao ,p.preco,p.idCategoria , t.tamanho, f.caminhoImagem as imagem FROM produto as p INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 AND p.idSubcategoria = ? GROUP BY p.idProduto');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $id);
+
+			//execução do statement
+			$stm->execute();
+
+			//contador
+			$cont = 0;
+
+			//percorrendo os dados
+			while($rsProdutoCategoria = $stm->fetch(PDO::FETCH_OBJ)){
+            
+                //criando um novo produto
+                $listProdutoCategoria[] = new Produto();
+
+                //adicionando os dados do produto
+                $listProdutoCategoria[$cont]->setImagem($rsProdutoCategoria->imagem);
+                $listProdutoCategoria[$cont]->setId($rsProdutoCategoria->idProduto);
+                $listProdutoCategoria[$cont]->setNome($rsProdutoCategoria->nome);
+                $listProdutoCategoria[$cont]->setDescricao($rsProdutoCategoria->descricao);
+                $listProdutoCategoria[$cont]->setTamanho($rsProdutoCategoria->tamanho);
+                $listProdutoCategoria[$cont]->setPreco($rsProdutoCategoria->preco);
+
+				//incrementando o contador
+             	$cont++;   
+			}
+			
+			//verificando o resultado
+			if($cont != 0){
+				//retornando os dados
+				return $listProdutoCategoria;
+			}
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 		
 		//função que busca os produtos por classificacao
 		public function SelectByClassificacao($classificacao, $pesquisa){

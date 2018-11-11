@@ -14,6 +14,7 @@
 		protected $marca;
 		protected $cor;
 		protected $imagem;
+		protected $subcategoria;
 		protected $status;
 		
 		public function setId($id){
@@ -87,6 +88,14 @@
 		
 		public function getCategoria(){
 			return $this->categoria;
+		}
+
+		public function setSubcategoria($subcategoria){
+			$this->subcategoria = $subcategoria;
+		}
+		
+		public function getSubcategoria(){
+			return $this->subcategoria;
 		}
 		
 		public function setImagem($imagem){

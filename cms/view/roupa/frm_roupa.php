@@ -111,12 +111,21 @@
 	}
 
 	//função para listar as subcategorias de uma categoria
-	function selecionarSubcategoria(){
+	function selecionarSubcategoria(idCategoria){
 		//removendo as options anteriores
 		$('#txtsubcategoria').children().remove();
+		
+		//verificando se o ID da categoria é indefinido
+		if(idCategoria == undefined){
+			//resgatando o ID da categoria
+			var idCategoria = $('#txtcategoria').find('option:selected').val();
+		}
 
-		//resgatando o ID da categoria
-		var idCategoria = $('#txtcategoria').val();
+		//verificando se existe o ID da categoria
+		if(typeof idCategoria == 'string'){
+			//mostra a subcategoria
+			$('#subcategoria').show();
+		}
 	
 		$.ajax({
 			type: 'POST', //tipo de requisição
@@ -156,6 +165,8 @@
 				$('#txtmarca').val(json.idMarca);
 				$('#txtcategoria').val(json.idCategoria);
 				$('#txtpreco').val(json.preco);
+				$('#txtsubcategoria').val(json.idSubcategoria);
+				selecionarSubcategoria(json.idCategoria);
 			}
 		});
 	}

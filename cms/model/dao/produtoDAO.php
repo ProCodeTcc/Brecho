@@ -56,9 +56,9 @@
 			
 			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
-			
+	
 			//query que insere dados no banco
-			$stm = $PDO_conexao->prepare('INSERT INTO produto(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idCor, idTamanho, naturezaProduto) VALUES(?,?,?,?,?,?,?,?,1)');
+			$stm = $PDO_conexao->prepare('INSERT INTO produto(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idSubcategoria, idCor, idTamanho, naturezaProduto) VALUES(?,?,?,?,?,?,?,?,?,1)');
 			
 			//parâmetros enviados
 			$stm->bindParam(1, $produto->getNome());
@@ -67,8 +67,9 @@
 			$stm->bindParam(4, $produto->getClassificacao());
 			$stm->bindParam(5, $produto->getMarca());
 			$stm->bindParam(6, $produto->getCategoria());
-			$stm->bindParam(7, $produto->getCor());
-			$stm->bindParam(8, $produto->getTamanho());
+			$stm->bindParam(7, $produto->getSubcategoria());
+			$stm->bindParam(8, $produto->getCor());
+			$stm->bindParam(9, $produto->getTamanho());
 			
 			//execução do statement
 			$stm->execute();
@@ -215,7 +216,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que atualiza os dados
-			$stm = $PDO_conexao->prepare('UPDATE produto SET nomeProduto = ?, descricao = ?, preco = ?, classificacao = ?, idMarca = ?, idCor = ?, idCategoria =?, idTamanho = ? WHERE idProduto = ?');
+			$stm = $PDO_conexao->prepare('UPDATE produto SET nomeProduto = ?, descricao = ?, preco = ?, classificacao = ?, idMarca = ?, idCor = ?, idCategoria =?, idSubcategoria = ?, idTamanho = ? WHERE idProduto = ?');
 			
 			//parâmetros enviados
 			$stm->bindParam(1, $produto->getNome());
@@ -225,8 +226,9 @@
 			$stm->bindParam(5, $produto->getMarca());
 			$stm->bindParam(6, $produto->getCor());
 			$stm->bindParam(7, $produto->getCategoria());
-			$stm->bindParam(8, $produto->getTamanho());
-			$stm->bindParam(9, $produto->getId());
+			$stm->bindParam(8, $produto->getSubcategoria());
+			$stm->bindParam(9, $produto->getTamanho());
+			$stm->bindParam(10, $produto->getId());
 			
 			//verifica se executou
 			if($stm->execute()){

@@ -26,6 +26,7 @@
 				$classificacao = $_POST['txtclassificacao'];
 				$marca = $_POST['txtmarca'];
 				$categoria = $_POST['txtcategoria'];
+				$subcategoria = $_POST['txtsubcategoria'];
 				$cor = $_POST['txtcor'];
 				$tamanho = $_POST['txttamanho'];
 				$idioma = $_POST['idioma'];
@@ -46,6 +47,7 @@
 			$produtoClass->setClassificacao($classificacao);
 			$produtoClass->setMarca($marca);
 			$produtoClass->setCategoria($categoria);
+			$produtoClass->setSubcategoria($subcategoria);
 			$produtoClass->setCor($cor);
 			$produtoClass->setTamanho($tamanho);
 			
@@ -94,6 +96,7 @@
 				$classificacao = $_POST['txtclassificacao'];
 				$marca = $_POST['txtmarca'];
 				$categoria = $_POST['txtcategoria'];
+				$subcategoria = $_POST['txtsubcategoria'];
 				$cor = $_POST['txtcor'];
 				$tamanho = $_POST['txttamanho'];
 				$id = $_POST['id'];
@@ -111,6 +114,7 @@
 			$produtoClass->setClassificacao($classificacao);
 			$produtoClass->setMarca($marca);
 			$produtoClass->setCategoria($categoria);
+			$produtoClass->setSubcategoria($subcategoria);
 			$produtoClass->setCor($cor);
 			$produtoClass->setTamanho($tamanho);
 			

@@ -79,8 +79,10 @@
 			
 			$(document).ready(function(){
 				$('.filtrar').click(function(){
-					$('#categoria').children().empty();
+                    $('#categoria').children().empty();
                 });
+
+                $('#pesquisa').hide();
 			});
 		</script>
 		

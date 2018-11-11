@@ -1,7 +1,7 @@
 <script>
     $(function(){
         var id = $('#frmRoupa').data('id');
-		
+        
 		if(id != ""){
             buscarProduto(id, 'pt');
             $('#frmRoupa').attr('data-modo', 'editar');
@@ -9,7 +9,7 @@
 
         listarCategoria();
 		listarMarca();
-		listarCor();
+        listarCor();
 
         $('#txtnumero').click(function(){
 			//exibindo os tamanhos
@@ -112,7 +112,7 @@
                 <input type="number" class="cadastro_input" name="txtpreco" id="txtpreco">
             </div>
 
-            <div class="form_linha">
+            <div class="form_linha" id="subcategoria">
                 <label class="lbl_cadastro">Subcategoria: </label>
                 <select name="txtsubcategoria" class="cadastro_select" id="txtsubcategoria">
                     <option>teste</option>

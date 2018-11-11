@@ -63,6 +63,20 @@
             //Retornando o produto da categoria.
             return $listProdutoCategoria;
         
+		}
+		
+		//função para listar os produtos de uma subcategoria
+		public function listarProdutoSubcategoria($id){
+        
+            //instância da classe produtoDAO
+            $produtoDAO = new ProdutoDAO();
+            
+            //armazenando os dados retornados.
+            $listProduto = $produtoDAO->selectProdutoSubcategoria($id);
+            
+            //Retornando o produto da categoria.
+            return $listProduto;
+        
         }
 		
 		//função que listas os produtos por classificação

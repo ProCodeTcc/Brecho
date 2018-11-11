@@ -182,11 +182,31 @@
                             
                         while($cont < count($rsCategoria)){
                     ?>
-                    <a href="view/visualizar_categoria.php?idCategoria=<?php echo($rsCategoria[$cont]->getId())?>">
-                        <div class="menu_item">
+                    
+                    <div class="menu_item">
+                        <a href="view/visualizar_categoria.php?idCategoria=<?php echo($rsCategoria[$cont]->getId())?>">
                             <?php echo($rsCategoria[$cont]->getNome())?>
+                        </a>
+
+                        <div class="subcategoria_container">
+                            <?php
+                                $listSubcategoria = new controllerCategoria();
+                                $rsSubcategoria = $listSubcategoria->listarSubcategoria($rsCategoria[$cont]->getId());
+                                $index = 0;
+                                while($index < count($rsSubcategoria)){
+                            ?>
+                            <div class="subcategoria_item">
+                                <a href="view/visualizar_subcategoria.php?idSubcategoria=<?php echo($rsSubcategoria[$index]->getId()) ?>">
+                                    <?php echo($rsSubcategoria[$index]->getNome()) ?>
+                                </a>
+                            </div>
+
+                            <?php
+                                $index++;
+                            }
+                            ?>
                         </div>
-                    </a>
+                    </div>
 
                     <?php
                         $cont++;

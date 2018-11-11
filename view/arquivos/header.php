@@ -14,16 +14,18 @@
 		<a href="../view/nossas_lojas.php" class="link_paginas"> Nossas Lojas </a>
 		<a href="../view/sobre.php" class="link_paginas"> Sobre </a>
 
-		<div class="pesquisa_cabecalho_icone">
+		<div id="pesquisa">
+			<div class="pesquisa_cabecalho_icone">
 
-			<img src="../view/icones/pesquisa.png" alt="#">
+				<img src="../view/icones/pesquisa.png" alt="#">
+			</div>
+
+			<div class="pesquisa_cabecalho">
+				<form name="search" method="POST" action="pesquisa.php">
+					<input class="campo_pesquisa_cabecalho" name="txtpesquisa" type="text">
+				</form>
+			</div>
 		</div>
-
-	<div class="pesquisa_cabecalho">
-		<form name="search" method="POST" action="pesquisa.php">
-			<input class="campo_pesquisa_cabecalho" id="pesquisa" name="txtpesquisa" type="text">
-		</form>
-	</div>
 	</div>
 </div>
 
