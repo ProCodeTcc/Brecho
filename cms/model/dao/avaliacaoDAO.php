@@ -151,8 +151,8 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que insere os dados
-			$stm = $PDO_conexao->prepare('INSERT INTO produto(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idCor, idTamanho, naturezaProduto) 
-			SELECT pa.nomeProduto, pa.descricao, pa.preco, pa.classificacao, pa.idMarca, pa.idCategoria, pa.idCor, pa.idTamanho, pa.naturezaProduto FROM produtoAvaliacao as pa WHERE pa.idProdutoAvaliacao = ?');
+			$stm = $PDO_conexao->prepare('INSERT INTO produto(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idSubcategoria, idCor, idTamanho, naturezaProduto) 
+			SELECT pa.nomeProduto, pa.descricao, pa.preco, pa.classificacao, pa.idMarca, pa.idCategoria, pa.idSubcategoria, pa.idCor, pa.idTamanho, pa.naturezaProduto FROM produtoAvaliacao as pa WHERE pa.idProdutoAvaliacao = ?');
 			
 			//parâmetro enviado
 			$stm->bindParam(1, $id);

@@ -2216,7 +2216,7 @@
 		margin-top: 10px;
 	}
 	
-	#txttamanho{
+	#txttamanho, #subcategoria{
 		display: none;
 	}
 

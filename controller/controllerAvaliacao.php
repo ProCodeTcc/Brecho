@@ -31,6 +31,7 @@
 				$valor = $_POST['txtvalor'];
 				$cor = $_POST['txtcor'];
 				$estado = $_POST['txtestado'];
+				$subcategoria = $_POST['txtsubcategoria'];
 				
 				//criando uma nova imagem
 				$imagemClass = new Imagem();
@@ -45,11 +46,14 @@
 				$avaliacaoClass->setNome($nome);
 				$avaliacaoClass->setTamanho($tamanho);
 				$avaliacaoClass->setCategoria($categoria);
+				$avaliacaoClass->setSubcategoria($subcategoria);
 				$avaliacaoClass->setMarca($marca);
 				$avaliacaoClass->setPreco($valor);
 				$avaliacaoClass->setCor($cor);
 				$avaliacaoClass->setDescricao($estado);
 				$avaliacaoClass->setClassificacao($classificacao);
+
+				//instância da classe AvaliacaoDAO
 				$avaliacaoDAO = new AvaliacaoDAO();
 				
 				//armazenando o ID do produto em uma variável
@@ -136,6 +140,18 @@
 			
 			//retornando os dados
 			return $listTamanho;
+		}
+
+		//função para listar as subcategorias
+		public function listarSubcategoria($idCategoria){
+			//instância da classe avaliacaoDAO
+			$avaliacaoDAO = new AvaliacaoDAO();
+
+			//armazenando os dados em uma variável
+			$listSubcategoria = $avaliacaoDAO->selectSubcategoria($idCategoria);
+
+			//retornando os dados
+			return $listSubcategoria;
 		}
 
 		//função para filtrar o pedido de um cliente

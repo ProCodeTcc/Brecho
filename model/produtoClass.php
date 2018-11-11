@@ -9,6 +9,7 @@
 		protected $descricao;
 		protected $preco;
 		protected $classificacao;
+		protected $subcategoria;
 		protected $marca;
 		protected $categoria;
 		protected $cor;
@@ -70,6 +71,14 @@
 		
 		public function getCategoria(){
 			return $this->categoria;
+		}
+
+		public function setSubcategoria($subcategoria){
+			$this->subcategoria = $subcategoria;
+		}
+		
+		public function getSubcategoria(){
+			return $this->subcategoria;
 		}
 		
 		public function setCor($cor){

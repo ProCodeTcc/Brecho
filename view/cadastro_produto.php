@@ -63,7 +63,10 @@
 						//percorrendo os dados
 						for(var i = 0; i < json.length; i++){
 							$('#txtcategoria').append(new Option(json[i].nomeCategoria, json[i].idCategoria));
-						}
+                        }
+                        
+                        var idCategoria = $('#txtcategoria').find('option:selected').val();
+                        selecionarSubcategoria(idCategoria);
 					}
 				});
 			}
@@ -84,7 +87,67 @@
 						}
 					}
 				});
-			}
+            }
+            
+            //função para listar as subcategorias de uma categoria
+            function selecionarSubcategoria(idCategoria){
+                //removendo as options anteriores
+                $('#txtsubcategoria').children().remove();
+                
+                //resgatando o ID da categoria
+                var idCategoria = $('#txtcategoria').find('option:selected').val();
+            
+                $.ajax({
+                    type: 'GET', //tipo de requisição
+                    url: url+'router.php', //url onde será enviada a requisição
+                    data: {controller: 'avaliação', modo: 'buscarSubcategoria', id:idCategoria}, //dados enviados
+                    success: function(dados){
+                        $('#subcategoria').show();
+                        //conversão dos dados para JSON
+                        json = JSON.parse(dados);
+
+                        //percorrendo os dados
+                        for(var i = 0; i < json.length; i++){
+                            //criando uma nova option com os dados
+                            $('#txtsubcategoria').append(new Option(json[i].nome, json[i].idSubcategoria));
+                        }
+                    }
+                });
+            }
+
+            //função para listar as subcategorias de uma categoria
+            function selecionarSubcategoria(idCategoria){
+                //removendo as options anteriores
+                $('#txtsubcategoria').children().remove();
+                
+                //verificando se o ID da categoria é indefinido
+                if(idCategoria == undefined){
+                    //resgatando o ID da categoria
+                    var idCategoria = $('#txtcategoria').find('option:selected').val();
+                }
+
+                //verificando se existe o ID da categoria
+                if(typeof idCategoria == 'string'){
+                    //mostra a subcategoria
+                    $('#subcategoria').show();
+                }
+            
+                $.ajax({
+                    type: 'GET', //tipo de requisição
+                    url: url+'router.php', //url onde será enviada a requisição
+                    data: {controller: 'avaliação', modo: 'buscarSubcategoria', id:idCategoria}, //dados enviados
+                    success: function(dados){
+                        //conversão dos dados para JSON
+                        json = JSON.parse(dados);
+
+                        //percorrendo os dados
+                        for(var i = 0; i < json.length; i++){
+                            //criando uma nova option com os dados
+                            $('#txtsubcategoria').append(new Option(json[i].nome, json[i].idSubcategoria));
+                        }
+                    }
+                });
+            }
 			
 			//função que mostra a prévia da imagem
 			function mostrarPrevia(input, localPrevia){
@@ -275,7 +338,7 @@
                             Categoria do Produto:
                         </div>
                         <div class="caixa_cadastro_produto">
-                            <select id="txtcategoria" name="txtcategoria" class="campo_cadastro_produto"></select>
+                            <select id="txtcategoria" name="txtcategoria" class="campo_cadastro_produto" onchange="selecionarSubcategoria()"></select>
                         </div>
                     </div>
                     <div class="linha_cadastro">
@@ -284,6 +347,14 @@
                         </div>
                         <div class="caixa_cadastro_produto">
                             <select id="txtmarca" name="txtmarca" class="campo_cadastro_produto"></select>
+                        </div>
+                    </div>
+                    <div class="linha_cadastro" id="subcategoria">
+                        <div class="titulo_cadastro_produto">
+                            Subcategoria do Produto:
+                        </div>
+                        <div class="caixa_cadastro_produto">
+                            <select id="txtsubcategoria" name="txtsubcategoria" class="campo_cadastro_produto"></select>
                         </div>
                     </div>
                     

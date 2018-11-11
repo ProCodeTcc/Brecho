@@ -27,7 +27,7 @@
 			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
 			
-			$stm = $PDO_conexao->prepare('INSERT INTO produtoavaliacao(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idCor, idTamanho, naturezaProduto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, 2)');
+			$stm = $PDO_conexao->prepare('INSERT INTO produtoavaliacao(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idSubcategoria, idCor, idTamanho, naturezaProduto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 2)');
 			
 			$stm->bindParam(1, $produto->getNome());
 			$stm->bindParam(2, $produto->getDescricao());
@@ -35,8 +35,9 @@
 			$stm->bindParam(4, $produto->getClassificacao());
 			$stm->bindParam(5, $produto->getMarca());
 			$stm->bindParam(6, $produto->getCategoria());
-			$stm->bindParam(7, $produto->getCor());
-			$stm->bindParam(8, $produto->getTamanho());
+			$stm->bindParam(7, $produto->getSubcategoria());
+			$stm->bindParam(8, $produto->getCor());
+			$stm->bindParam(9, $produto->getTamanho());
 			
 			if($stm->execute()){
 				header('location: view/cadastro_produto.php');
@@ -175,6 +176,24 @@
 			
 			//retornando os dados em JSON
 			return json_encode($listTamanho);
+		}
+
+		public function selectSubcategoria($idCategoria){
+			$conexao = new ConexaoMySQL();
+
+			$PDO_conexao = $conexao->conectarBanco();
+
+			$stm = $PDO_conexao->prepare('SELECT * FROM subcategoria WHERE idCategoria = ?');
+
+			$stm->bindParam(1, $idCategoria);
+
+			$stm->execute();
+
+			$listSubcategoria = $stm->fetchAll(PDO::FETCH_OBJ);
+
+			return json_encode($listSubcategoria);
+
+			$conexao->fecharConexao();
 		}
 	}
 ?>

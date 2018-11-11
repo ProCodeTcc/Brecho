@@ -183,6 +183,14 @@
 					
 					echo($listTamanho);
 				break;
+
+				case 'buscarSubcategoria':
+					$idCategoria = $_GET['id'];
+					$controllerAvaliacao = new controllerAvaliacao();
+					$listSubcategoria = $controllerAvaliacao->listarSubcategoria($idCategoria);
+
+					echo($listSubcategoria);
+				break;
 			}
             
         case 'login':
