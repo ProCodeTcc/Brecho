@@ -305,6 +305,18 @@
 			return $listCategoria;
 		}
 
+		//função para listar as subcategorias
+		public function listarSubcategoria($idCategoria){
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listSubcategoria = $produtoDAO->selectSubcategorias($idCategoria);
+
+			//retornando os dados
+			return $listSubcategoria;
+		}
+
 		//função para pesquisar um produto
 		public function pesquisarProduto($pesquisa){
 			//formatando a pesquisa

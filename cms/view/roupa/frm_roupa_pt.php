@@ -78,7 +78,7 @@
 
             <div class="form_linha">
                 <label class="lbl_cadastro">Categoria: </label>
-                <select name="txtcategoria" class="cadastro_select" id="txtcategoria">
+                <select name="txtcategoria" class="cadastro_select" id="txtcategoria" onchange="selecionarSubcategoria()">
 
                 </select>
             </div>
@@ -110,6 +110,13 @@
             <div class="form_linha">
                 <label class="lbl_cadastro">Valor: </label>
                 <input type="number" class="cadastro_input" name="txtpreco" id="txtpreco">
+            </div>
+
+            <div class="form_linha">
+                <label class="lbl_cadastro">Subcategoria: </label>
+                <select name="txtsubcategoria" class="cadastro_select" id="txtsubcategoria">
+                    <option>teste</option>
+                </select>
             </div>
         </div>
     </div>

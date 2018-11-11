@@ -109,6 +109,31 @@
 			}
 		});
 	}
+
+	//função para listar as subcategorias de uma categoria
+	function selecionarSubcategoria(){
+		//removendo as options anteriores
+		$('#txtsubcategoria').children().remove();
+
+		//resgatando o ID da categoria
+		var idCategoria = $('#txtcategoria').val();
+	
+		$.ajax({
+			type: 'POST', //tipo de requisição
+			url: url+'router.php', //url onde será enviada a requisição
+			data: {controller: 'produto', modo: 'buscarSubcategoria', id:idCategoria}, //dados enviados
+			success: function(dados){
+				//conversão dos dados para JSON
+				json = JSON.parse(dados);
+
+				//percorrendo os dados
+				for(var i = 0; i < json.length; i++){
+					//criando uma nova option com os dados
+					$('#txtsubcategoria').append(new Option(json[i].nome, json[i].idSubcategoria));
+				}
+			}
+		});
+	}
 	
 	//função para buscar o produto
 	function buscarProduto(id, idioma){

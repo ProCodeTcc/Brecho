@@ -1284,3 +1284,20 @@ footer{
 	width: 300px;
 	height: 200px;
 }
+
+.subcategoria_container{
+	display: flex;
+	flex-direction: column;
+	height: 300px;
+	flex-wrap: wrap;
+}
+
+.subcategorias{
+	display: flex;
+	flex-direction: row;
+	margin-top: 5px;
+}
+
+.subcategorias span{
+	margin-left: 5px;
+}

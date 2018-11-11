@@ -21,12 +21,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Categoria</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
 		<script src="../js/funcoes.js"></script>
+		<script src="../js/jquery-ui.js"></script>
     </head>
 	
 	<script>
@@ -48,7 +50,7 @@
 		function adicionar(){
 			$.ajax({
 				type: 'POST', //tipo de requisição
-				url: 'frm_categoria.php', //url onde será enviada a requisição
+				url: 'categoria.php', //url onde será enviada a requisição
 				success: function(dados){
 					//listando os dados na modal
 					$('.modal').html(dados);
@@ -60,7 +62,7 @@
 		function buscar(id){
 			$.ajax({
 				type: 'POST', //tipo de requisição
-				url: 'frm_categoria.php', //url onde será enviada a requisição
+				url: 'categoria.php', //url onde será enviada a requisição
 				data: {id:id}, //parâmetros enviados
 				success: function(dados){
 					//colocando os dados na modal
@@ -109,6 +111,17 @@
 
 					//listando os dados
 					listar();
+				}
+			});
+		}
+
+		function inserirSubcategoria(id){
+			$.ajax({
+				type: 'POST',
+				url: 'frm_subcategoria.php',
+				data: {idCategoria:id},
+				success: function(dados){
+					$('.modal').html(dados);
 				}
 			});
 		}

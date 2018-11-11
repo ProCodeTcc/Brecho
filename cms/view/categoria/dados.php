@@ -3,6 +3,10 @@
 		$('.editar').click(function(){
 			$('.container_modal').fadeIn(400);
 		})
+
+		$('.adicionar_subcategoria').click(function(){
+			$('.container_modal').fadeIn(400);
+		})
 	});
 </script>
 
@@ -24,6 +28,10 @@
 	<div class="users_view_itens">
 		<span data-id="<?php ?>" onclick="buscar(<?php echo($rsCategoria[$cont]->getId()) ?>);">
 		   <img class="editar" data-modo="editar" src="../imagens/pencil.png">
+		</span>
+
+		<span class="adicionar_subcategoria" onclick="inserirSubcategoria(<?php echo($rsCategoria[$cont]->getId()) ?>)">
+			<img src="../imagens/list.png">
 		</span>
 		
 		<span onclick="excluir(<?php echo($rsCategoria[$cont]->getId()) ?>)">

@@ -570,6 +570,32 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+
+		public function selectSubcategorias($idCategoria){
+			//instância da classe de conexão com o banco
+			$conexao = new ConexaoMySQL();
+
+			//chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+			//query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT * FROM subcategoria WHERE idCategoria = ?');
+
+			//parâmetros enviados
+			$stm->bindParam(1, $idCategoria);
+
+			//execução do statement
+			$stm->execute();
+
+			//armazenando os dados em uma variável
+			$listSubcategoria = $stm->fetchAll(PDO::FETCH_OBJ);
+
+			//retornando os dados em JSON
+			return json_encode($listSubcategoria);
+
+			//fechando a conexão
+			$conexao->fecharConexao();
+		}
 		
 		public function updateStatus($status, $id){
 			//instância da classe de conexão com o banco de dados

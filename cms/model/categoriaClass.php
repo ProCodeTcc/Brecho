@@ -7,7 +7,6 @@
         private $id;
         private $nome;
         private $genero;
-        private $idSubcategoria;
         private $status;
 
         

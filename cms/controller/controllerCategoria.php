@@ -11,6 +11,8 @@
             $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
             require_once($diretorio.'/model/categoriaClass.php');
             require_once($diretorio.'/model/dao/categoriaDAO.php');
+            require_once($diretorio.'/model/subcategoriaClass.php');
+            require_once($diretorio.'/model/dao/subcategoriaDAO.php');
         }
 
         //função que insere as categorias
@@ -77,11 +79,15 @@
             return $listCategoria;
         }
 
+        //função para buscar uma categoria
         public function buscarCategoria($id){
+            //instância da classe categoriaDAO
             $categoriaDAO = new CategoriaDAO();
 
+            //armazenando os dados em uma variável
             $listCategoria = $categoriaDAO->selectById($id);
 
+            //retornando os dados
             return $listCategoria;
         }
 
@@ -115,6 +121,88 @@
             }
 
             return json_encode($retorno);
+        }
+
+        //função para inserir uma subcategoria
+        public function inserirSubcategoria(){
+            //verificando se o método é POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //resgatando os valores
+                $nome = $_POST['txtnome'];
+                $idCategoria = $_POST['idCategoria'];
+            }
+            
+            //instância da classe Subcategoria
+            $subcategoriaClass = new Subcategoria();
+
+            //setando os atributos
+            $subcategoriaClass->setNome($nome);
+            $subcategoriaClass->setIdCategoria($idCategoria);
+
+            //instância da classe SubcategoriaDAO
+            $subcategoriaDAO = new SubcategoriaDAO();
+
+            //chamada da função que insere a subcategoria
+            $status = $subcategoriaDAO->Insert($subcategoriaClass);
+
+            //retornando os status
+            return $status;
+        }
+
+        //função para atualizar a subcategoria
+        public function atualizarSubcategoria(){
+            //verificando se o método é POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //resgatando os valores
+                $nome = $_POST['txtnome'];
+                $id = $_POST['id'];
+            }
+            
+            //instância da classe Subcategoria
+            $subcategoriaClass = new Subcategoria();
+
+            //setando os atributos
+            $subcategoriaClass->setNome($nome);
+            $subcategoriaClass->setId($id);
+
+            //instância da classe SubcategoriaDAO
+            $subcategoriaDAO = new SubcategoriaDAO();
+
+            //chamada da função que atualiza a subcategoria
+            $status = $subcategoriaDAO->Update($subcategoriaClass);
+
+            //retornando o status
+            return $status;
+        }
+
+        //função para listar as subcategorias
+        public function listarSubcategoria($idCategoria){
+            //instância da classe SubcategoriaDAO
+            $subcategoriaDAO = new SubcategoriaDAO();
+
+            //armazenando os dados em uma variável
+            $listSubcategoria = $subcategoriaDAO->selectAll($idCategoria);
+
+            //retornando os dados
+            return $listSubcategoria;
+        }
+
+        //função para buscar uma subcategoria
+        public function buscarSubcategoria($idSubcategoria){
+            //instância da classe SubcategoriaDAO
+            $subcategoriaDAO = new SubcategoriaDAO();
+
+            //armazenando os dados em uma variável
+            $listSubcategoria = $subcategoriaDAO->selectByID($idSubcategoria);
+
+            //retornando os dados
+            return $listSubcategoria;
+        }
+
+        public function excluirSubcategoria($idSubcategoria){
+            $subcategoriaDAO = new SubcategoriaDAO();
+
+            $subcategoriaDAO->Delete($idSubcategoria);
         }
     }
 ?>

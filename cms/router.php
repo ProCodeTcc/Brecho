@@ -444,6 +444,16 @@
 					
 					echo($listCategoria);
 				break;
+
+				case 'buscarSubcategoria':
+					$idCategoria = $_POST['id'];
+
+					$controllerProduto = new controllerProduto();
+
+					$listSubcategoria = $controllerProduto->listarSubcategoria($idCategoria);
+
+					echo($listSubcategoria);
+				break;
 					
 			}
 		break;
@@ -460,6 +470,14 @@
 					echo $retorno;
 				break;
 
+				case 'inserirSubcategoria':
+					$controllerCategoria = new controllerCategoria();
+
+					$status = $controllerCategoria->inserirSubcategoria();
+
+					echo($status);
+				break;
+
 				case 'buscar':
 					$id = $_POST['id'];
 					$controllerCategoria = new controllerCategoria();
@@ -469,12 +487,30 @@
 					echo($listCategoria);
 				break;
 
+				case 'buscarSubcategoria':
+					$id = $_POST['id'];
+
+					$controllerCategoria = new controllerCategoria();
+
+					$listSubcategoria = $controllerCategoria->buscarSubcategoria($id);
+
+					echo($listSubcategoria);
+				break;
+
 				case 'editar':
 					$controllerCategoria = new controllerCategoria();
 
 					$status = $controllerCategoria->atualizarCategoria();
 
 					echo $status;
+				break;
+
+				case 'editarSubcategoria':
+					$controllerCategoria = new controllerCategoria();
+
+					$status = $controllerCategoria->atualizarSubcategoria();
+
+					echo($status);
 				break;
 
 				case 'excluir':
