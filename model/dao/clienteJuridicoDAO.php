@@ -45,10 +45,7 @@
 			if($stm->rowCount() != 0){
 				//armazena o ID do cliente
 				$idCliente = $PDO_conexao->lastInsertId();
-				
-				//redireciona para página inicial
-				header('location: index.php');
-				
+
 				//retornando o ID do cliente
 				return $idCliente;
 			}
@@ -74,6 +71,15 @@
 			
 			//execução do statement
 			$stm->execute();
+
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//mensagem de sucesso
+				$status = array('status' => 'sucesso');
+			}else{
+				//mensagem de erro
+				$status = array('status' => 'erro');
+			}
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -156,6 +162,15 @@
 
 			//execução do statement
 			$stm->execute();
+
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//mensagem de sucesso
+				$status = array('status' => 'sucesso');
+			}else{
+				//mensagem de erro
+				$status = array('status' => 'erro');
+			}
 
 			//fechando a conexão
 			$conexao->fecharConexao();

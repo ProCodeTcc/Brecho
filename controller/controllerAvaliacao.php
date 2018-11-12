@@ -82,14 +82,16 @@
 						$clienteFisicoDAO = new ClienteFisicoDAO();
 
 						//relacionando o produto com o cliente
-						$clienteFisicoDAO->insertClienteProduto($_SESSION['idCliente'], $idProduto, $dataAtual);
+						$status = $clienteFisicoDAO->insertClienteProduto($_SESSION['idCliente'], $idProduto, $dataAtual);
 					}else{
 						//instância da classe ClienteJuridicoDAO
 						$clienteJuridicoDAO = new ClienteJuridicoDAO();
 
 						//relacionando o cliente com o produto
-						$clienteJuridicoDAO->insertClienteProduto($_SESSION['idCliente'], $idProduto, $dataAtual);
+						$status = $clienteJuridicoDAO->insertClienteProduto($_SESSION['idCliente'], $idProduto, $dataAtual);
 					}
+
+					return $status;
 				}
 			}
 		}

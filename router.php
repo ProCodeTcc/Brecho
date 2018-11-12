@@ -44,7 +44,9 @@
             switch($modo){
 				case 'cadastrar':
 					$controllerClienteFisico = new controllerClienteFisico();
-					$controllerClienteFisico->inserirCliente();
+					$status = $controllerClienteFisico->inserirCliente();
+
+					echo($status);
 				break;
 					
 				case 'buscar':
@@ -99,7 +101,9 @@
 			switch($modo){
 				case 'cadastrar':
 					$controllerClienteJuridico = new controllerClienteJuridico();
-					$controllerClienteJuridico->inserirCliente();
+					$status = $controllerClienteJuridico->inserirCliente();
+
+					echo($status);
 				break;
 					
 				case 'buscar':
@@ -152,7 +156,9 @@
 			switch($modo){
 				case 'cadastrar':
 					$controllerAvaliacao = new controllerAvaliacao();
-					$controllerAvaliacao->inserirProduto();
+					$status = $controllerAvaliacao->inserirProduto();
+
+					echo($status);
 				break;
 				
 				case 'listarCor':
@@ -199,7 +205,9 @@
             switch($modo){
 				case 'logar':
 					$controllerLogin = new controllerLogin();
-					$controllerLogin->BuscarConta();
+					$status = $controllerLogin->BuscarConta();
+
+					echo($status);
 				break;
 					
 				case 'deslogar':

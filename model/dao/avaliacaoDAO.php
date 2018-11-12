@@ -40,11 +40,8 @@
 			$stm->bindParam(9, $produto->getTamanho());
 			
 			if($stm->execute()){
-				header('location: view/cadastro_produto.php');
 				$idProduto = $PDO_conexao->lastInsertId();
 				return $idProduto;
-			}else{
-				echo('erro ao inserir os dados do produto');
 			}
 			
 			//fechando a conexão
@@ -64,8 +61,6 @@
 				
 				if($stm->execute()){
 					$idImagem[] = $PDO_conexao->lastInsertId();	
-				}else{
-					echo('Ocorreu um erro ao inserir a imagem');
 				}
 			}
 			

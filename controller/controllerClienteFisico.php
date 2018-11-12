@@ -86,7 +86,9 @@
            	$idCliente = $clienteFisicoDAO->Insert($clienteFisicoClass);
 			$idEndereco = $enderecoDAO->Insert($enderecoClass);
 			
-			$clienteFisicoDAO->InserirClienteEndereco($idCliente, $idEndereco);
+            $status = $clienteFisicoDAO->InserirClienteEndereco($idCliente, $idEndereco);
+            
+            return $status;
         }
 		
 		public function atualizarCliente(){

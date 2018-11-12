@@ -79,6 +79,39 @@
 					});
 				});
 				
+				//função no submit do form
+				$('#frmUsuario').submit(function(e){
+					//desativando o submit
+					e.preventDefault();
+
+					//resgatando o url
+					url = $('#frmUsuario').attr('action');
+
+					$.ajax({
+						type: 'POST', //tipo de requisição
+						url: url, //url onde será enviada a requisição
+						data: new FormData($('#frmUsuario')[0]), //dados enviados
+						cache: false,
+                        contentType: false,
+                        processData: false,
+						async: true,
+						success: function(dados){
+							alert(dados);
+							//conversão dos dados para JSON
+							json = JSON.parse(dados);
+
+							//verificando o status
+							if(json.status == 'sucesso'){
+								//mensagem de sucesso
+								mostrarSucesso('Cadastro efetuado com sucesso!!');
+								redirecionarUsuario('../index.php');
+							}else{
+								//mensagem de erro
+								mostrarErro('Ocorreu um erro ao efetuar o cadastro.');
+							}
+						}
+					});
+				});
 				
 			});
  
@@ -91,6 +124,34 @@
 		?>       
     </head>
     <body>
+		<div class="mensagens">
+            <div class="mensagem-sucesso" id="sucesso">
+				<div class="msg">
+
+				</div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>          
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+				<div class="msg">
+
+				</div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-info" id="info">
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
+
         <header>
             <?php
 				require_once('arquivos/header.php');
@@ -116,7 +177,7 @@
 					</div>
 					
                     <div class="cadastro_usuario" id="formulario">
-                        <form method="POST" action="../router.php?controller=ClienteFisico&modo=cadastrar" id="fisico">
+                        <form method="POST" id="frmUsuario" action="../router.php?controller=ClienteFisico&modo=cadastrar" id="fisico">
 							<div class="titulo_cadastro_usuario_meio">
 								Nome*
 							</div>
@@ -125,11 +186,11 @@
 							 </div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input class="campo_cadastro_usuario_meio" type="text" name="txtNome" required onkeypress="return validar(event,'number')">
+								<input class="campo_cadastro_usuario_meio" type="text" name="txtNome" onkeypress="return validar(event,'number')" required>
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input class="campo_cadastro_usuario_meio" type="text" name="txtSobrenome" required onkeypress="return validar(event,'number')">
+								<input class="campo_cadastro_usuario_meio" type="text" name="txtSobrenome" onkeypress="return validar(event,'number')" required>
 							</div>
 
 							<div class="titulo_cadastro_usuario">
@@ -165,7 +226,7 @@
 								<input class="campo_cadastro_usuario_meio" type="date" name="txtDataNasc" required>
 							</div>
 							<div class="linha_cadastro_usuario_meio">
-								<input id="txt_cpf" class="campo_cadastro_usuario_meio" type="text" onBlur="checkDados('ClienteFisico', 'Cpf', this)" name="txtCpf"required onkeypress="return validar(event,'caracter')">
+								<input id="txt_cpf" class="campo_cadastro_usuario_meio" type="text" onBlur="checkDados('ClienteFisico', 'Cpf', this)" name="txtCpf" onkeypress="return validar(event,'caracter')" required>
 								<script type="text/javascript">$("#txt_cpf").mask("000.000.000-00");</script>
 							</div>
 
@@ -178,7 +239,7 @@
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input id="txt_telefone" class="campo_cadastro_usuario_meio" type="text" name="txtTelefone"required onkeypress="return validar(event,'caracter')">
+								<input id="txt_telefone" class="campo_cadastro_usuario_meio" type="text" name="txtTelefone" onkeypress="return validar(event,'caracter')" required>
 								<script type="text/javascript">$("#txt_telefone").mask("(00) 0000-0000");</script>
 							</div>
 
@@ -194,7 +255,7 @@
 
 							<div class="linha_cadastro_usuario">
 								<label>
-									<input type="radio" class="radio_sexo" name="rb_sexo" checked value="M"> Masculino
+									<input type="radio" class="radio_sexo" name="rb_sexo" checked value="M" required> Masculino
 								</label>
 
 								<label>
@@ -213,7 +274,7 @@
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input class="campo_cadastro_usuario_meio txt_cep" type="text" onkeypress="return validar(event,'caracter')" name="txtCep">
+								<input class="campo_cadastro_usuario_meio txt_cep" type="text" onkeypress="return validar(event,'caracter')" name="txtCep" required>
 								<script type="text/javascript">$(".txt_cep").mask("00000-000");</script>
 							</div>
 
@@ -255,7 +316,7 @@
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input  class="campo_cadastro_usuario_meio" type="text" name="txtNumero">
+								<input  class="campo_cadastro_usuario_meio" type="text" name="txtNumero" required>
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">

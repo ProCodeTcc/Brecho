@@ -53,19 +53,14 @@
 //            var_dump($cliente);
             
             if($stm->execute()){
-                header("location:index.php");
                 $idCliente=$PDO_conexao->lastInsertId();
                 return $idCliente;
-            }else{
-                echo('Ocorreu um erro ao inserir os dados do cliente');
             }
             
 			$conexao->fecharConexao();
 			
         }
-        
-        
-        
+                
         public function InserirClienteEndereco($idCliente,$idEndereco){
             //Instancia da classe de cinexão com o banco 
             $conexao = new ConexaoMySQL();
@@ -75,12 +70,27 @@
             
             //criando um statement e preparando a querry que irá inserir os dados no banco.
             $stm = $PDO_conexao->prepare('insert into clientefisico_endereco(idClienteFisico,idEndereco) values(?,?)');
-            
+			
+			//parâmetros enviados
             $stm->bindParam(1, $idCliente);
             $stm->bindParam(2, $idEndereco);
-            
-            $stm->execute();
 			
+			//execução do statement
+			$stm->execute();
+			
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//mensagem de sucesso
+				$status = array('status' => 'sucesso');
+			}else{
+				//mensagem de erro
+				$status = array('status' => 'erro');
+			}
+
+			//retorna o status
+			return json_encode($status);
+			
+			//fechando a conexão
 			$conexao->fecharConexao();
             
         }
@@ -199,6 +209,18 @@
 
 			//execução do statement
 			$stm->execute();
+
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//mensagem de sucesso
+				$status = array('status' => 'sucesso');
+			}else{
+				//mensagem de erro
+				$status = array('status' => 'erro');
+			}
+
+			//retornando o status
+			return json_encode($status);
 
 			//fechando a conexão
 			$conexao->fecharConexao();

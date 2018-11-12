@@ -72,3 +72,31 @@ function sliderPrincipal(local){
 		});
 	});
 }
+
+function mostrarErro(mensagem){
+	$('.mensagens').fadeIn(400);
+	$('.msg').html(mensagem);
+	$('#erro').fadeIn(400);
+}
+
+function mostrarInfo(mensagem){
+	$('.mensagens').fadeIn(400);
+	$('.msg').html(mensagem);
+	$('#info').fadeIn(400);
+}
+
+function mostrarSucesso(mensagem){
+	$('.mensagens').fadeIn(400);
+	$('.msg').html(mensagem);
+	$('#sucesso').fadeIn(400);
+}
+
+function fecharMensagem(e){
+	$('.mensagens').fadeOut(400);
+}
+
+function redirecionarUsuario(url){
+	$('.close').click(function(){
+		window.location.href=url;
+	})
+}

@@ -32,10 +32,13 @@
 				$_SESSION['idCliente'] = $listCliente->idCliente;
 				$_SESSION['usuario'] = $listCliente->login;
 				$_SESSION['tipoCliente'] = 'F';
-				echo true;
+				$status = array('status' => 'sucesso');
 			}else{
-				echo false;
+				$status = array('status' => 'incorreto');
 			}
+
+			//retornando o status
+			return json_encode($status);
             
             $conexao->fecharConexao();
 			
@@ -67,10 +70,13 @@
 				$_SESSION['idCliente'] = $listCliente->idCliente;
 				$_SESSION['usuario'] = $listCliente->login;
 				$_SESSION['tipoCliente'] = 'J';
-				echo true;
+				$status = array('status' => 'sucesso');
 			}else{
-				echo false;
+				$status = array('status' => 'incorreto');
 			}
+
+			//retornando o status
+			return json_encode($status);
             
             $conexao->fecharConexao();
 			

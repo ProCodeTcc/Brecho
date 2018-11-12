@@ -4,6 +4,7 @@
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/funcoes.js"></script>
 		
 		<script>
 			$(document).ready(function(){
@@ -20,13 +21,15 @@
 						processData: false,
 						async: true,
 						success: function(dados){
+                            json = JSON.parse(dados);
+
 							//verificando o retorno dos dados
-							if(dados == true){
+							if(json.status == 'sucesso'){
 								//se for verdadeiro, redireciona pro login
 								window.location.href="../index.php";
 							}else{
 								//se for falso, mostra mensagem de esrro
-								alert('Usuário ou Senha incorretos!!');
+								mostrarErro('Usuário ou Senha incorretos!!');
 							}
 						}
 					});
@@ -41,6 +44,29 @@
 		?>
     </head>
     <body>
+        <div class="mensagens">
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>          
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+                    
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-info" id="info">
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
         <header>
             <div class="menu_principal_logo">
                 <div class="menu_responsivo">
@@ -69,11 +95,11 @@
                                 Usuário:
                                 <div class="campos">
 
-                                    <input class="campos_login" type="text" name="txtLogin">
+                                    <input class="campos_login" type="text" name="txtLogin" required>
                                 </div>
                                 Senha:
                                 <div class="campos">
-                                    <input class="campos_login" type="password" name="txtSenha">
+                                    <input class="campos_login" type="password" name="txtSenha" required>
                                 </div> 
 								
 								<div class="campos">

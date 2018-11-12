@@ -163,7 +163,23 @@
 					
 					leitor.readAsDataURL(input.files[0]);
 				}
-			}
+            }
+            
+            //função para validar as imagens
+            function verificarImagem(){
+                var arquivos = 0;
+
+                //percorrendo os inputs
+                $('input[type=file]').each(function(){
+                    //verificando se estão vazios
+                    if(!$(this).val()){
+                        //conta quantos inputs estão vazios
+                        arquivos += 1;
+                    }
+                });
+                //retorna a quantidade
+                return arquivos;
+            }
 			
 			$(document).ready(function(){
 				checarLogin(<?php echo($login) ?>);
@@ -181,7 +197,45 @@
 					$('#txttamanho').show();
 					
 					buscarTamanho(tipoTamanho);
-				});
+                });
+                
+                //função no submit do form
+                $('#frmProduto').submit(function(e){
+                    //desativando o submit do form
+                    e.preventDefault();
+
+                    //verificando se as imagens foram selecionadas
+                    if(verificarImagem() != 0){
+                        //informando para que selecioneas imagens
+                        mostrarInfo('Selecione todas as imagens!!');
+                    }else{
+                        //resgatando a url
+                        url = $('#frmUsuario').attr('action');
+                    }
+
+                    $.ajax({
+                        type: 'POST', //tipo de requisição
+                        url: url, //url onde será enviada a requisição
+                        data: new FormData($('#frmProduto')[0]), //dados enviados
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        async: true,
+                        success: function(dados){
+                            //conversão dos dados para JSON
+                            json = JSON.parse(dados);
+
+                            //verifica se deu certo
+                            if(json.status == 'sucesso'){
+                                //mensagem de sucesso
+                                mostrarSucesso('Produto enviado para avaliação!!');
+                            }else{
+                                //mensagem de erro
+                                mostrarErro('Ocorreu um erro ao enviar o produto');
+                            }
+                        }
+                    })
+                });
 			});
 			
 		</script>
@@ -193,6 +247,37 @@
 		?>
     </head>
     <body>
+        <div class="mensagens">
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+                    
+                </div>
+    
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>          
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+                    
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
         <header>
             <div class="menu_paginas">
                 <div class="menu_paginas_site">
@@ -305,14 +390,14 @@
                 Cadastar Produto           
             </div>
             
-            <form method="POST" name="frmProduto" enctype="multipart/form-data" class="cadastro_produto" action="../router.php?controller=avaliação&modo=cadastrar">
+            <form method="POST" name="frmProduto" id="frmProduto" enctype="multipart/form-data" class="cadastro_produto" action="../router.php?controller=avaliação&modo=cadastrar">
                 <div class="cadastro_esquerdo">
                     <div class="linha_cadastro">
                         <div class="titulo_cadastro_produto">
                             Nome do Produto:
                         </div>
                         <div class="caixa_cadastro_produto">
-                            <input class="campo_cadastro_produto" name="txtnome" type="text">
+                            <input class="campo_cadastro_produto" name="txtnome" type="text" required>
                         </div>
                     </div>
 					<div class="linha_cadastro">
@@ -322,14 +407,14 @@
 						
 						<div class="caixa_cadastro_produto" id="radio_produto">
 							<label>Medida</label>
-                            <input type="radio" name="txttipo" class="txttipo" value="1">
+                            <input type="radio" name="txttipo" class="txttipo" value="1" required>
 							
 							<label>Número</label>
 							<input type="radio" name="txttipo" class="txttipo" value="2">
                         </div>
 						
                         <div class="caixa_cadastro_produto">
-                            <select class="campo_cadastro_produto" name="txttamanho" id="txttamanho">
+                            <select class="campo_cadastro_produto" name="txttamanho" id="txttamanho" required>
                             </select>                      
                         </div>
                     </div>
@@ -369,7 +454,7 @@
                             Cor:
                         </div>
                         <div class="caixa_cadastro_produto_meio">
-                            <input class="campo_cadastro_produto_meio" name="txtvalor" type="number">
+                            <input class="campo_cadastro_produto_meio" name="txtvalor" type="number" required>
                         </div>
                         <div class="caixa_cadastro_produto_meio">
                             <select class="campo_cadastro_produto" name="txtcor" id="txtcor"></select>
@@ -392,7 +477,7 @@
                             Estado da Roupa:
                         </div>
                         <div class="caixa_cadastro_produto_descricao">
-                            <textarea class="campo_cadastro_produto_descricao" name="txtestado"></textarea>
+                            <textarea class="campo_cadastro_produto_descricao" name="txtestado" required></textarea>
                         </div>
                     </div>
                     <div class="linha_cadastro">

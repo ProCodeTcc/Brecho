@@ -30,11 +30,13 @@
 			//verifica qual o tipo do cliente
 			if($_POST['txtcliente'] == "F"){
 				//loga o cliente físico
-				$loginDAO->Select($usuario, $senha);
+				$status = $loginDAO->Select($usuario, $senha);
 			}else{
 				//loga o cliente jurídico
-				$loginDAO->logarClienteJuridico($usuario, $senha);
-			}
+				$status = $loginDAO->logarClienteJuridico($usuario, $senha);
+            }
+            
+            return $status;
 			
           }
 		
