@@ -19,7 +19,7 @@
 				//colocando os valores nas divs
 				$('#prev_titulo').text(json.titulo);
 				$('#prev_descricao').text(json.descricao);
-				$('#prev_imagem img').attr('src', json.imagem);
+				$('#prev_imagem img').attr('src', '../arquivos/'+json.imagem);
 				$('#prev_descricao2').text(json.descricao2);
 			}
 		});

@@ -20,7 +20,7 @@
 				
 				//preenchendo as caixas de texto
 				$('#prev_titulo').text(json.titulo);
-				$('#prev_imagem img').attr('src', json.imagem);
+				$('#prev_imagem img').attr('src', '../arquivos/'+json.imagem);
 				$('#prev_descricao').text(json.descricao);
 			}
 		});
