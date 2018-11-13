@@ -144,7 +144,7 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Produtos</span>
+            <span class="page_title">Consignação</span>
 
             <div class="page_search_container">
 				<input type="search" class="page_search" id="pesquisar" onkeydown="pesquisar(event)">
@@ -168,7 +168,7 @@
 
                 <div class="users_view">
                     <div class="users_view_title">
-                        <div class="users_view_itens">Produtos do Brechó</div>
+                        <div class="users_view_itens">Produtos</div>
                     </div>
 
                     <div id="consulta">

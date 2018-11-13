@@ -202,7 +202,7 @@
 	
 	<form class="frm_roupa" id="frmRoupa" data-id="<?php echo($id) ?>" method="post" name="frmRoupa" enctype="multipart/form-data" name="frmImagem" action="usuario_view.php">
 		
-		<div class="form_linha">
+		<!-- <div class="form_linha">
 			<div class="imagens_container">
 				<label for="imagem">
 					<img id="prev_imagem" src="../imagens/image.png">
@@ -222,7 +222,7 @@
 
 				<input type="file" name="fleimagem[]" id="imagem3" onChange="mostrarPrevia(this, '#prev_imagem3')">
 			</div>
-		</div>
+		</div> -->
 		
 		<div id="roupas_form">
 			<div id="roupas_col1">

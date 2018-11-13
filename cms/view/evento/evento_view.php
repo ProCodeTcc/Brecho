@@ -166,7 +166,7 @@
         </header>
 
         <div class="page_view">
-            <span class="page_title">Cores</span>
+            <span class="page_title">Eventos</span>
 
             <div class="page_search_container">
 				<input type="search" class="page_search" id="pesquisar" onkeydown="pesquisar(event)">
@@ -196,7 +196,7 @@
                     <div class="users_view_title">
                         <div class="users_view_itens">#</div>
                         <div class="users_view_itens">Nome</div>
-						<div class="users_view_itens">Cor</div>
+						<div class="users_view_itens">Data de Término</div>
                         <div class="users_view_itens">Ações</div>
                     </div>
 
