@@ -57,10 +57,12 @@
 			$stm->execute();
 			
 			if($stm->rowCount() != 0){
-				echo 'Usuário inserido com sucesso';
+				$status = array('status' => 'sucesso');
 			}else{
-				echo 'Ocoreu um erro ao inserir o usuário';
-			}
+				$status = array('status' => 'erro');
+            }
+            
+            return json_encode($status);
 			
             //fechando a conexão
             $conexao->fecharConexao();
@@ -85,10 +87,12 @@
 			$stm->bindParam(6, $usuario->getId());
 			
 			if($stm->execute()){
-				echo('Dados atualizados com sucesso!!');
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('Ocorreu um erro ao atualizar os dados!!');
-			}
+				$status = array('status' => 'erro');
+            }
+            
+            return json_encode($status);
 
             //fechando a conexão
             $conexao->fecharConexao();

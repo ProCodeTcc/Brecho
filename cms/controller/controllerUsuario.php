@@ -45,7 +45,9 @@
             $usuarioDAO = new UsuarioDAO();
 
             //chamada da função para inserção de dados
-           	$usuarioDAO::Insert($usuarioClass);
+            $status = $usuarioDAO::Insert($usuarioClass);
+               
+            return $status;
         }
 
         public function atualizarContato($id){
@@ -83,7 +85,9 @@
             $usuarioDAO = new UsuarioDAO();
 
             //chamada da função de atualizar os dados
-            $usuarioDAO->Update($usuarioClass);
+            $status = $usuarioDAO->Update($usuarioClass);
+
+            return $status;
         }
 
         public function buscarUsuario($id){

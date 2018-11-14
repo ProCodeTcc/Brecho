@@ -11,8 +11,9 @@
 
                 $controllerUsuario = new controllerUsuario();
             
-                $controllerUsuario->inserirUsuario();
+                $status = $controllerUsuario->inserirUsuario();
 
+				echo($status);
             break;
 
             case 'buscar':

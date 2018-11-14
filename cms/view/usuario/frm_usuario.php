@@ -68,6 +68,15 @@
             //criando uma variavel e armazenando o formulário nela
             var formulario = new FormData($('#frmUsuario')[0]);
 
+            //verificando se a imagem está vazia
+            if(verificarImagem() == 1){
+                //se estiver, mostra uma mensagem
+                mostrarInfo('Selecione a imagem');
+
+                //para a execução
+                return false;
+            }
+
             //se a variável usuário for nula, o modo deverá ser de inserir, caso contrário, editar
             if(idUsuario == ""){
                 //acrescentando ao formulário o parâmetro modo;
@@ -99,16 +108,31 @@
                 processData: false,
                 async: true,
                 success: function(dados){
-					alert(dados);
-					
-					//listando os dados inseridos ou atualizados
-					listar();
-					
-					//insere na tag img o conteúdo da variável imagem
-					$('#img_perfil').attr('src', imagem);
-					
-					//fecha a modal
-					$('.container_modal').fadeOut(400);
+                    json = JSON.parse(dados);
+                    
+                    if(json.status == 'sucesso'){
+                        mostrarSucesso('Usuario inserido com sucesso!!');
+
+                        //listando os dados inseridos ou atualizados
+                        listar();
+                        
+                        //insere na tag img o conteúdo da variável imagem
+                        $('#img_perfil').attr('src', imagem);					
+                    }else{
+                        mostrarErro('Ocorreu um erro ao inserir o usuário');
+                    }
+
+                    if(json.status == 'atualizado'){
+                        mostrarSucesso('Usuario atualizado com sucesso!!');
+
+                        //listando os dados inseridos ou atualizados
+                        listar();
+                        
+                        //insere na tag img o conteúdo da variável imagem
+                        $('#img_perfil').attr('src', imagem);
+                    }else{
+                        mostrarErro('Ocorreu um erro ao atualizar o usuário');
+                    }
                 }
             });
         });

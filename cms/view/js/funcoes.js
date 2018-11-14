@@ -40,19 +40,19 @@ function verificarSubmit(){
 
 function mostrarErro(mensagem){
 	$('.mensagens').fadeIn(400);
-	$('#erro').append(mensagem);
+	$('#erro .msg').html(mensagem);
 	$('#erro').fadeIn(400);
 }
 
 function mostrarInfo(mensagem){
 	$('.mensagens').fadeIn(400);
-	$('#info').append(mensagem);
+	$('#info .msg').html(mensagem);
 	$('#info').fadeIn(400);
 }
 
 function mostrarSucesso(mensagem){
 	$('.mensagens').fadeIn(400);
-	$('#sucesso').append(mensagem);
+	$('#sucesso .msg').html(mensagem);
 	$('#sucesso').fadeIn(400);
 }
 
@@ -89,4 +89,21 @@ function pesquisar(e){
 			}
 		});
 	}
+}
+
+//função para validar as imagens
+function verificarImagem(){
+	var arquivos = 0;
+
+	//percorrendo os inputs
+	$('input[type=file]').each(function(){
+		//verificando se estão vazios
+		if(!$(this).val()){
+			//conta quantos inputs estão vazios
+			arquivos += 1;
+		}
+	});
+	
+	//retorna a quantidade
+	return arquivos;
 }
