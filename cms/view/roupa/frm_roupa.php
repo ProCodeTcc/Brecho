@@ -154,6 +154,8 @@
 			data: {id:id, idioma:idioma, controller: 'produto', modo: 'buscar'}, //parâmetros enviados
 			success: function(dados){
 				$('#frmRoupa').attr('data-lang', idioma);
+				$('.imagens_container').hide();
+				mudarModal('600','600');
 
 				//conversão dos dados para json
 				json = JSON.parse(dados);

@@ -40,7 +40,8 @@
 			var total = preco-desconto;
 
 			$('#novo').show();
-			$('#novovalor').val(total);	
+			$('#novovalor').val(total);
+			mudarModal('420', '400');
 		}
 	}
 	
