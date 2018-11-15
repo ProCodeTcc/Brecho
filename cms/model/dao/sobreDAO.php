@@ -59,7 +59,7 @@
 			if($stm->rowCount() != 0){
 				$id = $PDO_conexao->lastInsertId();
 
-				$retorno = array('id' => $id, 'retorno' => 'inserido');
+				$retorno = array('id' => $id, 'status' => 'inserido');
 
 				return json_encode($retorno);
 			}
@@ -91,11 +91,14 @@
 			//verificando retorno
 			if($stm->rowCount() != 0){
 				//armazenando a mensagem uma variável
-				$retorno = array('retorno' => 'traduzido');
-
-				//retornando em JSON
-				return json_encode($retorno);
-			}
+				$status = array('status' => 'traduzido');
+			}else{
+                //atualizando o staus para erro
+                $status = array('status' => 'erro');
+            }
+            
+            //retornando em JSON
+            return json_encode($status);
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -138,8 +141,6 @@
 			
 			if($cont != 0){
 				return $listSobre;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			$conexao->fecharConexao();
@@ -221,10 +222,13 @@
 			$stm->bindParam(4, $sobre->getId());
 			
 			if($stm->execute()){
-				$retorno = array('retorno' => 'atualizado');
-
-				return json_encode($retorno);
-			}
+				$status = array('status' => 'atualizado');
+			}else{
+                $status = array('status' => 'erro');
+            }
+            
+            //retornando em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -249,11 +253,12 @@
 			//verificando se deu certo
 			if($stm->execute()){
 				//armazenando a mensagem em uma variável
-				$retorno = array('retorno' => 'atualizado');
-
-				//retornando os dados em JSON
-				return json_encode($retorno);
-			}
+				$status = array('status' => 'atualizado');
+			}else{
+                $status = array('status' => 'erro');
+            }
+            
+            return json_encode($status);
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -276,12 +281,13 @@
 			//executando o statement
 			$stm->execute();
 			
-			if($stm->rowCount() != 0){
-				echo('Layout excluído com sucesso!!');
-			}else{
-				echo('erro');
+			if($stm->rowCount() == 0){
+				$status = array('status' => 'erro');
 			}
+            
+            return json_encode($status);
 			
+            //fechando a conexão
 			$conexao->fecharConexao();
 		}
 		
@@ -358,7 +364,7 @@
 			if($stm->rowCount() != 0){
 				$id = $PDO_conexao->lastInsertId();
 
-				$retorno = array('id' => $id, 'retorno' => 'inserido');
+				$retorno = array('id' => $id, 'status' => 'inserido');
 
 				return json_encode($retorno);
 			}
@@ -388,14 +394,17 @@
 			//execução do statement
 			$stm->execute();
 
-			//verificando o retorno
+			//verificando retorno
 			if($stm->rowCount() != 0){
-				//armazenando a mensagem em uma variável
-				$retorno = array('retorno' => 'traduzido');
-
-				//retornando a msg em JSON
-				return json_encode($retorno);
-			}
+				//armazenando a mensagem uma variável
+				$status = array('status' => 'traduzido');
+			}else{
+                //atualizando o staus para erro
+                $status = array('status' => 'erro');
+            }
+            
+            //retornando em JSON
+            return json_encode($status);
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -464,13 +473,14 @@
 			$stm->bindParam(4, $sobre->getImagem());
 			$stm->bindParam(5, $sobre->getId());
 			
-			//executando o statement
 			if($stm->execute()){
-				$retorno = array('retorno' => 'atualizado');
-
-				return json_encode($retorno);
-			}
+				$status = array('status' => 'atualizado');
+			}else{
+                $status = array('status' => 'erro');
+            }
 			
+            return json_encode($status);
+            
 			//fechando a conexão
 			$conexao->fecharConexao();
 			
@@ -493,15 +503,14 @@
 			$stm->bindParam(3, $sobre->getDescricao2());
 			$stm->bindParam(4, $sobre->getId());
 
-			//verificando se deu certo
 			if($stm->execute()){
-				//armazenando a mensagem em uma variável
-				$retorno = array('retorno' => 'atualizado');
+				$status = array('status' => 'atualizado');
+			}else{
+                $status = array('status' => 'erro');
+            }
 
-				//retornando a msg em JSON
-				return json_encode($retorno);
-			}
-
+            return json_encode($status);
+            
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

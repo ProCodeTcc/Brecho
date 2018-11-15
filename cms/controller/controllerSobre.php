@@ -248,10 +248,14 @@
 			//verificando o total
 			if($totalLayouts == 1){
 				//se for 1, limita a exclusão
-				echo ('limite');
+				$status = array('status' => 'limite');
+                
+                return json_encode($status);
 			}else{
 				//chamada da função que deleta um layout
-				$sobreDAO->Delete($id);
+				$status = $sobreDAO->Delete($id);
+                
+                return $status;
 			}
 		}
 		

@@ -41,76 +41,82 @@
 
 			//armazenando o id da consignação inserida
 			$idConsignacao = $consignacaoDAO->insertConsignacao($consignacaoClass);
+            
+            if(isset($idConsignacao)){
+                if($tipoCliente == 'F'){
+                //verifica se a relação entre a consignação e o cliente foi feita
+                if($consignacaoDAO->insertConsignacaoCF($idConsignacao, $idCliente) == true){
+                    //instância da classe avaliacaoDAO
+                    $avaliacaoDAO = new AvaliacaoDAO();
 
-			if($tipoCliente == 'F'){
-				//verifica se a relação entre a consignação e o cliente foi feita
-				if($consignacaoDAO->insertConsignacaoCF($idConsignacao, $idCliente) == true){
-					//instância da classe avaliacaoDAO
-					$avaliacaoDAO = new AvaliacaoDAO();
-					
-					//inserindo o produto e guardando o ID inserido em uma variável
-					$idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
-					
-					//pegando as imagens de um produto em avaliação e guardando em uma variável
-					$imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
-					
-					//contador
-					$cont = 0;
-					
-					//percorrendo as imagens
-					while($cont < count($imagens)){
-						//inserindo as imagens e armazenando os IDs retornados em uma variável
-						$idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
-						
-						//incrementando o contador
-						$cont++;
-					}
-					
-					//verificando se a inserção do produto e da imagem na tabela de relacionamento foi
-					//feita com sucesso
-					if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
-						//se foi, deleta o produto da tabela de avaliação
-						$avaliacaoDAO->Delete($idProdutoAvaliacao);
+                    //inserindo o produto e guardando o ID inserido em uma variável
+                    $idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
 
-						//relacionando a consignação com o produto
-						$consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
-					}
-				}
-			}else{
-				//verifica se a relação entre a consignação e o cliente foi feita
-				if($consignacaoDAO->insertConsignacaoCJ($idConsignacao, $idCliente) == true){
-					//instância da classe avaliacaoDAO
-					$avaliacaoDAO = new AvaliacaoDAO();
-					
-					//inserindo o produto e guardando o ID inserido em uma variável
-					$idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
-					
-					//pegando as imagens de um produto em avaliação e guardando em uma variável
-					$imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
-					
-					//contador
-					$cont = 0;
-					
-					//percorrendo as imagens
-					while($cont < count($imagens)){
-						//inserindo as imagens e armazenando os IDs retornados em uma variável
-						$idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
-						
-						//incrementando o contador
-						$cont++;
-					}
-					
-					//verificando se a inserção do produto e da imagem na tabela de relacionamento foi
-					//feita com sucesso
-					if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
-						//se foi, deleta o produto da tabela de avaliação
-						$avaliacaoDAO->Delete($idProdutoAvaliacao);
+                    //pegando as imagens de um produto em avaliação e guardando em uma variável
+                    $imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
 
-						//relacionando a consignação com o produto
-						$consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
-					}
-				}
-			}
+                    //contador
+                    $cont = 0;
+
+                    //percorrendo as imagens
+                    while($cont < count($imagens)){
+                        //inserindo as imagens e armazenando os IDs retornados em uma variável
+                        $idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
+
+                        //incrementando o contador
+                        $cont++;
+                    }
+
+                    //verificando se a inserção do produto e da imagem na tabela de relacionamento foi
+                    //feita com sucesso
+                    if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
+                        //se foi, deleta o produto da tabela de avaliação
+                        $avaliacaoDAO->Delete($idProdutoAvaliacao);
+
+                        //relacionando a consignação com o produto
+                        $status = $consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
+                    }
+                }
+            }else{
+                //verifica se a relação entre a consignação e o cliente foi feita
+                if($consignacaoDAO->insertConsignacaoCJ($idConsignacao, $idCliente) == true){
+                    //instância da classe avaliacaoDAO
+                    $avaliacaoDAO = new AvaliacaoDAO();
+
+                    //inserindo o produto e guardando o ID inserido em uma variável
+                    $idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
+
+                    //pegando as imagens de um produto em avaliação e guardando em uma variável
+                    $imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
+
+                    //contador
+                    $cont = 0;
+
+                    //percorrendo as imagens
+                    while($cont < count($imagens)){
+                        //inserindo as imagens e armazenando os IDs retornados em uma variável
+                        $idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
+
+                        //incrementando o contador
+                        $cont++;
+                    }
+
+                    //verificando se a inserção do produto e da imagem na tabela de relacionamento foi
+                    //feita com sucesso
+                    if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
+                        //se foi, deleta o produto da tabela de avaliação
+                        $avaliacaoDAO->Delete($idProdutoAvaliacao);
+
+                        //relacionando a consignação com o produto
+                        $status = $consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
+                    }
+                }
+            }
+            }else{
+                $status = array('status' => 'erro');
+            }
+            
+            return $status;
 		}
 
 		//função que insere um pedido de compra
@@ -137,76 +143,81 @@
 
 			//inserindo o pedido e armazenando o ID
 			$idPedido = $pedidoDAO->insertPedidoCompra($pedidoClass);
-			//verificando qual o tipo de cliente
-			if($tipoCliente == 'F'){
-				//relacionando um pedido de compra com o cliente físico
-				if($pedidoDAO->insertPedidoCompraCF($idPedido, $idCliente) == true){
-					//instância da classe avaliacaoDAO
-					$avaliacaoDAO = new AvaliacaoDAO();
-						
-					//inserindo o produto e guardando o ID inserido em uma variável
-					$idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
-					
-					//pegando as imagens de um produto em avaliação e guardando em uma variável
-					$imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
-					
-					//contador
-					$cont = 0;
-					
-					//percorrendo as imagens
-					while($cont < count($imagens)){
-						//inserindo as imagens e armazenando os IDs retornados em uma variável
-						$idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
-						
-						//incrementando o contador
-						$cont++;
-					}
-					
-					//verificando se a inserção do produto e da imagem na tabela de relacionamento foi
-					//feita com sucesso
-					if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
-						//se foi, deleta o produto da tabela de avaliação
-						$avaliacaoDAO->Delete($idProdutoAvaliacao);
+			
+            if(isset($idPedido)){
+                //verificando qual o tipo de cliente
+                if($tipoCliente == 'F'){
+                    //relacionando um pedido de compra com o cliente físico
+                    if($pedidoDAO->insertPedidoCompraCF($idPedido, $idCliente) == true){
+                        //instância da classe avaliacaoDAO
+                        $avaliacaoDAO = new AvaliacaoDAO();
 
-						//relacionando a consignação com o produto
-						$pedidoDAO->insertCompraProduto($idProduto, $idPedido);
-					}
-				}
-			}else{
-				//inserindo um pedido de compra com um cliente jurídico
-				if($pedidoDAO->insertPedidoCompraCJ($idPedido, $idCliente) == true){
-					//instância da classe avaliacaoDAO
-					$avaliacaoDAO = new AvaliacaoDAO();
-						
-					//inserindo o produto e guardando o ID inserido em uma variável
-					$idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
-					
-					//pegando as imagens de um produto em avaliação e guardando em uma variável
-					$imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
-					
-					//contador
-					$cont = 0;
-					
-					//percorrendo as imagens
-					while($cont < count($imagens)){
-						//inserindo as imagens e armazenando os IDs retornados em uma variável
-						$idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
-						
-						//incrementando o contador
-						$cont++;
-					}
-					
-					//verificando se a inserção do produto e da imagem na tabela de relacionamento foi
-					//feita com sucesso
-					if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
-						//se foi, deleta o produto da tabela de avaliação
-						$avaliacaoDAO->Delete($idProdutoAvaliacao);
+                        //inserindo o produto e guardando o ID inserido em uma variável
+                        $idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
 
-						//relacionando o pedido com o produto
-						$pedidoDAO->insertCompraProduto($idProduto, $idPedido);
-					}
-				}
-			}
+                        //pegando as imagens de um produto em avaliação e guardando em uma variável
+                        $imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
+
+                        //contador
+                        $cont = 0;
+
+                        //percorrendo as imagens
+                        while($cont < count($imagens)){
+                            //inserindo as imagens e armazenando os IDs retornados em uma variável
+                            $idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
+
+                            //incrementando o contador
+                            $cont++;
+                        }
+
+                        //verificando se a inserção do produto e da imagem na tabela de relacionamento foi
+                        //feita com sucesso
+                        if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
+                            //se foi, deleta o produto da tabela de avaliação
+                            $avaliacaoDAO->Delete($idProdutoAvaliacao);
+
+                            //relacionando a consignação com o produto
+                            $status = $pedidoDAO->insertCompraProduto($idProduto, $idPedido);
+                        }
+                    }
+                }else{
+                    //inserindo um pedido de compra com um cliente jurídico
+                    if($pedidoDAO->insertPedidoCompraCJ($idPedido, $idCliente) == true){
+                        //instância da classe avaliacaoDAO
+                        $avaliacaoDAO = new AvaliacaoDAO();
+
+                        //inserindo o produto e guardando o ID inserido em uma variável
+                        $idProduto = $avaliacaoDAO->Insert($idProdutoAvaliacao);
+
+                        //pegando as imagens de um produto em avaliação e guardando em uma variável
+                        $imagens = $avaliacaoDAO->selectImages($idProdutoAvaliacao);
+
+                        //contador
+                        $cont = 0;
+
+                        //percorrendo as imagens
+                        while($cont < count($imagens)){
+                            //inserindo as imagens e armazenando os IDs retornados em uma variável
+                            $idImagem[] = $avaliacaoDAO->insertImages($imagens[$cont]->getImagem());
+
+                            //incrementando o contador
+                            $cont++;
+                        }
+
+                        //verificando se a inserção do produto e da imagem na tabela de relacionamento foi
+                        //feita com sucesso
+                        if($avaliacaoDAO->insertProdutoImage($idProduto, $idImagem)){
+                            //se foi, deleta o produto da tabela de avaliação
+                            $avaliacaoDAO->Delete($idProdutoAvaliacao);
+
+                            //relacionando o pedido com o produto
+                            $status = $pedidoDAO->insertCompraProduto($idProduto, $idPedido);
+                        }
+                    }
+                }
+            }
+            
+            return $status;
 		}
 		
 		//função que lista os produtos

@@ -57,7 +57,28 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					alert(dados);
+                    //conversão dos dados para JSON
+					json = JSON.parse(dados);
+                    
+                    //verificando qual o tipo de negócio
+                    if(negocio == 'consignado'){
+                        //verificando se deu certo
+                        if(json.status == 'sucesso'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Produto enviado para consignação');
+                        }else{
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao realizar essa operação')
+                        }
+                    }else{
+                        if(json.status == 'sucesso'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Operação realizada com sucesso');
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao realizar essa operação');
+                        }
+                    }
 				}
 			});
 			

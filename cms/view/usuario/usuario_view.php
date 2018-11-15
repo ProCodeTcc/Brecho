@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     $usuario = $_SESSION['usuario_cms'];
 	$idNivel = $_SESSION['nivel'];
@@ -12,7 +12,7 @@
 	require_once($diretorio.'controller/controllerUsuario.php');
 	$controllerNivel = new controllerNivel();
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
-	
+
 	$controllerUsuario = new controllerUsuario();
 	$controllerUsuario->checarLogin();
 ?>
@@ -30,7 +30,7 @@
 
         <script>
             var url = '../../';
-			
+
             function buscar(idItem){
                 $.ajax({
                     type: 'POST',
@@ -54,7 +54,7 @@
                     }
                 });
             }
-            
+
             //função enviar a requisição de exclusão para a router.php
             function excluir(idItem){
                 $.ajax({
@@ -62,31 +62,36 @@
                     url: url+'/router.php',
                     data: {modo: 'excluir', id:idItem, controller: 'usuario'},
                     success: function(dados){
-						console.log(dados);
-                        if(dados == false){
-							alert('Não foi possível realizar a exclusão!! Tem de haver ao menos um usuário cadastrado.');
-						}else{
-							alert('Usuario excluído com sucesso!!');
-						}
+                        //conversão dos dados para JSON
+                        json = JSON.parse(dados);
+
+                        //verificando o status
+                        if(json.status == 'limite'){
+                            //mostra mensagem de erro
+                            mostrarErro('Deve haver ao menos um usuário cadastrado!!');
+                        }
                     }
                 });
             }
-            
+
             //função para exibir os dados da tabela
             function listar(){
                 $.ajax({
-                    type: 'POST',
-                    url: 'dados.php',
+                    type: 'POST', //tipo de requisição
+                    url: 'dados.php', //url onde será enviada a requisição
                     success: function(dados){
-                        $('#consulta').html(dados);    
+                        //mostrando os dados
+                        $('#consulta').html(dados);
+                        
+                        //verificando os dados
+                        verificarDados('#consulta');
                     }
                 });
             }
-            
+
             //função para abrir a modal
-            $(document).ready(function(){                
+            $(document).ready(function(){
                 listar();
-                
 				//evento no click de um item do menu
 				$('.menu .menu_itens').click(function(e){
 					//mostrando o submenu somente do item clicado
@@ -95,10 +100,10 @@
 					//escondendo os submenus dos itens que não forem clicados
 					$('.menu_itens').not(this).find('.submenu').hide('fast');
 				});
-				
+
                 $('#adicionar').click(function(){
                     $('.container_modal').fadeIn(400);
-					
+
 					$.ajax({
                     type: 'POST',
                     url: 'frm_usuario.php',
@@ -107,7 +112,7 @@
                     }
                 });
                 });
-				
+
 				$('#logout').click(function(){
 					$.ajax({
 						type: 'POST',
@@ -125,14 +130,14 @@
     <body>
         <div class="container_modal">
             <div class="modal">
-                
+
             </div>
         </div>
 
         <div class="mensagens">
             <div class="mensagem-info" id="info">
                 <div class="msg">
-                
+
                 </div>
 
                 <div class="close" onclick="fecharMensagem()">
@@ -142,7 +147,7 @@
 
             <div class="mensagem-sucesso" id="sucesso">
                 <div class="msg">
-                
+
                 </div>
 
                 <div class="close" onclick="fecharMensagem()">
@@ -152,7 +157,7 @@
 
             <div class="mensagem-erro" id="erro">
                 <div class="msg">
-                
+
                 </div>
 
                 <div class="close" onclick="fecharMensagem()">
@@ -206,7 +211,7 @@
                     <div class="pages">
                    		<?php require_once('../menu.php') ?>
                     </div>
-					
+
                 </div>
 
                 <div class="users_view">

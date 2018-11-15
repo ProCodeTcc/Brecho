@@ -87,7 +87,7 @@
             //chamada da função de atualizar os dados
             $status = $usuarioDAO->Update($usuarioClass);
 
-            return $status;
+            echo $status;
         }
 
         public function buscarUsuario($id){
@@ -133,7 +133,8 @@
 			//verifica o número de usuários cadastrados
 			if($usuarios == 1){
 				//retorna falso, se houve apenas um
-				echo false;
+                $status = array('status' => 'limite');
+                echo json_encode($status);
 			}else{
 				//excluindo o usuário
 				$usuarioDAO->excluir($id);

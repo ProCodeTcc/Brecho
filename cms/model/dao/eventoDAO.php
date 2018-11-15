@@ -93,9 +93,9 @@
 				//armazenando o id do evento inserido
 				$idEvento = $PDO_conexao->lastInsertId();
 				
-				$retorno = array('id' => $idEvento, 'retorno' => 'inserido');
+				$status = array('id' => $idEvento, 'status' => 'inserido');
 
-				return json_encode($retorno);
+				return json_encode($status);
 			}
 			
 			//fechando a conexão
@@ -146,14 +146,16 @@
 			//execução do statement
 			$stm->execute();
 
-			//verificando retorno
+			//verificando status
 			if($stm->rowCount() != 0){
 				//armazenando a mensagem em uma variável
-				$retorno = array('retorno' => 'traduzido');
-
-				//retornando a msg em JSON
-				return json_encode($retorno);
-			}
+				$status = array('status' => 'traduzido');
+			}else{
+                $status = array('status' => 'erro');    
+            }
+            
+            //retornando a msg em JSON
+            return json_encode($status);
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -195,10 +197,9 @@
 			
 			if($cont != 0){
 				return $listEvento;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
+            //fechando a conexão
 			$conexao->fecharConexao();
 		}
 		
@@ -277,10 +278,13 @@
 			$stm->bindParam(4, $evento->getId());
 			
 			if($stm->execute()){
-				$retorno = array('retorno' => 'atualizado');
-
-				return json_encode($retorno);
-			}
+				$status = array('status' => 'atualizado');
+			}else{
+                $status = array('status' => 'erro');
+            }
+            
+            //retornando a msg em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -304,7 +308,7 @@
 			$stm->bindParam(4, $evento->getIdLoja());
 			
 			if(!$stm->execute()){
-				echo('Ocorreu um erro ao atualizar a data');
+				return 'erro';
 			}
 			
 			//fechando a conexão
@@ -329,12 +333,13 @@
 
 			//verificando se deu certo
 			if($stm->execute()){
-				//armazenando a mensagem em uma variável
-				$retorno = array('retorno' => 'atualizado');
-
-				//retornando os dados em JSON
-				return json_encode($retorno);
-			}
+				$status = array('status' => 'atualizado');
+			}else{
+                $status = array('status' => 'erro');
+            }
+            
+            //retornando a msg em JSON
+            return json_encode($status);
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -357,13 +362,12 @@
 			//execução do statement
 			$stm->execute();
 			
-			//verificando o retorno das linhas
-			if($stm->rowCount() != 0){
-				//se for diferente de 0, mensagem de sucesso
-				echo('Evento excluído com sucesso!!');
-			}else{
-				//caso contrário, mensagem de erro
-				echo 'erro';
+			//verificando o status das linhas
+			if($stm->rowCount() == 0){
+				$status = array('status' => 'erro');
+                
+                //retornando a mensagem em JSON
+                return json_encode($status);
 			}
 			
 			//fechando a conexão

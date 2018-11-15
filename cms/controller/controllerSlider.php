@@ -37,7 +37,9 @@
 				$sliderDAO = new SliderDAO();
 				
 				//chamada do método que insere um slider
-				$sliderDAO->Insert($sliderClass);
+				$status = $sliderDAO->Insert($sliderClass);
+                
+                return $status;
 			}
 		}
 		
@@ -64,7 +66,9 @@
 				$sliderDAO = new SliderDAO();
 				
 				//chamada do método que insere um slider
-				$sliderDAO->Update($sliderClass);
+				$status = $sliderDAO->Update($sliderClass);
+                
+                return $status;
 			}
 		}
 		
@@ -103,10 +107,12 @@
 			//verificando o total
 			if($slidersAtivos == 1){
 				//se for igual a 1, limita a exclusão
-				echo('limite');
+				$status = array('status' => 'limite');
+                return json_encode($status);
 			}else{
 				//chamada da função que deleta o slider
-				$sliderDAO->Delete($id);
+				$status = $sliderDAO->Delete($id);
+                return $status;
 			}
 		}
 		
@@ -126,7 +132,9 @@
 					$sliderDAO->updateStatus($status, $id);
 				}else{
 					//se for igual a 3, mensagem de erro
-					echo 'limite';
+					$status = array('status' => 'limite');
+                    
+                    return json_encode($status);
 				}
 			}else{
 				$sliderDAO->updateStatus($status, $id);

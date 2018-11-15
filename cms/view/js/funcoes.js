@@ -11,12 +11,31 @@ function validarData(input){
 	//verificando se a data é menor que a atual ou se é nula
 	if(data < dataAtual || data == 'Invalid Date'){
 		//mensagem de erro
-		alert('Insira uma data válida!!');
+		mostrarErro('Insira uma data válida!!');
 
 		//destacando o campo com erro
 		$(input).css('border', '1px solid red');
 
 		return false;
+	}else{
+		//destacando o campo com erro
+		$(input).css('border', '1px solid black');
+	}
+}
+
+function validarTermino(inicio, termino){
+	//verificando se a data é menor que a atual ou se é nula
+	if(inicio < termino){
+		//mensagem de erro
+		mostrarErro('A data de término não pode ser menor que a de início');
+
+		//destacando o campo com erro
+		$(input).css('border', '1px solid red');
+
+		return false;
+	}else{
+		//destacando o campo com erro
+		$(input).css('border', '1px solid black');
 	}
 }
 
@@ -24,7 +43,7 @@ function validarData(input){
 function verificarSubmit(){
 	//armazenando o valor em uma variável
 	var submit = $('.form').data('submit');
-	
+
 	//verificando se é verdadeiro
 	if(submit == true){
 		//habilita a guia em inglês
@@ -36,7 +55,7 @@ function verificarSubmit(){
 		//seta a guia em inglês como ativa
 		$('#tabs').tabs('option', 'active', 1);
 	}
-}   
+}
 
 function mostrarErro(mensagem){
 	$('.mensagens').fadeIn(400);
@@ -58,6 +77,7 @@ function mostrarSucesso(mensagem){
 
 function fecharMensagem(){
 	$('.mensagens').fadeOut(400);
+	$('.mensagens').children().hide();
 }
 
 function fecharModal(){
@@ -77,7 +97,7 @@ function voltar(){
 function pesquisar(e){
 	if(e.keyCode == 13 || e.button == 0){
 		var termo = $('#pesquisar').val();
-		
+
 		$.ajax({
 			type: 'POST',
 			url: 'pesquisa.php',
@@ -103,7 +123,21 @@ function verificarImagem(){
 			arquivos += 1;
 		}
 	});
-	
+
 	//retorna a quantidade
 	return arquivos;
+}
+
+function verificarDados(local){
+	var resultado = $.trim($(local).html()).length;
+    
+	if(resultado == 0 || resultado == 108 || resultado == 36 || resultado == 38){
+		$.ajax({
+			type: 'POST',
+			url: '../erro_tabela.php',
+			success: function(dados){
+				$(local).html(dados);
+			}
+		});
+	}
 }

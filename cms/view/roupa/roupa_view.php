@@ -99,14 +99,20 @@
 					url: url+'router.php', //url onde será enviada a requisição
 					data: {id:idItem, controller: 'produto', modo: 'excluir'}, //dados enviados
 					success: function(dados){
-						if(dados == 'limite'){
-							alert('Não foi possível realizar a exclusão!! Deve haver ao menos um produto ativo');
-						}else if(dados == 'erro'){
-							alert('Ocorreu um erro ao excluir o produto');
-						}else{
-							alert(dados); //mensagem de sucesso
-							listar(); //recarregando os dados
-						}
+                        //listagem dos dados
+					   listar();
+						
+                        //conversão dos dados para JSON
+                        json = JSON.parse(dados);
+                        
+                        //verificando o status
+                        if(json.status == 'limite'){
+                            //mensagem de informação
+                            mostrarInfo('Deve haver ao menos um produto cadastrado');
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao excluir o produto');
+                        }
 					}
 				});
 			}
@@ -158,19 +164,36 @@
         </div>
 
 		<div class="mensagens">
-			<div class="mensagem-sucesso" id="sucesso">
-				<div class="close" onclick="fecharMensagem()">
-					x
-				</div>
-			</div>
-	
-			<div class="mensagem-erro" id="erro">
-				<div class="close" onclick="fecharMensagem()">
-					x
-				</div>
-				
-			</div>
-		</div>
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
 
         <header>
             <div class="logo">

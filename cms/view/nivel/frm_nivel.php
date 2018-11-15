@@ -68,8 +68,26 @@
                 processData: false,
                 async: true,
                 success: function(dados){
-                    listar();
-                    $('.container_modal').fadeOut(400); //fechar a modal em caso de sucesso
+                    //conversão dos dados para JSON
+                    json = JSON.parse(dados);
+
+                    //verificando o status de inserção
+                    if(json.status == 'sucesso'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Nível inserido com sucesso');
+                    }else if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao inserir o nível');
+                    }
+
+                    //verificando o status de update
+                    if(json.status == 'atualizado'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Nível atualizado com sucesso');
+                    }else if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao atualizar o nível');
+                    }
                 }
             });
         });

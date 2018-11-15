@@ -72,7 +72,9 @@
         switch($modo){
             case 'inserir':
                 $controllerNivel = new controllerNivel();
-                $controllerNivel->inserirNivel();
+				$status = $controllerNivel->inserirNivel();
+				
+				echo($status);
             break;
 
             case 'excluir':
@@ -92,7 +94,9 @@
                 $id = $_POST['id'];
 
                 $controllerNivel = new controllerNivel();
-                $controllerNivel->atualizarNivel($id);
+				$status = $controllerNivel->atualizarNivel($id);
+				
+				echo($status);
             break;
 				
 			case 'permitir':
@@ -100,7 +104,9 @@
 				$idPagina = $_POST['idPagina'];
 				
 				$controllerNivel = new controllerNivel();
-				$controllerNivel->permitirPagina($idNivel, $idPagina);
+				$status = $controllerNivel->permitirPagina($idNivel, $idPagina);
+
+				echo($status);
 			break;
 				
 			case 'negar':
@@ -108,7 +114,9 @@
 				$idPagina = $_POST['idPagina'];
 				
 				$controllerNivel = new controllerNivel();
-				$controllerNivel->retirarPermissao($idNivel, $idPagina);
+				$status = $controllerNivel->retirarPermissao($idNivel, $idPagina);
+
+				echo($status);
 			break;
 
             case 'status':
@@ -173,7 +181,9 @@
             case 'excluir':
                 $id = $_POST['id'];
                 $controllerEnquete = new controllerEnquete();
-                $controllerEnquete->excluirEnquete($id);
+				$status = $controllerEnquete->excluirEnquete($id);
+				
+				echo($status);
             break;
 
             case 'status':
@@ -248,7 +258,9 @@
 						$layout = $_POST['layout'];
 						
 						$controllerSobre = new controllerSobre();
-						$controllerSobre->excluirLayout($id, $layout);
+						$status = $controllerSobre->excluirLayout($id, $layout);
+                        
+                        echo($status);
 					break;
 						
 					case 'status':
@@ -391,14 +403,18 @@
 					$id = $_POST['id'];
 					
 					$controllerProduto = new controllerProduto();
-					$controllerProduto->atualizarImagem($id);
+					$status = $controllerProduto->atualizarImagem($id);
+                    
+                    echo($status);
 				break;
 					
 				case 'excluirImagem':
 					$id = $_POST['id'];
 					
 					$controllerProduto = new controllerProduto();
-					$controllerProduto->excluirImagem($id);
+					$status = $controllerProduto->excluirImagem($id);
+                    
+                    echo($status);
 				break;
 					
 				case 'excluir':
@@ -406,7 +422,9 @@
 					
 					$controllerProduto = new controllerProduto();
 					
-					$controllerProduto->excluirProduto($id);
+					$status = $controllerProduto->excluirProduto($id);
+                    
+                    echo($status);
 				break;
 					
 				case 'inserirPromocao':
@@ -414,7 +432,9 @@
 					
 					$controllerProduto = new controllerProduto();
 					
-					$controllerProduto->inserirPromocao($id);
+					$status = $controllerProduto->inserirPromocao($id);
+                    
+                    echo($status);
 				break;
 					
 				case 'buscarMedida':
@@ -584,7 +604,9 @@
 					$idProdutoAvaliacao = $_POST['idProduto'];
 					
 					$controllerAvaliacao = new controllerAvaliacao();
-					$controllerAvaliacao->inserirConsignacao($tipoCliente, $idCliente, $idProdutoAvaliacao);
+					$status = $controllerAvaliacao->inserirConsignacao($tipoCliente, $idCliente, $idProdutoAvaliacao);
+                    
+                    echo($status);
 				break;
 				
 				case 'compra':
@@ -594,7 +616,9 @@
 					$idProdutoAvaliacao = $_POST['idProduto'];
 
 					$controllerAvaliacao = new controllerAvaliacao();
-					$controllerAvaliacao->inserirCompra($tipoCliente, $idCliente, $idProdutoAvaliacao);
+					$status = $controllerAvaliacao->inserirCompra($tipoCliente, $idCliente, $idProdutoAvaliacao);
+                    
+                    echo($status);
 				break;
 
 				case 'buscar':
@@ -700,7 +724,8 @@
 					$id = $_POST['id'];
 					
 					$controllerEvento = new controllerEvento();
-					$controllerEvento->excluirEvento($id);
+					$status = $controllerEvento->excluirEvento($id);
+                    echo($status);
 				break;
 			}
 		break;
@@ -711,7 +736,8 @@
 			switch($modo){
 				case 'inserir':
 					$controllerSlider = new controllerSlider();
-					$controllerSlider->inserirSlider();
+					$status = $controllerSlider->inserirSlider();
+                    echo($status);
 				break;
 					
 				case 'buscar':
@@ -725,14 +751,17 @@
 					
 				case 'editar':
 					$controllerSlider = new controllerSlider();
-					$controllerSlider->atualizarSlider();
+					$status = $controllerSlider->atualizarSlider();
+                    echo($status);
 				break;
 					
 				case 'excluir':
 					$id = $_POST['id'];
 					
 					$controllerSlider = new controllerSlider();
-					$controllerSlider->excluirSlider($id);
+					$status = $controllerSlider->excluirSlider($id);
+                    
+                    echo($status);
 				break;
 					
 				case 'status':

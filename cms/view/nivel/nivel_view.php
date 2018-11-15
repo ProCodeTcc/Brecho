@@ -102,6 +102,7 @@
                 success: function(dados){
                     //em caso de sucesso, insere os dados na div de consulta
                     $('#consulta').html(dados);
+                    verificarDados('#consulta');
                 }
             });
         }
@@ -145,6 +146,38 @@
         <div class="container_modal">
             <div class="modal" id="modal_nivel">
 
+            </div>
+        </div>
+
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 

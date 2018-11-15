@@ -18,7 +18,7 @@
 		});
 	});
 
-    
+
 </script>
     <?php
         if(isset($_POST['pesquisa'])){
@@ -46,7 +46,7 @@
             <span data-id="<?php echo($rsEnquetes[$cont]->getId()) ?>" onclick="buscar(<?php echo($rsEnquetes[$cont]->getId()) ?>)">
                <img class="editar" data-modo="editar" src="../imagens/pencil.png">
             </span>
-			
+
 			<span class="visualizar" onClick="visualizar(<?php echo($rsEnquetes[$cont]->getId()) ?>)">
 				<img src="../imagens/visualizar.png">
 			</span>
@@ -66,7 +66,7 @@
             </span>
         </div>
     </div>
-    <?php 
+    <?php
     $cont++;
     } ?>
 

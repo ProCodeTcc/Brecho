@@ -51,6 +51,7 @@
 				url: 'dados.php', //url onde será enviada a requisição
 				success: function(dados){
 					$('#consulta').html(dados); //lista os dados na tabela
+                    verificarDados('#consulta');
 				}
 			});
 		}
@@ -94,14 +95,18 @@
 				url: url+'/router.php', //url onde será enviada a requisição
 				data: {id:idItem, layout:layout, controller: 'sobre', modo: 'excluir'}, //parâmetros que serão enviados
 				success: function(dados){
-					if(dados == 'limite'){
-						alert('Não foi possível realizar a exclusão!! Deve haver ao menos um layout ativo');
-					}else if(dados == 'erro'){
-						alert('Ocorreu um erro ao realizar a exclusão');
-					}else{
-						alert(dados); //mensagem de sucesso
-						listar(); //listagem dos dados
-					}
+                    listar();
+                    //conversão dos dados para JSON
+					json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao realizar a exclusão');
+                    }else if(json.status == 'limite'){
+                        //mensagem de informação
+                        mostrarInfo('Tem de haver ao menos um layout ativo');
+                    }
 				}
 			});
 		}
@@ -181,6 +186,38 @@
             </div>
         </div>
 
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
+
         <header>
             <div class="logo">
                 <a href="../home.php">
@@ -235,7 +272,7 @@
                     </div>
 
                     <div id="consulta">						
-						
+                        
                     </div>
 
 					<div id="pesquisa">

@@ -38,14 +38,17 @@
 			url: url+'router.php', //url onde será enviada a requisição
 			data: {id:idItem, controller: 'produto', modo: 'excluirImagem'}, //parâmetros enviados
 			success: function(dados){
-				//mensagem de sucesso
-				alert(dados);
-				
-				//listando os dados atualizados
-				listar();
-				
-				//fechando a modal
-				$('.container_modal').fadeOut(400);
+                //listagem dos dados
+                listar();
+                
+				//conversão dos dados para JSON
+                json = JSON.parse(dados);
+                
+                //verificando o status
+                if(json.status == 'erro'){
+                    //mensagem de erro
+                    mostrarErro('Ocorreu um erro ao excluir a imagem');
+                }
 			}
 		});
 	}

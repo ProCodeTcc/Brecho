@@ -40,6 +40,7 @@
 				success: function(dados){
 					//listando os dados na div de consulta
 					$('#consulta').html(dados);
+                    verificarDados('#consulta');
 				}
 			});
 		}
@@ -76,16 +77,19 @@
 				url: url+'router.php', //url onde será enviada a requisição
 				data: {id:id, controller: 'slider', modo: 'excluir'}, //parâmetros enviados
 				success: function(dados){
-					if(dados == 'limite'){
-						alert('Não foi possível realizar a exclusão!! Deve haver ao menos uma imagem cadastrada.');
-					}else if(dados == 'erro'){
-						alert('Ocorreu um erro ao realizar a exclusão');
-					}else{
-						//mensagem
-						alert(dados);
-
-						//listagem dos dados atualizados
-						listar();
+					 //listagem dos dados atualizados
+				    listar();
+                    
+                    //conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'limite'){
+						//mensagem de informação
+                        mostrarInfo('Deve haver ao menos uma imagem cadastrada.');
+					}else if(json.status == 'erro'){
+                        //mensagem de erro
+						mostrarErro('Ocorreu um erro ao realizar a exclusão');
 					}
 				}
 			});
@@ -98,14 +102,13 @@
 				url: url+'router.php', //url onde será enviada a requisição
 				data: {status:status, id:id, controller: 'slider', modo: 'status'}, //parâmetros enviados
 				success: function(dados){
-					//verificando se o limite foi excedido
-					if(dados == 'limite'){
-						//mensagem de erro
-						alert('Você excedeu o limite máximo de sliders ativos!!');
-					}
-					
 					//listagem dos dados atualizados
 					listar();
+                    //verificando se o limite foi excedido
+					if(json.status == 'limite'){
+						//mensagem de erro
+						mostrarInfo('Você excedeu o limite máximo de sliders ativos!!');
+					}					
 				}
 			});
 		}
@@ -144,6 +147,38 @@
         <div class="container_modal">
             <div class="modal">
                 
+            </div>
+        </div>
+        
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 

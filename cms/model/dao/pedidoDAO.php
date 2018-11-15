@@ -36,9 +36,6 @@
 
                 //retornando o ID do pedido
                 return $idPedido;
-            }else{
-                //mensagem de erro
-                echo('Erro PC1 - Ocorreu um erro ao gerar o pedido de compra');
             }
 
             //fechando a conexão
@@ -66,9 +63,6 @@
             //verificando retorno das linhas
             if($stm->rowCount() != 0){
                 return true;
-            }else{
-                //mensagem de erro
-                echo('Erro PC2 - Ocorreu um erro ao relacionar o pedido com o cliente');
             }
 
             //fechando a conexão
@@ -96,9 +90,6 @@
             //verificando retorno das linha
             if($stm->rowCount() != 0){
                 return true;
-            }else{
-                //mensagem de rro
-                echo('Erro PC2 - Ocorreu um erro ao relacionar o pedido com o cliente');
             }
 
             //fechando a conexão
@@ -126,11 +117,13 @@
             //verifiando retorno das linhas
             if($stm->rowCount() != 0){
                 //mensagem de sucesso
-                echo('Pedido de compra gerado com sucesso!!');
+                $status = array('status' => 'sucesso');
             }else{
                 //mensagem de erro
-                echo('Erro PC3 - OCorreu um erro ao relacionar o pedido com o produto');
+                $status = array('status' => 'erro');
             }
+            
+            return json_encode($status);
 
             //fechando a conexão
             $conexao->fecharConexao();

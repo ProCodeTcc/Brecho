@@ -42,9 +42,6 @@
 
                 //retornando o ID
                 return $idConsignacao;
-            }else{
-                //mensagem de erro
-                echo('Erro CON-1: Ocorreu um erro ao realizar a consignação!!');
             }
 
             //fechando a conexão
@@ -72,9 +69,6 @@
             //verificando o retorno das linhas
             if($stm->rowCount() != 0){
                 return true;
-            }else{
-                //mensagem de erro
-                echo('Erro CON-2: Ocorreu um erro ao relacionar a consignação com o cliente!!');
             }
 
             //fechando a conexão
@@ -102,9 +96,6 @@
             //verificando retorno das linhas
             if($stm->rowCount() != 0){
                 return true;
-            }else{
-                //mensagem de erro
-                echo('Erro CON-2: Ocorreu um erro ao relacionar a consignação com o cliente!!');
             }
 
             //fechando a conexão
@@ -132,12 +123,13 @@
 
             //verificando o retorno das linhas
             if($stm->rowCount() != 0){
-                //mensagem de sucesso
-                echo('Consignação efetuada com sucesso!!');
+                $status = array('status' => 'sucesso');
             }else{
                 //mensagem de erro
-                echo('Erro CON-3: Ocorreu um erro ao relacionar o produto com a consignação');
+                $status = array('status' => 'erro');
             }
+            
+            return json_encode($status);
         
             //fechando a conexão
             $conexao->fecharConexao();
@@ -240,11 +232,13 @@
             //verificando se deu certo
             if($stm->execute()){
                 //retorna true se der certo
-                echo('true');
+                $status = array('status' => 'atualizado');
             }else{
                 //false se der erro
-                echo('false');
+                $status = array('status' => 'erro');
             }
+            
+            return json_encode($status);
 
             //fechando a conexão
             $conexao->fecharConexao();

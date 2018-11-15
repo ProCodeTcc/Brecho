@@ -66,6 +66,13 @@
 				//se for nulo, atribui ao formulário o parâmetro modo
 				//contendo inserir
 				formulario.append('modo', 'inserir');
+                
+                //verificando se a imagem foi selecionada
+                if(verificarImagem() == 1){
+                    //mostrando mensagem
+                    mostrarInfo('Selecione a imagem');
+                    return false;
+                }
 			}else{
 				//se existir o ID
 				
@@ -91,14 +98,23 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					//mensagem
-					alert(dados);
-					
-					//listagem dos dados
-					listar();
-					
-					//fechando a modal
-					$('.container_modal').fadeOut(400);
+                    //conversão dos dados para JSON
+				    json = JSON.parse(dados);
+                    
+                    //verificando se foi inserido
+                    if(json.status == 'inserido'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Slider inserido com sucesso');
+
+                        //listagem dos dados
+					   listar();
+                    }else if(json.status == 'atualizado'){//verificando se foi atualizado
+                        //mensagem de sucesso
+                        mostrarSucesso('Slider atualizado com sucesso');
+                    }else{
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao realizar a operação');
+                    }
 				}
 			});
 		});

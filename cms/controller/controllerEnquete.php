@@ -218,10 +218,13 @@
 			//verificando se o número é igual a um
 			if($enquetesAtivas == 1){
 				//impede a exclusão
-				echo 'limite';
+                $status = array('status' => 'limite');
+                return json_encode($status);
 			}else{
 				//chamada da função que deleta uma enquete
-				$enqueteDAO->Delete($id);
+                $status = $enqueteDAO->Delete($id);
+                
+                return $status;
 			}
         }
 

@@ -59,8 +59,6 @@
 			if($cont != 0){
 				//retornando a lista com os produtos
 				return $listProdutos;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			//fechando a conexão
@@ -107,8 +105,6 @@
 			if($cont != 0){
 				//retornando a lista com os produtos
 				return $listProdutos;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			//fechando a conexão

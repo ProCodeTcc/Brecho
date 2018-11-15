@@ -105,10 +105,16 @@
 			
 			//chamada da função que atualiza o evento
 			$retorno = $eventoDAO->Update($eventoClass);
-			
-			//atualizando a data
-			$eventoDAO->UpdateData($eventoClass);
 
+            //verificando se a data foi atualizada
+            if($eventoDAO->UpdateData($eventoClass) == 'erro'){
+                //atualiza o status
+                $retorno = array('status' => 'data');
+                
+                //retorna o status
+                return json_encode($retorno);
+            }
+            
 			//retorna a mensagem
 			return $retorno;
 		}
@@ -198,10 +204,14 @@
 			//verificando a quantidade de eventos
 			if($eventosAtivos == 1){
 				//limita a exclusão se houver apenas 1
-				echo 'limite';
+				$status = array('status' => 'limite');
+                
+                return $status;
 			}else{
 				//chamada da função que exclui um evento
-				$eventoDAO->Delete($id);
+				$status = $eventoDAO->Delete($id);
+                
+                return $status;
 			}
 		}
 		

@@ -6,7 +6,7 @@
 		});
 	});
 
-    
+
 </script>
 
 <?php
@@ -46,6 +46,6 @@
             </span>
         </div>
     </div>
-    <?php 
+    <?php
     $cont++;
     } ?>

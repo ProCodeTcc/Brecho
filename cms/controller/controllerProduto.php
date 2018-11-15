@@ -182,7 +182,9 @@
 			$produtoDAO = new ProdutoDAO();
 			
 			//chamando a função que atualiza a imagem
-			$produtoDAO->updateImagem($imagem, $id);
+			$status = $produtoDAO->updateImagem($imagem, $id);
+            
+            return $status;
 		}
 		
 		//função que lista as imagens
@@ -203,7 +205,9 @@
 			$produtoDAO = new ProdutoDAO();
 			
 			//chamada da função que deleta a imagem
-			$produtoDAO->deleteImagem($id);
+			$status = $produtoDAO->deleteImagem($id);
+            
+            return $status;
 		}
 		
 		//função que busca um produto a partir do ID
@@ -233,10 +237,14 @@
 			//verificando o total de produtos cadastrados
 			if($produtosAtivos == 1){
 				//limita a exclusão
-				echo 'limite';
+				$status = array('limite');
+                
+                return $status;
 			}else{
 				//chamada da função que deleta um produto
-				$produtoDAO->Delete($id);
+				$status = $produtoDAO->Delete($id);
+                
+                return $status;
 			}
 		}
 		
@@ -246,7 +254,9 @@
 			$produtoDAO = new ProdutoDAO();
 			
 			//chamada da função que insere uma promoção
-			$produtoDAO->insertPromocao($id);
+			$status = $produtoDAO->insertPromocao($id);
+            
+            return $status;
 		}
 		
 		//função que busca os tamanhos

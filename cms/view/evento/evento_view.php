@@ -55,6 +55,7 @@
 				success: function(dados){
 					//colocando os dados na div de consulta
 					$('#consulta').html(dados);
+                    verificarDados('#consulta');
 				}
 			});
 		}
@@ -81,18 +82,17 @@
 				url: url+'router.php', //url onde será enviada a requisição
 				data: {id:id, controller: 'evento', modo: 'excluir'}, //parâmetros enviados
 				success: function(dados){
-					if(dados == 'limite'){
-						alert('Não foi possível realizar a exclusão!! Deve haver ao menos um evento cadastrado.');
-					}else if(dados == 'erro'){
-						alert('Ocorreu um erro ao realizar a exclusão!!');
-					}else{
-						//mensagem 
-						alert(dados);
-
-						//listando os dados atualizados
-						listar();
+                    listar();
+					//conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
+                    if(json.status == 'limite'){
+                        mostrarErro('Deve haver ao menos um evento cadastrado');
+                    }else if(json.status == 'erro'){
+                        mostrarInfo('Ocorreu um erro ao realizar a exclusão');
+                    }
+                    
 					}
-				}
 			});
 		}
 		
@@ -142,6 +142,38 @@
         <div class="container_modal">
             <div class="modal">
                 
+            </div>
+        </div>
+        
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 

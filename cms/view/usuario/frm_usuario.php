@@ -8,7 +8,7 @@
 
 <script>
     var url = '../../';
-	
+
 	//função para exibir os dados
 	function exibirDados(idItem){
 		$.ajax({
@@ -32,63 +32,63 @@
 			}
 		});
 	}
-	
+
 	//função que mostra a prévia da imagem
 	function mostrarPrevia(input){
 		if(input.files && input.files[0]){
 			//criando um novo leitor de arquivos
 			var leitor = new FileReader();
-			
+
 			//função no momento em que algum arquivo for carregado
 			leitor.onload = function(event){
 				//colocando a imagem
 				$('#img').attr('src', event.target.result);
 			}
-			
+
 			leitor.readAsDataURL(input.files[0]);
 		}
 	}
-	
+
 	$('#imagem').live('change', function(){
 		mostrarPrevia(this);
 	});
-	
+
     $(document).ready(function(){
         mudarModal('500', '400');
-        
+
 		//resgatando o id do usuario
 		var idUsuario = $('#frmUsuario').data('id');
-		
+
 		//se o id do usuario for diferente de nulo, significa que é para exibir os dados para edição
 		if(idUsuario != ""){
 			exibirDados(idUsuario);
 		}
-		   
+
         $('#frmUsuario').submit(function(event){
             //criando uma variavel e armazenando o formulário nela
             var formulario = new FormData($('#frmUsuario')[0]);
-
-            //verificando se a imagem está vazia
-            if(verificarImagem() == 1){
-                //se estiver, mostra uma mensagem
-                mostrarInfo('Selecione a imagem');
-
-                //para a execução
-                return false;
-            }
 
             //se a variável usuário for nula, o modo deverá ser de inserir, caso contrário, editar
             if(idUsuario == ""){
                 //acrescentando ao formulário o parâmetro modo;
                 formulario.append('modo', 'inserir');
+
+                //verificando se a imagem está vazia
+                if(verificarImagem() == 1){
+                    //se estiver, mostra uma mensagem
+                    mostrarInfo('Selecione a imagem');
+
+                    //para a execução
+                    return false;
+                }
             }else{
 				var imagem = $('#frmUsuario').data('imagem');
                 //acrescentando ao formulário o parâmetro modo;
                 formulario.append('modo', 'editar');
-				
+
 				//acrescentando ao formulário o parâmetro id
                 formulario.append('id', idUsuario);
-				
+
 				//acrescentando ao formulário o parâmetro imagem, que irá conter a imagem
 				//que já estava, caso não seja alterada
 				formulario.append('imagem', imagem);
@@ -98,7 +98,7 @@
 
             //acrescentando ao formulário o parâmetro controller
             formulario.append('controller', 'usuario');
-            
+
             $.ajax({
                 type: 'post',
                 url: url+'/router.php',
@@ -109,16 +109,16 @@
                 async: true,
                 success: function(dados){
                     json = JSON.parse(dados);
-                    
+
                     if(json.status == 'sucesso'){
                         mostrarSucesso('Usuario inserido com sucesso!!');
 
                         //listando os dados inseridos ou atualizados
                         listar();
-                        
+
                         //insere na tag img o conteúdo da variável imagem
-                        $('#img_perfil').attr('src', imagem);					
-                    }else{
+                        $('#img_perfil').attr('src', imagem);
+                    }else if(json.status == 'erro'){
                         mostrarErro('Ocorreu um erro ao inserir o usuário');
                     }
 
@@ -127,10 +127,10 @@
 
                         //listando os dados inseridos ou atualizados
                         listar();
-                        
+
                         //insere na tag img o conteúdo da variável imagem
                         $('#img_perfil').attr('src', imagem);
-                    }else{
+                    }else if(json.status == 'erro'){
                         mostrarErro('Ocorreu um erro ao atualizar o usuário');
                     }
                 }
@@ -151,7 +151,7 @@
 
             <input type="file" id="imagem" name="fleimagem">
         </div>
-		
+
 		<div class="form_linha">
             <label class="lbl_cadastro">Nome:</label>
             <input type="text" class="cadastro_input" id="txtnome" name="txtnome" placeholder="Insira um nome" required>
@@ -166,7 +166,7 @@
         <div class="form_linha">
             <label class="lbl_cadastro">Nivel:</label>
             <select class="cadastro_select" id="txtnivel" name="txtnivel">
-            
+
         <?php
             $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
             require_once($diretorio.'/controller/controllerUsuario.php');
@@ -178,7 +178,7 @@
                 <option value="<?php echo($rsNiveis[$cont]->getNivel())?>">
                     <?php echo($rsNiveis[$cont]->getNomeNivel())?>
                 </option>
-                
+
         <?php
             $cont++;
             }

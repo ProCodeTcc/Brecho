@@ -210,7 +210,7 @@
                         mostrarInfo('Selecione todas as imagens!!');
                     }else{
                         //resgatando a url
-                        url = $('#frmUsuario').attr('action');
+                        url = $('#frmProduto').attr('action');
                     }
 
                     $.ajax({

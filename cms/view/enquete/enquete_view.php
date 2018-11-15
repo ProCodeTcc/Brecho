@@ -53,6 +53,7 @@
                 success: function(dados){
                     //em caso de sucesso, insere os dados na div consulta
                     $('#consulta').html(dados);
+                    verificarDados('#consulta');
                 }
             });
         }
@@ -82,11 +83,19 @@
                 url: url+'/router.php', //url onde será feita a requisição
                 data: {id:idItem, modo: 'excluir', controller: 'enquete'}, //dados a serem enviados
                 success: function(dados){
-                    if(dados == 'limite'){
-						alert('Não foi possível realizar a exclusão!! Tem de haver ao menos uma enquete ativa.');
-					}else{
-						listar();
-					}
+                    //conversão dos dados para JSON
+                    json = JSON.parse(dados);
+
+                    //verificando o status
+                    if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao realizar a exclusão');
+                    }else if(json.status == 'limite'){
+                        //mensagem de informação
+                        mostrarInfo('Deve haver ao menos uma enquete ativa');
+                    }
+
+                    listar();
                 }
             });
         }
@@ -121,7 +130,7 @@
 
         $(document).ready(function(){
             listar()
-			
+
 			//evento no click de um item do menu
 			$('.menu .menu_itens').click(function(e){
 				//mostrando o submenu somente do item clicado
@@ -155,12 +164,40 @@
 
     <body>
         <div class="container_modal">
-            <div class="mensagem-info">
-            
-            </div>
-
             <div class="modal">
                 
+            </div>
+        </div>
+
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 

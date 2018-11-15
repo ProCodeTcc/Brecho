@@ -33,7 +33,9 @@
             $nivelDAO = new NivelDAO();
 			
 			//chamada da função que insere um nível
-         	$nivelDAO->Insert($nivelClass);
+			 $status = $nivelDAO->Insert($nivelClass);
+			 
+			 return $status;
         }
 		
 		//função que exclui um nível
@@ -100,7 +102,9 @@
             $nivelDAO = new NivelDAO();
 			
 			//chamada da função que deleta um nível
-            $nivelDAO->Update($nivelClass);
+			$status = $nivelDAO->Update($nivelClass);
+			
+			return $status;
         }
 
 		//função que atualiza o status
@@ -118,7 +122,9 @@
 			$nivelDAO = new NivelDAO();
 			
 			//chamada da função que permite uma página
-			$nivelDAO->permitirPagina($idNivel, $idPagina);
+			$status = $nivelDAO->permitirPagina($idNivel, $idPagina);
+			
+			return $status;
 		}
 		
 		//função que remove o acesso a uma página
@@ -127,7 +133,9 @@
 			$nivelDAO = new NivelDAO();
 			
 			//chamada da função que retira a permissão
-			$nivelDAO->retirarPermissao($idNivel, $idPagina);
+			$status = $nivelDAO->retirarPermissao($idNivel, $idPagina);
+
+			return $status;
 		}
 		
 		//função que verifica qual a permissão necessária

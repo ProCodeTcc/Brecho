@@ -202,6 +202,15 @@
 			
 			//armazenando o modo em uma variável
 			var modo = $('#frmRoupa').attr('data-modo');
+            
+            //verifica se o modo é pra inserir
+            if(modo == 'inserir'){
+                //verifica se as imagens foram selecionadas
+                if(verificarImagem() != 0){
+                    //mensagem de informação
+                    mostrarInfo('Selecione as imagens');
+                }
+            }
 
 			//atribuindo o modo ao form
 			formulario.set('modo', modo);

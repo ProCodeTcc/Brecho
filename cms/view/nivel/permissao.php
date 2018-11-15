@@ -19,7 +19,20 @@
 			url: url+'/router.php', //url onde será enviada a requisição
 			data: {idNivel:idNivel, idPagina:idPagina, controller: 'nivel', modo: 'permitir'}, //dados que serão enviados
 			success: function(dados){
-				alert(dados); //mostra uma mensagem
+				//conversão dos dados para JSON
+				json = JSON.parse(dados);
+
+				//verificando o status
+				if(json.status == 'sucesso'){
+					//mensagem de sucesso
+					mostrarSucesso('Permissão concedida com sucesso');
+				}else if(json.status == 'permitido'){
+					//informação
+					mostrarInfo('A permissão já foi concedida');
+				}else if(json.status == 'erro'){
+					//mensagem de erro
+					mostrarErro('Ocorreu um erro ao conceder a permissão');
+				}
 			}
 		});
 	}
@@ -30,7 +43,17 @@
 			url: url+'/router.php', //url onde será enviada a requisição
 			data: {idNivel:idNivel, idPagina:idPagina, controller: 'nivel', modo: 'negar'}, //dados que serão enviados
 			success: function(dados){
-				alert(dados); //mostra uma mensagem
+				//conversão dos dados para JSON
+				json = JSON.parse(dados);
+
+				//verificando o status
+				if(json.status == 'erro'){
+					//mensagem de erro
+					mostrarErro('Ocorreu um erro ao retirar a permissão');
+				}else if(json.status == 'sucesso'){
+					//mensagem de sucesso
+					mostrarSucesso('Permissão retirada com sucesso');
+				}
 			}
 		});
 	}

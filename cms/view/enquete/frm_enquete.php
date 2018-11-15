@@ -92,26 +92,40 @@
                 processData: false,
                 async: true,
                 success: function(dados){
-                    // if(validarTermino() != false){
-                    //     listar();
-                    //     $('.container_modal').fadeOut(400);
-                    // }
-
+                    //conversão dos dados para JSON
                     json = JSON.parse(dados);
     
+                    //verificando se o modo é pra inserir
                     if(modo == 'inserir'){
-                        if(json.retorno == 'inserido'){
+                        //verificndo se foi inserido
+                        if(json.status == 'inserido'){
+                            //atualizando os data-atributo
                             $('#frm_enquete').attr('data-submit', true);
                             $('#frm_enquete').attr('data-lang', 'en');
                             $('#frm_enquete').attr('data-id', json.id);
                             
+                            //trocando a guia
                             verificarSubmit();
-                        }else if(json.retorno == 'traduzido'){
-                            alert('Enquete inserida com sucesso!!');
+                        }else if(json.status == 'traduzido'){ //verificando se foi traduzido
+                            //mensagem de sucesso
+                            mostrarSucesso('Enquete inserida com sucesso!!');
+
+                            //listagem dos dados
+                            listar();
+                        }else if(json.status == 'erro'){
+                            //mensagem de rro
+                            mostrarErro('Ocorreu um erro ao inserir a enquete');
                         }
                     }else{
-                        if(json.retorno == 'atualizado'){
-                            alert('Enquete atualizada com sucesso!!');
+                        if(json.status == 'atualizado'){ //verificando se foi atualizado
+                            //mensagem de sucesso
+                            mostrarSucesso('Enquete atualizada com sucesso!!');
+
+                            //listagem dos dados
+                            listar();
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao inserir a enquete');
                         }
                     }
                 }

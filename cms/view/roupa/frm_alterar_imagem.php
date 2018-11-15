@@ -69,20 +69,27 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					//mensagem de sucesso
-					alert(dados);
-					
-					//listagem dos dados
-					listar();
-					
-					//fechando a modal
-					$('.container_modal').fadeOut(400);
+					//conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
+                    //verificando se a imagem foi atualizada
+                    if(json.status = 'atualizado'){
+                        //listagem dos dados
+                        listar();
+                        
+                        //mensagem de sucesso
+                        mostrarSucesso('Imagem atualizada com sucesso');
+                    }else{
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao atualizar a imagem');
+                    }
 				}
 			});
 		});
 	});
 </script>
 
+<img class="close" src="../imagens/fechar.png" onclick="fecharModal()">
 <form id="frmImagem" name="frmImagem" data-id="<?php echo($idImagem) ?>" data-caminho="<?php echo($caminho) ?>">
 	<div id="visualizar_edicao">
 		<label for="imagem">

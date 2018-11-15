@@ -35,14 +35,17 @@
 			//execução do statement
 			$stm->execute();
 			
-			//verificando o retorno das linha
-			if($stm->rowCount() != 0){
-				//se for diferente de 0, mostra uma mensagem de sucesso
-				echo('Slider inserido com sucesso!!');
+            //verificando o retorno
+            if($stm->rowCount() != 0){
+                //atualizando o status para sucesso
+				$status = array('status' => 'inserido');
 			}else{
-				//se não, mostra uma mensagem de erro
-				echo('Ocorreu um erro ao inserir o slider');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+			
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -63,13 +66,18 @@
 			$stm->bindParam(1, $slider->getImagem());
 			$stm->bindParam(2, $slider->getId());
 			
-			
+			//executando o statement
 			if($stm->execute()){
-				echo('Slider atualizado com sucesso!!');
+                //atualizando o status para sucesso
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('Ocorreu um erro ao atualizar o slider');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
 			
+            //retornando o status em JSON
+            return json_encode($status);
+            
 			//fechando a conexão
 			$conexao->fecharConexao();
 			
@@ -136,8 +144,6 @@
 			if($cont != 0){
 				//retornando os dados
 				return $listSlider;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			//fechando a conexão
@@ -162,12 +168,11 @@
 			$stm->execute();
 			
 			//verificando retorno das linhas
-			if($stm->rowCount() != 0){
+			if($stm->rowCount() == 0){
 				//mensagem de sucesso
-				echo('Slider excluído com sucesso!!');
-			}else{
-				//mensagem de erro
-				echo('Ocorreu um erro ao excluir o slider');
+				$status = array('status' => 'erro');
+                
+                return json_encode($status);
 			}
 			
 			//fechando a conexão

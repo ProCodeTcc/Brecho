@@ -85,6 +85,18 @@
 
 			//atribuindo o modo ao formulário
 			formulario.set('modo', modo);
+            
+            //verificando se o modo é pra inserir
+            if(modo == 'inserir'){
+                //verificando se a imagem foi selecionada
+                if(verificarImagem() == 1){
+                    //mensagem de informação
+                    mostrarInfo('Selecione a imagem');
+                    
+                    //parando o formulário
+                    return false;
+                }
+            }
 			
 			//armazenando o ID em uma variável
 			var id = $('#frmEvento').attr('data-id');
@@ -115,7 +127,7 @@
 					//verificando se o modo é pra inserir
 					if(modo == 'inserir'){
 						//verificando se foi inserido
-						if(json.retorno == 'inserido'){
+						if(json.status == 'inserido'){
 							//muda o submit pra true
 							$('#frmEvento').attr('data-submit', true);
 
@@ -127,28 +139,28 @@
 
 							//muda de aba
 							verificarSubmit();
-						}else if(json.retorno == 'traduzido'){ //verificando se foi traduzido
+						}else if(json.status == 'traduzido'){ //verificando se foi traduzido
 							//mensagem de sucesso
-							alert('Evento inserido com sucesso!!');
+							mostrarSucesso('Evento inserido com sucesso!!');
 							
 							//listando os dados
 							listar();
-							
-							//fechando a modal
-							$('.container_modal').fadeOut(400);
-						}
+						}else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao inserir o evento');
+                        }
 					}else{
 						//verifica se foi atualizado
-						if(json.retorno == 'atualizado'){
+						if(json.status == 'atualizado'){
 							//mensagem de sucesso
-							alert('Evento atualizado com sucesso!!');
+							mostrarSucesso('Evento atualizado com sucesso!!');
 							
 							//listagem dos dados
 							listar();
-
-							//fechando a modal
-							$('.container_modal').fadeOut(400);
-						}
+						}else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao atualizar o evento');
+                        }else if(json.status == 'data'){
+                            mostrarErro('Ocorreu um erro ao atualizar a data');
+                        }
 					}
 				}
 			});

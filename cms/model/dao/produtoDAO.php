@@ -294,11 +294,13 @@
 			$stm->execute();
 			
 			//verificando o número de linhas afetadas
-			if($stm->rowCount() != 0){
-				echo('Produto excluído com sucesso!!');
-			}else{
-				echo ('erro');
+			if($stm->rowCount() == 0){
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -341,8 +343,6 @@
 			if($cont != 0){
 				//retornando o id do produto
 				return $listProduto;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			$conexao->fecharConexao();
@@ -419,10 +419,15 @@
 	
 			//executando o statement
 			if($stm->execute()){
-				echo('Imagem atualizada com sucesso!!');
+                //atualizando o status para sucesso
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('Ocorreu um erro ao atualizar a imagem!!');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -442,10 +447,13 @@
 			$stm->bindParam(1, $id);
 			
 			//executando o statement
-			if($stm->execute()){
-				echo('Imagem excluida com sucesso!!');
+			if(!$stm->execute()){
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
 			
+            return json_encode($status);
+            
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
@@ -470,11 +478,14 @@
 			//verificando o número de linhas afetadas
 			if($stm->rowCount() != 0){
 				//se for diferente de 0, signifia que é um novo produto, então mostra uma mensagem de sucesso
-				echo('Esse produto foi adicionado á lista de promoções!!');
+				$status = array('status' => 'inserido');
 			}else{
 				//se for 0, siginfica que o produto já existe, então mostra uma mensagem de erro
-				echo('Esse produto já se encontra em promoção');
+				$status = array('status' => 'existe');
 			}
+            
+            //conversão dos dados para JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

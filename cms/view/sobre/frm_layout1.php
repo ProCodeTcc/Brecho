@@ -57,7 +57,7 @@
 		$('#frm_sobreLayout1').submit(function(e){
 			//desabilitando o submit do botão
 			e.preventDefault();
-
+            
 			//armazenando o formulario em uma variável
 			var formulario =  new FormData($('#frm_sobreLayout1')[0]);
 			
@@ -69,6 +69,17 @@
 			
 			//armazenando o modo em uma variável
 			var modo = $('#frm_sobreLayout1').attr('data-modo');
+            
+            if(modo == 'inserirLayout'){
+                //verificando se foi selecionada a imagem
+                if(verificarImagem() == 1){
+                    //mostra informação
+                    mostrarInfo('Selecione a imagem');
+
+                    //para o submit
+                    return false;
+                }
+            }
 
 			//atribuindo ao formulário o parâmetro modo
 			formulario.set('modo', modo);
@@ -111,26 +122,35 @@
 					//verificando o modo
 					if(modo == 'inserirLayout'){
 						//se for inserirido, troca de aba e atualiza as informações do form
-						if(json.retorno == 'inserido'){
+						if(json.status == 'inserido'){
+                            //atualizando o data-atributo
 							$('#frm_sobreLayout1').attr('data-submit', true);
 							$('#frm_sobreLayout1').attr('data-id', json.id);
 							$('#frm_sobreLayout1').attr('data-lang', 'en');
 
+                            //trocando a guia
 							verificarSubmit();
-						}else if(json.retorno == 'traduzido'){
-							//se for traduzido, mostra uma msg de sucesso e fecha o form
-							alert('Layout inserido com sucesso!!');
+						}else if(json.status == 'traduzido'){
+							//mensagem de sucesso
+							mostrarSucesso('Layout inserido com sucesso!!');
 							
+                            //listagem dos dados
 							listar();
-
-							$('.container_modal').fadeOut(400);
-						}
+						}else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao inserir o Layout');
+                        }
 					}else{
-						if(json.retorno == 'atualizado'){
-							alert('Layout atualizado com sucesso!!');
+						if(json.status == 'atualizado'){
+                            //mensagem de sucesso
+							mostrarSucesso('Layout atualizado com sucesso!!');
+                            
+                            //listagem dos dados
 							listar();
-							$('.container_modal').fadeOut(400);
-						}
+						}else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao atualizar o layout');
+                        }
 					}
 				}
 			});

@@ -13,7 +13,7 @@
         Data: 27/09/2018
         Objetivo: Atualizando o CRUD, mudando a forma como são inseridos e resgatados os parâmetros
 
-    */ 
+    */
 
 	/*
         Projeto: CMS do Brechó - Atualização
@@ -21,7 +21,7 @@
         Data: 01/10/2018
         Objetivo: Implementao a função que trás a quantidade de respostas de cada enquete
 
-    */ 
+    */
 
 	/*
         Projeto: CMS do Brechó - Atualização
@@ -29,7 +29,7 @@
         Data: 22/10/2018
         Objetivo: Implementao a função que limita a exclusão da enquete se houver apenas uma
 
-    */ 
+    */
 
     /*
         Projeto: CMS do Brechó - Atualização
@@ -59,10 +59,10 @@
 
             //chamada da função que conecta com o banco
             $PDO_conexao = $conexao->conectarBanco();
-			
-            //query que insere os dados no banco	
+
+            //query que insere os dados no banco
 			$stm = $PDO_conexao->prepare("INSERT INTO enquete(pergunta, alternativaA, alternativaB, alternativaC, alternativaD, dataInicial, dataFinal, idTema) VALUES(?,?,?,?,?,?,?,?)");
-			
+
 			//parâmetros que serão inseridos no banco
 			$stm->bindParam(1, $enquete->getPergunta());
 			$stm->bindParam(2, $enquete->getAlternativaA());
@@ -72,13 +72,13 @@
 			$stm->bindParam(6, $enquete->getDtInicio());
 			$stm->bindParam(7, $enquete->getDtTermino());
 			$stm->bindParam(8, $enquete->getIdTema());
-            
+
             //executando o statement
             $stm->execute();
-            
+
             if($stm->rowCount() != 0){
                 $idEnquete = $PDO_conexao->lastInsertId();
-                $retorno = array('id' => $idEnquete, 'retorno' => 'inserido');
+                $retorno = array('id' => $idEnquete, 'status' => 'inserido');
 
                 return json_encode($retorno);
             }
@@ -109,14 +109,16 @@
 
             //execução do statement
             $stm->execute();
-            
+
             //verificando retorno das linhas
             if($stm->rowCount() != 0){
                 //armazenando uma mensagem na variável
-                $retorno = array('retorno' => 'traduzido');
+                $retorno = array('status' => 'traduzido');
 
                 //retornando a mensagem em JSON
                 return json_encode($retorno);
+            }else{
+                $retorno = array('status' => 'erro');
             }
 
             //fechando a conexão
@@ -172,10 +174,10 @@
             //verificando se foi executado com sucesso
             if($stm->execute()){
                 //mensagem de sucesso
-                $retorno = array('retorno' => 'atualizado');
+                $retorno = array('status' => 'atualizado');
             }else{
                 //mensagem de erro
-                $retorno = array('retorno' => 'erro');
+                $retorno = array('status' => 'erro');
             }
 
             //retorna a mensagem em JSON
@@ -192,11 +194,11 @@
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
-			
+
             //query que atualiza os dados
-			$stm = $PDO_conexao->prepare("UPDATE enquete set pergunta = ?, alternativaA = ?, alternativaB = ?, alternativaC = ?, alternativaD = ?, 
+			$stm = $PDO_conexao->prepare("UPDATE enquete set pergunta = ?, alternativaA = ?, alternativaB = ?, alternativaC = ?, alternativaD = ?,
 			dataInicial = ?, dataFinal = ?, idTema = ? WHERE idEnquete = ?");
-			
+
 			$stm->bindParam(1, $enquete->getPergunta());
 			$stm->bindParam(2, $enquete->getAlternativaA());
 			$stm->bindParam(3, $enquete->getAlternativaB());
@@ -210,10 +212,10 @@
             //verificando se foi executado com sucesso
             if($stm->execute()){
                 //mensagem de sucesso
-                $retorno = array('retorno' => 'atualizado');
+                $retorno = array('status' => 'atualizado');
             }else{
                 //mensagem de erro
-                $retorno = array('retorno' => 'erro');
+                $retorno = array('status' => 'erro');
             }
 
             //retorna a mensagem em JSON
@@ -222,7 +224,7 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
-        
+
         //função para pegar os dados no banco
         public function selectAll(){
 			//instancia da classe de conexão com o banco
@@ -230,7 +232,7 @@
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
-			
+
             //query que realiza a consulta
             $sql = "SELECT enquete.*, t.tema FROM enquete LEFT JOIN temaenquete AS t ON enquete.idTema = t.idTema";
 
@@ -258,37 +260,35 @@
 
             if($cont != 0){
                 return $listEnquetes;
-            }else{
-                require_once('../erro_tabela.php');
             }
 
             //fechando a conexão
             $conexao->fecharConexao();
         }
-		
+
 		//função que consulta o banco de dados em busca da quantidade de respostas de cada enquete
 		public function qtdRespostas($id){
 			//instância da classe que conecta com o banco de dados
 			$conexao = new ConexaoMySQL();
-			
+
 			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
-			
+
 			//query que realiza a consulta
 			$stm = $PDO_conexao->prepare('SELECT qtdAlternativaA, qtdAlternativaB, qtdAlternativaC, qtdAlternativaD FROM enquete WHERE idEnquete = ?');
-			
+
 			//parâmetro que será enviado
 			$stm->bindParam(1, $id);
-			
+
 			//executando o statement
 			$stm->execute();
-			
+
 			//armazenando o retorno dos dados em uma variável
 			$resultado = $stm->fetch(PDO::FETCH_OBJ);
-			
+
 			//retornando os dados em json
 			return json_encode($resultado);
-			
+
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
@@ -300,13 +300,13 @@
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
-			
+
             //query que realiza a consulta
             $sql = 'SELECT * FROM temaenquete';
 
             //armazenando o retorno dos dados em uma variável
             $resultado = $PDO_conexao->query($sql);
-            
+
             //variável de contagem
             $cont = 0;
 
@@ -332,19 +332,19 @@
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
-			
+
             //query que realiza a consulta através do ID
             $stm = $PDO_conexao->prepare('SELECT * FROM enquete WHERE idEnquete = ?');
-			
+
 			//parâmetro que será enviado
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
-			
+
 			//executando o statement
 			$stm->execute();
 
 			//criando uma nova enquete
 			$listEnquetes = new Enquete();
-			
+
 			//armazenando os dados da enquete
 			$listEnquetes = $stm->fetch(PDO::FETCH_OBJ);
 
@@ -362,15 +362,24 @@
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
-			
+
             //query que exclui os dados do banco
             $stm = $PDO_conexao->prepare('DELETE FROM enquete WHERE idEnquete = ?');
-			
+
 			//parâmetro que será enviado
 			$stm->bindParam(1, $id);
-			
+
 			//executando o statement
-			$stm->execute();
+            $stm->execute();
+
+            //verificado se foi excluído
+            if(!$stm->rowCount() != 0){
+                //atualizando o status para erro
+                $status = array('status' => 'erro');
+            }
+
+            //retornando o status em JSON
+            return json_encode($status);
 
             //fechando a conexão
             $conexao->fecharConexao();
@@ -383,11 +392,11 @@
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
-			
-			
+
+
 			//query que atualiza o status
 			$stm = $PDO_conexao->prepare("UPDATE enquete SET status = 1 WHERE idEnquete = ?");
-			
+
 			//parâmetro que será enviado
 			$stm->bindParam(1, $id);
 
@@ -397,7 +406,7 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
-		
+
 		//função que atualiza o status da enquete no banco de dados
         public function disableAll($id){
             //instância da classe de conexão com o banco
@@ -405,11 +414,11 @@
 
             //chamada da função que conecta com o banco de dados
             $PDO_conexao = $conexao->conectarBanco();
-			
-			
+
+
 			//query que atualiza o status
 			$stm = $PDO_conexao->prepare("UPDATE enquete SET status = 0 WHERE idEnquete <> ?");
-			
+
 			//parâmetro que será enviado
 			$stm->bindParam(1, $id);
 
@@ -419,31 +428,31 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
-		
+
 		//função que verifica o total de enquetes
 		public function checkEnquete(){
 			//instância da classe de conexão com o banco
 			$conexao = new ConexaoMySQL();
-			
+
 			//chamada da função que conecta com o banco
 			$PDO_conexao = $conexao->conectarBanco();
-			
+
 			//query que faz a consulta
 			$stm = $PDO_conexao->prepare('SELECT idEnquete from enquete');
-			
+
 			//execução do statement
 			$stm->execute();
-			
+
 			//armazenando o número de itens
 			$linhas = $stm->rowCount();
-			
+
 			//retornando
 			return $linhas;
-			
+
 			//fechando a conexão
 			$conexao->fecharConexao();
         }
-        
+
         //função para pesquisar as enquetes do banco
         public function searchEnquete($pesquisa){
             //instância da classe de conexão com o banco
@@ -483,12 +492,9 @@
             }
 
             //verificando se há resultados
-            if($cont != 0){
+            if($cont == 0){
                 //se houver, retorna a lista
                 return $listEnquete;
-            }else{
-                //se não, mensagem 
-                echo('nenhuma enquete encontrada');
             }
 
             //fechando a conexão

@@ -70,6 +70,15 @@
 			
 			//armazenando o modo em uma variável
 			var modo = $('#frm_sobreLayout2').attr('data-modo');
+            
+            //verificando se o modo é pra inserir
+            if(modo == 'inserirLayout'){
+                //verificando se a imagem foi selecionada
+                if(verificarImagem() == 1){
+                    //mostra informação
+                    mostrarInfo('Selecione a imagem');
+                }
+            }
 
 			//atribuindo ao formulário o parâmetro modo
 			formulario.set('modo', modo);
@@ -110,26 +119,33 @@
 					//verificando o modo
 					if(modo == 'inserirLayout'){
 						//se for inserirido, troca de aba e atualiza as informações do form
-						if(json.retorno == 'inserido'){
+						if(json.status == 'inserido'){
 							$('#frm_sobreLayout2').attr('data-submit', true);
 							$('#frm_sobreLayout2').attr('data-id', json.id);
 							$('#frm_sobreLayout2').attr('data-lang', 'en');
 
 							verificarSubmit();
-						}else if(json.retorno == 'traduzido'){
+						}else if(json.status == 'traduzido'){
 							//se for traduzido, mostra uma msg de sucesso e fecha o form
-							alert('Layout inserido com sucesso!!');
-							
-							listar();
+							mostrarSucesso('Layout inserido com sucesso!!');
 
-							$('.container_modal').fadeOut(400);
-						}
-					}else{
-						if(json.retorno == 'atualizado'){
-							alert('Layout atualizado com sucesso!!');
+                            //listagem dos dados
 							listar();
-							$('.container_modal').fadeOut(400);
-						}
+						}else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao inserir o layout');
+                        }
+					}else{
+						if(json.status == 'atualizado'){
+                            //mensagem de sucesso
+							mostrarSucesso('Layout atualizado com sucesso!!');
+                            
+                            //listagem dos dados
+							listar();
+						}else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao atualizar o Layout');
+                        }
 					}
 				}
 			});

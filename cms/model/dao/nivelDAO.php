@@ -48,8 +48,20 @@
 			//parâmetros que serão inseridos
 			$stm->bindParam(1, $nivel->getNome());
 		
-			//executando o statement
-            $stm->execute();
+			//execução do statement
+			$stm->execute();
+
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
+			}else{
+				//atualizando status para erro
+				$status = array('status' => 'erro');
+			}
+			
+			//retornando os dados em JSON
+			return json_encode($status);
 			
             //fechando a conexão
             $conexao->fecharConexao();
@@ -85,8 +97,6 @@
             if($cont != 0){
 				//retornando os dados
                 return $listNiveis;
-            }else{
-                require_once('../erro_tabela.php');
             }
             
             //fechando a conexão
@@ -187,8 +197,17 @@
 			$stm->bindParam(1, $nivel->getNome());
 			$stm->bindParam(2, $nivel->getId());
 			
-			//executando o statement
-            $stm->execute();
+			//verificando o retorno
+			if($stm->execute()){
+				//atualizando o status para sucesso
+				$status = array('status' => 'atualizado');
+			}else{
+				//atualizando status para erro
+				$status = array('status' => 'erro');
+			}
+			
+			//retornando os dados em JSON
+			return json_encode($status);
 			
 			//fechando a conexão
             $conexao->fecharConexao();
@@ -240,14 +259,20 @@
 			//executando o statement
 			$stm->execute();
 			
-			//verificando as linhas retornadas
-			if($stm->rowCount() == 0){
-				//se retornar 0, mostra uma mensagem de erro, pois o registro já existe no banco
-				echo 'ERRO! Esse nível já possui acesso a essa página!!';
+			//verificando o retorno
+			if($stm->rowCount() == 1){
+				//atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
+			}else if($stm->rowCount() == 0){
+				//atualizando status para erro
+				$status = array('status' => 'permitido');
 			}else{
-				//se retornar 1, é por que foi inserido com sucesso
-				echo 'Permissão concedida com sucesso';
+				//atualizando status para erro
+				$status = array('status' => 'erro');
 			}
+			
+			//retornando os dados em JSON
+			return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -270,14 +295,17 @@
 			//executando o statement
 			$stm->execute();
 			
-			//verificando as linhas retornadas
-			if($stm->rowCount() == 0){
-				//se retornar 0, mostra uma mensagem de erro
-				echo 'Ocorreu um erro durante a exclusão!!';
+			//verificando o retorno
+			if($stm->rowCount() != 0){
+				//atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				//se retornar 1, mostra uma mensagem de sucesso
-				echo 'Permissão retirada com sucesso';
+				//atualizando os status para erro
+				$status = array('status' => 'erro');
 			}
+
+			//retornando os dados em JSON
+			return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
