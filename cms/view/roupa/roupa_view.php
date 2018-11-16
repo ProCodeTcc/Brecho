@@ -62,7 +62,17 @@
 					url: url+'router.php',
 					data: {id:id, modo: 'inserirPromocao', controller: 'produto'},
 					success: function(dados){
-						alert(dados);
+                        //conversão dos dados para JSON
+						json = JSON.parse(dados);
+                        
+                        //verificando o status
+                        if(json.status == 'inserido'){
+                            //mensagem de sucesso
+                            mostrarSucesso('O produto foi enviado à lista de promoções');
+                        }else if(json.status == 'existe'){
+                            //mensagem de informação
+                            mostrarInfo('O produto já se encontra em promoção');
+                        }
 					}
 				});
 			}

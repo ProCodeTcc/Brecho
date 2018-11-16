@@ -37,14 +37,17 @@
 			//execução do statement
 			$stm->execute();
 			
-			//verificando o retorno das linhas
+			//execução do statement
 			if($stm->rowCount() != 0){
-				//se for diferente de 0, mostra mensagem de sucesso
-				echo('Retirada marcada com sucesso!!');
+                //mensagem de sucesso
+				$status = array('status' => 'marcado');
 			}else{
-				//se for 0, mensagem de erro
-				echo('Ocorreu um erro ao marcar a retirada');
+                //mensagem de erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -67,11 +70,17 @@
 			$stm->bindParam(3, $retirada->getIdPedido());
 			$stm->bindParam(4, $retirada->getIdRetirada());
 			
+            //execução do statement
 			if($stm->execute()){
-				echo('Retirada atualizada com sucesso!!');
+                //mensagem de sucesso
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('ocorreu um erro ao atualizar a retirada');
+                //mensagem de erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -219,6 +228,34 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+        
+        //função para pegar algumas informações do cliente
+        public function selectCliente($idPedido){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que busca os dados
+            $stm = $PDO_conexao->prepare('SELECT cf.nome, cf.email FROM clientefisico as cf INNER JOIN clientefisico_pedidovenda AS cfp ON cf.idCliente = cfp.idClienteFisico INNER JOIN pedidovenda AS pv ON pv.idPedidoVenda = cfp.idPedidoVenda WHERE pv.idPedidoVenda = ? UNION SELECT cj.razao, cj.email FROM clientejuridico as cj INNER JOIN clientejuridico_pedidovenda AS cjp ON cjp.idClienteJuridico = cj.idCliente INNER JOIN pedidovenda AS pv ON pv.idPedidoVenda = cjp.idPedidoVenda WHERE cjp.idPedidoVenda = ?');
+            
+            //parâmetros enviados
+            $stm->bindParam(1, $idPedido);
+            $stm->bindParam(2, $idPedido);
+            
+            //execução do statement
+            $stm->execute();
+            
+            //armazenando os dados em uma variável
+            $listCliente = $stm->fetch(PDO::FETCH_OBJ);
+            
+            //retornando os dados em JSON
+            return json_encode($listCliente);
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
 		
 	}
 ?>

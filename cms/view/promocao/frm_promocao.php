@@ -71,7 +71,17 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					alert(dados);
+					//conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'sucesso'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Promoção cadastrada com sucesso');
+                    }else if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao efetuar o cadastro');
+                    }
 				}
 			});
 		});

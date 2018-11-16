@@ -574,14 +574,16 @@
 					$id = $_POST['id'];
 					
 					$controllerPromocao = new controllerPromocao();
-					$controllerPromocao->cadastrarPromocao($id);
+					$status = $controllerPromocao->cadastrarPromocao($id);
+                    echo($status);
 				break;
 				
 				case 'excluir':
 					$id = $_POST['id'];
 					
 					$controllerPromocao = new controllerPromocao();
-					$controllerPromocao->excluirPromocao($id);
+					$status = $controllerPromocao->excluirPromocao($id);
+                    echo($status);
 				break;
 					
 				case 'status':
@@ -780,7 +782,8 @@
 			switch($modo){
 				case 'inserir':
 					$controllerRetirada = new controllerRetirada();
-					$controllerRetirada->inserirRetirada();
+					$status = $controllerRetirada->inserirRetirada();
+                    echo($status);
 				break;
 					
 				case 'buscar':
@@ -817,6 +820,19 @@
 					
 					echo($listPedido);
 				break;
+                    
+                case 'listarCliente':
+                    $id = $_POST['pedido'];
+                    $controllerRetirada = new controllerRetirada();
+                    $listCliente = $controllerRetirada->listarCliente($id);
+                    echo($listCliente);
+                break;
+                
+                case 'enviarEmail':
+                    $controllerRetirada = new controllerRetirada();
+                    $status = $controllerRetirada->enviarEmail();
+                    echo($status);
+                break;
 			}
 		break;
 

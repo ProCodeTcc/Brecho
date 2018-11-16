@@ -10,6 +10,7 @@
 		public function __construct(){
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
 			require_once($diretorio.'model/retiradaClass.php');
+            require_once($diretorio.'model/emailClass.php');
 			require_once($diretorio.'model/dao/retiradaDAO.php');
 		}
 		
@@ -35,7 +36,9 @@
 			$retiradaDAO = new RetiradaDAO();
 			
 			//chamada da função que insere os dados
-			$retiradaDAO->Insert($retiradaClass);
+			$status = $retiradaDAO->Insert($retiradaClass);
+            
+            return $status;
 		}
 		
 		//função que atualiza uma retirada
@@ -134,5 +137,44 @@
 			//retornando os dados
 			return $listPedidos;
 		}
+        
+        public function listarCliente($idPedido){
+            $retiradaDAO = new RetiradaDAO();
+            
+            $listCliente = $retiradaDAO->selectCliente($idPedido);
+            
+            return $listCliente;
+        }
+        
+        //função para enviar email
+        public function enviarEmail(){
+            //verificando se o método é POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //resgatando os valores das caixas de texto
+                $assunto = $_POST['txtassunto'];
+                $email = $_POST['txtemail'];
+                $mensagem = $_POST['txtmsg'];
+            }
+            
+            //criando um novo e-mail
+            $emailClass = new Email();
+            
+            //setando os atributos
+            $emailClass->setAssunto($assunto);
+            $emailClass->setEmail($email);
+            $emailClass->setMensagem($mensagem);
+            
+            //enviando o email
+            if(mail($emailClass->getEmail(), $emailClass->getAssunto(), $emailClass->getMensagem())){
+                //atualiza o status pra sucesso
+                $status = array('status' => 'enviado');
+            }else{
+                //atualiza o status para erro
+                $status = array('status' => 'erro');
+            }
+            
+            //retornando o status em JSON
+            return json_encode($status);
+        }
 	}
 ?>

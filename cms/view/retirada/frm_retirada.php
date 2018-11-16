@@ -66,6 +66,48 @@
 			}
 		});
 	}
+    
+    //função para pegar os dados do cliente
+    function selecionarPedido(){
+        //resgatando o valor do pedido
+        var pedido = $('#txtpedido').val();
+        
+        $.ajax({
+           type: 'POST', //tipo de requisição
+            url: url+'router.php', //url onde será enviada a requisição
+            data: {controller: 'retirada', modo: 'listarCliente', pedido:pedido}, //dados enviados
+            success: function(dados){
+                //conversão dos dados para JSON
+                json = JSON.parse(dados);
+                
+                //preenchendo as caixas de texto
+               $('#txtcliente').val(json.nome);
+               $('#frmRetirada').attr('data-email', json.email);
+            }
+        });
+    }
+    
+    //função para abrir o form de email
+    function enviarEmail(){
+        //resgatando o email do cliente
+        var email = $('#frmRetirada').attr('data-email');
+        
+        //limpando a modal
+        $('.modal').empty();
+        
+        $.ajax({
+           type: 'POST', //tipo de requisição
+            url: 'frm_email.php', //url onde será enviada a requisição
+            data: {email:email}, //parâmetros enviados
+            success: function(dados){
+                //jogando os dados na modal
+                $('.modal').html(dados);
+                
+                //colocando o email no input
+                $('#txtemail').val(email);
+            }
+        });
+    }
 	
 	$(document).ready(function(){
 		mudarModal('500', '400');
@@ -115,14 +157,17 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					//mensagem
-					alert(dados)
-					
-					//listagem dos dados
-					listar();
-					
-					//fechando a modal
-					$('.container_modal').fadeOut(400);
+                    //conversão dos dados para JSON
+					json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'marcado'){
+                        //abrindo form do email
+                        enviarEmail();
+                    }else if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao marcar a retirada');
+                    }
 				}
 			});
 		});
@@ -137,17 +182,8 @@
 				Pedido:
 			</label>
 			
-			<select class="cadastro_select" name="txtpedido" id="txtpedido" required>
-	
+			<select class="cadastro_select" name="txtpedido" id="txtpedido" required onchange="selecionarPedido()">
 			</select>
-		</div>
-		
-		<div class="form_linha">
-			<label class="lbl_cadastro">
-				Produto:
-			</label>
-			
-			<input type="text" name="txtproduto" class="cadastro_input" id="txtproduto" disabled>
 		</div>
 		
 		<div class="form_linha">

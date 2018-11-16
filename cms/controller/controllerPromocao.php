@@ -62,7 +62,9 @@
 			$promocaoDAO = new PromocaoDAO();
 			
 			//chamada da função que "insere uma promoção"
-			$promocaoDAO->insertPromocao($promocaoClass);
+			$status = $promocaoDAO->insertPromocao($promocaoClass);
+            
+            return $status;
 		}
 		
 		//função que exclui a promoção
@@ -76,10 +78,12 @@
 			//verificando o total
 			if($promocaoAtiva == 1){
 				//se for igual a 1, limita a exclusão
-				echo('limite');
+				$status = array('status' => 'limite');
+                return json_encode($status);
 			}else{
 				//chamada da função que deleta do banco
-				$promocaoDAO->Delete($id);
+				$status = $promocaoDAO->Delete($id);
+                return $status;
 			}
 		}
 		

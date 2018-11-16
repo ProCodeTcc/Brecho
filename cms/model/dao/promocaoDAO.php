@@ -60,8 +60,6 @@
 			if($cont != 0){
 				//retornando os dados
 				return $listProdutos;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			$conexao->fecharConexao();
@@ -110,14 +108,17 @@
 			$stm->bindParam(3, $promocao->getDtFinal());
 			$stm->bindParam(4, $promocao->getId());
 			
-			//execução do statement
-			$stm->execute();
-			
-			if($stm->rowCount() != 0){
-				echo('Promoção cadastrada com sucesso!!');
+            //verificando o retorno das linhas
+			if($stm->execute()){
+                //atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				echo('Ocorreu um erro ao cadastrar a promoção!!');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando os dados em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -139,11 +140,14 @@
 			//execução do statement
 			$stm->execute();
 			
-			if($stm->rowCount() != 0){
-				echo('Promoção excluída com sucesso!!');
-			}else{
-				echo('erro');
+            //verificando o retorno das linhas
+			if($stm->rowCount() == 0){
+                //atualizando o status
+				$status = array('status' => 'erro');
 			}
+            
+            //fechando a conexão
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
