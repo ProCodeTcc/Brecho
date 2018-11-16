@@ -131,14 +131,17 @@
 			$stm->bindParam(6, $cliente->getSenha());
 			$stm->bindParam(7, $cliente->getIdCliente());
 			
-			//execução do statement
+			//verificando retorno
 			if($stm->execute()){
-				//retorna true se der certo
-				echo true;
+				//mensagem de sucesso
+				$status = array('status' => 'atualizado');
 			}else{
-				//false se der errado
-				echo false;
+				//mensagem de erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando os dados em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

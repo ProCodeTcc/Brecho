@@ -109,26 +109,66 @@
 			}
 		});
 	}
+
+	//função para listar as subcategorias de uma categoria
+	function selecionarSubcategoria(idCategoria){
+		//removendo as options anteriores
+		$('#txtsubcategoria').children().remove();
+		
+		//verificando se o ID da categoria é indefinido
+		if(idCategoria == undefined){
+			//resgatando o ID da categoria
+			var idCategoria = $('#txtcategoria').find('option:selected').val();
+		}
+
+		//verificando se existe o ID da categoria
+		if(typeof idCategoria == 'string'){
+			//mostra a subcategoria
+			$('#subcategoria').show();
+		}
+	
+		$.ajax({
+			type: 'POST', //tipo de requisição
+			url: url+'router.php', //url onde será enviada a requisição
+			data: {controller: 'produto', modo: 'buscarSubcategoria', id:idCategoria}, //dados enviados
+			success: function(dados){
+				//conversão dos dados para JSON
+				json = JSON.parse(dados);
+
+				//percorrendo os dados
+				for(var i = 0; i < json.length; i++){
+					//criando uma nova option com os dados
+					$('#txtsubcategoria').append(new Option(json[i].nome, json[i].idSubcategoria));
+				}
+			}
+		});
+	}
 	
 	//função para buscar o produto
-	function buscarProduto(id){
+	function buscarProduto(id, idioma){
 		$('#frmImagem').hide();
 		$('#txttamanho').show();
 		$.ajax({
 			type: 'POST', //tipo de requisição
 			url: url+'/router.php', //url onde será enviada a requisição
-			data: {id:id, controller: 'produto', modo: 'buscar'}, //parâmetros enviados
+			data: {id:id, idioma:idioma, controller: 'produto', modo: 'buscar'}, //parâmetros enviados
 			success: function(dados){
+				$('#frmRoupa').attr('data-lang', idioma);
+				$('.imagens_container').hide();
+				mudarModal('600','600');
+
 				//conversão dos dados para json
 				json = JSON.parse(dados);
 				
 				//colocando os valores nas caixas de texto
-				$('#txtnome').val(json.nomeProduto);
-				$('#txtdesc').val(json.descricao);
+				$('.txtnome').val(json.nomeProduto);
+				$('.txtdesc').val(json.descricao);
 				$('#txtcor').val(json.idCor);
 				$('#txtmarca').val(json.idMarca);
 				$('#txtcategoria').val(json.idCategoria);
 				$('#txtpreco').val(json.preco);
+				$('#txtsubcategoria').val(json.idSubcategoria);
+				selecionarSubcategoria(json.idCategoria);
 			}
 		});
 	}
@@ -146,154 +186,83 @@
 	}
 	
 	$(document).ready(function(){
-		mudarModal('650', '600');
-		var id = $('#frmRoupa').data('id');
-		listarCategoria();
-		listarMarca();
-		listarCor();
+		mudarModal('680', '600');
 		
-		if(id != ""){
-			buscarProduto(id);
-		}
+		$('#tabs').tabs();
 		
 		$('#frmRoupa').submit(function(e){
 			e.preventDefault();
 			
+			//armazenando o formulário me uma variável
 			var formulario = new FormData($('#frmRoupa')[0]);
-			formulario.append('controller', 'produto');
 			
-            formulario.append('modo', 'editar');
-            formulario.append('id', id);
+			//atribuindo a controller ao form
+			formulario.set('controller', 'produto');
+			
+			//armazenando o modo em uma variável
+			var modo = $('#frmRoupa').attr('data-modo');
+
+			//atribuindo o modo ao form
+			formulario.set('modo', modo);
+
+			//armazenando o idioma em uma variável
+			var idioma = $('#frmRoupa').attr('data-lang');
+
+			//atribuindo o idioma ao form
+			formulario.set('idioma', idioma);
+
+			//armazenando o ID em uma variável
+			var id = $('#frmRoupa').attr('data-id');
+
+			//atribuindo o ID ao form
+			formulario.set('id', id);
 			
 			$.ajax({
-				type: 'POST',
-				url: url+'router.php',
-				data: formulario,
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: formulario, //dados enviados
 				cache: false,
                 contentType: false,
                 processData: false,
                 async: true,
 				success: function(dados){
-					alert(dados);
-					listar();
-					$('.container_modal').fadeOut(400);
+					//conversão dos dados para JSON
+					json = JSON.parse(dados);
+
+                    if(json.status == 'atualizado'){
+                        //mostra mensagem de sucesso
+                        mostrarSucesso('Produto atualizado com sucesso!!');
+
+                        //lista os dados
+                        listar();
+                    }else if(json.status == 'traduzido'){
+                        //mostra a mensagem de sucesso
+                        mostrarSucesso('Tradução realizada com sucesso!!');
+
+                        //lista os dados
+                        listar();
+                    }else if(json.status == 'erro'){
+                        //mostra mensagem de erro
+                        mostrarErro('Ocorreu um erro ao inserir o produto!!');
+                    }
 				}
 			});
-		});
-		
-		$('#txtnumero').click(function(){
-			//exibindo os tamanhos
-			buscarNumero(2);
-		});
-		
-		$('#txtmedida').click(function(){
-			//exibindo os tamanhos
-			buscarMedida(1);
 		});
 	});
 </script>
 
-<div class="form_container" id="form_container_roupa">
-	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
-    
-	<form method="post" class="frm_imagem" id="frmImagem" name="frmImagem" enctype="multipart/form-data" action="upload.php">
-		
-	</form>
-	
-	<form class="frm_roupa" id="frmRoupa" data-id="<?php echo($id) ?>" method="post" name="frmRoupa" enctype="multipart/form-data" name="frmImagem" action="usuario_view.php">
-		
-		<!-- <div class="form_linha">
-			<div class="imagens_container">
-				<label for="imagem">
-					<img id="prev_imagem" src="../imagens/image.png">
-				</label>
+<form class="form" id="frmRoupa" data-id="<?php echo($id) ?>" method="post" name="frmRoupa" data-lang="pt" enctype="multipart/form-data" name="frmImagem">		
+	<div id="tabs">
+		<ul>
+			<li>
+			 	<a href="frm_produto_pt.php">PT</a>
+			</li>
 
-				<input type="file" name="fleimagem[]" id="imagem" onChange="mostrarPrevia(this, '#prev_imagem')">
+			<li>
+				<a href="frm_produto_en.php">EN</a>
+			</li>
 
-				<label for="imagem2">
-					<img id="prev_imagem2" src="../imagens/image.png">
-				</label>
-
-				<input type="file" name="fleimagem[]" id="imagem2" onChange="mostrarPrevia(this, '#prev_imagem2')">
-
-				<label for="imagem3">
-					<img id="prev_imagem3" src="../imagens/image.png">
-				</label>
-
-				<input type="file" name="fleimagem[]" id="imagem3" onChange="mostrarPrevia(this, '#prev_imagem3')">
-			</div>
-		</div> -->
-		
-		<div id="roupas_form">
-			<div id="roupas_col1">
-				<div class="form_linha">
-					<label class="lbl_cadastro">Nome: </label>
-					<input type="text" class="cadastro_input" name="txtnome" id="txtnome">
-				</div>
-
-				<div class="form_linha">
-					<label class="lbl_cadastro">Descrição: </label>
-					<textarea name="txtdescricao" class="cadastro_text" id="txtdesc"></textarea>
-				</div>
-
-				<div class="form_linha" id="radio_linha">
-					<label class="lbl_cadastro">Tipo: </label>
-
-					<div class="radio">
-						<label for="txtmedida">Medida</label>
-						<input type="radio" id="txtmedida" name="txttipo" value="medida" onClick="buscarMedida">
-
-						<label for="txtnumero">Número</label>
-						<input type="radio" id="txtnumero" name="txttipo" value="numero" onClick="buscarNumero">
-					</div>
-				</div>
-
-				<div class="form_linha">
-					<select name="txttamanho" class="cadastro_select" id="txttamanho">
-					
-					</select>
-				</div>
-
-				<div class="form_linha">
-					<label class="lbl_cadastro">Categoria: </label>
-					<select name="txtcategoria" class="cadastro_select" id="txtcategoria">
-
-					</select>
-				</div>
-			</div>
-
-			<div id="roupas_col2">
-				<div class="form_linha">
-					<label class="lbl_cadastro">Marca: </label>
-					<select name="txtmarca" class="cadastro_select" id="txtmarca">
-					</select>
-				</div>
-
-				<div class="form_linha">
-					<label class="lbl_cadastro">Cor: </label>
-					<select name="txtcor" class="cadastro_select" id="txtcor">
-				
-					</select>
-				</div>
-
-				<div class="form_linha">
-					<label class="lbl_cadastro">Classificação: </label>
-					<select name="txtclassificacao" class="cadastro_select" id="txtclassificacao">
-						<option value="A">A</option>
-						<option value="B">B</option>
-						<option value="B">C</option>
-					</select>
-				</div>
-
-				<div class="form_linha">
-					<label class="lbl_cadastro">Valor: </label>
-					<input type="number" class="cadastro_input" name="txtpreco" id="txtpreco">
-				</div>
-			</div>
-		</div>
-		
-		<div style="margin-top: 15px;">
-			<input type="submit" class="sub_btn" value="ENVIAR">
-		</div>
-    </form>
-</div>
+			<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
+		</ul>
+	</div>
+</form>

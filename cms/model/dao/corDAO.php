@@ -37,16 +37,22 @@
 			$stm->bindParam(4, $cor->getCor());
 			
 			//execução do statement
-			$stm->execute();
+			if($stm->execute() != true){
+                //mensagem de erro
+                $status = array('status' => 'erro');
+            }
 			
 			//verificando o número de linhas retornadas
 			if($stm->rowCount() != 0){
-				//caso seja diferente de 0, emite uma mensagem de sucesso
-				echo('Cor inserida com sucesso!!');
+				//atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				//caso seja 0, emite uma mensagem de erro
-				echo('Essa cor já existe no sistema!!');
+				//atualizando o status
+				$status = array('status' => 'existe');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -69,10 +75,15 @@
 			
 			//execução do statement
 			if($stm->execute()){
-				echo('Cor atualizada com sucesso!!');
+                //atualizando o status para atualizado
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('Ocorreu um erro ao atualizar a cor');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			$conexao->fecharConexao();
 		}
@@ -110,8 +121,6 @@
 			if($cont != 0){
 				//retornando as cores
 				return $listCor;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			//fechando a conexão
@@ -160,11 +169,13 @@
 			$stm->execute();
 			
 			//verificando o número de linhas retornadas
-			if($stm->rowCount() != 0){
-				echo('Cor excluída com sucesso!!');
-			}else{
-				echo('Ocorreu um erro ao realizar a exclusão');
-			}
+			if($stm->rowCount() == 0){
+                //atualizando o status para erro
+                $status = array('status' => 'erro');
+            }
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

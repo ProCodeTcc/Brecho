@@ -161,7 +161,7 @@
 					json = JSON.parse(dados);
                     
                     //verificando o status
-                    if(json.status == 'marcado'){
+                    if(json.status == 'marcado' || json.status == 'atualizado'){
                         //abrindo form do email
                         enviarEmail();
                     }else if(json.status == 'erro'){

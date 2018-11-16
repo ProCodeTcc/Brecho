@@ -48,6 +48,7 @@
 				url: 'dados.php',
 				success: function(dados){
 					$('#consulta').html(dados);
+                    verificarDados('#consulta');
 				}
 			});
 		}
@@ -69,8 +70,14 @@
 				url: url+'router.php',
 				data: {id:id, controller: 'retirada', modo: 'excluir'},
 				success: function(dados){
-					alert(dados);
-					listar();
+					//listagem dos dados
+                    listar();
+                    
+                    //verificando status
+                    if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao realizar a operação');
+                    }
 				}
 			});
 		}

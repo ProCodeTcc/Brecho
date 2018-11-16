@@ -65,13 +65,17 @@
 			$retiradaDAO = new RetiradaDAO();
 			
 			//chamada da função que atualiza os dados
-			$retiradaDAO->Update($retiradaClass);
+			$status = $retiradaDAO->Update($retiradaClass);
+            
+            return $status;
 		}
 		
 		public function excluirRetirada($id){
 			$retiradaDAO = new RetiradaDAO();
 			
-			$retiradaDAO->Delete($id);
+			$status = $retiradaDAO->Delete($id);
+            
+            return $status;
 		}
 		
 		//função que lista as retiradas

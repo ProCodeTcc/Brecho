@@ -171,13 +171,13 @@
 			$stm->execute();
 			
 			//verificando retorno das linhas
-			if($stm->rowCount() != 0){
+			if($stm->rowCount() == 0){
 				//mensagem de sucesso
-				echo('Retirada excluída com sucesso!!');
-			}else{
-				//mensagem de erro
-				echo('Ocorreu um erro ao excluir a retirada');
+				$status = array('status' => 'erro');
 			}
+            
+            //conversão dos dados para JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

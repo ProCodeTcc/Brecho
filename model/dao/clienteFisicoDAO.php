@@ -151,11 +151,14 @@
 			//verificando retorno
 			if($stm->execute()){
 				//mensagem de sucesso
-				echo('Dados atualizados com sucesso!!');
+				$status = array('status' => 'atualizado');
 			}else{
 				//mensagem de erro
-				echo('Ocorreu um erro ao atualizar os dados');
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando os dados em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

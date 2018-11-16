@@ -83,7 +83,9 @@
 							echo "extensão inválida";
 						}
 					}
-					return $imagens;
+					if(isset($imagens)){
+                        return $imagens;
+                    }
 				}
 			}
 		}

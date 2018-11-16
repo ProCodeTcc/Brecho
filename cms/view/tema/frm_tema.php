@@ -31,31 +31,54 @@
 			exibirDados(id);
 		}
 		
+        //função no submit do form
 		$('#frmTema').submit(function(e){
+            //desativando o submit
 			e.preventDefault();
 			
+            //armazenando o formulario em uma variável
 			var formulario = new FormData($('#frmTema')[0]);
+            
+            //armazenando a controller 
 			formulario.append('controller', 'tema');
 			
+            //verificando se existe o ID
 			if(id == ""){
+                //armazenando o modo inserir
 				formulario.append('modo', 'inserir');
 			}else{
+                //armazenando o modo editar
 				formulario.append('modo', 'editar');
+                
+                //armazenando o ID ao form
 				formulario.append('id', id);
 			}
 			
 			$.ajax({
-				type: 'POST',
-				url: url+'router.php',
-				data: formulario,
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: formulario, //dados enviados
 				cache: false,
                 contentType: false,
                 processData: false,
                 async: true,
 				success: function(dados){
-					listar();
-					alert(dados);
-					$('.container_modal').fadeOut(400);
+                    //conversão dos dados para JSON
+					json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'sucesso'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Tema inserido com sucesso');
+                        //listagem dos dados
+                        listar();
+                    }else if(json.status == 'atualizado'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Tema atualizado com sucesso');
+                    }else if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao realizar a operação');
+                    }
 				}
 			});
 		});

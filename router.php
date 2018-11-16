@@ -60,7 +60,8 @@
 					
 				case 'atualizar':
 					$controllerClienteFisico = new controllerClienteFisico();
-					$controllerClienteFisico->atualizarCliente();
+					$status = $controllerClienteFisico->atualizarCliente();
+                    echo $status;
 				break;
 
 				case 'validarUsuario':
@@ -117,7 +118,8 @@
 					
 				case 'atualizar':
 					$controllerClienteJuridico = new controllerClienteJuridico();
-					$controllerClienteJuridico->atualizarCliente();
+					$status = $controllerClienteJuridico->atualizarCliente();
+                    echo $status;
 				break;
 
 				case 'validarUsuario':
@@ -293,6 +295,47 @@
 				break;
 			}
 		break;
+        
+        case 'cartao':
+            require_once('controller/controllerCartao.php');
+            $modo = $_GET['modo'];
+            switch($modo){
+                case 'inserir':
+                    $tipo = $_GET['tipo'];
+                    $id = $_GET['id'];
+                    
+                    $controllerCartao = new controllerCartao();
+                    
+                    $status = $controllerCartao->inserirCartao($tipo, $id);
+                    
+                    echo($status);
+                break;
+                    
+                case 'buscarCartao':
+                    $id = $_POST['id'];
+                    $controllerCartao = new controllerCartao();
+                    $listCartao = $controllerCartao->buscarCartao($id);
+                    
+                    echo($listCartao);
+                break;
+                    
+                case 'editar':
+                    $controllerCartao = new controllerCartao();
+                    
+                    $status = $controllerCartao->atualizarCartao();
+                    
+                    echo $status;
+                break;
+                    
+                case 'excluir':
+                    $id = $_POST['id'];
+                    $controllerCartao = new controllerCartao();
+                    
+                    $status = $controllerCartao->excluirCartao($id);
+                    echo $status;
+                break;
+            }
+        break;
         
     }
 ?>

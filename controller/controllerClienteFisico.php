@@ -147,8 +147,10 @@
 			$enderecoDAO = new EnderecoDAO();
 			
             //Chamada da função para inserir dados
-           	$clienteFisicoDAO->Update($clienteFisicoClass);
+           	$status = $clienteFisicoDAO->Update($clienteFisicoClass);
 			$enderecoDAO->Update($enderecoClass);
+            
+            return $status;
 		}
         
         //função que lista os dados do cliente

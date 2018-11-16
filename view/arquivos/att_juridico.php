@@ -84,14 +84,17 @@
 				processData: false,
 				async: true,
 				success: function(dados){
-					if(dados == 1){
-						//mensagem de sucesso
-						alert('Dados atualizados com sucesso!!');
-						window.location.href="atualizar_dados.php";
-					}else{
-						//mensagem de erro
-						alert('Ocorrou um erro ao atualizar os dados');
-					}
+					//conversão dos dados para JSNO
+					json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'atualizado'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Dados atualizados com sucesso');
+                    }else{
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao atualizar os dados');
+                    }
 				}
 			});
 		});

@@ -27,6 +27,38 @@
 		?>
     </head>
     <body>
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
+        
         <header>
             <?php
 				require_once('arquivos/header.php');
@@ -66,6 +98,16 @@
                                 </div>
                                 <div class="texto_dados">
                                     <h1> Minhas Vendas </h1>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="cartao.php">
+                            <div class="botao_dados">
+                                <div class="icone_dados">
+                                    <img alt="#" src="icones/cartao.png">
+                                </div>
+                                <div class="texto_dados">
+                                    <h1> Cartões de Crédito </h1>
                                 </div>
                             </div>
                         </a>

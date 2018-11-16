@@ -56,6 +56,37 @@
 		?>
     </head>
     <body>
+        <div class="mensagens">
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+                    
+                </div>
+    
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>          
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+                    
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
         <header>
             <?php
 				require_once('arquivos/header.php');

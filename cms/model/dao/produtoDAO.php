@@ -704,5 +704,38 @@
 			$conexao->fecharConexao();
 		}
 		
+        //função para verificar se o produto possui tradução
+        public function checkTranslate($id){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que faz a consulta
+            $stm = $PDO_conexao->prepare('SELECT idProduto FROM produto_traducao WHERE idProduto = ?');
+            
+            //parâmetro enviado
+            $stm->bindParam(1, $id);
+            
+            //execução do statement
+            $stm->execute();
+            
+            //verificando a contagem
+           if($stm->rowCount() != 0){
+               //atualizando o status para atualizar
+               $status = array('status' => 'atualizar');
+           }else{
+               //atualizando o status para inserir
+               $status = array('status' => 'inserir');
+           }
+            
+            //retornando os dados em JSON
+            return json_encode($status);
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+        
 	}
 ?>

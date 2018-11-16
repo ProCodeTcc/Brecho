@@ -69,8 +69,14 @@
 				url: url+'router.php',
 				data: {id:idItem, controller: 'cor', modo: 'excluir'},
 				success: function(dados){
-					listar();
-					alert(dados);
+                    listar();
+                    //conversão para JSON
+					json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'erro'){
+                        mostrarErro('Ocorreu um erro ao realizar a operação');
+                    }
 				}
 			});
 		}
@@ -108,6 +114,38 @@
         <div class="container_modal">
             <div class="modal" id="modal_cor">
                 
+            </div>
+        </div>
+        
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 

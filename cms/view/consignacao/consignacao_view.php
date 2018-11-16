@@ -21,12 +21,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Consignação</title>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
 		<script src="../js/funcoes.js"></script>
+        <script src="../js/jquery-ui.js"></script>
 		
 		<script>
 			var url = '../../';
@@ -74,6 +76,7 @@
 					data: {id:idItem}, //dados enviados
 					success: function(dados){
 						$('.modal').html(dados); //carregando os dados
+                        $('.form').attr('data-modo', 'editar');
 					}
 				});
             }
@@ -120,6 +123,38 @@
         <div class="container_modal">
             <div class="modal" id="modal_roupa">
                 
+            </div>
+        </div>
+        
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 

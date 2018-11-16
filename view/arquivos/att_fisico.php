@@ -86,8 +86,17 @@
 				processData: false,
 				async: true,
 				success: function(dados){
-					//mensagem
-					alert(dados);
+                    //conversão dos dados para JSON
+					json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'atualizado'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Dados atualizados com sucesso');
+                    }else{
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao atualizar os dados');
+                    }
 				}
 			});
 

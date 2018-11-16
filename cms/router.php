@@ -280,13 +280,15 @@
 			switch($modo){
 				case 'inserir':
 					$controllerCor = new controllerCor();
-					$controllerCor->inserirCor();
+					$status = $controllerCor->inserirCor();
+                    echo($status);
 				break;
 					
 				case 'excluir':
 					$id = $_POST['id'];
 					$controllerCor = new controllerCor();
-					$controllerCor->excluirCor($id);
+					$status = $controllerCor->excluirCor($id);
+                    echo($status);
 				break;
 					
 				case 'buscar':
@@ -299,7 +301,8 @@
 					
 				case 'editar':
 					$controllerCor = new controllerCor();
-					$controllerCor->atualizarCor();
+					$status = $controllerCor->atualizarCor();
+                    echo($status);
 				break;
 			}
 		break;
@@ -310,14 +313,16 @@
 			switch($modo){
 				case 'inserir':
 					$controllerTema = new controllerTema();
-					$controllerTema->inserirTema();
+					$status = $controllerTema->inserirTema();
+                    echo($status);
 				break;
 					
 				case 'editar':
 					$id = $_POST['id'];
 					
 					$controllerTema = new controllerTema();
-					$controllerTema->atualizarTema($id);
+					$status = $controllerTema->atualizarTema($id);
+                    echo($status);
 				break;
 					
 				case 'buscar':
@@ -333,7 +338,8 @@
 					$id = $_POST['id'];
 					
 					$controllerTema = new controllerTema();
-					$controllerTema->excluirTema($id);
+					$status = $controllerTema->excluirTema($id);
+                    echo($status);
 				break;
 					
 				case 'status':
@@ -476,6 +482,15 @@
 					echo($listSubcategoria);
 				break;
 					
+                case 'verificar':
+                    $id = $_POST['id'];
+                    
+                    $controllerProduto = new controllerProduto();
+                    
+                    $status = $controllerProduto->verificarTraducao($id);
+                    
+                    echo($status);
+                break;
 			}
 		break;
 
@@ -797,14 +812,16 @@
 					
 				case 'editar':
 					$controllerRetirada = new controllerRetirada();
-					$controllerRetirada->atualizarRetirada();
+					$status = $controllerRetirada->atualizarRetirada();
+                    echo($status);
 				break;
 					
 				case 'excluir':
 					$id = $_POST['id'];
 					
 					$controllerRetirada = new controllerRetirada();
-					$controllerRetirada->excluirRetirada($id);
+					$status = $controllerRetirada->excluirRetirada($id);
+                    echo($status);
 				break;
 					
 				case 'listarLojas':
@@ -851,7 +868,9 @@
 
 				case 'editar':
 					$controllerConsignacao = new controllerConsignacao();
-					$controllerConsignacao->atualizarConsignacao();
+					$status = $controllerConsignacao->atualizarConsignacao();
+                    
+                    echo($status);
 				break;
 			}
 		break;

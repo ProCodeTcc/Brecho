@@ -55,9 +55,23 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					alert(dados);
-					listar();
-					$('.container_modal').fadeOut(400);
+					//conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'sucesso'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Cor inserida com sucesso');
+                    }else if(json.status == 'existe'){
+                        //menasgem de informação
+                        mostrarInfo('Essa cor já existe no sistema');
+                    }else if(json.status == 'atualizado'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Cor atualizada com sucesso');
+                    }else if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao realizar a operação');
+                    }
 				}
 			});
 		});

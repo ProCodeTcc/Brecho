@@ -345,5 +345,17 @@
 			//retornando os dados
 			return $listProduto;
 		}
+        
+        //função para verificar se um produto possui tradução
+        public function verificarTraducao($id){
+            //instância da classe ProdutoDAO
+            $produtoDAO = new ProdutoDAO();
+            
+            //chamada da função que verifica
+            $status = $produtoDAO->checkTranslate($id);
+            
+            //retornando o status
+            return $status;
+        }
 	}
 ?>

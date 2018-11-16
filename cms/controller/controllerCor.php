@@ -34,7 +34,9 @@
 			$corDAO = new CorDAO();
 			
 			//chamada da função que insere uma cor
-			$corDAO->Insert($corClass);
+			$status = $corDAO->Insert($corClass);
+            
+            return $status;
 		}
 		
 		//chamada da função que atualiza uma cor
@@ -59,7 +61,9 @@
 			$corDAO = new CorDAO();
 			
 			//chamada da função que atualiza a cor
-			$corDAO->Update($corClass);
+			$status = $corDAO->Update($corClass);
+            
+            return $status;
 		}
 		
 		//função que lista as cores
@@ -92,7 +96,9 @@
 			$corDAO = new CorDAO();
 			
 			//chamada da função que exclui uma cor
-			$corDAO->Delete($id);
+			$status = $corDAO->Delete($id);
+            
+            return $status;
 		}
 
 		//função para pesquisar as cores

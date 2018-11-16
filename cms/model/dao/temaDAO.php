@@ -38,11 +38,17 @@
 			//executando o statement
 			$stm->execute();
 			
+            //verificando o retorno
 			if($stm->rowCount() != 0){
-				echo('Tema inserido com sucesso!!');
+                //atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				echo('Ocorreu um erro ao inserir o tema');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -76,8 +82,6 @@
 			
 			if($cont != 0){
 				return $listTemas;
-			}else{
-				require_once('../erro_tabela.php');
 			}
 			
 			//fechando a conexão
@@ -126,12 +130,17 @@
 			$stm->bindParam(3, $tema->getGenero());
 			$stm->bindParam(4, $tema->getId());
 			
-			//executando o statement
+			//executando o sta,ement
 			if($stm->execute()){
-				echo('Tema atualizado com sucesso!!');
+                //atualizando o status para sucesso
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('Ocorreu um erro ao atualizar o tema');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -150,12 +159,16 @@
 			//parâmetros enviados
 			$stm->bindParam(1, $id);
 			
-			//executando o statement
-			if($stm->execute()){
-				echo('Tema excluído com sucesso!!');
-			}else{
-				echo('Ocorreu um erro ao excluir um tema');
+            $stm->execute();
+            
+			//verificando o retorno
+			if($stm->rowCount() == 0){
+                //atualizando o status para sucesso
+				$status = array('status' => 'erro');
 			}
+
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

@@ -73,6 +73,17 @@ function sliderPrincipal(local){
 	});
 }
 
+function sliderCartao(local){
+	$(function() {
+		var film_roll = new FilmRoll({
+			container: local,
+            prev: prev,
+            next: next,
+            configure_load: true,
+		});
+	});
+}
+
 function mostrarErro(mensagem){
 	$('.mensagens').fadeIn(400);
 	$('.msg').html(mensagem);
@@ -99,4 +110,8 @@ function redirecionarUsuario(url){
 	$('.close').click(function(){
 		window.location.href=url;
 	})
+}
+
+function fecharModal(){
+    $('.container_modal').fadeOut(400);
 }

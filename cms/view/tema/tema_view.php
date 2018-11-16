@@ -79,11 +79,14 @@
 					//listando os dados
 					listar();
 					
-					//mensagem de sucesso
-					alert(dados);
-					
-					//fechando a modal
-					$('.container_modal').fadeOut(400);
+                    //conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao realizar a exclusão');
+                    }
 				}
 			});
 		}
@@ -134,6 +137,38 @@
         <div class="container_modal">
             <div class="modal">
                 
+            </div>
+        </div>
+        
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 

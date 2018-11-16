@@ -101,8 +101,9 @@
 			$clienteDAO = new ClienteJuridicoDAO();
 			$enderecoDAO = new EnderecoDAO();
 			
-			$clienteDAO->Update($clienteClass);
+			$status = $clienteDAO->Update($clienteClass);
 			$enderecoDAO->Update($enderecoClass);
+            return $status;
 		}
 		
 		public function buscarCliente($id){

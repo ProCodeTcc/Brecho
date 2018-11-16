@@ -36,7 +36,9 @@
             $consignacaoDAO = new ConsignacaoDAO();
 
             //chamada da função que atualiza a consignação
-            $consignacaoDAO->Update($consignacaoClass);
+            $status = $consignacaoDAO->Update($consignacaoClass);
+            
+            return $status;
         }
 
         //função para listar os produtos

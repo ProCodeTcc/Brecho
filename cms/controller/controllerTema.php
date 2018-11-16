@@ -36,7 +36,9 @@
 			$temaDAO = new TemaDAO();
 			
 			//chamada da função que insere o tema
-			$temaDAO->Insert($temaClass);
+			$status = $temaDAO->Insert($temaClass);
+            
+            return $status;
 		}
 		
 		//função que atualiza um tema
@@ -62,7 +64,9 @@
 			$temaDAO = new TemaDAO();
 			
 			//chamada da função que atualiza o tema
-			$temaDAO->Update($temaClass);
+			$status = $temaDAO->Update($temaClass);
+            
+            return $status;
 		}
 		
 		//função que lista os temas
@@ -95,7 +99,9 @@
 			$temaDAO = new TemaDAO();
 			
 			//chamada da função que exclui um tema
-			$temaDAO->Delete($id);
+			$status = $temaDAO->Delete($id);
+            
+            return $status;
 		}
 		
 		//função que atualiza o status

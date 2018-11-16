@@ -60,17 +60,17 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					//verificando o retorno
-					if(dados == 'true'){
-						//mensagem de sucesso
-						alert('Consignação atualizada com sucesso!!');
-
-						//fechamento da modal
-						$('.container_modal').fadeOut();
-					}else{
-						//mensagem de erro
-						alert('Ocorreu um erro ao atualizar a consignação!!');
-					}
+					//conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
+                    //verificando o status
+                    if(json.status == 'atualizado'){
+                        //mensagem de sucesso
+                        mostrarSucesso('Consignação atualizada com sucesso');
+                    }else if(json.status == 'erro'){
+                        //mensagem de erro
+                        mostrarErro('Ocorreu um erro ao atualizar a consignação');
+                    }
 					
 				}
 			});
