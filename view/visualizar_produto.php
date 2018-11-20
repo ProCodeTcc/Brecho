@@ -10,7 +10,9 @@
 		$id = $_GET['id'];
 		if(isset($_GET['pagina'])){
 			$pagina = $_GET['pagina'];
-		}
+		}else{
+            $pagina = '';
+        }
 	}else{
 		header('location: erro.php');
 	}
@@ -42,6 +44,36 @@
 				});
 			}
 			
+             //função para adicionar um item ao carrinho
+            function adicionarCarrinho(id){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: '../router.php?controller=produto&modo=adicionarCarrinho', //url onde será enviada a requisição
+                    data: {id:id}, //parâmetros enviados
+                    success: function(dados){
+                        //verifica se o item já existe
+                        if(dados == 'existe'){
+                            //se existir, manda uma mensagem de erro
+                            alert('Esse item já foi adicionado ao carrinho!!');
+                        }else{
+                            //se não, adiciona o item ao carrinho
+                            $('#carrinho').html(dados);
+                        }
+                    }
+                });
+            }
+            
+            function comprarProduto(id){
+                $.ajax({
+                   type: 'POST',
+                    url: '../router.php?controller=produto&modo=adicionarCarrinho',
+                    data: {id:id},
+                    success: function(dados){
+                        window.location.href="dados_pagamento.php";
+                    }
+                });
+            }
+            
 			$(document).ready(function(){
 				checarLogin(<?php echo($login) ?>);
 			});
@@ -86,20 +118,14 @@
                     </div>
                 </div>
 				
-				<?php
-					if($pagina == 'home'){
-						$listProduto = new controllerProduto();
+				<?php        
+                    if($pagina == 'promoção'){
+                        $listProduto = new controllerPromocao();
 						$rsProduto = $listProduto->buscarProduto($id);
-					}else if($pagina == 'promoção'){
-						$listProduto = new controllerPromocao();
-						$rsProduto = $listProduto->buscarProduto($id);
-					}else if($pagina == 'categoria'){
+                    }else{
                         $listProduto = new controllerProduto();
 						$rsProduto = $listProduto->buscarProduto($id);
-                    }else if($pagina == 'sugestão'){
-						$listProduto = new controllerProduto();
-						$rsProduto = $listProduto->buscarProduto($id);
-					}
+                    }
 				?>
 				
                 <div class="visualizar_produto_detalhes">
@@ -121,10 +147,8 @@
                         
                     </div>
                     <div class="produto_detalhes_botao">
-                            <input class="botao_compra" type="submit" value="Carrinho">
-                        <form action="dados_pagamento.php">
-                            <input class="botao_compra" type="submit" value="Comprar">
-                        </form> 
+                        <input class="botao_compra" type="button" value="Carrinho" onclick="adicionarCarrinho(<?php echo($rsProduto->getId()) ?>)">
+                        <input class="botao_compra" type="submit" value="Comprar" onclick="comprarProduto(<?php echo($rsProduto->getId()) ?>)">
                     </div>
                 </div>
                 
@@ -146,7 +170,7 @@
 					$cont = 0;
 					while($cont < count($rsProdutos)){
 				?>
-               <a href="visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=sugestão">
+               <a href="visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>">
                     <div class="produto_veja">
                         <div class="imagem_produto">
                             <img alt="#" src="../cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
@@ -162,8 +186,10 @@
                                 <div class="comprar_produto">
                                     Conferir
                                 </div>
-                               
+                            <div class="carrinho_produto carrinho" onClick="adicionarCarrinho(<?php echo($rsProdutos[$cont]->getId()) ?>)">
+                                <img alt="#" src="icones/carrinho.png">
                             </div>
+                        </div>
                         </div>
                     </div>
                 </a>

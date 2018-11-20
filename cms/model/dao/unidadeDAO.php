@@ -84,8 +84,6 @@
 				
 				//retornando o id da unidade
 				return $idUnidade;
-			}else{
-				echo('Ocorreu um erro ao inserir os dados da unidade');
 			}
 			
 			$conexao->fecharConexao();
@@ -111,12 +109,15 @@
 			
 			//verificando numero de linhas retornadas
 			if($stm->rowCount() != 0){
-				//mensagem de sucesso
-				echo('Unidade inserida com sucesso!!');
+                //atualizando o status pra sucesso
+				$status = array('status' => 'sucesso');
 			}else{
 				//mensagem de erro
-				echo('Ocorreu um erro ao inserir a unidade');
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -209,11 +210,17 @@
 			$stm->bindParam(2, $unidade->getIdLoja());
 			$stm->bindParam(3, $unidade->getId());
 			
+			//verificando numero de linhas retornadas
 			if($stm->execute()){
-				echo('Unidade atualizada com sucesso!');
+                //atualizando o status pra sucesso
+				$status = array('status' => 'atualizado');
 			}else{
-				echo('Ocorreu um erro ao atualizar a unidade');
+				//mensagem de erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 		}
 		
 		//função que deleta a unidade do banco
@@ -234,11 +241,14 @@
 			//executando o statement
 			$stm->execute();
 			
-			if($stm->rowCount() != 0){
-				echo('Unidade excluída com sucesso!!');
-			}else{
-				echo('Ocorreu um erro ao excluir a unidade');
+			//verificando numero de linhas retornadas
+			if($stm->rowCount() == 0){
+				//mensagem de erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

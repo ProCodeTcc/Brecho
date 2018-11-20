@@ -71,31 +71,33 @@
                     //conversão dos dados para JSON
                     json = JSON.parse(dados);
 
-                    //verificando o status de inserção
-                    if(json.status == 'sucesso'){
-                        //mensagem de sucesso
-                        mostrarSucesso('Nível inserido com sucesso');
-                    }else if(json.status == 'erro'){
-                        //mensagem de erro
-                        mostrarErro('Ocorreu um erro ao inserir o nível');
-                    }
-
-                    //verificando o status de update
-                    if(json.status == 'atualizado'){
-                        //mensagem de sucesso
-                        mostrarSucesso('Nível atualizado com sucesso');
-                    }else if(json.status == 'erro'){
-                        //mensagem de erro
-                        mostrarErro('Ocorreu um erro ao atualizar o nível');
+                    if(id == ""){
+                        //verificando o status de inserção
+                        if(json.status == 'sucesso'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Nível inserido com sucesso');
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao inserir o nível');
+                        }   
+                    }else{
+                        //verificando o status de update
+                        if(json.status == 'atualizado'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Nível atualizado com sucesso');
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao atualizar o nível');
+                        }   
                     }
                 }
             });
         });
     });
 </script>
-
+<img class="fechar" src="../imagens/fechar.png">
 <div class="form_container">
-    <img class="fechar" src="../imagens/fechar.png">
+
     <form class="frm_nivel" method="post" data-id="<?php echo($id) ?>" name="frmNivel" id="frm_nivel" action="nivel_view.php">
         <div class="form_linha">
             <label class="lbl_cadastro">

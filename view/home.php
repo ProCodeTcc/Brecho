@@ -9,7 +9,8 @@
 	}else{
 		$usuario = 'Entrar';
 	}
-
+    
+    require_once('arquivos/idioma.php');
     require_once('arquivos/check_carrinho.php');
 ?>
 
@@ -24,15 +25,26 @@
         <script src="view/js/jquery.cycle.all.js"> </script>
         <script src="view/js/jquery.film_roll.js"></script>
         <script src="view/js/funcoes.js"></script>
+        <script src="view/js/jquery.touchSwipe.js"></script>
         <script>
 			
 			function checarLogin(){
-				var login = $('#logout').data('login');
+				var login = $('.logout').data('login');
 				
 				if(login == 1){
-					$('#logout').css('display', 'block');
+					$('.logout').css('display', 'block');                           $('.perfil_usuario').show();
+                    
+                    if($(window).width() == '980'){
+                        $('.entrar').hide('fast');
+                    }
+                    
 				}else{
-					$('#logout').css('display', 'none');
+					$('.logout').css('display', 'none');
+                    $('.perfil_usuario').hide('fast');
+                    
+                    if($(window).width() == '980'){
+                        $('.entrar').show();
+                    }
 				}
 			}
 			
@@ -48,6 +60,9 @@
 
             //função para adicionar um item ao carrinho
             function adicionarCarrinho(id){
+                //desabilitando o onclick do link
+                $('a').attr('onclick', null).off('click');
+                
                 $.ajax({
                     type: 'POST', //tipo de requisição
                     url: 'router.php?controller=produto&modo=adicionarCarrinho', //url onde será enviada a requisição
@@ -64,14 +79,17 @@
                     }
                 });
             }
-			
+            
 			$(document).ready(function(){
 				checarLogin();
-				
-				
                 sliderPrincipal('#slider');
                 sliderProduto('#film_row');
                 sliderProduto('#produto_clique');
+               
+                if($(window).width() == '980'){
+                     submenuMobile();
+                     painelUsuario();
+                }
 
                 $('.carrinho').click(function(e){
                     e.preventDefault();
@@ -85,7 +103,13 @@
 						url: 'router.php', //url onde será enviada a requisição
 						data: {controller: 'enquete', modo: qtd}, //parâmetros enviados
 						success: function(dados){
-							alert(dados); //mensagem de sucesso
+							json = JSON.parse(dados);
+                            
+                            if(json.status == 'sucesso'){
+                                mostrarSucesso('Obrigado pela sua opinião!!');
+                            }else{
+                                mostrarErro('Ocorreu um erro ao enviar a resposta');
+                            }
 						}
 					});
 				});
@@ -100,6 +124,38 @@
 		
     </head>
     <body>
+        <div class="mensagens">
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+                    
+                </div>
+    
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>          
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+                    
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
+        
         <header>
             <div class="menu_paginas">
                 <div class="menu_paginas_site">
@@ -107,15 +163,33 @@
                     <a href="view/nossas_lojas.php" class="link_paginas"> Nossas Lojas </a>
                     <a href="view/sobre.php" class="link_paginas"> Sobre </a>
                 
-                    <div class="pesquisa_cabecalho_icone">
-                        <img src="view/icones/pesquisa.png" alt="#">
+                    <div class="idioma_container">
+                       <form method="POST" action="index.php?lang=ptbr">
+                            <label for="ptbr">
+                                <img src="view/icones/brazil24.png">
+                            </label>
+                           
+                            <input type="submit" id="ptbr">
+                        </form>
+                        
+                        <form method="POST" action="index.php?lang=en">
+                            <label for="en">
+                                <img src="view/icones/usa24.png">
+                            </label>
+
+                            <input type="submit" id="en">
+                        </form>
                     </div>
                     
-                <div class="pesquisa_cabecalho">
-                    <form name="search" method="POST" action="view/pesquisa.php">
-                        <input class="campo_pesquisa_cabecalho" id="pesquisa" name="txtpesquisa" type="text">
-                    </form>
-                </div>
+                    <div class="pesquisa_cabecalho">
+                        <form name="search" method="POST" action="view/pesquisa.php">
+                            <input class="campo_pesquisa_cabecalho" id="pesquisa" name="txtpesquisa" type="text">
+                        </form>
+                        
+                        <div class="pesquisa_cabecalho_icone">
+                            <img src="view/icones/pesquisa.png" alt="#">
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -123,7 +197,73 @@
                 <div class="menu_principal_site">
                     <div class="menu_lado_esquerdo">
                         <div class="menu_responsivo">
-                            <img src="view/icones/menu_responsivo.png">
+                            <img id="menu" src="view/icones/menu_responsivo.png">
+                            <div class="submenu_responsivo" id="submenu">
+                                <div class="submenu_responsivo_itens">
+                                    <div id="categorias">
+                                        Categorias
+                                    </div>
+
+                                    <div class="menu_responsivo_categorias" id="menu_categoria">
+                                        <?php
+                                            require_once('controller/controllerCategoria.php');
+                                            $listCategoria = new controllerCategoria();
+                                            $rsCategoria = $listCategoria->listarCategoria();
+                                            $cont = 0;
+                                            while($cont < count($rsCategoria)){
+                                        ?>
+                                        <div class="categorias_responsivo_itens categoria_item">
+                                            <?php echo($rsCategoria[$cont]->getNome()) ?>
+
+                                            <div class="subcategorias_responsivo" id="subcategorias">
+
+                                            <?php
+                                                require_once('controller/controllerCategoria.php');
+                                                $listSubcategoria = new controllerCategoria();
+                                                $rsSubcategoria = $listSubcategoria->listarSubcategoria($rsCategoria[$cont]->getId());
+                                                $index = 0;
+                                                while($index < count($rsSubcategoria)){    
+                                            ?>
+                                                <div class="subcategorias_responsivo_itens">
+                                                    <a href="view/visualizar_subcategoria.php?idSubcategoria=<?php echo($rsSubcategoria[$index]->getId()) ?>&mobile=true">
+                                                        <?php
+                                                            echo($rsSubcategoria[$index]->getNome());
+                                                        ?>
+                                                    </a>
+                                                </div>
+                                            <?php
+                                                $index++;
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+
+                                    <?php
+                                        $cont++;
+                                        }
+                                    ?>
+
+                                    </div>
+                                </div>
+
+                                <div class="submenu_responsivo_itens">
+                                    <a href="view/fale_conosco.php">
+                                        Fale Conosco
+                                    </a>
+                                </div>
+
+                                <div class="submenu_responsivo_itens">
+                                    <a href="view/nossas_lojas.php">
+                                        Nossas Lojas
+                                    </a>
+                                </div>
+
+                                <div class="submenu_responsivo_itens">
+                                    <a href="view/sobre.php">
+                                        Sobre
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <a href="index.php">
                             <div class="logo">
@@ -131,25 +271,27 @@
                             </div>
                         </a>
                     </div>
+                    
                     <div class="menu_lado_direito">
                         <div class="login_carrinho">
                                 <div class="login">
                                     <a  href="view/login.php">
                                     <div class="icone_login">
-                                        <img src="view/icones/login.png" alt="#">
+                                        <img id="login" src="view/icones/login.png" alt="#">
                                     </div>
+                                        
                                     <div class="texto_login">
                                         <?php echo($usuario) ?>   
                                     </div>
                                     </a>
                                     <div class="sub_login">
                                         <a href="view/perfil.php">
-                                            <div class="texto_perfil">
+                                            <div class="texto_perfil perfil_usuario">
                                                 Perfil   
                                             </div>
                                         </a>
 										
-										<div class="texto_perfil" id="logout" data-login="<?php echo($login) ?>" onClick="logout()">
+										<div class="texto_perfil logout" data-login="<?php echo($login) ?>" onClick="logout()">
 											Logout   
 										</div>
                                     </div>
@@ -166,6 +308,45 @@
                                 </div>
                             </a>
                         </div>
+                        
+                        <div class="menu_usuario_responsivo" id="painel_usuario">
+                            <div class="idiomas">
+                                <form method="POST" action="index.php?lang=ptbr">
+                                    <label for="ptbr">
+                                        <img src="view/icones/ptbr.png">
+                                    </label>
+
+                                    <input type="submit" id="ptbr">
+                                </form>
+
+                                <form method="POST" action="index.php?lang=en">
+                                    <label for="en">
+                                        <img src="view/icones/usa.png">
+                                    </label>
+
+                                    <input type="submit" id="en">
+                                </form>
+                            </div>
+                            
+                            <div class="menu_usuario_itens entrar">
+                                <a href="view/login.php">
+                                    Entrar
+                                </a>
+                            </div>
+                            
+                            <div class="menu_usuario_itens perfil_usuario">
+                                <a href="view/perfil.php">
+                                    Perfil
+                                </a>
+                            </div>
+                            
+                            <div class="menu_usuario_itens logout">
+                                <a href="view/login.php" data-login="<?php echo($login) ?>" onClick="logout()">
+                                    Logout
+                                </a>
+                            </div> 
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -259,7 +440,7 @@
                 ?>
                 <div class="caixa_produto">
                         <div class="produto">
-                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=home" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
+                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
 
                             <div class="imagem_produto">
                                 <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
@@ -315,7 +496,7 @@
                 ?>
                 <div class="caixa_produto">
                         <div class="produto">
-                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>&pagina=home" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
+                            <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
 
                             <div class="imagem_produto">
                                 <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
@@ -365,7 +546,7 @@
                             require_once($diretorio.'/controller/controllerEnquete.php');
                         
                             $listar = new controllerEnquete();
-                            $rsLista = $listar->selecionarEnquete();
+                            $rsLista = $listar->selecionarEnquete($_SESSION['idioma']);
                             
                         ?>
                     <form method="POST" class="enquete_pesquisa" name="frmEnquete" id="frmEnquete">

@@ -20,7 +20,7 @@
 
 				$.ajax({
 					type: 'POST', //tipo de requisição
-					url: 'arquivos/produtos_categoria.php', //url onde será enviada a requisição
+					url: 'arquivos/categoria/produtos_categoria.php', //url onde será enviada a requisição
 					data: {tipoFiltro: 'classificacao', filtro: classificacao, termo:pesquisa, id:idCategoria}, //dados enviados
 					success: function(dados){
                         //colocando os dados na div
@@ -36,7 +36,7 @@
 
                 $.ajax({
 					type: 'POST', //tipo de requisição
-					url: 'arquivos/produtos_categoria.php', //url onde será enviada a requisição
+					url: 'arquivos/categoria/produtos_categoria.php', //url onde será enviada a requisição
 					data: {tipoFiltro: 'tamanho', filtro: tamanho, termo:pesquisa, id:idCategoria}, //dados enviados
 					success: function(dados){
                         //colocando o conteúdo na div
@@ -44,6 +44,28 @@
 					}
 				});
 			}
+            
+            //função para filtrar o produto pelo preco
+            function filtrarPreco(idCategoria){
+                //resgatando o conteúdo da pesquisa
+                var pesquisa = $('#categoria').data('pesquisa');
+                
+                //resgatando o valor mínimo
+                var min = $('#min').val();
+                
+                //resgatando o valor máximo
+                var max = $('#max').val();
+                
+                $.ajax({
+                    type: 'POST', //tipo de requisião
+                    url: 'arquivos/categoria/produtos_categoria.php', //url onde será enviada a requisição
+                    data: {tipoFiltro:'preco', min:min, max:max, termo:pesquisa, id:idCategoria}, //dados enviados
+                    success: function(dados){
+                        //colocando o conteúdo na div
+                        $('#categoria').html(dados);
+                    }
+                });
+            }
 
             //função para filtrar por cor
             function filtrarCor(cor, idCategoria){
@@ -52,7 +74,7 @@
 
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos_categoria.php', //url onde será enviada a requisição
+                    url: 'arquivos/categoria/produtos_categoria.php', //url onde será enviada a requisição
                     data: {tipoFiltro: 'cor', filtro:cor, termo:pesquisa, id:idCategoria}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
@@ -68,7 +90,7 @@
 
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos_categoria.php', //url onde será enviada a requisição
+                    url: 'arquivos/categoria/produtos_categoria.php', //url onde será enviada a requisição
                     data: {tipoFiltro: 'marca', filtro:marca, termo:pesquisa, id:idCategoria}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
@@ -122,6 +144,16 @@
                             <div class="categoria_linha filtrar" onClick="filtrarClassificacao('C', <?php echo($id) ?>)">
                                 C
                             </div>
+                            
+                            <div class="titulo_categoria">
+                                Preço
+                            </div>
+
+                            <div class="preco_container">
+                                <input class="preco_min" id="min" type="number" name="txtmin" placeholder="min">
+                                <input class="preco_max" id="max" type="number" name="txtmax" placeholder="max" onblur="filtrarPreco(<?php echo($id) ?>)">
+                            </div>
+                            
                             <div class="titulo_categoria">
                                 Medidas
                             </div>

@@ -10,7 +10,6 @@
         
         $('.editar').click(function(){
             $('.container_modal').fadeIn(400); 
-            $('.modal').height(300);
         });
     })
 </script>
@@ -42,9 +41,22 @@
             <?php echo($rsCartao[$cont]->getVencimento()) ?>
          </p>
         <div class="acoes">
-            <img class="adicionar" src="icones/ativar.png" onclick="adicionar()">
+            <img class="adicionar" src="icones/plus(1).png" onclick="adicionar()">
+            
             <img class="editar" src="icones/pencil.png" onclick="buscarCartao(<?php echo($rsCartao[$cont]->getId()) ?>)">
+            
             <img src="icones/delete16.png" onclick="excluirCartao(<?php echo($rsCartao[$cont]->getId()) ?>)">
+            
+            <?php
+                $status = $rsCartao[$cont]->getStatus();
+                
+                if($status == 1){
+                    $img = 'ativar.png';
+                }else{
+                    $img = 'desativar.png';
+                }
+            ?>
+                <img src="icones/<?php echo($img) ?>" onclick="atualizarStatus(<?php echo($rsCartao[$cont]->getId()) ?>, <?php echo($rsCartao[$cont]->getStatus()) ?>)">
         </div>
     </div>
     <?php

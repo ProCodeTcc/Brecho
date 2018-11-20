@@ -114,12 +114,13 @@
             if($stm->rowCount() != 0){
                 //armazenando uma mensagem na variável
                 $retorno = array('status' => 'traduzido');
-
-                //retornando a mensagem em JSON
-                return json_encode($retorno);
+                
             }else{
                 $retorno = array('status' => 'erro');
             }
+            
+            //retornando a mensagem em JSON
+            return json_encode($retorno);
 
             //fechando a conexão
             $conexao->fecharConexao();

@@ -1,5 +1,6 @@
 <script>
     $(function(){
+        mudarModal('680','600');
         var id = $('#frmRoupa').data('id');
         
 		if(id != ""){

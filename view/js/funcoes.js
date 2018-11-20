@@ -1,11 +1,21 @@
 // JavaScript Document
 function checarLogin(login){
 	if(login == 1){
-		$('#logout').css('display', 'block');
-		$('.login a').attr('href', '../view/perfil.php');
-	}else{
-		$('#logout').css('display', 'none');
-	}
+        $('.logout').css('display', 'block');
+        $('.perfil_usuario').show();
+
+        if($(window).width() == '980'){
+            $('.entrar').hide('fast');
+        }
+
+    }else{
+        $('.logout').css('display', 'none');
+        $('.perfil_usuario').hide('fast');
+
+        if($(window).width() == '980'){
+            $('.entrar').show();
+        }
+    }
 }
 
 function logout(){
@@ -104,6 +114,7 @@ function mostrarSucesso(mensagem){
 
 function fecharMensagem(e){
 	$('.mensagens').fadeOut(400);
+    $('.mensagens').children().hide();
 }
 
 function redirecionarUsuario(url){
@@ -112,6 +123,72 @@ function redirecionarUsuario(url){
 	})
 }
 
+function mostrarDialogo(mensagem){
+    $('.mensagens').fadeIn(400);
+	$('.msg-dialog').html(mensagem);
+	$('#dialog').fadeIn(400);
+}
+
 function fecharModal(){
     $('.container_modal').fadeOut(400);
+}
+
+function filtroResponsivo(){
+    $('#filtro_menu').click(function(){
+       $('#filtro_submenu').toggle();
+    });
+
+    $('.filtro_responsivo_item').click(function(){
+       $('.opcao_item').fadeToggle(); 
+       $('.filtro_responsivo_item').not($(this)).find('.opcao_item').hide();
+    });
+    
+    $('.preco_container').click(function(e){
+       e.stopPropagation(); 
+    });
+}
+
+function submenuMobile(){
+    //ação no click do menu
+    $('#menu').click(function(){
+        //mostrando o submenu
+        $('#submenu').toggle(); 
+    });
+
+    //ação no click da categoria
+    $('#categorias').click(function(){
+        //mostando as categorias
+        $('#menu_categoria').toggle();
+    })
+
+    //ação no click de uma categoria
+    $('.categoria_item').click(function(){
+        //mostrando as subcategorias
+       $(this).find('#subcategorias').toggle(); 
+        $('.categoria_item').not($(this)).find('#subcategorias').hide('fast');
+    });
+}
+
+function painelUsuario(){
+    $('.login a').click(function(e){
+        e.preventDefault();
+    });
+    
+    $('#login').click(function(){
+        $('#painel_usuario').fadeToggle();
+    });
+}
+
+function verificarMobile(){
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+        return true;
+    }
+}
+
+function verificarProdutos(){
+    var resultado = $.trim($('.filtro_categoria').html()).length;
+
+    if(resultado == 0){
+        $('.nenhum_produto').show();
+    }
 }

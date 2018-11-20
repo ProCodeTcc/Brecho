@@ -41,12 +41,12 @@
 
 			$('#novo').show();
 			$('#novovalor').val(total);
-			mudarModal('420', '400');
+			mudarModal('440', '400');
 		}
 	}
 	
 	$(document).ready(function(){
-		mudarModal('350', '400');
+		mudarModal('370', '400');
 		var id = $('#frmPromocao').data('id');
 		
 		exibirDados(id);

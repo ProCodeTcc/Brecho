@@ -15,12 +15,18 @@
         }
 
 		//função que realiza uma consulta no banco
-        public function selecionarEnquete(){
+        public function selecionarEnquete($idioma){
 			//instância da classe enqueteDAO
             $enqueteDAO = new EnqueteDAO();
 			
-			//armazenando o resultado da consulta na variável
-            $enquete = $enqueteDAO->Select();
+            //verificando o idioma
+			if($idioma == 'ptbr'){
+                //armazenando o resultado da consulta na variável
+                $enquete = $enqueteDAO->Select();
+            }else{
+                //armazenando o resultado da consulta na variável
+                $enquete = $enqueteDAO->selectTranslate();
+            }
 
 			//retornando os dados
             return $enquete;
@@ -34,7 +40,9 @@
 			$enqueteDAO = new EnqueteDAO();
 			
 			//chamada da função que atualiza uma enquete
-			$enqueteDAO->UpdateQtdA();
+			$status = $enqueteDAO->UpdateQtdA();
+            
+            return $status;
 		}
 		
 		//função que atualiza a quantidade de respostas
@@ -44,7 +52,9 @@
 			$enqueteDAO = new EnqueteDAO();
 			
 			//chamada da função que atualiza uma enquete
-			$enqueteDAO->UpdateQtdB();
+			$status = $enqueteDAO->UpdateQtdB();
+            
+            return $status;
 		}
 		
 		//função que atualiza a quantidade de respostas
@@ -54,7 +64,9 @@
 			$enqueteDAO = new EnqueteDAO();
 			
 			//chamada da função que atualiza uma enquete
-			$enqueteDAO->UpdateQtdC();
+			$status = $enqueteDAO->UpdateQtdC();
+            
+            return $status;
 		}
 		
 		//função que atualiza a quantidade de respostas
@@ -64,7 +76,9 @@
 			$enqueteDAO = new EnqueteDAO();
 			
 			//chamada da função que atualiza uma enquete
-			$enqueteDAO->UpdateQtdD();
+			$status = $enqueteDAO->UpdateQtdD();
+            
+            return $status;
 		}
 		
 		

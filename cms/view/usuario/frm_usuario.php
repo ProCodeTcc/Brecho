@@ -109,30 +109,32 @@
                 async: true,
                 success: function(dados){
                     json = JSON.parse(dados);
+                    if(idUsuario == ""){
+                        if(json.status == 'sucesso'){
+                            mostrarSucesso('Usuario inserido com sucesso!!');
 
-                    if(json.status == 'sucesso'){
-                        mostrarSucesso('Usuario inserido com sucesso!!');
+                            //listando os dados inseridos ou atualizados
+                            listar();
 
-                        //listando os dados inseridos ou atualizados
-                        listar();
+                            //insere na tag img o conteúdo da variável imagem
+                            $('#img_perfil').attr('src', imagem);
+                        }else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao inserir o usuário');
+                        }
+                    }else{
+                        if(json.status == 'atualizado'){
+                            mostrarSucesso('Usuario atualizado com sucesso!!');
 
-                        //insere na tag img o conteúdo da variável imagem
-                        $('#img_perfil').attr('src', imagem);
-                    }else if(json.status == 'erro'){
-                        mostrarErro('Ocorreu um erro ao inserir o usuário');
+                            //listando os dados inseridos ou atualizados
+                            listar();
+
+                            //insere na tag img o conteúdo da variável imagem
+                            $('#img_perfil').attr('src', imagem);
+                        }else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao atualizar o usuário');
+                        }
                     }
-
-                    if(json.status == 'atualizado'){
-                        mostrarSucesso('Usuario atualizado com sucesso!!');
-
-                        //listando os dados inseridos ou atualizados
-                        listar();
-
-                        //insere na tag img o conteúdo da variável imagem
-                        $('#img_perfil').attr('src', imagem);
-                    }else if(json.status == 'erro'){
-                        mostrarErro('Ocorreu um erro ao atualizar o usuário');
-                    }
+                    
                 }
             });
         });

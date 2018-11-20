@@ -47,7 +47,7 @@
             $consignacaoDAO = new ConsignacaoDAO();
 
             //armazenando os dados em uma variável
-            $listProdutos = $consignacaoDAO->selectAll();
+            $listProdutos = $consignacaoDAO->selectProdutos();
 
             //retornando os dados
             return $listProdutos;
@@ -78,6 +78,36 @@
 
             //retornando os dados
             return $listProdutos;
+        }
+        
+        //função para listar a data de término da consignação
+        public function listarData(){
+            //instância da classe ConsignacaoDAO
+            $consignacaoDAO = new ConsignacaoDAO();
+            
+            //chamada da função que lista as datas
+            $listConsignacao = $consignacaoDAO->selectDtConsignacao();
+            
+            //retornando a lista com as datas
+            return $listConsignacao;
+        }
+        
+        //função para verificar a data da consignação
+        public function verificarData($data, $id){
+            //instância da classe ConsignacaoDAO
+            $consignacaoDAO = new ConsignacaoDAO();
+            
+            //armazenando a data atual em uma variável
+            $dataAtual = date('Y-m-d');
+            
+            //verificando se a data da consignação é igual à data atual
+            if($data == $dataAtual){
+                //se for, desativa a consignação
+                $consignacaoDAO->disableConsignacao($dataAtual, $id);
+            }else{
+                //se não, ativa a consignação
+                $consignacaoDAO->enableConsignacao($dataAtual, $id);
+            }
         }
     }
 ?>

@@ -44,7 +44,9 @@
 			$fconoscoDAO = new FaleConoscoDAO();
 			
 			//chamada da função que exclui um feedback
-			$fconoscoDAO->Delete($id);
+			$status = $fconoscoDAO->Delete($id);
+            
+            return $status;
 		}
 
 		public function pesquisarFeedback($pesquisa){

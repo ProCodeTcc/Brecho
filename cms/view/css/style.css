@@ -136,7 +136,7 @@ header{
 	display: flex;
 	flex-direction: column;
 	width: 200px;
-	height: 200px;
+	height: auto;
 	margin: 0;
 	padding: 0;
 }
@@ -442,6 +442,7 @@ footer{
 .fechar{
 	float: right;
 	cursor: pointer;
+    margin: 10px;
 }
 
 .form_container{
@@ -840,6 +841,10 @@ footer{
 	height: 50px;
 }
 
+.frmEvento #txtdesc{
+    height: 150px;
+}
+
 .container_data{
 	width: 200px;
 	display: flex;
@@ -856,10 +861,24 @@ footer{
 	margin-top: 25px;
 }
 
+.frm_ingles{
+    width: 250px;
+    margin: auto;
+}
+
+.frm_ingles #txtdesc{
+    height: 150px;
+}
+
 #roupas_form{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+}
+
+#roupas_form #txtdesc{
+	margin-top: 25px;
+    height: 150px;
 }
 
 .imagens_container{
@@ -1241,9 +1260,20 @@ footer{
 
 /************************* RETIRADAS *****************************/
 .frmRetirada{
-	width: 300px;
+	width: 250px;
 	height: auto;
 	margin: auto;
+}
+
+.frmEmail{
+    margin: auto;
+    width: 250px;
+}
+
+.frmEmail .txtdesc{
+	height: 150px;
+    width: 200px;
+    resize: none;
 }
 
 /************************* SLIDER ******************************/
@@ -1287,6 +1317,11 @@ footer{
 .slider_imagem img{
 	width: 300px;
 	height: 200px;
+}
+
+.frm_categoria{
+    width: 250px;
+    margin: auto;
 }
 
 .subcategoria_container{

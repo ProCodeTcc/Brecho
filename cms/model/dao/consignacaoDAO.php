@@ -9,6 +9,11 @@
 		Autor: Lucas Eduardo
 		Data: 30/10/2018
 		Objetivo: Implementada função que atualiza a consignação
+        
+        Projeto: CMS do Brechó
+		Autor: Lucas Eduardo
+		Data: 19/11/2018
+		Objetivo: Implementada função que verifica a data da consignação
     */
     
     class ConsignacaoDAO{
@@ -136,7 +141,7 @@
         }
 
         //função para pegar os produtos do banco
-        public function selectAll(){
+        public function selectProdutos(){
             //instância da classe de conexão com o banco
             $conexao = new ConexaoMySQL();
 
@@ -289,6 +294,90 @@
                 return $listProdutos;
             }
 
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+        
+        //função para pegar a data de termino da consignação
+        public function selectDtConsignacao(){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que busca os dados
+            $stm = $PDO_conexao->prepare('SELECT dataFinal, idConsignacao FROM pedidoconsignacao');
+            
+            //execução do statement
+            $stm->execute();
+            
+            //contador
+            $cont = 0;
+            
+            //percorrendo os dados
+            while($rsConsignacao = $stm->fetch(PDO::FETCH_OBJ)){
+                //criando uma nova consignação
+                $listConsignacao[] = new Consignacao();
+                
+                //setando os atributos
+                $listConsignacao[$cont]->setId($rsConsignacao->idConsignacao);
+                $listConsignacao[$cont]->setDtTermino($rsConsignacao->dataFinal);
+                
+                //incrementando o contador
+                $cont ++;
+            }
+            
+            //verificando os dados
+            if($cont != 0){
+                //retornando a consignação
+                return $listConsignacao;
+            }
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
+        
+        //função para ativar a consignação
+        public function enableConsignacao($dataAtual, $id){
+            //instância da classe de conexão com o banco de dados
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que atualiza o status
+            $stm = $PDO_conexao->prepare('UPDATE pedidoconsignacao SET idStatus = 1 WHERE dataFinal <> ? AND idConsignacao = ?');
+            
+            //parâmetros enviados
+            $stm->bindParam(1, $dataAtual);
+            $stm->bindParam(2, $id);
+            
+            //execução do statement
+            $stm->execute();
+            
+            //fechando a consignação
+            $conexao->fecharConexao();
+        }
+        
+        //função para desabilitar a consignação
+        public function disableConsignacao($dataAtual, $id){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que atualiza o status
+            $stm = $PDO_conexao->prepare('UPDATE pedidoconsignacao SET idStatus = 0 WHERE dataFinal = ? AND idConsignacao = ?');
+            
+            //parâmetros enviados
+            $stm->bindParam(1, $dataAtual);
+            $stm->bindParam(2, $id);
+            
+            //execução do statement
+            $stm->execute();
+            
             //fechando a conexão
             $conexao->fecharConexao();
         }

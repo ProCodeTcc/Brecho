@@ -186,6 +186,21 @@
 			//retornando os dados
 			return $listProduto;
 		}
+        
+        //função para listar o produto a partir do preço
+		public function listarProdutoPreco($pesquisa, $min, $max){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$produtoDAO = new ProdutoDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $produtoDAO->selectByPreco($termo, $min, $max);
+
+			//retornando os dados
+			return $listProduto;
+		}
 		
 		//função que lista os produtos aleatóriamente
 		public function listarAleatorio(){

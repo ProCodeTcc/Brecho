@@ -68,7 +68,7 @@
                         //verificando o status
                         if(json.status == 'limite'){
                             //mostra mensagem de erro
-                            mostrarErro('Deve haver ao menos um usuário cadastrado!!');
+                            mostrarInfo('Deve haver ao menos um usuário cadastrado!!');
                         }
                     }
                 });

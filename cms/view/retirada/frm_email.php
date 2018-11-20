@@ -47,8 +47,8 @@
 	});
 </script>
 
+<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 <div class="form_container">
-	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 	<form class="frmEmail" id="frmEmail" name="frmEmail">
 		<div class="form_linha">
 			<label class="lbl_cadastro">
@@ -68,14 +68,14 @@
         
         <div class="form_linha">
 			<label class="lbl_cadastro">
-				Email:
+				Mensagem:
 			</label>
 			
 			<textarea class="txtdesc" name="txtmsg" id="txtmsg"></textarea>
 		</div>
 		
 		<div class="form_linha" id="btn_linha">
-			<input type="submit" class="sub_btn" value="CADASTRAR">
+			<input type="submit" class="sub_btn" value="ENVIAR">
 		</div>
 	</form>
 </div>

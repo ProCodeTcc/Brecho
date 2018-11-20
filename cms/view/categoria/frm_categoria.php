@@ -17,6 +17,7 @@
                 success: function(dados){
                     //conversão dos dados para JSON
                     json = JSON.parse(dados);
+                    $('.sub_btn').val('ATUALIZAR');
         
                     //colocando os valores nas caixas de texto
                     $('.txtnome').val(json.nomeCategoria);
@@ -33,6 +34,7 @@
 		if(id != ""){
             exibirDados(id);
             $('#tabs ul').show();
+            $('#fechar').hide();
         }
 		
 		//função para submeter o form
@@ -66,27 +68,33 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					alert(dados);
 					//conversão dos dados para JSON
 					json = JSON.parse(dados);
 
-					//verifica se foi inserido
-					if(json.status == 'sucesso'){
-						//mensagem de sucesso
-						mostrarSucesso('Categoria inserida com sucesso!!');
-					}else if(json.status == 'atualizado'){ //verifica se foi atualizado
-						//mensagem de sucesso
-						mostrarSucesso('Categoria atualizada com sucesso!!');
-					}else{
-						//mensagem de erro
-						mostrarErro('Ocorreu um erro ao inserir a categoria!!');
-					}
+                    if(id == ""){
+                        //verifica se foi inserido
+                        if(json.status == 'sucesso'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Categoria inserida com sucesso!!');
+                        }else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao inserir a categoria');
+                        }
+                    }else{
+                        if(json.status == 'atualizado'){ //verifica se foi atualizado
+                            //mensagem de sucesso
+                            mostrarSucesso('Categoria atualizada com sucesso!!');
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao atualizar a categoria!!');
+                        }
+                    }
 				}
 			});
 		});
 	});
 </script>
 
+<img class="fechar" id="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 <div class="form_container">
     <form class="frm_categoria" id="frmCategoria" name="frm_categoria">
         <div class="form_linha">
@@ -95,21 +103,6 @@
             </label>
             
             <input type="text" class="cadastro_input txtnome" name="txtnome" id="txtnome">
-        </div>
-        
-        <div class="form_linha">
-            <label class="lbl_cadastro">
-                Gênero
-            </label>
-            
-            <div class="radio">
-                <label for="masculino">Masculino</label>
-                <input type="radio" class="txtgenero" name="txtgenero" id="masculino" value="M">
-                
-                <label for="feminino">Feminino</label>
-                <input type="radio" class="txtgenero" name="txtgenero" id="feminino" value="F">
-            </div>
-            
         </div>
         
         <div class="form_linha" id="btn_linha">

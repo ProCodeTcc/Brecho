@@ -18,6 +18,7 @@
 			success: function(dados){
 				//convertendo os dados para json
 				json = JSON.parse(dados);
+                $('.sub_btn').val('ATUALIZAR');
 				
 				//colocando os valores nas caixas de texto
 				$('#txtnome').val(json.nome);

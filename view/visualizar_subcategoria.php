@@ -3,6 +3,12 @@
 	require_once($diretorio.'controller/controllerProduto.php');
     require_once('arquivos/check_login.php');
     $id = $_GET['idSubcategoria'];
+
+    if(isset($_GET['mobile'])){
+        $mobile = $_GET['mobile'];
+    }else{
+        $mobile = 'false';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -11,16 +17,26 @@
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery-3.2.1.min.js"></script>
-		
+		<script src="js/funcoes.js"></script>
+        
 		<script>
             //função para filtrar por classificação
 			function filtrarClassificacao(classificacao, idSubcategoria){
                 //pegando o nome do produto
                 var pesquisa = $('#categoria').data('pesquisa');
 
+                //verificando o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para mobile
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php';
+                }
+                
 				$.ajax({
 					type: 'POST', //tipo de requisição
-					url: 'arquivos/produtos_subcategoria.php', //url onde será enviada a requisição
+					url: url, //url onde será enviada a requisição
 					data: {tipoFiltro: 'classificacao', filtro: classificacao, termo:pesquisa, id:idSubcategoria}, //dados enviados
 					success: function(dados){
                         //colocando os dados na div
@@ -33,10 +49,19 @@
 			function filtrarTamanho(tamanho, idSubcategoria){
                 //pegando o nome do produto
                 var pesquisa = $('#categoria').data('pesquisa');
+                
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o celular
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php';
+                }
 
                 $.ajax({
 					type: 'POST', //tipo de requisição
-					url: 'arquivos/produtos_subcategoria.php', //url onde será enviada a requisição
+					url: url, //url onde será enviada a requisição
 					data: {tipoFiltro: 'tamanho', filtro: tamanho, termo:pesquisa, id:idSubcategoria}, //dados enviados
 					success: function(dados){
                         //colocando o conteúdo na div
@@ -49,11 +74,59 @@
             function filtrarCor(cor, idSubcategoria){
                 //pegando o conteúdo da pesquisa
                 var pesquisa = $('#categoria').data('pesquisa');
+                
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o celular
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php';
+                }
 
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos_subcategoria.php', //url onde será enviada a requisição
+                    url: url, //url onde será enviada a requisição
                     data: {tipoFiltro: 'cor', filtro:cor, termo:pesquisa, id:idSubcategoria}, //dados enviados
+                    success: function(dados){
+                        //colocando o conteúdo na div
+                        $('#categoria').html(dados);
+                    }
+                });
+            }
+            
+             //função para filtrar o produto pelo preco
+            function filtrarPreco(idSubcategoria){
+                //resgatando o conteúdo da pesquisa
+                var pesquisa = $('#categoria').data('pesquisa');
+                
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o celular
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php';
+                }
+                
+                if($(window).width() == '980'){
+                    //resgatando o valor mínimo
+                    var min = $('#preco .min').val();
+
+                    //resgatando o valor máximo
+                    var max = $('#preco .max').val();
+                }else{
+                    //resgatando o valor mínimo
+                    var min = $('.min').val();
+
+                    //resgatando o valor máximo
+                    var max = $('.max').val();
+                }
+                
+                $.ajax({
+                    type: 'POST', //tipo de requisião
+                    url: url, //url onde será enviada a requisição
+                    data: {tipoFiltro:'preco', min:min, max:max, termo:pesquisa, id:idSubcategoria}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
                         $('#categoria').html(dados);
@@ -65,10 +138,19 @@
             function filtrarMarca(marca, idSubcategoria){
                 //pegando o conteúdo da pesquisa
                 var pesquisa = $('#categoria').data('pesquisa');
+                
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o celular
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/subcategoria/produtos_subcategoria.php';
+                }
 
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos_subcategoria.php', //url onde será enviada a requisição
+                    url: url, //url onde será enviada a requisição
                     data: {tipoFiltro: 'marca', filtro:marca, termo:pesquisa, id:idSubcategoria}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
@@ -78,11 +160,17 @@
             }
 			
 			$(document).ready(function(){
+                if(verificarMobile() == true){
+                    filtroResponsivo();
+                }
+                
 				$('.filtrar').click(function(){
 					$('#categoria').children().empty();
                 });
 
                 $('#pesquisa').hide();
+                
+                verificarProdutos();
 			});
 		</script>
 		
@@ -103,11 +191,21 @@
         <div class="caixa_categoria">
                     <div class="categoria_pesquisa">
                         <div class="categoria_pesquisa_centro">
-                            <form name="search" method="POST" action="pesquisa.php">
+                            <form name="search" method="POST" action="pesquisa.php?mobile=<?php echo($mobile) ?>">
                                 <input type="search" name="txtpesquisa" class="campo_pesquisa_categoria"> 
                                 <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar">
                             </form>
                         </div>
+                        
+                        <?php
+                            if(isset($_GET['mobile'])){
+                                $mobile = $_GET['mobile'];
+
+                                if($mobile == 'true'){
+                                    require_once('arquivos/subcategoria/filtro_responsivo_subcategoria.php');
+                                }
+                            }
+                        ?>
                     </div>
                         <div class="categoria">
                             <div class="titulo_categoria_primeiro">
@@ -122,6 +220,16 @@
                             <div class="categoria_linha filtrar" onClick="filtrarClassificacao('C', <?php echo($id) ?>)">
                                 C
                             </div>
+                            
+                            <div class="titulo_categoria">
+                                Preço
+                            </div>
+
+                            <div class="preco_container">
+                                <input class="preco_min min" type="number" name="txtmin" placeholder="min">
+                                <input class="preco_max max" type="number" name="txtmax" placeholder="max" onblur="filtrarPreco(<?php echo($id) ?>)">
+                            </div>
+                            
                             <div class="titulo_categoria">
                                 Medidas
                             </div>
@@ -247,12 +355,16 @@
                             </a>
                      </div>
 					
-					<div id="resultado">
-					
-					</div>
-                        <div class="botao_categoria_responsivo"> 
-                            <img src="icones/categoria.png">
-                        </div>
+					<div class="nenhum_produto">
+                        <strong>NENHUM RESULTADO ENCONTRADO</strong>
+                        <p>Encontramos 0 resultado para sua busca</p>
+
+                        <strong>Dicas para melhorar sua busca</strong>
+                        <p>Verifique se não houve erro de digitação.</p>
+                        <p>Procure por um termo similar ou sinônimo.</p>
+                        <p>Tente procurar termos mais gerais e filtrar o resultado da busca.</p>
+                    </div>
+            
                   </div> 
         </main>
         <footer>

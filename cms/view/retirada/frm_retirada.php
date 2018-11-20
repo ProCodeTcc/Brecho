@@ -58,6 +58,7 @@
 			success: function(dados){
 				//conversão dos dados para json
 				json = JSON.parse(dados);
+                $('.sub_btn').val('ATUALIZAR');
 				
 				//resgatando os valores das caixas de texto
 				$('#txtpedido').val(json.idPedido);
@@ -174,8 +175,8 @@
 	});
 </script>
 
+<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 <div class="form_container">
-	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 	<form class="frmRetirada" data-id="<?php echo($id) ?>" id="frmRetirada" name="frmRetirada">
 		<div class="form_linha">
 			<label class="lbl_cadastro">
@@ -212,7 +213,7 @@
 		</div>
 		
 		<div class="form_linha" id="btn_linha">
-			<input type="submit" class="sub_btn" value="CADASTRAR">
+			<input type="submit" class="sub_btn" value="MARCAR">
 		</div>
 	</form>
 </div>

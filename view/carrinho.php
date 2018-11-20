@@ -63,7 +63,7 @@
                             ?>
 
                             <div class="produto_carrinho">
-                                <img src="icones/fechar.png" id="item<?php echo($produtos['id']) ?>" onClick="removerItem(<?php echo($produtos['id']) ?>)">
+                                <img src="icones/remover.png" id="item<?php echo($produtos['id']) ?>" onClick="removerItem(<?php echo($produtos['id']) ?>)">
                                 <div class="foto_carrinho">
                                     <img alt="#"  src="../cms/view/arquivos/<?php echo($produtos['imagem']) ?>">
                                 </div>

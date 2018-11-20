@@ -20,7 +20,7 @@
 				//colocando os valores nas caixas de texto
 				$('#txtnome').text(json.nomeProduto);
 				$('#txtpreco').text(json.preco);
-				$('#txtcor').text(json.cor);
+				$('#txtcor').text(json.nome);
 				$('#txtclassificacao').text(json.classificacao);
 				$('#txtmarca').text(json.marca);
 				$('#txtcategoria').text(json.categoria);

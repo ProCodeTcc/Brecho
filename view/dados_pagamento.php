@@ -5,6 +5,10 @@
         if(!$_SESSION['total'] > 0){
             header('location: login.php');
         }
+        
+        
+        $idCliente = $_SESSION['idCliente'];
+        $tipoCliente = $_SESSION['tipoCliente'];
     }else{
         header('location: login.php');
     }
@@ -16,9 +20,85 @@
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/funcoes.js"></script>
         
         <script>
+            //função para finalizar o pedido
+            function finalizarPedido(id, tipo){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: '../router.php?controller=cartao&modo=verificar', //parâmetros enviados
+                    data: {id:id, tipo:tipo},
+                    success: function(dados){
+                        //conversão dos dados para JSON
+                        json = JSON.parse(dados);
+                        
+                        //verificando se o cliente possui um cartão ativo
+                        if(json.status == 'desativado'){
+                            //mensagem de erro
+                            mostrarErro('Você não possui nenhum cartão ativo!!');
+                            
+                            //redirecionando o usuário
+                            redirecionarUsuario('cartao.php?status=desativado');
+                        }else{
+                            //verificando o status do pagamento
+                            var status = $('#dados').attr('data-pagamento');
+                            
+                            //verificando se é pra finalizar
+                            if(status == 'finalizar'){
+                                //mensagem de confirmação
+                                mostrarDialogo('Deseja finalizar o pagamento?')
+                            }
+                        }
+                    }
+                });
+            }
+            
+            //função para selecionar o cartão do cliente
+            function selecionarCartao(id, tipo){
+                $.ajax({
+                   type: 'POST', //tipo de requisição
+                    url: '../router.php?controller=cartao&modo=selecionar', //parâmetros enviados
+                    data: {id:id, tipo:tipo},
+                    success: function(dados){
+                        //conversão dos dados para JSON
+                        json = JSON.parse(dados);
+                        
+                        //limpando os dados
+                        $('.dados_esquedo').children('.linha_pagamento').empty();
+                        
+                        //preenchendo os dados do cartão
+                        $('#txtnome').html('Titular: ' + json.nomeTitular);
+                        $('#txtnumero').html('Número: ' + json.numeroCartao);
+                        $('#txtvencimento').html('Vencimento: ' + json.vencimento);
+                        $('#txtcodigo').html('Código: ' + json.codseguranca);
+                        
+                        //atualizando o status do pagamento
+                        $('#dados').attr('data-pagamento', 'finalizar');
+                        
+                    }
+                });
+            }
+            
+            //função para verificar a opção escolhida pelo cliente
+            function verificarOpcao(opcao){
+                //se for sim
+                if(opcao == 'sim'){
+                    //redireciona o cliente
+                    window.location.href='pedido_finalizado.php';
+                }else{
+                    //fecha a mensagem
+                    $('.mensagens').fadeOut(400);
+                }
+            }
+            
             $(document).ready(function(){
+                var id = $('#dados').attr('data-id');
+                var tipo = $('#dados').attr('data-tipo');
+                
+                //selecionando o cartão
+                selecionarCartao(id, tipo);
+                
                 $('#frmPedido').submit(function(e){
                     e.preventDefault();
                     $.ajax({
@@ -44,6 +124,60 @@
         </script>
     </head>
     <body>
+        <div class="mensagens">
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+                    
+                </div>
+    
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>          
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+                    
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+            
+            <div class="mensagem-dialog" id="dialog">
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+                
+                <div class="dialog">
+                    <div class="dialog-msg">
+                        Deseja finalizar o pagamento?
+                    </div>
+                    
+                    <div class="dialog_opcoes">
+                        <div class="dialog-yes" onclick="verificarOpcao('sim')">
+                            Sim
+                        </div>
+
+                        <div class="dialog-no" onclick="verificarOpcao('não')">
+                            Não
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <header>
             <?php
 				require_once('arquivos/header.php');
@@ -53,21 +187,21 @@
             <div class="linha">
                 Dados Do Pagamento
             </div>
-            <div class="caixa_dados_pagamento">
+            <div class="caixa_dados_pagamento" id="dados" data-id="<?php echo($idCliente) ?>" data-tipo="<?php echo($tipoCliente) ?>">
                 <div class="dados_esquedo">
                     <div class="titulo_pagamento">
                         Cartão de Crédito 
                     </div>
-                    <div class="linha_pagamento">
+                    <div class="linha_pagamento" id="txtnumero">
                         Numero do Cartão: 0000 0000 0000 0000
                     </div>
-                    <div class="linha_pagamento">
+                    <div class="linha_pagamento" id="txtnome">
                         Nome do Titular: Fulano da Silva
                     </div>
-                    <div class="linha_pagamento">
+                    <div class="linha_pagamento" id="txtcodigo">
                         Código de Segurança: 000
                     </div>
-                    <div class="linha_pagamento">
+                    <div class="linha_pagamento" id="txtvencimento">
                         Vencimento: 08/20
                     </div>
                     <div class="linha_pagamento">
@@ -76,6 +210,7 @@
                 </div>
                
                 <div class="dados_direito">
+<!--
                     <div class="titulo_pagamento_direito">
                         RESUMO DO PEDIDO 
                     </div>
@@ -99,6 +234,7 @@
                             Telefone: (11)4002-8922
                         </div>
                     </div>
+-->
                         
 <!--
                         <div class="tabela_produto">
@@ -139,9 +275,7 @@
                     ?>
                     </div>
                     <div class="linha_botao_dados">
-                        <form method="POST" id="frmPedido">
-                            <input class="botao_login" type="submit" value="Comprar">
-                        </form>
+                        <input class="botao_login" type="submit" value="Comprar" onclick="finalizarPedido(<?php echo($idCliente) ?>, '<?php echo($tipoCliente) ?>')">
                     </div>
                 </div>
             </div>

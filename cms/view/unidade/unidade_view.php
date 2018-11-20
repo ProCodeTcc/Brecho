@@ -76,11 +76,13 @@
 					url: url+'router.php', //url onde será enviada a requisição
 					data: {id:idItem, idEndereco:idEndereco, controller: 'unidade', modo: 'excluir'}, //parâmetros enviados
 					success: function(dados){
-						//mensagem
-						alert(dados);
-						
 						//listagem dos dados
 						listar();
+                        
+                        //conversão dos dados para JSON.
+                        if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao excluir a unidade');
+                        }
 					}
 				});
 			}
@@ -110,6 +112,38 @@
         <div class="container_modal">
             <div class="modal">
                 
+            </div>
+        </div>
+        
+        <div class="mensagens">
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
             </div>
         </div>
 
@@ -163,8 +197,8 @@
                 <div class="users_view">
 					<div class="users_view_title">
 						<div class="users_view_itens">#</div>
-						<div class="users_view_itens">Usuario</div>
-						<div class="users_view_itens">Nível</div>
+						<div class="users_view_itens">Nome</div>
+						<div class="users_view_itens">Cidade</div>
 						<div class="users_view_itens">Ações</div>
 					</div>
 

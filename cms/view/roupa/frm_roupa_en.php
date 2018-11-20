@@ -1,7 +1,8 @@
 <script>
     $(function(){
         var id = $('#frmRoupa').data('id');
-		
+        mudarModal('420','600');
+        
 		if(id != ""){
             $('#frmRoupa').attr('data-modo', 'atualizarTraducao');
 			buscarProduto(id, 'en');
@@ -9,7 +10,7 @@
     });
 </script>
 
-<div class="form_container" id="form_container_roupa">
+<div class="frm_ingles" id="form_container_roupa">
     <div class="form_linha">
         <label class="lbl_cadastro">Nome: </label>
         <input type="text" class="cadastro_input txtnome" name="txtnome" id="txtnome">

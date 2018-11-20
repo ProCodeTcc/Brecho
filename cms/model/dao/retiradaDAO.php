@@ -162,7 +162,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que deleta os dados
-			$stm = $PDO_conexao->prepare('DELETE FROM retirada WHERE idRetirada = ?');
+			$stm = $PDO_conexao->prepare('DELETE FaROM retirada WHERE idRetirada = ?');
 			
 			//parâmetros enviados
 			$stm->bindParam(1, $id);

@@ -30,7 +30,7 @@
 			//query que realiza a consulta
 			$sql = 'SELECT cp.idClienteFisico, p.*, f.caminhoImagem as imagem FROM clientefisico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
 			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
-			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientefisico as cf on cp.idClienteFisico = cf.idCliente';
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientefisico as cf on cp.idClienteFisico = cf.idCliente GROUP BY p.idProdutoAvaliacao';
 			
 			//armazenando o resultado em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -76,7 +76,7 @@
 			//query que realiza a consulta
 			$sql = 'SELECT cp.idClienteJuridico, p.*, f.caminhoImagem as imagem FROM clientejuridico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
 			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
-			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientejuridico as cj on cp.idClienteJuridico = cj.idCliente';
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientejuridico as cj on cp.idClienteJuridico = cj.idCliente GROUP BY p.idProdutoAvaliacao';
 			
 			//armazenando o resultado em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -120,7 +120,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que busca um produto e seus detalhes que envolvem outras tabelas
-			$stm = $PDO_conexao->prepare('SELECT p.idProdutoAvaliacao, p.nomeProduto, p.descricao, p.preco, p.classificacao, m.nomeMarca as marca, ct.nomeCategoria as categoria, c.cor, t.tamanho FROM produtoAvaliacao as p INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho WHERE idProdutoAvaliacao = ?');
+			$stm = $PDO_conexao->prepare('SELECT p.idProdutoAvaliacao, p.nomeProduto, p.descricao, p.preco, p.classificacao, m.nomeMarca as marca, ct.nomeCategoria as categoria, c.nome, t.tamanho FROM produtoAvaliacao as p INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho WHERE idProdutoAvaliacao = ?');
 			
 			//parâmetro enviado
 			$stm->bindParam(1, $id);

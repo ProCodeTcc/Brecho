@@ -16,7 +16,8 @@
 			data: {id:id, idioma:idioma, modo: 'buscar', controller: 'sobre'}, //dados enviados
 			success: function(dados){
 				$('.form').attr('data-lang', idioma);
-
+                $('.sub_btn').val('ATUALIZAR');
+                
 				json = JSON.parse(dados);
 				
 				//colocando os valores nas caixas de texto

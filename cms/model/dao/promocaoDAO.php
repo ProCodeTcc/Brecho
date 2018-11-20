@@ -132,7 +132,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que exclui a promoção do banco
-			$stm = $PDO_conexao->prepare('DELETE FROM promocao WHERE idPromocao = ?');
+			$stm = $PDO_conexao->prepare('DELETE FROM promocaao WHERE idPromocao = ?');
 			
 			//parâmetro enviado
 			$stm->bindParam(1, $id);

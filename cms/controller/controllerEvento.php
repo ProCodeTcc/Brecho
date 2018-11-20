@@ -206,7 +206,7 @@
 				//limita a exclusão se houver apenas 1
 				$status = array('status' => 'limite');
                 
-                return $status;
+                return json_encode($status);
 			}else{
 				//chamada da função que exclui um evento
 				$status = $eventoDAO->Delete($id);

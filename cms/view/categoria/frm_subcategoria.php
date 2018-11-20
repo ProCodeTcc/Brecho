@@ -6,7 +6,9 @@
     }
     
     if(isset($_POST['idSubcategoria'])){
-        $id = $_POST['idSubcategoria'];
+        $idSubcategoria = $_POST['idSubcategoria'];
+    }else{
+        $idSubcategoria = null;
     }
 ?>
 
@@ -22,6 +24,7 @@
             success: function(dados){
                 //conversão dos dados para JSON
                 json = JSON.parse(dados);
+                $('.sub_btn').val('ATUALIZAR');
     
                 //colocando os valores nas caixas de texto
                 $('.txtnome').val(json.nome);
@@ -81,17 +84,23 @@
 				success: function(dados){
                     //conversão dos dados para JSON
                     json = JSON.parse(dados);
-
-                    //verificando se foi inserido
-                    if(json.status == 'inserido'){
-                        //mensagem de sucesso
-                        mostrarSucesso('Subcategoria inserida com sucesso!!');
-                    }else if(json.status == 'atualizado'){ //verificando se foi atualizado
-                        //mensagem de sucesso
-                        mostrarSucesso('Subcategoria atualizada com sucesso!!');
+                    
+                    if(idSubcategoria == ''){
+                        //verificando se foi inserido
+                        if(json.status == 'inserido'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Subcategoria inserida com sucesso!!');
+                        }else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao inserir a subcategoria');
+                        }
                     }else{
-                        //mensagem de erro
-                        mostrarErro('Ocorreu um erro ao realizar essa operação..');
+                        if(json.status == 'atualizado'){ //verificando se foi atualizado
+                            //mensagem de sucesso
+                            mostrarSucesso('Subcategoria atualizada com sucesso!!');
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao atualizar a subcategoria..');
+                        }
                     }
 				}
 			});
@@ -99,9 +108,9 @@
 	});
 </script>
 
-<img class="close" src="../imagens/fechar.png" onclick="fecharModal()">
+<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 <div class="form_container">
-	<form class="frm_categoria" data-id="<?php echo($id) ?>" data-idSubcategoria="<?php echo($id) ?>" id="frmSubcategoria" name="frm_categoria">
+	<form class="frm_categoria" data-id="<?php echo($id) ?>" data-idSubcategoria="<?php echo($idSubcategoria) ?>" id="frmSubcategoria" name="frm_categoria">
 		<div class="form_linha">
 			<label class="lbl_cadastro">
 				Nome:

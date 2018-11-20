@@ -87,12 +87,11 @@
                     json = JSON.parse(dados);
                     
                     if(json.status == 'limite'){
-                        mostrarErro('Deve haver ao menos um evento cadastrado');
+                        mostrarInfo('Deve haver ao menos um evento cadastrado');
                     }else if(json.status == 'erro'){
-                        mostrarInfo('Ocorreu um erro ao realizar a exclusão');
+                        mostrarErro('Ocorreu um erro ao realizar a exclusão');
                     }
-                    
-					}
+				}
 			});
 		}
 		

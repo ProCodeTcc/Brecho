@@ -155,7 +155,6 @@
 			success: function(dados){
 				$('#frmRoupa').attr('data-lang', idioma);
 				$('.imagens_container').hide();
-				mudarModal('600','600');
 
 				//conversão dos dados para json
 				json = JSON.parse(dados);
@@ -186,8 +185,6 @@
 	}
 	
 	$(document).ready(function(){
-		mudarModal('680', '600');
-		
 		$('#tabs').tabs();
 		
 		$('#frmRoupa').submit(function(e){
@@ -243,7 +240,7 @@
                         listar();
                     }else if(json.status == 'erro'){
                         //mostra mensagem de erro
-                        mostrarErro('Ocorreu um erro ao inserir o produto!!');
+                        mostrarErro('Ocorreu um erro ao atualizar o produto!!');
                     }
 				}
 			});

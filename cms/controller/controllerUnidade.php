@@ -63,7 +63,9 @@
 			//resgatando o ID do Endereço após a inserção
 			$idEndereco = $enderecoDAO->Insert($enderecoClass);
 			
-			$unidadeDAO->InsertUnidadeEndereco($idUnidade, $idEndereco);
+			$status = $unidadeDAO->InsertUnidadeEndereco($idUnidade, $idEndereco);
+            
+            echo($status);
 		}
 		
 		//função para atualizar uma unidade
@@ -110,11 +112,12 @@
 			$enderecoDAO = new EnderecoDAO();
 			
 			//chamada da função que atualiza a unidade
-			$unidadeDAO->Update($unidadeClass);
+			$status = $unidadeDAO->Update($unidadeClass);
 			
 			//chamada da função que atualiza o endereço
 			$enderecoDAO->Update($enderecoClass);
 			
+            return $status;
 		}
 		
 		//função que lista as unidades
@@ -159,7 +162,9 @@
 			$unidadeDAO = new UnidadeDAO();
 			
 			//chamada da função que deleta uma unidade
-			$unidadeDAO->Delete($id, $idEndereco);
+			$status = $unidadeDAO->Delete($id, $idEndereco);
+            
+            echo($status);
 		}
 
 		//função para pesquisar uma unidade

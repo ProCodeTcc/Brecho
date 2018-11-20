@@ -104,14 +104,27 @@
                 processData: false,
                 async: true,
 				success: function(dados){
-					//listagem dos dados
-					listar();
-					
-					//mensagem
-					alert(dados);
-					
-					//fechando a modal
-					$('.container_modal').fadeOut(400);
+					//conversão dos dados para JSON.
+                    json = JSON.parse(dados);
+                    
+                    if(id == ''){
+                        if(json.status == 'sucesso'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Unidade inserida com sucesso');
+                            //listagem dos dados
+                           listar();
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao inserir a unidade');
+                        }
+                    }else{
+                        if(json.status == 'atualizado'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Unidade atualizada com sucesso');
+                        }else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao atualizar a unidade');
+                        }
+                    }
 				}
 			});
 		});

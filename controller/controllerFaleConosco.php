@@ -45,8 +45,9 @@
             $faleConoscoDAO = new FaleConoscoDAO();
             
             //chamada da função para inserir dados
-            $faleConoscoDAO::Insert($faleConoscoClass);
+            $status = $faleConoscoDAO->Insert($faleConoscoClass);
             
+            return $status;
         }
     }
 ?>

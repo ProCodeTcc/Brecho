@@ -1,10 +1,12 @@
 <script>
     $(function(){
+        mudarModal('820', '600');
         var id = $('#frmRoupa').data('id');
         
 		if(id != ""){
             buscarProduto(id, 'pt');
             $('#frmRoupa').attr('data-modo', 'editar');
+			mudarModal('700','600');
 		}
 
         listarCategoria();

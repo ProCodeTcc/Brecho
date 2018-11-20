@@ -102,7 +102,7 @@
                             </div>
                         </a>
                         <a href="cartao.php">
-                            <div class="botao_dados">
+                            <div class="botao_dados item3">
                                 <div class="icone_dados">
                                     <img alt="#" src="icones/cartao.png">
                                 </div>

@@ -10,22 +10,30 @@
 			switch($modo){
 				case 'qtdA':
 					$controllerEnquete = new controllerEnquete();
-					$controllerEnquete->atualizarQtdA();
+					$status = $controllerEnquete->atualizarQtdA();
+                    
+                    echo($status);
 				break;
 				
 				case 'qtdB':
 					$controllerEnquete = new controllerEnquete();
-					$controllerEnquete->atualizarQtdB();
+					$status = $controllerEnquete->atualizarQtdB();
+                    
+                    echo($status);
 				break;
 					
 				case 'qtdC':
 					$controllerEnquete = new controllerEnquete();
-					$controllerEnquete->atualizarQtdC();
+					$status = $controllerEnquete->atualizarQtdC();
+                    
+                    echo($status);
 				break;
 					
 				case 'qtdD':
 					$controllerEnquete = new controllerEnquete();
-					$controllerEnquete->atualizarQtdD();
+					$status = $controllerEnquete->atualizarQtdD();
+                    
+                    echo($status);
 				break;
 			}
 		break;
@@ -34,8 +42,9 @@
             require_once('controller/controllerFaleConosco.php');
             
             $controllerFaleConosco = new controllerFaleConosco();
-            $controllerFaleConosco->inserirFaleConosco();
+            $status = $controllerFaleConosco->inserirFaleConosco();
 
+            echo $status;
         break;
             
         case 'ClienteFisico':
@@ -333,6 +342,31 @@
                     
                     $status = $controllerCartao->excluirCartao($id);
                     echo $status;
+                break;
+                    
+                case 'status':
+                    $id = $_POST['id'];
+                    $status = $_POST['status'];
+                    $controllerCartao = new controllerCartao();
+                    $controllerCartao->atualizarStatus($id, $status);
+                break;
+                    
+                case 'verificar':
+                    $id = $_POST['id'];
+                    $tipo = $_POST['tipo'];
+                    
+                    $controllerCartao = new controllerCartao();
+                    $status = $controllerCartao->verificarCartao($id, $tipo);
+                    echo($status);
+                break;
+                    
+                case 'selecionar':
+                    $id = $_POST['id'];
+                    $tipo = $_POST['tipo'];
+                    
+                    $controllerCartao = new controllerCartao();
+                    $listCartao = $controllerCartao->selecionarAtivo($id, $tipo);
+                    echo($listCartao);
                 break;
             }
         break;

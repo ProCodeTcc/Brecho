@@ -1,9 +1,15 @@
 <?php
 	if(isset($_POST['tipoFiltro'])){
 		$tipoFiltro = $_POST['tipoFiltro'];
-		$filtro = $_POST['filtro'];
-        $idCategoria = $_POST['id'];
+        
+        if(isset($_POST['id'])){
+            $idCategoria = $_POST['id'];
+        }
 
+        if(isset($_POST['filtro'])){
+            $filtro = $_POST['filtro'];
+        }
+        
         if(!empty($_POST['termo'])){
             $pesquisa = $_POST['termo'];
         }else{
@@ -15,6 +21,14 @@
     require_once($diretorio.'controller/controllerProduto.php');
     require_once($diretorio.'controller/controllerCategoria.php');
 ?>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/funcoes.js"></script>
+<script>
+    $(function(){
+       verificarProdutos(); 
+    });
+</script>
 
 <div class="caixa_categoria">
 	<div class="categoria_pesquisa">
@@ -36,6 +50,16 @@
 			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('C', <?php echo($idCategoria) ?>)">
 				C
 			</div>
+            
+            <div class="titulo_categoria">
+                Preço
+            </div>
+
+            <div class="preco_container">
+                <input class="preco_min" id="min" type="number" name="txtmin" placeholder="min">
+                <input class="preco_max" id="max" type="number" name="txtmax" placeholder="max" onblur="filtrarPreco(<?php echo($idCategoria) ?>)">
+            </div>
+            
 			<div class="titulo_categoria">
 				Medidas
 			</div>
@@ -127,7 +151,11 @@
 					$rsFiltro = $listCategoria->listarCategoriaCor($idCategoria, $filtro, $pesquisa);
 				}else if($tipoFiltro == 'marca'){
 					$rsFiltro = $listCategoria->listarCategoriaMarca($idCategoria, $filtro, $pesquisa);
-				}
+				}else if($tipoFiltro == 'preco'){
+                    $min = $_POST['min'];
+                    $max = $_POST['max'];
+                    $rsFiltro = $listCategoria->listarCategoriaPreco($pesquisa, $min, $max, $idCategoria);
+                }
 
 
 				$cont = 0;
@@ -172,9 +200,16 @@
 			</a>
 	 </div>
 
-	<div id="resultado">
-	
-	</div>
+	<div class="nenhum_produto">
+        <strong>NENHUM RESULTADO ENCONTRADO</strong>
+        <p>Encontramos 0 resultado para sua busca</p>
+
+        <strong>Dicas para melhorar sua busca</strong>
+        <p>Verifique se não houve erro de digitação.</p>
+        <p>Procure por um termo similar ou sinônimo.</p>
+        <p>Tente procurar termos mais gerais e filtrar o resultado da busca.</p>
+    </div>
+    
 		<div class="botao_categoria_responsivo"> 
 			<img src="icones/categoria.png">
 		</div>

@@ -21,7 +21,6 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //resgatando os valores das caixas de texto
                 $nome = $_POST['txtnome'];
-                $genero = $_POST['txtgenero'];
             }
 
             //instância da classe Categoria
@@ -29,7 +28,6 @@
 
             //setando os atributos
             $categoriaClass->setNome($nome);
-            $categoriaClass->setGenero($genero);
 
             //instância da classe CategoriaDAO
             $categoriaDAO = new CategoriaDAO();
@@ -47,7 +45,7 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //resgatando os valores das caixas de texto
                 $nome = $_POST['txtnome'];
-                $genero = $_POST['txtgenero'];
+                $id = $_POST['id'];
             }
 
             //instância da classe Categoria
@@ -55,7 +53,7 @@
 
             //setando os atributos
             $categoriaClass->setNome($nome);
-            $categoriaClass->setGenero($genero);
+            $categoriaClass->setId($id);
 
             //instância da classe CategoriaDAO
             $categoriaDAO = new CategoriaDAO();

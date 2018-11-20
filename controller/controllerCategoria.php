@@ -145,5 +145,35 @@
 			//retornando os dados
 			return $listProduto;
 		}
+        
+        //função para listar o produto a partir do preço e da categoria
+		public function listarCategoriaPreco($pesquisa, $min, $max, $idCategoria){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$categoriaDAO = new CategoriaDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $categoriaDAO->selectByPreco($termo, $min, $max, $idCategoria);
+
+			//retornando os dados
+			return $listProduto;
+		}
+        
+        //função para listar o produto a partir do preço e da subcategoria
+		public function listarSubcategoriaPreco($pesquisa, $min, $max, $idSubcategoria){
+			//formatando a pesquisa
+			$termo = '%'.$pesquisa.'%';
+
+			//instância da classe ProdutoDAO
+			$subcategoriaDAO = new SubcategoriaDAO();
+
+			//armazenando os dados em uma variável
+			$listProduto = $subcategoriaDAO->selectByPreco($termo, $min, $max, $idSubcategoria);
+
+			//retornando os dados
+			return $listProduto;
+		}
     }
 ?>

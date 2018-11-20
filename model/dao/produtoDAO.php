@@ -176,8 +176,6 @@
 			if($cont != 0){
 				//retornando um produto
                 return $listProdutoCategoria;
-			}else{
-				echo('Não há produtos nessa categoria');
 			}
 			
 			$conexao->fecharConexao();
@@ -273,8 +271,6 @@
 			if($cont != 0){
 				//retornando os dados
 				return $listProdutos;
-			}else{
-				echo('nenhum produto encontrado');
 			}
 			
 			//fechando a conexão
@@ -430,8 +426,10 @@
 				$cont++;
 			}
 
-			//retornando os dados
-			return $listProduto;
+			if($cont != 0){
+                //retornando os dados
+                return $listProduto;
+            }
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -514,8 +512,10 @@
 				$cont++;
 			}
 
-			//retornando os dados
-			return $listProdutos;
+			if($cont != 0){
+                //retornando os dados
+                return $listProdutos;
+            }
 
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -561,8 +561,6 @@
 			if($cont != 0){
 				//retornando os dados
 				return $listProdutos;
-			}else{
-				echo('nenhum produto encontrado');
 			}
 			
 			//fechando a conexão
@@ -578,7 +576,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//quey que faz a consulta
-			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 GROUP BY p.idProduto ORDER BY rand() limit 3';
+			$sql = 'SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 GROUP BY p.idProduto ORDER BY rand() limit 3';
 			
 			//armazenando o resultado em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -740,6 +738,56 @@
 			
 			return $listProduto;
 		}
+        
+        //função para selecionar o produto pelo preço
+        public function selectByPreco($pesquisa, $min, $max){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+			
+            //chamada da função que conecta com o banco
+			$PDO_conexao = $conexao->conectarBanco();
+
+            //query que busca os dados
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE p.status = 1 and p.nomeProduto LIKE ? and p.preco >= ? and p.preco <= ? GROUP BY p.idProduto');
+
+            //parâmetros enviados
+            $stm->bindParam(1, $pesquisa);
+			$stm->bindValue(2, $min);
+            $stm->bindValue(3, $max);
+
+            //execução do statement
+			$stm->execute();
+
+            //contador
+			$cont = 0;
+
+            //percorrendo os dados
+			while($rsProduto = $stm->fetch(PDO::FETCH_OBJ)){
+                //criando um novo Produto
+				$listProduto[] = new Produto();
+
+                //setando os atributos
+				$listProduto[$cont]->setId($rsProduto->idProduto);
+				$listProduto[$cont]->setImagem($rsProduto->imagem);
+				$listProduto[$cont]->setNome($rsProduto->nome);
+				$listProduto[$cont]->setPreco($rsProduto->preco);
+				$listProduto[$cont]->setTamanho($rsProduto->tamanho);
+
+                //incrementando o contador
+				$cont++;
+			}
+
+            //verificando os dados
+			if($cont != 0){
+                //retornando os dados
+				return $listProduto;
+			}else{
+				echo('nenhum produto encontrado...');
+			}
+
+            //fechando a conexão
+			$conexao->fecharConexao();
+        }
 		
 	}
 ?>

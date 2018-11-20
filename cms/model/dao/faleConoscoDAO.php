@@ -94,13 +94,22 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que deleta os dados do banco
-			$stm = $PDO_conexao->prepare('DELETE FROM faleconosco WHERE idRegistro = ?');
+			$stm = $PDO_conexao->prepare('DELETE FaROM faleconosco WHERE idRegistro = ?');
 			
 			//parâmetros que serão enviados
 			$stm->bindParam(1, $id);
 			
-			//executando o statement
-			$stm->execute();
+            //executando o statement
+            $stm->execute();
+            
+			//verificando o retorno
+			if($stm->rowCount() == 0){
+                //atualizando status para erro
+                $status = array('status' => 'erro');
+                
+                //retornando o status em JSON
+                return json_encode($status);
+            }
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

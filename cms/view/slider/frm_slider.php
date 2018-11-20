@@ -16,6 +16,7 @@
 			url: url+'router.php', //url onde será enviada a requisição
 			data: {id:id, controller: 'slider', modo: 'buscar'}, //parâmetros enviados
 			success: function(dados){
+                $('.sub_btn').val('ATUALIZAR');
 				//conversão dos dados para JSON
 				json = JSON.parse(dados);
 				
@@ -101,19 +102,25 @@
                     //conversão dos dados para JSON
 				    json = JSON.parse(dados);
                     
-                    //verificando se foi inserido
-                    if(json.status == 'inserido'){
-                        //mensagem de sucesso
-                        mostrarSucesso('Slider inserido com sucesso');
+                    if(id == ''){
+                        //verificando se foi inserido
+                        if(json.status == 'inserido'){
+                            //mensagem de sucesso
+                            mostrarSucesso('Imagem inserida com sucesso');
 
-                        //listagem dos dados
-					   listar();
-                    }else if(json.status == 'atualizado'){//verificando se foi atualizado
-                        //mensagem de sucesso
-                        mostrarSucesso('Slider atualizado com sucesso');
+                            //listagem dos dados
+                           listar();
+                        }else if(json.status == 'erro'){
+                            mostrarErro('Ocorreu um erro ao inserir a imagem');
+                        }
                     }else{
-                        //mensagem de erro
-                        mostrarErro('Ocorreu um erro ao realizar a operação');
+                        if(json.status == 'atualizado'){//verificando se foi atualizado
+                            //mensagem de sucesso
+                            mostrarSucesso('Imagem atualizada com sucesso');
+                        }else if(json.status == 'erro'){
+                            //mensagem de erro
+                            mostrarErro('Ocorreu um erro ao atualizar a imagem');
+                        }
                     }
 				}
 			});
@@ -122,6 +129,7 @@
 	});
 </script>
 
+<img class="fechar" src="../imagens/fechar.png">
 <div class="form_container">
 	<form method="post" class="frm_slider" data-id="<?php echo($id) ?>" id="frmSlider" name="frmSlider" enctype="multipart/form-data">
 		<div class="form_linha">

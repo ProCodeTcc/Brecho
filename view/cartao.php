@@ -2,6 +2,12 @@
     require_once('arquivos/check_login.php');
     $tipoCliente = $_SESSION['tipoCliente'];
     $id = $_SESSION['idCliente'];
+    
+    if(isset($_GET['status'])){
+        $status = $_GET['status'];
+    }else{
+        $status = '';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +23,7 @@
 		<script>
             function adicionar(){
                 $('.container_modal').fadeIn(400);
-                $('.modal').height(300);
+                $('#frmCartao').trigger('reset');
             }
             
             //função para se existe algum cartão
@@ -37,6 +43,24 @@
                 }
             }
             
+            //função para verificar se o usuário ativou o cartão
+            function validarStatus(){
+                //armazendando o status em uma variável
+                var ativo = $('#prosseguir').attr('data-ativo');
+                
+                //verificando se foi ativado
+                if(ativo == 'false'){
+                    //se não foi, mostra uma mensagem
+                    mostrarInfo('Você deve ativar um cartão para prosseguir com o pagamento');
+                }else if(ativo == 'true'){
+                    //se foi, mostra outra mensagem
+                    mostrarInfo('Você será redirecionado para continuar com o pagamento');
+                    
+                    //redireciona o usuário
+                    redirecionarUsuario('dados_pagamento.php?status=ativo');
+                }
+            }
+            
             //função para listar os cartões
             function listar(){
                 $.ajax({
@@ -48,6 +72,31 @@
                         
                         //verificando os dados
                         verificarCartao();
+                    }
+                });
+            }
+            
+            //função para atualizar o status
+            function atualizarStatus(id, status){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: '../router.php?controller=cartao&modo=status', //parâmetros enviados
+                    data: {id:id, status:status}, //dados enviados
+                    success: function(dados){
+                        //listando os dados com o status atualizado
+                        listar();
+                        
+                        //armazenando o status do cartão em uma variável
+                        var cartaoativo = $('#dados').attr('data-status');
+                        
+                        //verificando se está desativado
+                        if(cartaoativo == 'desativado'){
+                            //verificando se está ativando o cartão
+                            if(status == 0){
+                                //mudando o status do data-atributo
+                                $('#prosseguir').attr('data-ativo', 'true');
+                            }
+                        }
                     }
                 });
             }
@@ -99,6 +148,18 @@
 				checarLogin(<?php echo($login) ?>);
                 listar();
                 
+                //armazenando o status em uma variável
+                var status = $('#dados').attr('data-status');
+                
+                //verificando se está desativado
+                if(status == 'desativado'){
+                    //mostra uma mensagem
+                    mostrarInfo('Você deve selecionar ativar um cartão para prosseguir com o pagamento');
+                    
+                    //mostra o botão para prosseguir
+                    $('#prosseguir').show();
+                }
+                
                 $('#frmCartao').submit(function(e){
                    e.preventDefault();
                     
@@ -146,7 +207,7 @@
                                     
                                     //mostrando os dados
                                     $('.cartao_full').show();
-                                }else{
+                                }else if(json.status == 'erro'){
                                     //mensagem de erro
                                     mostrarErro('Ocorreu um erro ao adicionar o cartao');
                                 }
@@ -157,7 +218,7 @@
                                     
                                     //mensagem de erro
                                     listar();
-                                }else{
+                                }else if(json.status == 'erro'){
                                     //mensagem de erro
                                     mostrarErro('Ocorreu um erro ao atualizar o cartão');
                                 }
@@ -165,6 +226,24 @@
                         }
                     });
                 });
+                
+                if(verificarMobile() == true){
+                    //removendo os títulos dos inputs
+                    $('#frmCartao').find('div.titulo_cadastro_usuario_mini').remove();
+                    $('#frmCartao').find('div.titulo_cadastro_usuario').remove();
+                    
+                    //adicionando placeholders
+                    $('#txtcartao').attr('placeholder', 'Número do Cartão');
+                    $('#txttitular').attr('placeholder', 'Nome do Titular');
+                    $('#txtcodigo').attr('placeholder', 'Cod. de Segurança');
+                    $('#txtvencimento').attr('placeholder', 'Vencimento');
+                
+                    //trocando a classe do tamanho das linhas
+                    $('div.linha_cadastro_usuario_mini').removeClass('linha_cadastro_usuario_mini').addClass('linha_cadastro_usuario');
+
+                    //trocando a classe do tamanho dos campos
+                    $('input.campo_cadastro_usuario_mini').removeClass('campo_cadastro_usuario_mini').addClass('campo_cadastro_usuario');
+                }
             });
 		</script>
 		
@@ -176,7 +255,7 @@
     </head>
     <body>
         <div class="container_modal">
-            <div class="modal">
+            <div class="modal modal_cartao">
                 <img class="close" src="icones/fechar.png" onclick="fecharModal()">
                 <div class="informacao_conta">
                      <form name="frmCartao" id="frmCartao" method="post" action="../router.php?controller=cartao&modo=inserir&tipo=<?php echo($tipoCliente) ?>&id=<?php echo($id) ?>">
@@ -275,7 +354,7 @@
             </div>
             
             <div class="cartao_full">
-                <div class="cartao_container" id="dados">
+                <div class="cartao_container" id="dados" data-status="<?php echo($status) ?>">
                     
                 </div>
             </div>
@@ -290,6 +369,10 @@
                         <input class="botao_cadastro" type="button" value="adicionar" onclick="adicionar()">
                     </div>
                 </div>
+            </div>
+            
+            <div id="prosseguir" data-ativo="false">
+                    <input class="botao_cadastro" type="button" value="PROSSEGUIR" onclick="validarStatus()">
             </div>
         </main>
         <footer>

@@ -93,7 +93,7 @@
                     if(json.status == 'atualizado'){
                         //mensagem de sucesso
                         mostrarSucesso('Dados atualizados com sucesso');
-                    }else{
+                    }else if(json.status == 'erro'){
                         //mensagem de erro
                         mostrarErro('Ocorreu um erro ao atualizar os dados');
                     }
@@ -194,58 +194,7 @@
 			</div>
 
 		</div>
-
-		<div class="titulo_atualizar">
-			Adicionar Cartão 
-		</div>
-
-		<div class="informacao_conta">
-			 <div class="titulo_cadastro_usuario">
-				Nome do Titular*
-			</div>
-			<div class="linha_cadastro_usuario">
-				<input class="campo_cadastro_usuario" type="text" onkeypress="return validar(event,'number')">
-			</div>
-
-			<div class="titulo_cadastro_usuario">
-				Numero do Cartão*
-			</div>
-			<div class="linha_cadastro_usuario">
-				<input class="campo_cadastro_usuario" type="text" onkeypress="return validar(event,'caracter')">
-
-			</div>
-			<div class="titulo_cadastro_usuario_mini">
-				Cód de Segurança*
-			 </div>
-
-			<div class="titulo_cadastro_usuario_mini">
-				Vencimento*
-			 </div>
-
-			<div class="titulo_cadastro_usuario_mini">
-				Bandeira*
-			 </div>
-
-			<div class="linha_cadastro_usuario_mini">
-				<input class="campo_cadastro_usuario_mini" type="text" onkeypress="return validar(event,'caracter')" maxlength="4">
-			</div>
-
-			<div class="linha_cadastro_usuario_mini">
-
-				<select  class="campo_cadastro_usuario_mini"> 
-					<option>01/20</option>
-				</select>
-			</div>
-
-			<div class="linha_cadastro_usuario_mini">
-				 <select  class="campo_cadastro_usuario_mini" >
-					 <option>Visa</option>
-					 <option>Mastercard</option>
-					 <option>Elo</option>
-				</select>
-			</div>
-		</div>
-
+        
 		<div class="titulo_atualizar">
 			Atualizar Informações de Endereço 
 		</div>

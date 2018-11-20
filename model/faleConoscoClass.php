@@ -32,7 +32,7 @@
         }
         
         public function setNomePessoa($nomePessoa){
-            $this->nome=$nomePessoa;
+            $this->nomePessoa=$nomePessoa;
         }
         
         public function setEmail($email){
@@ -63,7 +63,7 @@
         }
         
         public function getNomePessoa(){
-            return $this->nome;
+            return $this->nomePessoa;
         }
         
         public function getEmail(){

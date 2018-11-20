@@ -176,6 +176,12 @@
 											Promoção
 										</a>
 									</li>
+                                    
+                                    <li class="submenu-itens">
+										<a class="paginas_link" href="categoria/categoria_view.php">
+											Categorias
+										</a>
+									</li>
 									
 									<li class="submenu-itens">
 										<a class="paginas_link" href="retirada/retirada_view.php">

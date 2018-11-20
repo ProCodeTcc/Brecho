@@ -26,6 +26,7 @@
     }
     
     $(function(){
+        mudarModal('420','600');
         var id = $('#frmRoupa').data('id');
 		if(id != ""){
             verificarTraducao(id);
@@ -33,7 +34,7 @@
     });
 </script>
 
-<div class="form_container" id="form_container_roupa">
+<div class="frm_ingles" id="form_container_roupa">
     <div class="form_linha">
         <label class="lbl_cadastro">Nome: </label>
         <input type="text" class="cadastro_input txtnome" name="txtnome" id="txtnome">

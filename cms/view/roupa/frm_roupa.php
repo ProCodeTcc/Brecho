@@ -155,7 +155,6 @@
 			success: function(dados){
 				$('#frmRoupa').attr('data-lang', idioma);
 				$('.imagens_container').hide();
-				mudarModal('600','600');
 
 				//conversão dos dados para json
 				json = JSON.parse(dados);
@@ -186,8 +185,6 @@
 	}
 	
 	$(document).ready(function(){
-		mudarModal('680', '600');
-		
 		$('#tabs').tabs();
 		$('#tabs').tabs('disable', 1);
 		

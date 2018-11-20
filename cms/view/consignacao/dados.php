@@ -24,8 +24,10 @@
 		$cont = 0;
 
 		$rsProdutos = $listProdutos->listarProdutos();
+        $rsConsignacao = $listProdutos->listarData();
 
 		while($cont < count($rsProdutos)){
+        $listProdutos->verificarData($rsConsignacao[$cont]->getDtTermino(), $rsConsignacao[$cont]->getId());
 	?>
 	<div class="produtos">
 		<div class="produtos_imagem">

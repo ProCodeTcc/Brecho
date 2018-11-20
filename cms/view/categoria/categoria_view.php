@@ -2,7 +2,7 @@
     session_start();
     $usuario = $_SESSION['usuario_cms'];
 	$idNivel = $_SESSION['nivel'];
-	$idPagina = 13;
+	$idPagina = 16;
 	if(isset($_SESSION['imagem'])){
 		$imagem = $_SESSION['imagem'];
 	}
@@ -164,13 +164,21 @@
 		
 		<div class="mensagens">
 			<div class="mensagem-sucesso" id="sucesso">
-				<div class="close" onclick="fecharMensagem()">
+                <div class="msg">
+                
+                </div>
+				
+                <div class="close" onclick="fecharMensagem()">
 					x
 				</div>
 			</div>
 	
 			<div class="mensagem-erro" id="erro">
-				<div class="close" onclick="fecharMensagem()">
+                <div class="msg">
+                
+                </div>
+				
+                <div class="close" onclick="fecharMensagem()">
 					x
 				</div>
 				
@@ -201,7 +209,10 @@
             <span class="page_title">Categorias</span>
 
             <div class="page_search_container">
-                <input type="text" class="page_search">
+                <input type="search" class="page_search" id="pesquisar" onkeydown="pesquisar(event)">
+                <div class="img_pesquisa">
+                    <img src="../imagens/search.png" onmousedown="pesquisar(event)">
+                </div>
             </div>
 
             <button class="page_btn" onclick="adicionar();" id="adicionar" data-modo="novo">
@@ -225,7 +236,6 @@
                     <div class="users_view_title">
                         <div class="users_view_itens">#</div>
                         <div class="users_view_itens">Nome</div>
-						<div class="users_view_itens">Cor</div>
                         <div class="users_view_itens">Ações</div>
                     </div>
 

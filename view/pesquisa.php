@@ -6,6 +6,12 @@
     if(isset($_POST['txtpesquisa'])){
         $pesquisa = $_POST['txtpesquisa'];
     }
+    
+    if(isset($_GET['mobile'])){
+        $mobile = 'true';
+    }else{
+        $mobile = 'false';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +20,7 @@
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/funcoes.js"></script>
 		
 		<script>
             //função para filtrar por classificação
@@ -21,9 +28,18 @@
                 //pegando o nome do produto
                 var pesquisa = $('#categoria').data('pesquisa');
 
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o mobile
+                    url = 'arquivos/pesquisa/produtos.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/pesquisa/produtos.php';
+                }
+                
 				$.ajax({
 					type: 'POST', //tipo de requisição
-					url: 'arquivos/produtos.php', //url onde será enviada a requisição
+					url: url, //url onde será enviada a requisição
 					data: {tipoFiltro: 'classificacao', filtro: classificacao, termo:pesquisa}, //dados enviados
 					success: function(dados){
                         //colocando os dados na div
@@ -37,9 +53,18 @@
                 //pegando o nome do produto
                 var pesquisa = $('#categoria').data('pesquisa');
 
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o mobile
+                    url = 'arquivos/pesquisa/produtos.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/pesquisa/produtos.php';
+                }
+                
                 $.ajax({
 					type: 'POST', //tipo de requisição
-					url: 'arquivos/produtos.php', //url onde será enviada a requisição
+					url: url, //url onde será enviada a requisição
 					data: {tipoFiltro: 'tamanho', filtro: tamanho, termo:pesquisa}, //dados enviados
 					success: function(dados){
                         //colocando o conteúdo na div
@@ -53,9 +78,18 @@
                 //pegando o conteúdo da pesquisa
                 var pesquisa = $('#categoria').data('pesquisa');
 
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o mobile
+                    url = 'arquivos/pesquisa/produtos.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/pesquisa/produtos.php';
+                }
+                
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos.php', //url onde será enviada a requisição
+                    url: url, //url onde será enviada a requisição
                     data: {tipoFiltro: 'cor', filtro:cor, termo:pesquisa}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
@@ -69,9 +103,18 @@
                 //pegando o conteúdo da pesquisa
                 var pesquisa = $('#categoria').data('pesquisa');
 
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o mobile
+                    url = 'arquivos/pesquisa/produtos.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/pesquisa/produtos.php';
+                }
+                
                 $.ajax({
                     type: 'POST', //tipo de requisição
-                    url: 'arquivos/produtos.php', //url onde será enviada a requisição
+                    url: url, //url onde será enviada a requisição
                     data: {tipoFiltro: 'marca', filtro:marca, termo:pesquisa}, //dados enviados
                     success: function(dados){
                         //colocando o conteúdo na div
@@ -79,12 +122,41 @@
                     }
                 });
             }
+            
+            function filtrarPreco(){
+                var pesquisa = $('#categoria').data('pesquisa');
+                var min = $('#min').val();
+                var max = $('#max').val();
+                
+                //verificando se o acesso é pelo celular
+                if(verificarMobile() == true){
+                    //url para o mobile
+                    url = 'arquivos/pesquisa/produtos.php?mobile=true';
+                }else{
+                    //url para o desktop
+                    url = 'arquivos/pesquisa/produtos.php';
+                }
+                
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {tipoFiltro:'preco', min:min, max:max, termo:pesquisa},
+                    success: function(dados){
+                        $('#categoria').html(dados);
+                    }
+                })
+            }
 			
 			$(document).ready(function(){
 				$('.filtrar').click(function(){
 					$('#categoria').children().empty();
                 });
                 $('#pesquisa').hide();
+                
+                if(verificarMobile() == true){
+                    painelUsuario();
+                    filtroResponsivo();
+                }
 			});
 		</script>
 		
@@ -104,13 +176,23 @@
         <main id="categoria" data-pesquisa="<?php echo($pesquisa) ?>">
                 <div class="caixa_categoria">
                     <div class="categoria_pesquisa">
-                                <div class="categoria_pesquisa_centro">
-                                <form name="search" method="POST" action="pesquisa.php">
-                                   <input type="search" name="txtpesquisa" class="campo_pesquisa_categoria"> 
-                                   <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar">
-                                </form>
-                                </div>
-                            </div>
+                        <div class="categoria_pesquisa_centro">
+                            <form name="search" method="POST" action="pesquisa.php?mobile=<?php echo($mobile) ?>">
+                               <input type="search" name="txtpesquisa" class="campo_pesquisa_categoria"> 
+                               <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar">
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <?php
+                        if(isset($_GET['mobile'])){
+                            $mobile = $_GET['mobile'];
+
+                            if($mobile == 'true'){
+                                require_once('arquivos/pesquisa/filtro_responsivo_pesquisa.php');
+                            }
+                        }
+                    ?>
                         <div class="categoria">
                             <div class="titulo_categoria_primeiro">
                                 Classificação
@@ -124,6 +206,16 @@
                             <div class="categoria_linha filtrar" onClick="filtrarClassificacao('C')">
                                 C
                             </div>
+                            
+                            <div class="titulo_categoria">
+                                Preço
+                            </div>
+                            
+                            <div class="preco_container">
+                                <input class="preco_min" id="min" type="number" name="txtmin" placeholder="min">
+                                <input class="preco_max" id="max" type="number" name="txtmax" placeholder="max" onblur="filtrarPreco()">
+                            </div>
+                            
                             <div class="titulo_categoria">
                                 Medidas
                             </div>
@@ -251,9 +343,7 @@
 					<div id="resultado">
 					
 					</div>
-                        <div class="botao_categoria_responsivo"> 
-                            <img src="icones/categoria.png">
-                        </div>
+                        
                   </div>  
         </main>
         <footer>

@@ -153,79 +153,18 @@
 
 
 
-			<div class="titulo_cadastro_usuario_meio">
+			<div class="titulo_cadastro_usuario">
 				cnpj*
 			 </div>
 
 
-
-			<div class="titulo_cadastro_usuario_meio">
-				Data de Nascimento*
-			 </div>
-
-			<div class="linha_cadastro_usuario_meio">
+			<div class="linha_cadastro_usuario">
 				<label>
-					<input id="txtcnpj" class="campo_cadastro_usuario_meio" type="text" name="txtcnpj"required onkeypress="return validar(event,'caracter')">
+					<input id="txtcnpj" class="campo_cadastro_usuario" type="text" name="txtcnpj"required onkeypress="return validar(event,'caracter')">
 					<script type="text/javascript">$("#txtcnpj").mask("00.000.000/0000-00");</script>
 				</label>      
 			</div>
 
-
-			<div class="linha_cadastro_usuario_meio">
-				<input  class="campo_cadastro_usuario_meio" type="date" name="txtdata" id="txtdata">
-			</div>
-
-		</div>
-
-		<div class="titulo_atualizar">
-			Adicionar Cartão 
-		</div>
-
-		<div class="informacao_conta">
-			 <div class="titulo_cadastro_usuario">
-				Nome do Titular*
-			</div>
-			<div class="linha_cadastro_usuario">
-				<input class="campo_cadastro_usuario" type="text" onkeypress="return validar(event,'number')">
-			</div>
-
-			<div class="titulo_cadastro_usuario">
-				Numero do Cartão*
-			</div>
-			<div class="linha_cadastro_usuario">
-				<input class="campo_cadastro_usuario" type="text" onkeypress="return validar(event,'caracter')">
-
-			</div>
-			<div class="titulo_cadastro_usuario_mini">
-				Cód de Segurança*
-			 </div>
-
-			<div class="titulo_cadastro_usuario_mini">
-				Vencimento*
-			 </div>
-
-			<div class="titulo_cadastro_usuario_mini">
-				Bandeira*
-			 </div>
-
-			<div class="linha_cadastro_usuario_mini">
-				<input class="campo_cadastro_usuario_mini" type="text" onkeypress="return validar(event,'caracter')" maxlength="4">
-			</div>
-
-			<div class="linha_cadastro_usuario_mini">
-
-				<select  class="campo_cadastro_usuario_mini"> 
-					<option>01/20</option>
-				</select>
-			</div>
-
-			<div class="linha_cadastro_usuario_mini">
-				 <select  class="campo_cadastro_usuario_mini" >
-					 <option>Visa</option>
-					 <option>Mastercard</option>
-					 <option>Elo</option>
-				</select>
-			</div>
 		</div>
 
 		<div class="titulo_atualizar">
@@ -290,8 +229,11 @@
 			<div class="linha_cadastro_usuario_meio">
 				<input  class="campo_cadastro_usuario_meio" type="text" id="txtcomplemento" name="txtcomplemento">
 			</div>
-			<div class="linha_cadastro_usuario_botao">
+			<div class="linha_atualizar_dados_botao">
 				<input class="botao_cadastro" type="submit" value="Atualizar">
+                <a href="../view/perfil.php">
+                    <input class="botao_voltar" type="button" value="Voltar">
+                </a>
 			</div>
 
 		</div>

@@ -104,6 +104,10 @@
 				success: function(dados){
 					//listagem dos dados atualizados
 					listar();
+                    alert(dados);
+                    //conversão dos dados para JSON
+                    json = JSON.parse(dados);
+                    
                     //verificando se o limite foi excedido
 					if(json.status == 'limite'){
 						//mensagem de erro

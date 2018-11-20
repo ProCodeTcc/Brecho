@@ -1,21 +1,52 @@
 <?php
 	if(isset($_POST['tipoFiltro'])){
 		$tipoFiltro = $_POST['tipoFiltro'];
-		$filtro = $_POST['filtro'];
+		@$filtro = $_POST['filtro'];
 		$pesquisa = $_POST['termo'];
 	}
+
+    if(isset($_GET['mobile'])){
+        $mobile = 'true';
+    }else{
+        $mobile = 'false';
+    }
 
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 	require_once($diretorio.'controller/controllerProduto.php');
 ?>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/funcoes.js"></script>
+<script>
+    $(document).ready(function(){
+        if(verificarMobile() == true){
+            filtroResponsivo();
+        } 
+        
+        verificarProdutos();
 
+    });
+</script>
 <div class="caixa_categoria">
 	<div class="categoria_pesquisa">
-				<div class="categoria_pesquisa_centro">
-				   <input type="search" class="campo_pesquisa_categoria"> 
-				   <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar"> 
-				</div>
-			</div>
+        <div class="categoria_pesquisa_centro">
+           <div class="categoria_pesquisa_centro">
+                <form name="search" method="POST" action="pesquisa.php?mobile=<?php echo($mobile) ?>">
+                   <input type="search" name="txtpesquisa" class="campo_pesquisa_categoria"> 
+                   <input type="submit" class="botao_pesquisa_categoria" value="Pesquisar">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+        if(isset($_GET['mobile'])){
+            $mobile = $_GET['mobile'];
+
+            if($mobile == 'true'){
+                require_once('filtro_responsivo_pesquisa.php');
+            }
+        }
+    ?>
 		<div class="categoria">
 			<div class="titulo_categoria_primeiro">
 				Classificação
@@ -29,6 +60,16 @@
 			<div class="categoria_linha filtrar" onClick="filtrarClassificacao('C')">
 				C
 			</div>
+            
+            <div class="titulo_categoria">
+                Preço
+            </div>
+
+            <div class="preco_container">
+                <input class="preco_min" id="min" type="number" name="txtmin" placeholder="min">
+                <input class="preco_max" id="max" type="number" name="txtmax" placeholder="max" onblur="filtrarPreco()">
+            </div>
+            
 			<div class="titulo_categoria">
 				Medidas
 			</div>
@@ -97,7 +138,7 @@
 			$cont = 0;
 			while($cont < count($rsMarca)){
 		?>
-			<div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getMarca()) ?>)">
+			<div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>)">
 				<?php
 					echo($rsMarca[$cont]->getMarca());
 				?>
@@ -120,7 +161,11 @@
 					$rsFiltro = $listProdutoCategoria->listarProdutoCor($filtro, $pesquisa);
 				}else if($tipoFiltro == 'marca'){
 					$rsFiltro = $listProdutoCategoria->listarProdutoMarca($filtro, $pesquisa);
-				}
+				}else if($tipoFiltro = 'preco'){
+                    $min = $_POST['min'];
+                    $max = $_POST['max'];
+                    $rsFiltro = $listProdutoCategoria->listarProdutoPreco($pesquisa, $min, $max);
+                }
 
 
 				$cont = 0;
@@ -165,10 +210,14 @@
 			</a>
 	 </div>
 
-	<div id="resultado">
+	<div class="nenhum_produto">
+        <strong>NENHUM RESULTADO ENCONTRADO</strong>
+        <p>Encontramos 0 resultado para sua busca</p>
 
-	</div>
-		<div class="botao_categoria_responsivo"> 
-			<img src="icones/categoria.png">
-		</div>
+        <strong>Dicas para melhorar sua busca</strong>
+        <p>Verifique se não houve erro de digitação.</p>
+        <p>Procure por um termo similar ou sinônimo.</p>
+        <p>Tente procurar termos mais gerais e filtrar o resultado da busca.</p>
+    </div>
+    
   </div>

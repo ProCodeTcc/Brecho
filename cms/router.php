@@ -28,8 +28,8 @@
                 $id = $_POST['id'];
                 
                 $controllerUsuario = new controllerUsuario();
-                $controllerUsuario->atualizarContato($id);
-
+                $status = $controllerUsuario->atualizarContato($id);
+                echo($status);
             break;
 
             case 'excluir':
@@ -211,7 +211,9 @@
 				case 'excluir':
 					$id = $_POST['id'];
 					$controllerFaleConosco = new controllerFaleConosco();
-					$controllerFaleConosco->excluirFeedback($id);
+					$status = $controllerFaleConosco->excluirFeedback($id);
+                    
+                    echo($status);
 				break;
 			}
 		break;
@@ -663,7 +665,8 @@
 			switch($modo){
 				case 'inserir':
 					$controllerUnidade = new controllerUnidade();
-					$controllerUnidade->inserirUnidade();
+					$status = $controllerUnidade->inserirUnidade();
+                    echo($status);
 				break;
 					
 				case 'buscar':
@@ -680,7 +683,8 @@
 					$idEndereco = $_POST['idEndereco'];
 					
 					$controllerUnidade = new controllerUnidade();
-					$controllerUnidade->atualizarUnidade($id, $idEndereco);
+					$status = $controllerUnidade->atualizarUnidade($id, $idEndereco);
+                    echo($status);
 				break;
 					
 				case 'excluir':
@@ -688,7 +692,8 @@
 					$idEndereco = $_POST['idEndereco'];
 					
 					$controllerUnidade = new controllerUnidade();
-					$controllerUnidade->excluirUnidade($id, $idEndereco);
+					$status = $controllerUnidade->excluirUnidade($id, $idEndereco);
+                    echo($status);
 				break;
 			}
 		break;
@@ -786,7 +791,8 @@
 					$id = $_POST['id'];
 					
 					$controllerSlider = new controllerSlider();
-					$controllerSlider->atualizarStatus($status, $id);
+					$status = $controllerSlider->atualizarStatus($status, $id);
+                    echo($status);
 				break;
 			}
 		break;

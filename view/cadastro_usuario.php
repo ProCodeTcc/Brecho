@@ -1,5 +1,12 @@
 <?php
 	require_once('arquivos/check_login.php');
+    
+    if(isset($_POST['txtemail'])){
+        $email = $_POST['txtemail'];
+        $_SESSION['email'] = $email;
+    }else{
+        $email == '';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -197,7 +204,7 @@
 								E-mail*
 							</div>
 							<div class="linha_cadastro_usuario">
-								<input class="campo_cadastro_usuario" type="email" onBlur="checkDados('ClienteFisico', 'Email', this)" name="txtEmail" required>
+								<input class="campo_cadastro_usuario" type="email" onBlur="checkDados('ClienteFisico', 'Email', this)" name="txtEmail" required value="<?php echo($email) ?>">
 							</div>
 
 							<div class="titulo_cadastro_usuario_meio">

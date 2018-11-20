@@ -20,11 +20,10 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query que insere a categoria
-            $stm = $PDO_conexao->prepare('INSERT INTO categoria(nomeCategoria, genero) VALUES(?,?)');
+            $stm = $PDO_conexao->prepare('INSERT INTO categoria(nomeCategoria) VALUES(?)');
 
             //parâmetros enviados
             $stm->bindParam(1, $categoria->getNome());
-            $stm->bindParam(2, $categoria->getGenero());
 
             //execução do statement
             $stm->execute();
@@ -70,7 +69,6 @@
                 //setando os atributos
                 $listCategoria[$cont]->setId($rsCategoria->idCategoria);
                 $listCategoria[$cont]->setNome($rsCategoria->nomeCategoria);
-                $listCategoria[$cont]->setGenero($rsCategoria->genero);
                 $listCategoria[$cont]->setStatus($rsCategoria->status);
 
                 //incrementando o contador
@@ -153,12 +151,11 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query que atualiza os dados
-            $stm = $PDO_conexao->prepare('UPDATE categoria SET nomeCategoria = ?, genero = ? WHERE idCategoria = ?');
+            $stm = $PDO_conexao->prepare('UPDATE categoria SET nomeCategoria = ? WHERE idCategoria = ?');
 
             //parâmetros enviados
             $stm->bindParam(1, $categoria->getNome());
-            $stm->bindParam(2, $categoria->getGenero());
-            $stm->bindParam(3, $categoria->getId());
+            $stm->bindParam(2, $categoria->getId());
 
             //verificando se foi executado
             if($stm->execute()){

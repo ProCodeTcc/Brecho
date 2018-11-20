@@ -229,7 +229,7 @@
                             if(json.status == 'sucesso'){
                                 //mensagem de sucesso
                                 mostrarSucesso('Produto enviado para avaliação!!');
-                            }else{
+                            }else if(json.status == 'erro'){
                                 //mensagem de erro
                                 mostrarErro('Ocorreu um erro ao enviar o produto');
                             }
@@ -246,6 +246,7 @@
 			}
 		?>
     </head>
+    
     <body>
         <div class="mensagens">
             <div class="mensagem-sucesso" id="sucesso">
@@ -278,113 +279,13 @@
                 </div>
             </div>
         </div>
+        
         <header>
-            <div class="menu_paginas">
-                <div class="menu_paginas_site">
-                    <a href="fale_conosco.php" class="link_paginas"> Fale Conosco </a>
-                    <a href="nossas_lojas.php" class="link_paginas"> Nossas Lojas </a>
-                    <a href="sobre.php" class="link_paginas"> Sobre </a>
-                
-                    <div class="pesquisa_cabecalho_icone">
-                        
-                        <img alt="#"  src="icones/pesquisa.png">
-                    </div>
-                    
-                <div class="pesquisa_cabecalho">
-                    <input class="campo_pesquisa_cabecalho" type="text">
-                </div>
-                </div>
-            </div>
-            
-            <div class="menu_principal">
-                <div class="menu_principal_site">
-                    <div class="menu_lado_esquerdo">
-                        <div class="menu_responsivo">
-                        
-                        </div>
-                        <a href="../index.php">
-                            <div class="logo">
-                                <img alt="#"  src="imagens/logoBrecho3.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="menu_lado_direito">
-                        <div class="login_carrinho">
-                            
-                                <div class="login">
-                                    <div class="icone_login">
-                                        <img alt="#"  src="icones/login.png">
-                                    </div>
-                                    <a  href="login.php">
-                                        <div class="texto_login">
-                                            Entrar   
-                                        </div>
-                                    </a>
-                                    <div class="sub_login">
-                                        <a href="perfil.php">
-                                            <div class="texto_perfil">
-                                                Perfil   
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            
-                            <a href="carrinho.php">
-                                <div class="login">
-                                    <div class="icone_login">
-                                        <img alt="#"  src="icones/carrinho.png">
-                                    </div>
-                                    <div class="texto_login">
-                                        Carrinho   
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="menu_categoria">
-                <div class="menu">
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Comum
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Alfaiataria
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Banho
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Pijamas
-                        </div>
-                    </a>
-                    <a href="visualizar_categoria.php">
-                        <div class="menu_item">
-                            Social
-                        </div>
-                    </a>
-                    <a href="promocao.php">
-                        <div class="menu_item">
-                            Promoção
-                        </div> 
-                    </a>
-                    <a href="eventos.php">
-                        <div class="menu_item">
-                            Eventos
-                        </div> 
-                    </a>
-                    
-                </div>
-            </div>
+            <?php
+				require_once('arquivos/header.php');
+			?>
         </header>
+        
         <main>
             <div class="linha">
                 Cadastar Produto           
@@ -486,25 +387,12 @@
                         </div>
                     </div>
                     <div class="caixa_fotos">
-                        <div class="fotos_container">
-							<div class="foto">
-                            	<img alt="#" id="prev_imagem" src="icones/foto.png">
-							</div>
-
-							<div class="foto">
-								<img alt="#" id="prev_imagem2" src="icones/foto.png">
-							</div>
-							<div class="foto">
-								<img alt="#" id="prev_imagem3" src="icones/foto.png">
-							</div>
-						</div>
-						
 						<div class="selecao_container">
 							<div class="selecao_fotos">
 								<input class="escolha_fotos" id="imagem" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem')">
 								<label for="imagem">
 									<div class="botao_imagem">
-										selecionar
+										<img alt="#" id="prev_imagem" src="icones/foto.png">
 									</div>
 								</label>
 
@@ -513,7 +401,7 @@
 								<input class="escolha_fotos" id="imagem2" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem2')">
 								<label for="imagem2">
 									<div class="botao_imagem">
-										selecionar
+										<img alt="#" id="prev_imagem" src="icones/foto.png">
 									</div>
 								</label>
 							</div>
@@ -521,7 +409,7 @@
 							   <input class="escolha_fotos" id="imagem3" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem3')">
 								<label for="imagem3">
 									<div class="botao_imagem">
-										selecionar
+										<img alt="#" id="prev_imagem" src="icones/foto.png">
 									</div>
 								</label> 
 							</div>

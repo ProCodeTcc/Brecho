@@ -30,8 +30,6 @@
 			//chamada da função que conecta com o banco
             $PDO_conexao = $conexao->conectarBanco();
 			 
-			$PDO_conexao->exec("SET CHARACTER SET LATIN1");
-			 
 			//query que seleciona os dados do banco
             $stm = $PDO_conexao->prepare("select * from enquete where status = 1");
 			 
@@ -51,6 +49,30 @@
             $conexao->fecharConexao();
              
         }
+        
+        //função para selecionar a tradução de uma enquete
+        public function selectTranslate(){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que busca os dados
+            $stm = $PDO_conexao->prepare('SELECT et.* FROM enquete_traducao as et INNER JOIN enquete AS e ON et.idEnquete = e.idEnquete WHERE e.status = 1');
+            
+            //execução do statement
+            $stm->execute();
+            
+            //armazenando os dados em uma variável
+            $enquete = $stm->fetch(PDO::FETCH_OBJ);
+            
+            //retornando a enquete
+            return $enquete;
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
 		
 		public function UpdateQtdA(){
 			//instância da classe de conexão com o banco
@@ -65,12 +87,16 @@
 			//execução do statement
 			$stm->execute();
 			
-			
+			//verificando o retorno
 			if($stm->rowCount() == 1){
-				echo('Obrigado pelo feedback! Sua opinião foi enviada para nossos administradores.');
+                //atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				echo('Ocorreu um erro ao enviar sua resposta');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -89,11 +115,17 @@
 			//execução do statement
 			$stm->execute();
 			
+            //verificando o retorno
 			if($stm->rowCount() == 1){
-				echo('Obrigado pelo feedback! Sua opinião foi enviada para nossos administradores.');
+                //atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				echo('Ocorreu um erro ao enviar sua resposta');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -112,11 +144,17 @@
 			//execução do statement
 			$stm->execute();
 			
+			//verificando o retorno
 			if($stm->rowCount() == 1){
-				echo('Obrigado pelo feedback! Sua opinião foi enviada para nossos administradores.');
+                //atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				echo('Ocorreu um erro ao enviar sua resposta');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -135,11 +173,17 @@
 			//execução do statement
 			$stm->execute();
 			
+			//verificando o retorno
 			if($stm->rowCount() == 1){
-				echo('Obrigado pelo feedback! Sua opinião foi enviada para nossos administradores.');
+                //atualizando o status para sucesso
+				$status = array('status' => 'sucesso');
 			}else{
-				echo('Ocorreu um erro ao enviar sua resposta');
+                //atualizando o status para erro
+				$status = array('status' => 'erro');
 			}
+            
+            //retornando o status em JSON
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();

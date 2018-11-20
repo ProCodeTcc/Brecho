@@ -1,3 +1,13 @@
+<?php
+    session_start();
+    
+    if(isset($_SESSION['email'])){
+            $email = $_SESSION['email'];
+        }else{
+            $email = '';
+    }
+?>
+
 <script>
 	$('.txt_cep').blur(function(){
 			var cep = $('.txt_cep').val();
@@ -30,7 +40,7 @@
 		E-mail*
 	</div>
 	<div class="linha_cadastro_usuario">
-		<input class="campo_cadastro_usuario" type="email" name="txtEmail" onBlur="checkDados('ClienteJuridico', 'Email', this)" required>
+		<input class="campo_cadastro_usuario" type="email" name="txtEmail" onBlur="checkDados('ClienteJuridico', 'Email', this)" required value="<?php echo($email) ?>">
 	</div>
 
 	<div class="titulo_cadastro_usuario_meio">

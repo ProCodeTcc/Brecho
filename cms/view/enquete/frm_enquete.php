@@ -125,7 +125,7 @@
                             listar();
                         }else if(json.status == 'erro'){
                             //mensagem de erro
-                            mostrarErro('Ocorreu um erro ao inserir a enquete');
+                            mostrarErro('Ocorreu um erro ao atualizar a enquete');
                         }
                     }
                 }

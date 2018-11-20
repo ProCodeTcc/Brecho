@@ -136,5 +136,62 @@
             //retornando o status
             return $status;
         }
+        
+        //função para atualizar o status
+        public function atualizarStatus($id, $status){
+            //instância da classe CartaoDAO
+            $cartaoDAO = new CartaoDAO();
+            
+            //verifica o staus
+            if($status == 1){
+                //desativa todos os cartões
+                $cartaoDAO->disableAll($id);
+                
+                //ativa apenas um
+                $cartaoDAO->activateOne($id);
+            }else{
+                //ativa apenas um
+                $cartaoDAO->activateOne($id);
+                
+                //desativa todos
+                $cartaoDAO->disableAll($id);
+            }
+        }
+        
+        //função para verificar se o cliente possui um cartão ativo
+        public function verificarCartao($idCliente, $tipoCliente){
+            //instância da classe cartaoDAO
+            $cartaoDAO = new CartaoDAO();
+            
+            //verificando o tipo do cliente
+            if($tipoCliente == 'F'){
+                //chamada da função que verifica o cartão
+                $status = $cartaoDAO->checkCartaoCF($idCliente);
+            }else{
+                //chamada da função que verifica o cartão
+                $status = $cartaoDAO->checkCartaoCJ($idCliente);
+            }
+            
+            //retornando o status
+            return $status;
+        }
+        
+        //função para selecionar o cartão ativo do cliente
+        public function selecionarAtivo($idCliente, $tipoCliente){
+            //instância da classe CartaoDAO
+            $cartaoDAO = new CartaoDAO();
+            
+            //verificando o tipo do cliente
+            if($tipoCliente == 'F'){
+                //chamada da função que seleciona o cartão do cliente físico
+                $listCartao = $cartaoDAO->selectAtivoCF($idCliente);
+            }else{
+                //chamada da função que seleciona o cartão do cliente juridico
+                $listCartao = $cartaoDAO->selectAtivoCJ($idCliente);
+            }
+            
+            //retornando os dados do cartão
+            return $listCartao;
+        }
     }
 ?>

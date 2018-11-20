@@ -16,7 +16,7 @@
 			data: {id:id, controller: 'tema', modo: 'buscar'},
 			success: function(dados){
 				json = JSON.parse(dados);
-				
+			     $('.sub_btn').val('ATUALIZAR');	
 				$('#txtnome').val(json.nomeTema);
 				$('#txtcor').val(json.corTema);
 			}

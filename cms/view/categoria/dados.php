@@ -24,14 +24,13 @@
 <div class="users_view_list">
 	<div class="users_view_itens"><?php echo($rsCategoria[$cont]->getId()) ?></div>
 	<div class="users_view_itens"><?php echo($rsCategoria[$cont]->getNome()) ?></div>
-	<div class="users_view_itens"><?php echo($rsCategoria[$cont]->getGenero())?></div>
 	<div class="users_view_itens">
-		<span data-id="<?php ?>" onclick="buscar(<?php echo($rsCategoria[$cont]->getId()) ?>);">
-		   <img class="editar" data-modo="editar" src="../imagens/pencil.png">
-		</span>
-
 		<span class="adicionar_subcategoria" onclick="inserirSubcategoria(<?php echo($rsCategoria[$cont]->getId()) ?>)">
 			<img src="../imagens/list.png">
+		</span>
+        
+        <span data-id="<?php ?>" onclick="buscar(<?php echo($rsCategoria[$cont]->getId()) ?>);">
+		   <img class="editar" data-modo="editar" src="../imagens/pencil.png">
 		</span>
 		
 		<span onclick="excluir(<?php echo($rsCategoria[$cont]->getId()) ?>)">

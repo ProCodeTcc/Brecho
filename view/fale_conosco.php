@@ -38,6 +38,38 @@
  
 			$(document).ready(function(){
 				checarLogin(<?php echo($login) ?>);
+                
+                //função no submit do formulário
+                $('#frmFaleConosco').submit(function(e){
+                    //desativando o submit do form
+                   e.preventDefault();
+                    
+                    //resgatando a url
+                    var url = $('#frmFaleConosco').attr('action');
+                    
+                    $.ajax({
+                        type: 'POST', //tipo de requisição
+                        url: url, //url onde será enviada a requisição
+                        data: new FormData($('#frmFaleConosco')[0]), //enviando os dados do form
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        async: true,
+                        success: function(dados){
+                            //conversão dos dados para JSON
+                            json = JSON.parse(dados);
+                            
+                            //verificando o status
+                            if(json.status == 'sucesso'){
+                                //mensagem de sucesso
+                                mostrarSucesso('Feedback enviado com sucesso');
+                            }else if(json.status == 'erro'){
+                                //mensagem de erro
+                                mostrarErro('Ocorreu um erro ao enviar o feedback');
+                            }
+                        }
+                    });
+                });
 			});
         </script>
 		
@@ -46,6 +78,38 @@
 		?>
     </head>
     <body>
+        <div class="mensagens">
+            <div class="mensagem-sucesso" id="sucesso">
+                <div class="msg">
+                    
+                </div>
+    
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>          
+            </div>
+
+            <div class="mensagem-erro" id="erro">
+                <div class="msg">
+                    
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+
+            <div class="mensagem-info" id="info">
+                <div class="msg">
+
+                </div>
+
+                <div class="close" onclick="fecharMensagem()">
+                    x
+                </div>
+            </div>
+        </div>
+        
         <header>
             <?php
 				require_once('arquivos/header.php');

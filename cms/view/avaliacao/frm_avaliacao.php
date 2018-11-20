@@ -18,10 +18,12 @@
 	}
 
 	$(document).ready(function(){
+        mudarModal('350', '500');
 		$('.txttipo').change(function(){
 			var tipo = $('input[name=txttipo]:checked').val();
 
 			if(tipo == 'consignado'){
+                mudarModal('460', '500');
 				$('#consignacao').show();
 			}else{
 				$('#consignacao').hide();
@@ -87,7 +89,7 @@
 </script>
 
 <div class="form_container">
-	<img class="fechar" src="../imagens/fechar.png">
+	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 	<form class="frmAvaliacao" method="POST" data-idProduto="<?php echo($idProduto) ?>" data-idCliente="<?php echo($idCliente) ?>" data-tipoCliente="<?php echo($tipoCliente) ?>" id="frmAvaliacao" name="frmAvaliacao">	
 		<div class="form_linha">
 			<label class="lbl_cadastro">

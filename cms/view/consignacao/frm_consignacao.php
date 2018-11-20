@@ -67,6 +67,9 @@
                     if(json.status == 'atualizado'){
                         //mensagem de sucesso
                         mostrarSucesso('Consignação atualizada com sucesso');
+                        
+                        //listagem dos dados atualizados
+                        listar()
                     }else if(json.status == 'erro'){
                         //mensagem de erro
                         mostrarErro('Ocorreu um erro ao atualizar a consignação');

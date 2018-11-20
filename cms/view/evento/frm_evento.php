@@ -31,6 +31,7 @@
 			url: url+'router.php', //url onde será enviada a requisição
 			data: {id:id, idioma:idioma, controller: 'evento', modo: 'buscar'}, //parâmetros enviados
 			success: function(dados){
+                $('.sub_btn').val('ATUALIZAR');
 				$('#frmEvento').attr('data-lang', idioma);
 				//conversão dos dados para JSON
 				json = JSON.parse(dados);
@@ -54,7 +55,7 @@
 	}
 	
 	$(document).ready(function(){
-		mudarModal('650', '400');
+		mudarModal('750', '400');
 		$('#tabs').tabs();
 	
 		$('#tabs').tabs('disable', 1);
