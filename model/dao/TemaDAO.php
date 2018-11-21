@@ -27,11 +27,16 @@
 			//criando um novo tema
 			$listTema = new Tema();
 			
-			//setando o atributo
-			$listTema->setCor($rsTema->corTema);
+			if($stm->rowCount() != 0){
+                //setando o atributo
+                $listTema->setCor($rsTema->corTema);
+            }
 			
 			//retornando a lista com os temas
 			return $listTema;
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
 		}
 	}
 ?>

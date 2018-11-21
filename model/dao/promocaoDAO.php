@@ -76,10 +76,10 @@
 			$listPromocao = new Promocao();
 			
 			//setando os atributos
-			$listPromocao->setIdProduto($rsProdutos->idProduto);
+			$listPromocao->setId($rsProdutos->idProduto);
 			$listPromocao->setNome($rsProdutos->nomeProduto);
 			$listPromocao->setDescricao($rsProdutos->descricao);
-			$listPromocao->setPreco($rsProdutos->preco);
+			$listPromocao->setPreco($rsProdutos->total);
 			$listPromocao->setCor($rsProdutos->cor);
 			$listPromocao->setMarca($rsProdutos->marca);
 			$listPromocao->setCategoria($rsProdutos->categoria);

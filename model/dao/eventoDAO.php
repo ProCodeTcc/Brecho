@@ -46,9 +46,12 @@
 				$cont++;
 			}
 			
-			//retornando os dados
-			return $listEvento;
-		
+			if($cont != 0){
+                //retornando os dados
+                return $listEvento;
+            }
+            
+            $conexao->fecharConexao();
 		}
     }
 

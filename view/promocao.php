@@ -44,7 +44,7 @@
 						while($cont < count($rsPromocao)){
 					?>
 					
-					<a href="visualizar_produto.php?id=<?php echo($rsPromocao[$cont]->getIdProduto()) ?>&pagina=promoção">
+					<a href="visualizar_produto.php?id=<?php echo($rsPromocao[$cont]->getIdProduto()) ?>&pagina=promoção" onclick="atualizarClique(this, event, <?php echo($rsPromocao[$cont]->getIdProduto()) ?>)">
                         <div class="produto_promocao">
                             <div class="imagem_produto_promocao">
                                 <div class="icone_promocao">
@@ -68,7 +68,7 @@
                                             Conferir
                                         </div>
 <!--                                    </a>-->
-                                    <div class="carrinho_produto_promocao">
+                                    <div class="carrinho_produto_promocao" onclick="adicionarCarrinho(<?php echo($rsPromocao[$cont]->getIdProduto()) ?>, event)">
                                         <img alt="#"  src="icones/carrinho.png">
                                     </div>
                                 </div>

@@ -11,6 +11,7 @@
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/funcoes.js"></script>
 		
 		<script>
             //função para filtrar por classificação
@@ -105,6 +106,8 @@
                 });
 
                 $('#pesquisa').hide();
+                
+                verificarProdutos();
 			});
 		</script>
 		
@@ -242,7 +245,7 @@
 
                                 while($cont < count($rsProduto)){
                             ?>
-                            <a href="visualizar_produto.php?id=<?php echo($rsProduto[$cont]->getId())?>">
+                            <a href="visualizar_produto.php?id=<?php echo($rsProduto[$cont]->getId())?>" onclick="atualizarClique(this, event, <?php echo($rsProduto[$cont]->getId()) ?>)">
                                 <div class="produto">
                                     <div class="imagem_produto">
                                         <img  alt="#" src="../cms/view/arquivos/<?php echo($rsProduto[$cont]->getImagem())?>" alt="#">
@@ -264,7 +267,7 @@
                                             <div class="comprar_produto">
                                                 Conferir
                                             </div>
-                                            <div class="carrinho_produto">
+                                            <div class="carrinho_produto" onclick="adicionarCarrinho(<?php echo($rsProduto[$cont]->getId()) ?>, event)">
                                                 <img  alt="#" src="icones/carrinho.png">
                                             </div>
                                         </div>
@@ -279,9 +282,16 @@
                             </a>
                      </div>
 					
-					<div id="resultado">
-					
-					</div>
+					<div class="nenhum_produto">
+                        <strong>NENHUM RESULTADO ENCONTRADO</strong>
+                        <p>Encontramos 0 resultado para sua busca</p>
+
+                        <strong>Dicas para melhorar sua busca</strong>
+                        <p>Verifique se não houve erro de digitação.</p>
+                        <p>Procure por um termo similar ou sinônimo.</p>
+                        <p>Tente procurar termos mais gerais e filtrar o resultado da busca.</p>
+                    </div>
+            
                         <div class="botao_categoria_responsivo"> 
                             <img src="icones/categoria.png">
                         </div>

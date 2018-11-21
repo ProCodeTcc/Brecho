@@ -123,6 +123,7 @@
                 });
             }
             
+            //função para filtrar pelo preço
             function filtrarPreco(){
                 var pesquisa = $('#categoria').data('pesquisa');
                 var min = $('#min').val();
@@ -138,10 +139,11 @@
                 }
                 
                 $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: {tipoFiltro:'preco', min:min, max:max, termo:pesquisa},
+                    type: 'POST', //tipo de requisição
+                    url: url, //url onde será a requisição
+                    data: {tipoFiltro:'preco', min:min, max:max, termo:pesquisa}, //dados enviados
                     success: function(dados){
+                        //colocando os dados na div
                         $('#categoria').html(dados);
                     }
                 })
@@ -157,6 +159,8 @@
                     painelUsuario();
                     filtroResponsivo();
                 }
+                
+                verificarProdutos();
 			});
 		</script>
 		
@@ -303,7 +307,7 @@
 
                                 while($cont < count($rsProduto)){
                             ?>
-                            <a href="visualizar_produto.php?id=<?php echo($rsProduto[$cont]->getId())?>">
+                            <a href="visualizar_produto.php?id=<?php echo($rsProduto[$cont]->getId())?>" onclick="atualizarClique(this, event, <?php echo($rsProduto[$cont]->getId()) ?>)">
                                 <div class="produto">
                                     <div class="imagem_produto">
                                         <img  alt="#" src="../cms/view/arquivos/<?php echo($rsProduto[$cont]->getImagem())?>" alt="#">
@@ -325,7 +329,7 @@
                                             <div class="comprar_produto">
                                                 Conferir
                                             </div>
-                                            <div class="carrinho_produto">
+                                            <div class="carrinho_produto" onclick="adicionarCarrinho(<?php echo($rsProduto[$cont]->getId()) ?>, event)">
                                                 <img  alt="#" src="icones/carrinho.png">
                                             </div>
                                         </div>
@@ -333,16 +337,21 @@
                                 </div>
                                 
                                 <?php
-                                        $cont++;
-                                        }
-                                
+                                    $cont++;
+                                    }
                                 ?>
                             </a>
                      </div>
 					
-					<div id="resultado">
-					
-					</div>
+					<div class="nenhum_produto">
+                        <strong>NENHUM RESULTADO ENCONTRADO</strong>
+                        <p>Encontramos 0 resultado para sua busca</p>
+
+                        <strong>Dicas para melhorar sua busca</strong>
+                        <p>Verifique se não houve erro de digitação.</p>
+                        <p>Procure por um termo similar ou sinônimo.</p>
+                        <p>Tente procurar termos mais gerais e filtrar o resultado da busca.</p>
+                    </div>
                         
                   </div>  
         </main>

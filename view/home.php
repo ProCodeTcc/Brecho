@@ -1,17 +1,13 @@
 <?php
-	session_start();
-	if(isset($_SESSION['login'])){
-		$login = 1;
-	}
-
+    require_once('arquivos/check_login.php');
+    require_once('arquivos/idioma.php');
+    require_once('arquivos/check_carrinho.php');
+    
 	if(isset($_SESSION['usuario'])){
 		$usuario = $_SESSION['usuario'];
 	}else{
 		$usuario = 'Entrar';
 	}
-    
-    require_once('arquivos/idioma.php');
-    require_once('arquivos/check_carrinho.php');
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +28,8 @@
 				var login = $('.logout').data('login');
 				
 				if(login == 1){
-					$('.logout').css('display', 'block');                           $('.perfil_usuario').show();
+					$('.logout').css('display', 'block');                           
+                    $('.perfil_usuario').show();
                     
                     if($(window).width() == '980'){
                         $('.entrar').hide('fast');
@@ -86,7 +83,7 @@
                 sliderProduto('#film_row');
                 sliderProduto('#produto_clique');
                
-                if($(window).width() == '980'){
+                if(verificarMobile() == true){
                      submenuMobile();
                      painelUsuario();
                 }

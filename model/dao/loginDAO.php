@@ -32,6 +32,7 @@
 				$_SESSION['idCliente'] = $listCliente->idCliente;
 				$_SESSION['usuario'] = $listCliente->login;
 				$_SESSION['tipoCliente'] = 'F';
+                $_SESSION['atividade'] = time();
 				$status = array('status' => 'sucesso');
 			}else{
 				$status = array('status' => 'incorreto');
@@ -70,6 +71,7 @@
 				$_SESSION['idCliente'] = $listCliente->idCliente;
 				$_SESSION['usuario'] = $listCliente->login;
 				$_SESSION['tipoCliente'] = 'J';
+                $_SESSION['atividade'] = time();
 				$status = array('status' => 'sucesso');
 			}else{
 				$status = array('status' => 'incorreto');

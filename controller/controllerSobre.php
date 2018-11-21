@@ -15,25 +15,35 @@
 		}
 		
 		//função que lista o layout 1
-		public function listarLayout(){
+		public function listarLayout($idioma){
 			//instância da classe sobreDAO
 			$sobreDAO = new SobreDAO();
 			
-			//armazenando o retorno dos dados em uma variável
-			$listLayout = $sobreDAO->selectLayout();
+            //verificando o idioma
+			if($idioma == 'ptbr'){
+                //armazenando o retorno dos dados em uma variável
+                $listLayout = $sobreDAO->selectLayout();
+            }else{
+                //armazenando o retorno dos dados em uma variável
+                $listLayout = $sobreDAO->selectTranslate();
+            }
 			
 			//retornando o layout
 			return $listLayout;
 		}
 		
 		//função que lista o layout 2
-		public function listarLayout2(){
+		public function listarLayout2($idioma){
 			//instância da classe sobreDAO
 			$sobreDAO = new SobreDAO();
 			
-			//armazenando o retorno dos dados em uma variável
-			$listSobre = $sobreDAO->selectLayout2();
-			
+            //verificando o idioma
+            if($idioma == 'ptbr'){
+                //armazenando o retorno dos dados em uma variável
+                $listSobre = $sobreDAO->selectLayout2();
+            }else{
+                $listSobre = $sobreDAO->selectTranslateLayout2();
+            }
 			//retornando o layout
 			return $listSobre;
 		}

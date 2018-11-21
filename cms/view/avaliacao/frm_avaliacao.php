@@ -68,6 +68,7 @@
                         if(json.status == 'sucesso'){
                             //mensagem de sucesso
                             mostrarSucesso('Produto enviado para consignação');
+                            listar();
                         }else{
                             //mensagem de erro
                             mostrarErro('Ocorreu um erro ao realizar essa operação')
@@ -76,6 +77,7 @@
                         if(json.status == 'sucesso'){
                             //mensagem de sucesso
                             mostrarSucesso('Operação realizada com sucesso');
+                            listar();
                         }else if(json.status == 'erro'){
                             //mensagem de erro
                             mostrarErro('Ocorreu um erro ao realizar essa operação');

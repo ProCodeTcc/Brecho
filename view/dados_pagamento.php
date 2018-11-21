@@ -84,12 +84,33 @@
             function verificarOpcao(opcao){
                 //se for sim
                 if(opcao == 'sim'){
-                    //redireciona o cliente
-                    window.location.href='pedido_finalizado.php';
+                    //chamada da função que gera o pedido
+                    gerarPedido();
                 }else{
                     //fecha a mensagem
                     $('.mensagens').fadeOut(400);
                 }
+            }
+            
+            //função para gerar o pedido
+            function gerarPedido(){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: '../router.php?controller=pedido&modo=gerar', //url onde será enviada a requisição
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    async: true,
+                    success: function(dados){
+                        if(dados == 'sucesso'){
+                            window.location.href="pedido_finalizado.php";
+                        }else if(dados == 'erro'){
+                            alert('Ocorreu um erro ao gerar o pedido!!');
+
+                            window.location.href="carrinho.php";
+                        }
+                    }
+                });
             }
             
             $(document).ready(function(){
@@ -99,27 +120,9 @@
                 //selecionando o cartão
                 selecionarCartao(id, tipo);
                 
-                $('#frmPedido').submit(function(e){
-                    e.preventDefault();
-                    $.ajax({
-                        type: 'POST',
-                        url: '../router.php?controller=pedido&modo=gerar',
-                        data: new FormData($('#frmPedido')[0]),
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        async: true,
-                        success: function(dados){
-                            if(dados == 'sucesso'){
-                                window.location.href="pedido_finalizado.php";
-                            }else if(dados == 'erro'){
-                                alert('Ocorreu um erro ao gerar o pedido!!');
-
-                                window.location.href="carrinho.php";
-                            }
-                        }
-                    });
-                });
+                if(verificarMobile == true){
+                    submenuResponsivo();
+                }
             });
         </script>
     </head>

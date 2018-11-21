@@ -695,49 +695,40 @@
 
 			if($cont != 0){
 				return $listProduto;
-			}else{
-				echo('nenhum produto encontrado...');
 			}
 
 			$conexao->fecharConexao();
 		}
-
-		public function selectCartItens($ids){
-			//instância da classe de conexão com o banco de dados
-			$conexao = new ConexaoMySQL();
-			
-			//chamada da função que conecta com o banco
-			$PDO_conexao = $conexao->conectarBanco();
-			
-			$in = str_repeat('?, ', count($ids) - 1) . '?';
-
-			//query que faz a consulta no banco
-			$stm = $PDO_conexao->prepare("SELECT p.idProduto, p.nomeProduto as nome, p.preco, p.classificacao, c.nome as cor, m.nomeMarca as marca, t.tamanho, ct.nomeCategoria as categoria, f.caminhoImagem as imagem FROM produto as p INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN produto_fotoproduto as pi ON p.idProduto = pi.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto WHERE status = 1 AND p.idProduto IN ($in) GROUP BY p.idProduto");
-			
-			// $stm->bindValue(1, $ids, PDO::PARAM_INT);
-			
-			$stm->execute($ids);
-
-			$cont = 0;
-			
-			while($rsProdutos = $stm->fetch(PDO::FETCH_OBJ)){
-				$listProduto[] = new Produto();
-				
-				$listProduto[$cont]->setId($rsProdutos->idProduto);
-				$listProduto[$cont]->setNome($rsProdutos->nome);
-				$listProduto[$cont]->setPreco($rsProdutos->preco);
-				$listProduto[$cont]->setClassificacao($rsProdutos->classificacao);
-				$listProduto[$cont]->setCor($rsProdutos->cor);
-				$listProduto[$cont]->setMarca($rsProdutos->marca);
-				$listProduto[$cont]->setCategoria($rsProdutos->categoria);
-				$listProduto[$cont]->setTamanho($rsProdutos->tamanho);
-				$listProduto[$cont]->setImagem($rsProdutos->imagem);
-				
-				$cont++;
-			}
-			
-			return $listProduto;
-		}
+        
+        //função para verificar se um produto está em promoção
+        public function checkPromocao($id){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que busca os dados
+            $stm = $PDO_conexao->prepare('SELECT idProduto FROM promocao WHERE idProduto = ?');
+            
+            //parâmetros enviados
+            $stm->bindParam(1, $id);
+            
+            //execução do statement
+            $stm->execute();
+            
+            //verificando o retorno
+            if($stm->rowCount() != 0){
+                //retornando verdadeiro
+                return true;
+            }else{
+                //retornando false
+                return false;
+            }
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
         
         //função para selecionar o produto pelo preço
         public function selectByPreco($pesquisa, $min, $max){

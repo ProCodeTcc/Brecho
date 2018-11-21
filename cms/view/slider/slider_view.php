@@ -104,7 +104,6 @@
 				success: function(dados){
 					//listagem dos dados atualizados
 					listar();
-                    alert(dados);
                     //conversão dos dados para JSON
                     json = JSON.parse(dados);
                     

@@ -2610,6 +2610,11 @@ body{
 		padding-top: 15px;
 		cursor: pointer;
 	}
+    
+    .botao_imagem img{
+        width: 100px;
+        height: 100px;
+    }
 
     .linha_botao_cadastro{
         width: 150px;

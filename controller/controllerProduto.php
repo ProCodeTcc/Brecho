@@ -13,7 +13,9 @@
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 			require_once($diretorio.'model/produtoClass.php');
 			require_once($diretorio.'model/dao/produtoDAO.php');
+            require_once($diretorio.'model/dao/promocaoDAO.php');
 			require_once($diretorio.'model/corClass.php');
+            require_once($diretorio.'model/promocaoClass.php');
 		}
 		
 		//função que lista um produto
@@ -257,9 +259,21 @@
 			}else{
 				//criando um novo produto
 				$produtoDAO = new ProdutoDAO();
-
-				//armazenando os dados do produto em uma variável
-				$listProduto = $produtoDAO->selectByID($id);
+                
+                //chamada da função que verifica se o produto está em promoção
+                $promocao = $produtoDAO->checkPromocao($id);
+                
+                //verificando se o produto está em promoção
+                if($promocao == false){
+                    //armazenando os dados do produto em uma variável
+				    $listProduto = $produtoDAO->selectByID($id);
+                }else{
+                    //instância da classe PromoçaoDO
+                    $promocaoDAO = new PromocaoDAO();
+                    
+                    //armazenando os dados do produto em uma variável
+				    $listProduto = $promocaoDAO->selectByID($id);
+                }
 
 				//armazenando os dados da imagem em uma variável
 				$listImagem = $produtoDAO->selectImages($id);

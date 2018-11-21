@@ -80,6 +80,8 @@
 				//mensagem de erro
 				$status = array('status' => 'erro');
 			}
+            
+            return json_encode($status);
 			
 			//fechando a conexão
 			$conexao->fecharConexao();
@@ -175,6 +177,8 @@
 				$status = array('status' => 'erro');
 			}
 
+            return json_encode($status);
+            
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}

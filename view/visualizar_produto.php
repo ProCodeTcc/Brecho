@@ -44,25 +44,6 @@
 				});
 			}
 			
-             //função para adicionar um item ao carrinho
-            function adicionarCarrinho(id){
-                $.ajax({
-                    type: 'POST', //tipo de requisição
-                    url: '../router.php?controller=produto&modo=adicionarCarrinho', //url onde será enviada a requisição
-                    data: {id:id}, //parâmetros enviados
-                    success: function(dados){
-                        //verifica se o item já existe
-                        if(dados == 'existe'){
-                            //se existir, manda uma mensagem de erro
-                            alert('Esse item já foi adicionado ao carrinho!!');
-                        }else{
-                            //se não, adiciona o item ao carrinho
-                            $('#carrinho').html(dados);
-                        }
-                    }
-                });
-            }
-            
             function comprarProduto(id){
                 $.ajax({
                    type: 'POST',
@@ -147,7 +128,7 @@
                         
                     </div>
                     <div class="produto_detalhes_botao">
-                        <input class="botao_compra" type="button" value="Carrinho" onclick="adicionarCarrinho(<?php echo($rsProduto->getId()) ?>)">
+                        <input class="botao_compra" type="button" value="Carrinho" onclick="adicionarCarrinho(<?php echo($rsProduto->getId()) ?>, event)">
                         <input class="botao_compra" type="submit" value="Comprar" onclick="comprarProduto(<?php echo($rsProduto->getId()) ?>)">
                     </div>
                 </div>

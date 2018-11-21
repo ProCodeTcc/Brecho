@@ -22,7 +22,7 @@
 		<a href="../view/sobre.php" class="link_paginas"> Sobre </a>
 
         <div class="idioma_container">
-           <form method="POST" action="../index.php?lang=ptbr">
+           <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?lang=ptbr">
                 <label for="ptbr">
                     <img src="icones/brazil24.png">
                 </label>
@@ -30,7 +30,7 @@
                 <input type="submit" id="ptbr">
             </form>
 
-            <form method="POST" action="../index.php?lang=en">
+            <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?lang=en">
                 <label for="en">
                     <img src="icones/usa24.png">
                 </label>
@@ -209,37 +209,56 @@
 </div>
 
 <div class="menu_categoria">
-	<div class="menu">
-		<?php
-			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-			require_once($diretorio.'controller/controllerCategoria.php');
+    <div class="menu">
+        <?php
+            require_once('../controller/controllerCategoria.php');
 
-			$listCategoria = new controllerCategoria();
-			$rsCategoria = $listCategoria->listarCategoria();
+            $listCategoria = new controllerCategoria();
+            $rsCategoria = $listCategoria->listarCategoria();
 
-			$cont = 0;
+            $cont = 0;
 
-			while($cont < count($rsCategoria)){
-		?>
-		<a href="../view/visualizar_categoria.php?idCategoria=<?php echo($rsCategoria[$cont]->getId())?>">
-			<div class="menu_item">
-				<?php echo($rsCategoria[$cont]->getNome())?>
-			</div>
-		</a>
+            while($cont < count($rsCategoria)){
+        ?>
 
-		<?php
-			$cont++;
-			}
-		?>
-		<a href="../view/promocao.php">
-			<div class="menu_item">
-				Promoção
-			</div> 
-		</a>
-		<a href="../view/eventos.php">
-			<div class="menu_item">
-				Eventos
-			</div> 
-		</a>
-	</div>
+        <div class="menu_item">
+            <a href="visualizar_categoria.php?idCategoria=<?php echo($rsCategoria[$cont]->getId())?>">
+                <?php echo($rsCategoria[$cont]->getNome())?>
+            </a>
+
+            <div class="subcategoria_container">
+                <?php
+                    $listSubcategoria = new controllerCategoria();
+                    $rsSubcategoria = $listSubcategoria->listarSubcategoria($rsCategoria[$cont]->getId());
+                    $index = 0;
+                    while($index < count($rsSubcategoria)){
+                ?>
+                <div class="subcategoria_item">
+                    <a href="visualizar_subcategoria.php?idSubcategoria=<?php echo($rsSubcategoria[$index]->getId()) ?>">
+                        <?php echo($rsSubcategoria[$index]->getNome()) ?>
+                    </a>
+                </div>
+
+                <?php
+                    $index++;
+                }
+                ?>
+            </div>
+        </div>
+
+        <?php
+            $cont++;
+            }
+        ?>
+        <a href="promocao.php">
+            <div class="menu_item">
+                Promoção
+            </div> 
+        </a>
+        <a href="eventos.php">
+            <div class="menu_item">
+                Eventos
+            </div> 
+        </a>
+    </div>
 </div>

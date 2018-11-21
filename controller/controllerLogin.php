@@ -42,7 +42,16 @@
 		
 		public function deslogar(){
 			session_start();
-			session_destroy();
+			unset($_SESSION['email']);
+            unset($_SESSION['carrinho']);
+            unset($_SESSION['total']);
+            unset($_SESSION['idioma']);
+            unset($_SESSION['login']);
+            unset($_SESSION['idCliente']);
+            unset($_SESSION['tipoCliente']);
+            unset($_SESSION['usuario']);
+            unset($_SESSION['sexo']);
+            unset($_SESSION['atividade']);
 		}
     }
 

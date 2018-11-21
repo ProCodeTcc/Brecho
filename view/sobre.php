@@ -1,5 +1,6 @@
 <?php
 	require_once('arquivos/check_login.php');
+    require_once('arquivos/idioma.php');
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +41,8 @@
 						$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
 						require_once($diretorio.'controller/controllerSobre.php');
 						$listSobre = new controllerSobre();
-						$rsLayout = $listSobre->listarLayout();
-						$rsLayout2 = $listSobre->listarLayout2();
+						$rsLayout = $listSobre->listarLayout($_SESSION['idioma']);
+						$rsLayout2 = $listSobre->listarLayout2($_SESSION['idioma']);
 					?>
                     <div class="texto_sobre">
                         <h2> <?php echo($rsLayout->getTitulo()) ?> </h2>
