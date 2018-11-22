@@ -10,7 +10,7 @@
 			$(document).ready(function(){
                 submenuMobile();
 				//função no click do botão logar
-				$('#logar').click(function(e){
+				$('#frmLogin').submit(function(e){
 					//desativando o submit do botão
 					e.preventDefault();
 					$.ajax({
