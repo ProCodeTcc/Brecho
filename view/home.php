@@ -429,7 +429,7 @@
                     require_once($diretorio.'controller/controllerProduto.php');
                 
                     $listProduto = new controllerProduto();
-                    $rsProdutos = $listProduto->listarProdutos();
+                    $rsProdutos = $listProduto->listarProdutos($_SESSION['idioma']);
                     
                     $cont = 0;
                 
@@ -485,7 +485,7 @@
                     require_once($diretorio.'controller/controllerProduto.php');
                 
                     $listProduto = new controllerProduto();
-                    $rsProdutos = $listProduto->listarProdutosClique();
+                    $rsProdutos = $listProduto->listarProdutosClique($_SESSION['idioma']);
                     
                     $cont = 0;
                 

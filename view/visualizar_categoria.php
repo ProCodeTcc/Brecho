@@ -239,7 +239,7 @@
                             <?php
                                 $listProduto = new controllerProduto();
 
-                                $rsProduto = $listProduto->listarProdutoCategoria($id);
+                                $rsProduto = $listProduto->listarProdutoCategoria($id, $_SESSION['idioma']);
                                 
                                 $cont = 0;
 

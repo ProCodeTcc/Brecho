@@ -312,7 +312,7 @@
                             <?php
                                 $listProduto = new controllerProduto();
 
-                                $rsProduto = $listProduto->listarProdutoSubcategoria($id);
+                                $rsProduto = $listProduto->listarProdutoSubcategoria($id, $_SESSION['idioma']);
                                 
                                 $cont = 0;
 

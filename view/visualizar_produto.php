@@ -105,7 +105,7 @@
 						$rsProduto = $listProduto->buscarProduto($id);
                     }else{
                         $listProduto = new controllerProduto();
-						$rsProduto = $listProduto->buscarProduto($id);
+						$rsProduto = $listProduto->buscarProduto($id, $_SESSION['idioma']);
                     }
 				?>
 				
@@ -147,7 +147,7 @@
             <div class="veja_tambem">
 				<?php
 					$listProduto = new controllerProduto();
-					$rsProdutos = $listProduto->listarAleatorio();
+					$rsProdutos = $listProduto->listarAleatorio($_SESSION['idioma']);
 					$cont = 0;
 					while($cont < count($rsProdutos)){
 				?>

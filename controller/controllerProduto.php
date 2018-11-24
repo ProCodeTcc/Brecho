@@ -19,24 +19,36 @@
 		}
 		
 		//função que lista um produto
-		public function listarProdutos(){
+		public function listarProdutos($idioma){
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->selectAll();	
+            //verificando o idioma
+			if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectAll();
+            }else{
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectTranslate();
+            }
 			
 			//retornando a lista dos produtos
 			return $listProduto;
 		}
 		
 		//função que busca um produto pelo ID
-		public function buscarProduto($id){
+		public function buscarProduto($id, $idioma){
 			//instância da classe produtoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//armazenando os dados retornados em uma variável
-			$listProduto = $produtoDAO->selectByID($id);
+            //verificando o idioma
+			if($idioma == 'ptbr'){
+                //armazenando os dados retornados em uma variável
+                $listProduto = $produtoDAO->selectByID($id);
+            }else{
+                //armazenando os dados retornados em uma variável
+                $listProduto = $produtoDAO->selectByTranslate($id);
+            }
 			
 			//retornando o produto
 			return $listProduto;
@@ -54,13 +66,18 @@
 			return $listImagens;
 		}
         
-        public function listarProdutoCategoria($id){
+        public function listarProdutoCategoria($id, $idioma){
         
             //instância da classe produtoDAO
             $produtoCategoriaDAO = new ProdutoDAO();
             
-            //armazenando os dados retornados.
-            $listProdutoCategoria= $produtoCategoriaDAO->selectProdutoCategoria($id);
+            if($idioma == 'ptbr'){
+                //armazenando os dados retornados.
+                $listProdutoCategoria= $produtoCategoriaDAO->selectProdutoCategoria($id);
+            }else{
+                //armazenando os dados retornados.
+                $listProdutoCategoria= $produtoCategoriaDAO->selectProdutoCategoriaTranslate($id, $idioma);
+            }
             
             //Retornando o produto da categoria.
             return $listProdutoCategoria;
@@ -68,13 +85,18 @@
 		}
 		
 		//função para listar os produtos de uma subcategoria
-		public function listarProdutoSubcategoria($id){
+		public function listarProdutoSubcategoria($id, $idioma){
         
             //instância da classe produtoDAO
             $produtoDAO = new ProdutoDAO();
             
-            //armazenando os dados retornados.
-            $listProduto = $produtoDAO->selectProdutoSubcategoria($id);
+            if($idioma == 'ptbr'){
+                //armazenando os dados retornados.
+                $listProduto = $produtoDAO->selectProdutoSubcategoria($id);
+            }else{
+                //armazenando os dados retornados.
+                $listProduto = $produtoDAO->selectProdutoSubcategoriaTranslate($id);
+            }
             
             //Retornando o produto da categoria.
             return $listProduto;
@@ -205,12 +227,18 @@
 		}
 		
 		//função que lista os produtos aleatóriamente
-		public function listarAleatorio(){
+		public function listarAleatorio($idioma){
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->selectRandom();
+            //verificando o idioma
+			if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectRandom();
+            }else{
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectRandomTranslate();
+            }
 			
 			//retornando os dados
 			return $listProduto;
@@ -226,12 +254,18 @@
 		}
 
 		//função para listar os produtos
-		public function listarProdutosClique(){
+		public function listarProdutosClique($idioma){
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 
-			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->selectByClick();
+            //verificando o idioma
+			if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByClick();
+            }else{
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByClickTranslate();
+            }
 
 			//retornando os dados
 			return $listProduto;

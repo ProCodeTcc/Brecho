@@ -5,7 +5,32 @@
 		$usuario = 'Entrar';
 	}
 
+    if(isset($_GET['id'])){
+        $parametro_pt = 'lang=ptbr&id='.$_GET['id'];
+        $parametro_en = 'lang=en&id='.$_GET['id'];
+    }else{
+        $parametro_pt = 'lang=ptbr';
+        $parametro_en = 'lang=en';
+    }
+
+    if(isset($_GET['idSubcategoria'])){
+        $parametro_pt = 'lang=ptbr&idSubcategoria='.$_GET['idSubcategoria'];
+        $parametro_en = 'lang=en&idSubcategoria='.$_GET['idSubcategoria'];
+    }else{
+        $parametro_pt = 'lang=ptbr';
+        $parametro_en = 'lang=en';
+    }
+
+    if(isset($_GET['idCategoria'])){
+        $parametro_pt = 'lang=ptbr&idCategoria='.$_GET['idCategoria'];
+        $parametro_en = 'lang=en&idCategoria='.$_GET['idCategoria'];
+    }else{
+        $parametro_pt = 'lang=ptbr';
+        $parametro_en = 'lang=en';
+    }
+
 	require_once('check_carrinho.php');
+    require_once('idioma.php');
 ?>
 <script>
     $(function(){
@@ -22,7 +47,7 @@
 		<a href="../view/sobre.php" class="link_paginas"> Sobre </a>
 
         <div class="idioma_container">
-           <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?lang=ptbr">
+           <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?<?php echo($parametro_pt) ?>">
                 <label for="ptbr">
                     <img src="icones/brazil24.png">
                 </label>
@@ -30,7 +55,7 @@
                 <input type="submit" id="ptbr">
             </form>
 
-            <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?lang=en">
+            <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?<?php echo($parametro_en) ?>">
                 <label for="en">
                     <img src="icones/usa24.png">
                 </label>

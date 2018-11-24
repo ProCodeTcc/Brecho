@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
 	if(isset($_POST['tipoFiltro'])){
 		$tipoFiltro = $_POST['tipoFiltro'];
         
@@ -144,17 +146,17 @@
 				$listCategoria = new controllerCategoria();
 
 				if($tipoFiltro == 'classificacao'){
-					$rsFiltro = $listCategoria->listarCategoriaClassificacao($idCategoria, $filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaClassificacao($idCategoria, $filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro == 'tamanho'){
-					$rsFiltro = $listCategoria->listarCategoriaTamanho($idCategoria, $filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaTamanho($idCategoria, $filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro == 'cor'){
-					$rsFiltro = $listCategoria->listarCategoriaCor($idCategoria, $filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaCor($idCategoria, $filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro == 'marca'){
-					$rsFiltro = $listCategoria->listarCategoriaMarca($idCategoria, $filtro, $pesquisa);
+					$rsFiltro = $listCategoria->listarCategoriaMarca($idCategoria, $filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro == 'preco'){
                     $min = $_POST['min'];
                     $max = $_POST['max'];
-                    $rsFiltro = $listCategoria->listarCategoriaPreco($pesquisa, $min, $max, $idCategoria);
+                    $rsFiltro = $listCategoria->listarCategoriaPreco($pesquisa, $min, $max, $idCategoria, $_SESSION['idioma']);
                 }
 
 
