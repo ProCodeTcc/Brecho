@@ -120,6 +120,12 @@
                     Categorias
                 </a>
             </li>
+            
+            <li class="submenu-itens">
+                <a class="paginas_link" href="../marca/marca_view.php">
+                    Marcas
+                </a>
+            </li>
 			
 			<li class="submenu-itens">
 				<a class="paginas_link" href="../retirada/retirada_view.php">

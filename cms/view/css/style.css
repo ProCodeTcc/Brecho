@@ -1307,6 +1307,8 @@ footer{
 	height: 200px;
 }
 
+/*********************************************** CATEGORIAS ******************************************/
+
 .frm_categoria{
     width: 250px;
     margin: auto;
@@ -1327,4 +1329,12 @@ footer{
 
 .subcategorias span{
 	margin-left: 5px;
+}
+
+/*************************************** MARCAS ****************************************************/
+
+.frmMarca{
+    width: 250px;
+    height: auto;
+    margin: auto;
 }

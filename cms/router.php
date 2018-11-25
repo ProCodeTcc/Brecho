@@ -1121,6 +1121,43 @@
                     echo($status);
 				break;
 			}
+            
+        case 'marca':
+            $modo = $_POST['modo'];
+            require_once('controller/controllerMarca.php');
+            switch($modo){
+                case 'inserir':
+                    $controllerMarca = new controllerMarca();
+                    $status = $controllerMarca->inserirMarca();
+                        
+                    echo $status;
+                break;
+                    
+                case 'buscar':
+                    $id = $_POST['id'];
+                    
+                    $controllerMarca = new controllerMarca();
+                    $status = $controllerMarca->buscarMarca($id);
+                        
+                    echo $status;
+                break;
+                    
+                case 'editar':
+                    $controllerMarca = new controllerMarca();
+                    $status = $controllerMarca->atualizarMarca();
+                        
+                    echo $status;
+                break;
+                    
+                case 'excluir':
+                    $id = $_POST['id'];
+                    
+                    $controllerMarca = new controllerMarca();
+                    $status = $controllerMarca->excluirMarca($id);
+                        
+                    echo $status;
+                break;
+            }
 		break;
     }
 ?>
