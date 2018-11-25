@@ -104,15 +104,21 @@
         }
 		
 		//função que listas os produtos por classificação
-		public function listarProdutoClassificacao($classificacao, $pesquisa){
+		public function listarProdutoClassificacao($classificacao, $pesquisa, $idioma){
 			//formatando a pesquisa
 			$termo = '%'.$pesquisa.'%';
 
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//armazenando os dados em uma variável
-			$listProdutos = $produtoDAO->SelectByClassificacao($classificacao, $termo);
+			//verificando o idioma
+            if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProdutos = $produtoDAO->SelectByClassificacao($classificacao, $termo);
+            }else{
+                //armazenando os dados em uma variável
+                $listProdutos = $produtoDAO->SelectByClassificacaoTranslate($classificacao, $termo);
+            }
 			
 			//retornando os dados
 			return $listProdutos;
@@ -143,15 +149,21 @@
 		}
 		
 		//função que lista os produtos pelo tamanho
-		public function listarProdutoTamanho($tamanho, $pesquisa){
+		public function listarProdutoTamanho($tamanho, $pesquisa, $idioma){
 			//formatando a pesquisa
 			$termo = '%'.$pesquisa.'%';
 
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 			
-			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->SelectByTamanho($tamanho, $termo);
+            //verificando o idioma
+			if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->SelectByTamanho($tamanho, $termo);
+            }else{
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->SelectByTamanhoTranslate($tamanho, $termo);
+            }
 			
 			//retornando os dados
 			return $listProduto;
@@ -170,15 +182,21 @@
 		}
 		
 		//função para listar o produto a partir da cor
-		public function listarProdutoCor($cor, $pesquisa){
+		public function listarProdutoCor($cor, $pesquisa, $idioma){
 			//formatando a pesquisa
 			$termo = '%'.$pesquisa.'%';
 
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 
-			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->selectByCor($cor, $termo);
+			//verificando o idioma
+            if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByCor($cor, $termo);
+            }else{
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByCorTranslate($cor, $termo);
+            }
 
 			//retornando os dados
 			return $listProduto;
@@ -197,30 +215,40 @@
 		}
 
 		//função para listar o produto a partir da marca
-		public function listarProdutoMarca($marca, $pesquisa){
+		public function listarProdutoMarca($marca, $pesquisa, $idioma){
 			//formatando a pesquisa
 			$termo = '%'.$pesquisa.'%';
 
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 
-			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->selectByMarca($marca, $termo);
+			if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByMarca($marca, $termo);
+            }else{
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByMarcaTranslate($marca, $termo);
+            }
 
 			//retornando os dados
 			return $listProduto;
 		}
         
         //função para listar o produto a partir do preço
-		public function listarProdutoPreco($pesquisa, $min, $max){
+		public function listarProdutoPreco($pesquisa, $min, $max, $idioma){
 			//formatando a pesquisa
 			$termo = '%'.$pesquisa.'%';
 
 			//instância da classe ProdutoDAO
 			$produtoDAO = new ProdutoDAO();
 
-			//armazenando os dados em uma variável
-			$listProduto = $produtoDAO->selectByPreco($termo, $min, $max);
+			if($idioma == 'ptbr'){
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByPreco($termo, $min, $max);
+            }else{
+                //armazenando os dados em uma variável
+                $listProduto = $produtoDAO->selectByPrecoTranslate($termo, $min, $max);
+            }
 
 			//retornando os dados
 			return $listProduto;
@@ -271,12 +299,16 @@
 			return $listProduto;
 		}
 
-		public function pesquisarProduto($pesquisa){
+		public function pesquisarProduto($pesquisa, $idioma){
 			$termo = '%'.$pesquisa.'%';
 
 			$produtoDAO = new ProdutoDAO();
 
-			$listProduto = $produtoDAO->searchByName($termo);
+			if($idioma == 'ptbr'){
+                $listProduto = $produtoDAO->searchByName($termo);
+            }else{
+                $listProduto = $produtoDAO->searchByNameTranslate($termo);
+            }
 
 			return $listProduto;
 		}

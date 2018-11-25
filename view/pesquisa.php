@@ -7,8 +7,8 @@
         $pesquisa = $_POST['txtpesquisa'];
     }
     
-    if(isset($_GET['mobile'])){
-        $mobile = 'true';
+    if(isset($_GET['mobile']) && $_GET['mobile'] == 'true'){
+        $mobile = $_GET['mobile'];
     }else{
         $mobile = 'false';
     }
@@ -301,7 +301,7 @@
                         <div class="filtro_categoria">
                             <?php
                                 $listProduto = new controllerProduto();
-                                $rsProduto = $listProduto->pesquisarProduto($pesquisa);
+                                $rsProduto = $listProduto->pesquisarProduto($pesquisa, $_SESSION['idioma']);
                                 
                                 $cont = 0;
 

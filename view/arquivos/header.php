@@ -5,28 +5,22 @@
 		$usuario = 'Entrar';
 	}
 
+    $parametro_pt = 'lang=ptbr';
+    $parametro_en = 'lang=en';
+
     if(isset($_GET['id'])){
         $parametro_pt = 'lang=ptbr&id='.$_GET['id'];
         $parametro_en = 'lang=en&id='.$_GET['id'];
-    }else{
-        $parametro_pt = 'lang=ptbr';
-        $parametro_en = 'lang=en';
     }
 
     if(isset($_GET['idSubcategoria'])){
         $parametro_pt = 'lang=ptbr&idSubcategoria='.$_GET['idSubcategoria'];
         $parametro_en = 'lang=en&idSubcategoria='.$_GET['idSubcategoria'];
-    }else{
-        $parametro_pt = 'lang=ptbr';
-        $parametro_en = 'lang=en';
     }
 
     if(isset($_GET['idCategoria'])){
         $parametro_pt = 'lang=ptbr&idCategoria='.$_GET['idCategoria'];
         $parametro_en = 'lang=en&idCategoria='.$_GET['idCategoria'];
-    }else{
-        $parametro_pt = 'lang=ptbr';
-        $parametro_en = 'lang=en';
     }
 
 	require_once('check_carrinho.php');

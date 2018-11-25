@@ -1,11 +1,13 @@
 <?php
+    session_start();
+
 	if(isset($_POST['tipoFiltro'])){
 		$tipoFiltro = $_POST['tipoFiltro'];
 		@$filtro = $_POST['filtro'];
 		$pesquisa = $_POST['termo'];
 	}
 
-    if(isset($_GET['mobile'])){
+    if(isset($_GET['mobile']) && $_GET['mobile'] == 'true'){
         $mobile = 'true';
     }else{
         $mobile = 'false';
@@ -27,6 +29,7 @@
     });
 </script>
 <div class="caixa_categoria">
+    <?php echo($mobile) ?>
 	<div class="categoria_pesquisa">
         <div class="categoria_pesquisa_centro">
            <div class="categoria_pesquisa_centro">
@@ -154,17 +157,17 @@
 				$listProdutoCategoria = new controllerProduto();
 
 				if($tipoFiltro == 'classificacao'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoClassificacao($filtro, $pesquisa);
+					$rsFiltro = $listProdutoCategoria->listarProdutoClassificacao($filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro == 'tamanho'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoTamanho($filtro, $pesquisa);
+					$rsFiltro = $listProdutoCategoria->listarProdutoTamanho($filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro == 'cor'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoCor($filtro, $pesquisa);
+					$rsFiltro = $listProdutoCategoria->listarProdutoCor($filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro == 'marca'){
-					$rsFiltro = $listProdutoCategoria->listarProdutoMarca($filtro, $pesquisa);
+					$rsFiltro = $listProdutoCategoria->listarProdutoMarca($filtro, $pesquisa, $_SESSION['idioma']);
 				}else if($tipoFiltro = 'preco'){
                     $min = $_POST['min'];
                     $max = $_POST['max'];
-                    $rsFiltro = $listProdutoCategoria->listarProdutoPreco($pesquisa, $min, $max);
+                    $rsFiltro = $listProdutoCategoria->listarProdutoPreco($pesquisa, $min, $max, $_SESSION['idioma']);
                 }
 
 

@@ -288,9 +288,14 @@ body{
     }
 
     .logo{
-        width: 140px;
-        height: 100px;
+        width: 180px;
+        height: 110px;
         float: right;
+    }
+    
+    .logo img{
+        width: 180px;
+        height: 110px;
     }
 
     .menu_lado_direito{

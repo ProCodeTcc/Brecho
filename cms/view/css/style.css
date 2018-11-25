@@ -694,24 +694,12 @@ footer{
 
 #resultado{
 	display: none;
-}
-
-#resultado_itens{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	box-sizing: border-box;
-	padding: 20px;
-}
-
-#resultado span{
-	font-size: 25px;
-	box-sizing: border-box;
-	padding: 20px;
+    text-align: center;
 }
 
 #voltar{
 	cursor: pointer;
+    margin-top: 15px;
 }
 
 /***************************** ANÁLISE **********************************/

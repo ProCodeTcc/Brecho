@@ -15,6 +15,7 @@
 
 		$('.visualizar').click(function(){
 			$('#consulta').hide();
+            $('#titulo').hide();
 		});
 	});
 

@@ -24,11 +24,13 @@
         <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Home</title>
+        
         <script src="../js/jquery.js"></script>
 		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
         <script src="../js/jquery-ui.js"></script>
+        <script src="../js/Chart.js"></script>
     </head>
 
     <script>
@@ -68,11 +70,8 @@
 					//conversão dos dados recebidos para json
 					json = JSON.parse(dados);
 					
-					//colocando os valores 
-					$('#qtdA').text("Quantidade de Cliques na Alternativa A: " + json.qtdAlternativaA);
-					$('#qtdB').text("Quantidade de Cliques na Alternativa B: " + json.qtdAlternativaB);
-					$('#qtdC').text("Quantidade de Cliques na Alternativa C: " + json.qtdAlternativaC);
-					$('#qtdD').text("Quantidade de Cliques na Alternativa D: " + json.qtdAlternativaD);
+
+                        graficoPizza(json.qtdAlternativaA, json.qtdAlternativaB, json.qtdAlternativaC, json.qtdAlternativaD);
 				}
 			});
 		}
@@ -249,7 +248,7 @@
                 </div>
 
                 <div class="users_view">
-                    <div class="users_view_title">
+                    <div class="users_view_title" id="titulo">
                         <div class="users_view_itens">Pergunta</div>
                         <div class="users_view_itens">Tema</div>
                         <div class="users_view_itens">Término</div>
@@ -257,18 +256,14 @@
                     </div>
 
                     <div id="consulta">
-
+                        
                     </div>
 					
 					<div id="resultado">
-						<div id="resultado_itens">
-							<span id="qtdA"></span>
-							<span id="qtdB"></span>
-							<span id="qtdC"></span>
-							<span id="qtdD"></span>
-
-							<input type="button" id="voltar" value="VOLTAR">
-						</div>
+						<canvas id="grafico" width="600" height="200"></canvas>
+                        <button class="sub_btn" type="button" id="voltar">
+                            <strong>VOLTAR</strong>
+                        </button>
 					</div>
 
                     <div id="pesquisa">

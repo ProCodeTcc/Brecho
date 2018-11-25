@@ -152,3 +152,27 @@ function exibirSubmenu(){
         $('.menu_itens').not(this).find('.submenu').hide('fast');
     });
 }
+
+function graficoPizza(qtdA, qtdB, qtdC, qtdD){
+    var ctx = document.getElementById('grafico').getContext('2d');
+    
+    var data = {
+        labels: ['Alternativa A', 'Alternativa B', 'Alternativa C', 'Alternativa D'],
+        datasets: [{
+            label: 'Quantidade de Respostas',
+            data: [qtdA, qtdB, qtdC, qtdD],
+            backgroundColor: ['#F7464A', '#E2EAE9', '#D4CCC5', '#949FB1']
+        }]
+    };
+    var options = {
+        animation: {
+            easing: 'easeInOutQuart',
+            duration: 1000
+        }
+    }
+    var pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options:options
+    });
+}

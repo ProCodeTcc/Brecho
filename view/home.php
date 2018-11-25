@@ -600,7 +600,7 @@
                         Sobre o Brechó
                     </div>
                     <div class="linha_rodape">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
+                        Brechó Bernadete é uma startup criada por duas amigas sócias, Thais e Silvia, que em 2017 enxergaram o potencial em crescimento do mercado de brechós. 
                     </div>
                 </div>
                 <div class="caixa_rodape">
