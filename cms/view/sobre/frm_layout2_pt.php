@@ -1,5 +1,6 @@
 <script>
     var id = $('#frm_sobreLayout2').data('id');
+    mudarModal('700', '400');
 		
     if(id != ""){
         $('.form').attr('data-modo', 'atualizarLayout');

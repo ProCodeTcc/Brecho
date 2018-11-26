@@ -209,6 +209,10 @@ function filtroResponsivo(){
         //desativa o fechamento da opção
        e.stopPropagation(); 
     });
+    
+    $('.close-subcategoria').click(function(){
+       $('#filtro_submenu').fadeOut();
+    });
 }
 
 //função para exibir o submenu do mobile

@@ -89,16 +89,30 @@
 
             //chamada da função que conecta com o banco
             $PDO_conexao = $conexao->conectarBanco();
+            
+            //setando os atributos para captura de erros
+            $PDO_conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            //chamada da função que exclui os dados
-            $stm = $PDO_conexao->prepare('DELETE FROM categoria WHERE idCategoria = ?');
+            try{
+                //chamada da função que exclui os dados
+                $stm = $PDO_conexao->prepare('DELETE FROM categoria WHERE idCategoria = ?');
 
-            //parâmetros enviados
-            $stm->bindParam(1, $id);
+                //parâmetros enviados
+                $stm->bindParam(1, $id);
 
-            //execução do statement
-            $stm->execute();
-
+                //execução do statement
+                $stm->execute();
+            }catch(PDOException $e){
+                //verificando o código do erro
+                if($e->getCode() == 23000){
+                    //atualizando o status
+                    $status = array('status' => 'produto');
+                    
+                    //retorno do status
+                    echo(json_encode($status));
+                }
+            }
+            
             //verificando se foi excluído
             if($stm->rowCount() != 0){
                 //mensagem de sucesso

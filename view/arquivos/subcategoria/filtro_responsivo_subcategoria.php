@@ -4,6 +4,7 @@
 
 <div class="filtro_responsivo_container" id="filtro_responsivo">
     <div class="filtro_responsivo" id="filtro_submenu">
+        <div class="close-subcategoria">x</div>
         <div class="filtro_itens filtro_responsivo_item">
             Classificação
 

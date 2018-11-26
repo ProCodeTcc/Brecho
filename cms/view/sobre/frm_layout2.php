@@ -48,7 +48,6 @@
 	}
 	
 	$(document).ready(function(){
-		mudarModal('700', '400');
 		$('#tabs').tabs();
 		$('#tabs').tabs('disable', 1);
 		

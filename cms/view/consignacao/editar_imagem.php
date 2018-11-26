@@ -51,7 +51,7 @@
 	}
 	
 	$(document).ready(function(){
-		$('.modal').height(400);
+		mudarModal('400', '800');
 		
 //		$('.editar_imagem').click(function(){
 //			$('.container_imagens').hide('fast');

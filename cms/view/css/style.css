@@ -90,6 +90,11 @@ header{
 	text-align: center;
 }
 
+.logo img{
+    width: 180px;
+    height: 120px;
+}
+
 .painel_usuario{
     margin-top: 15px;
     margin: 10px;
@@ -744,13 +749,13 @@ footer{
 .produtos_imagem{
 	width: 128px;
 	height: 128px;
-	border: 1px solid black;
 	margin: auto;
 }
 
 .produtos_imagem > img{
 	width: 128px;
 	height: 128px;
+    border-radius: 10px;
 }
 
 .produtos_titulo{
@@ -878,6 +883,7 @@ footer{
 .imagens_container img{
 	height: 128px;
 	width: 128px;
+    margin-right: 5px;
 }
 
 #form_container_roupa{

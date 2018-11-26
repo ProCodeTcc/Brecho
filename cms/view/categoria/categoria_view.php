@@ -85,10 +85,13 @@
 					if(json.status == 'sucesso'){
 						//mensagem de sucesso
 						mostrarSucesso('Categoria excluída com sucesso!!');
-					}else{
+					}else if(json.status == 'produto'){
 						//mensagem de erro
+                        mostrarErro('Não foi possível realizar a exclusão, pois há produtos nesta categoria');
+					}else{
+                        //mensagem de erro
 						mostrarErro('Ocorreu um erro ao realizar a exclusão!!');
-					}
+                    }
 				}
 			});
 		}

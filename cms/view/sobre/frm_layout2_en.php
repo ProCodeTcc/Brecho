@@ -1,5 +1,6 @@
 <script>
     var id = $('#frm_sobreLayout2').data('id');
+    mudarModal('500', '400');
 		
     if(id != ""){
         $('.form').attr('data-modo', 'atualizarTraducao');

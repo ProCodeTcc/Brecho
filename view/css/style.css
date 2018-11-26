@@ -3423,6 +3423,11 @@ body{
         width: 300px;
         height: 90%;
     }
+    
+    .logo img{
+        width: 340px;
+        height: 220px;
+    }
 
     .fundo_login{
         width: 100%;
@@ -4287,8 +4292,15 @@ body{
         float: left;
         position: fixed;
         border-radius: 100px;
-        margin-left: 800px;
-        margin-top: 100px;
+        bottom: 0;
+        right: 0;
+    }
+    
+    .close-subcategoria{
+        float: right;
+        font-size: 60px;
+        font-weight: bold;
+        margin-right: 20px;
     }
     
     .filtro_responsivo{
