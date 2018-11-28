@@ -106,6 +106,8 @@
 				for(var i = 0; i < json.length; i++){
 					$('#txtcategoria').append(new Option(json[i].nomeCategoria, json[i].idCategoria));
 				}
+                
+                selecionarSubcategoria(json.idCategoria);
 			}
 		});
 	}

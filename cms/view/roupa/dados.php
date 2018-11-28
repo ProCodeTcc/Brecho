@@ -29,8 +29,8 @@
 		</div>
 
 		<article>
-			<p class="produtos_titulo">nome</p>
-			<p class="produtos_titulo">preço</p>
+			<p class="produtos_titulo"><?php echo($rsProdutos[$cont]->getNome()) ?></p>
+			<p class="produtos_titulo">R$: <?php echo($rsProdutos[$cont]->getPreco()) ?></p>
 		</article>
 
 		<div class="acoes">
