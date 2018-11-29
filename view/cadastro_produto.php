@@ -401,7 +401,7 @@
 								<input class="escolha_fotos" id="imagem2" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem2')">
 								<label for="imagem2">
 									<div class="botao_imagem">
-										<img alt="#" id="prev_imagem" src="icones/foto.png">
+										<img alt="#" id="prev_imagem2" src="icones/foto.png">
 									</div>
 								</label>
 							</div>
@@ -409,7 +409,7 @@
 							   <input class="escolha_fotos" id="imagem3" name="fleimagem[]" type="file" onChange="mostrarPrevia(this, '#prev_imagem3')">
 								<label for="imagem3">
 									<div class="botao_imagem">
-										<img alt="#" id="prev_imagem" src="icones/foto.png">
+										<img alt="#" id="prev_imagem3" src="icones/foto.png">
 									</div>
 								</label> 
 							</div>
