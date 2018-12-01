@@ -30,9 +30,12 @@
                 }else if(tipoFiltro == 2){
                     $('#produtos').find('.itens_vendas').not('.compra').hide();
                     $('.compra').show();
-                }else{
+                }else if(tipoFiltro == 3){
                     $('#produtos').find('.itens_vendas').not('.venda').hide();
                     $('.venda').show();
+                }else{
+                    $('#produtos').find('.itens_vendas').not('.consignacao').hide();
+                    $('.consignacao').show();
                 }
             }
 		</script>
@@ -54,26 +57,29 @@
                 Minhas Vendas           
             </div>
             <div class="vendas_centro">
-                <form action="cadastro_produto.php">
                     <div class="filtro_pedidos">
                         <select id="txtfiltro" onChange="filtrarPedidos()">
                             <option value="0">filtrar pedidos</option>
                             <option value="1">Avaliação</option>
                             <option value="2">Compras</option>
                             <option value="3">Vendas</option>
+                            <option value="4">Consignação</option>
                         </select>
+                        
+                        <div class="linha_vender_produtos_botao">    
+                            <a href="../view/perfil.php">
+                                <input class="botao_voltar" type="button" value="Voltar">
+                            </a>
+
+                             <a href="../view/cadastro_produto.php">
+                                <input class="botao_cadastro" type="button" value="Vender Produto">
+                            </a>
+                        </div>
                     </div>
-                    <div class="linha_vender_produtos_botao">    
-                        <a href="../view/perfil.php">
-                            <input class="botao_voltar" type="button" value="Voltar">
-                        </a>
-                        <input class="botao_cadastro" type="submit" value="Vender Produto">
-                    </div>
-                </form>
                 <div class="caixa_vendas" id="produtos">
                     <div class="titulo_vendas">
                         <div class="titulo_produtos_vendas">
-                            Produtos
+                            Pedido
                         </div>
                         <div class="titulo_menor_produtos_vendas">
                             Valor
@@ -164,7 +170,36 @@
                             <?php echo($rsProduto[$cont]->getDtPedido()) ?>
                         </div>
                          <div class="detalhe_vendas">
-                            Vendido
+                            <?php echo($rsProduto[$cont]->getStatus()) ?>
+                        </div>
+                    </div>
+
+                <?php
+                    $cont ++;
+                        }
+                ?>
+                    
+                <?php
+                        require_once($diretorio.'/controller/controllerConsignacao.php');
+                        $listConsignacao = new controllerConsignacao();
+                        $cont = 0;
+                        $rsConsignacao = $listConsignacao->filtrarConsignacao($_SESSION['tipoCliente'], $_SESSION['idCliente']);
+
+                        while($cont < count($rsConsignacao)){
+                    ?>
+                    
+                    <div class="itens_vendas consignacao">
+                        <div class="produto_vendas">
+                            <?php echo($rsConsignacao[$cont]->getId()) ?>
+                        </div>
+                         <div class="detalhe_vendas">
+                            R$: <?php echo($rsConsignacao[$cont]->getValor()) ?>
+                        </div>
+                         <div class="detalhe_vendas">
+                            <?php echo($rsConsignacao[$cont]->getDtTermino()) ?>
+                        </div>
+                         <div class="detalhe_vendas">
+                            <?php echo($rsConsignacao[$cont]->getStatus()) ?>
                         </div>
                     </div>
 

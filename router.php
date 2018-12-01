@@ -475,18 +475,27 @@
             //switch no modo para verificar qual o modo
 			switch($modo){
 				case 'gerar':
+                    $qtdParcela = $_POST['qtdParcela'];
                     //instância da controller
 					$controllerPedido = new controllerPedido();
                     
                     //chamada da função que gera o pedido
-					$status = $controllerPedido->gerarPedido();
-
+					$status = $controllerPedido->gerarPedido($qtdParcela);
+                    echo($status);
                     //verificando se o pedido foi feito
 					if($status == 'sucesso'){
                         //redirecionando o usuário
 						header('location: view/pedido_finalizado.php');
 					}
 				break;
+                    
+                case 'gerarDuplicata':
+                    $controllerPedido = new controllerPedido();
+                    
+                    $status = $controllerPedido->gerarDuplicata();
+                    
+                    echo($status);
+                break;
 			}
 		break;
         

@@ -1300,6 +1300,27 @@
             //fechando a conexão
 			$conexao->fecharConexao();
         }
+        
+        //função para atualizar o status do produto
+        public function updateStatus($idProduto){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query para atualizar os dados
+            $stm = $PDO_conexao->prepare('UPDATE produto SET status = 0 WHERE idProduto = ?');
+            
+            //parâmetro enviado
+            $stm->bindParam(1, $idProduto);
+            
+            //execução do statement
+            $stm->execute();
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
 		
 	}
 ?>

@@ -1435,6 +1435,7 @@
                     echo($status);
 				break;
 			}
+        break;
             
         case 'marca':
             $modo = $_POST['modo'];

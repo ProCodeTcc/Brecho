@@ -248,6 +248,28 @@
             //fechando a conexão
             $conexao->fecharConexao();
         }
+        
+        //função para aplicar o percentual de ganho da loja
+        public function applyPorcentagem($percentual, $idConsignacao){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query para atualizar o preço
+            $stm = $PDO_conexao->prepare('UPDATE produto as p INNER JOIN produto_consignacao as pc ON p.idProduto = pc.idProduto SET preco = (?+100)/100*preco WHERE pc.idConsignacao = ?');
+            
+            //parâmetro enviado
+            $stm->bindParam(1, $percentual);
+            $stm->bindParam(2, $idConsignacao);
+            
+            //execução do statement
+            $stm->execute();
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
 
         //função para pesquisar os produtos em consignação
         public function searchConsignacao($pesquisa){
@@ -369,11 +391,12 @@
             $PDO_conexao = $conexao->conectarBanco();
             
             //query que atualiza o status
-            $stm = $PDO_conexao->prepare('UPDATE pedidoconsignacao SET idStatus = 0 WHERE dataFinal = ? AND idConsignacao = ?');
+            $stm = $PDO_conexao->prepare('UPDATE pedidoconsignacao SET idStatus = 2 WHERE dataFinal = ? OR dataFinal < ? AND idConsignacao = ?');
             
             //parâmetros enviados
             $stm->bindParam(1, $dataAtual);
-            $stm->bindParam(2, $id);
+            $stm->bindParam(2, $dataAtual);
+            $stm->bindParam(3, $id);
             
             //execução do statement
             $stm->execute();

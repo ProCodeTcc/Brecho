@@ -336,6 +336,52 @@
 			//fechando a conexão
 			$conexao->fecharConexao();
 		}
+        
+        //função para selecionar os pedidos em consignação do cliente
+        public function selectConsignacao($idCliente){
+            //instância da classe de conexão com o banco
+            $conexao = new ConexaoMySQL();
+            
+            //chamada da função que conecta com o banco
+            $PDO_conexao = $conexao->conectarBanco();
+            
+            //query que busca o pedido
+            $stm = $PDO_conexao->prepare('SELECT p.*, sp.status FROM pedidoconsignacao AS p INNER JOIN statusconsignacao AS sp ON sp.idStatus = p.idStatus INNER JOIN 
+            pedidoconsignacao_clientejuridico AS pj ON pj.idPedidoConsignacao = p.idConsignacao INNER JOIN clientejuridico AS c ON c.idCliente = 
+            pj.idClienteJuridico WHERE pj.idClienteJuridico = ?');
+            
+            //parâmetro enviado
+            $stm->bindParam(1, $idCliente);
+            
+            //execução do statement
+            $stm->execute();
+            
+            //contador
+            $cont = 0;
+            
+            //percorrendo os dados
+            while($rsConsignacao = $stm->fetch(PDO::FETCH_OBJ)){
+                //criando uma nova consignação
+                $listConsignacao[] = new Consignacao();
+                
+                //setando os atributos
+                $listConsignacao[$cont]->setId($rsConsignacao->idConsignacao);
+                $listConsignacao[$cont]->setDtTermino($rsConsignacao->dataFinal);
+                $listConsignacao[$cont]->setStatus($rsConsignacao->status);
+                $listConsignacao[$cont]->setValor($rsConsignacao->valorConsignacao);
+                
+                //incrementando o contador
+                $cont++;
+            }
+            
+            if($cont != 0){
+                //retornando os dados
+                return $listConsignacao;
+            }
+            
+            //fechando a conexão
+            $conexao->fecharConexao();
+        }
 
 		//função que verifica o campo de usuário
 		public function checkUsuario($usuario){

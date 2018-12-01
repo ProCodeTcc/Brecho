@@ -34,6 +34,9 @@
 
             //instância da classe ConsignacaoDAO
             $consignacaoDAO = new ConsignacaoDAO();
+            
+            //aplicando o percentual de ganho da loja ao valor do produto
+            $consignacaoDAO->applyPorcentagem($percentual, $id);
 
             //chamada da função que atualiza a consignação
             $status = $consignacaoDAO->Update($consignacaoClass);
@@ -101,7 +104,7 @@
             $dataAtual = date('Y-m-d');
             
             //verificando se a data da consignação é igual à data atual
-            if($data == $dataAtual){
+            if($data == $dataAtual || $data < $dataAtual){
                 //se for, desativa a consignação
                 $consignacaoDAO->disableConsignacao($dataAtual, $id);
             }else{

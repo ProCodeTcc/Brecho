@@ -1046,6 +1046,8 @@ body{
     }
     
     .filtro_pedidos{
+        width: 100%;
+        height: auto;
         float: left;
     }
     
@@ -1081,13 +1083,16 @@ body{
     }
 
     .caixa_vendas{
-        width: 99%;
+        clear: both;
+        width: 60%;
         min-height: 200px;
+        height: auto;
+        overflow: auto;
         border: solid 1px #cecece;
         border-radius: 10px;
         margin-bottom: 20px;
         padding-bottom: 10px;
-        float: right;
+        margin: auto;
     }
 
     .titulo_vendas{
@@ -1100,7 +1105,7 @@ body{
     }
 
     .titulo_produtos_vendas{
-        width: 55%;
+        width: 40%;
         height: 35px;
         float: left;
         padding-top: 15px;
@@ -1112,7 +1117,7 @@ body{
     }
 
     .titulo_menor_produtos_vendas{
-        width: 15%;
+        width: 21%;
         height: 35px;
         float: left;
         padding-top: 15px;
@@ -1133,15 +1138,16 @@ body{
     }
 
     .produto_vendas{
-        width: 55%;
+        width: 40%;
         height: 100%;
         float: left;
         height: 35px;
         padding-top: 15px;
+        text-align: center;
     }
 
     .detalhe_vendas{
-        width: 15%;
+        width: 20%;
         height: 35px;
         height: 35px;
         padding-top: 15px;

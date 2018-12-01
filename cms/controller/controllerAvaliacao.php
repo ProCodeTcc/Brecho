@@ -75,6 +75,9 @@
 
                         //relacionando a consignação com o produto
                         $status = $consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
+                        
+                        //aplicando percental de ganho ao valor do produto
+                        $consignacaoDAO->applyPorcentagem($percentualLoja, $idConsignacao);
                     }
                 }
             }else{
@@ -109,6 +112,9 @@
 
                         //relacionando a consignação com o produto
                         $status = $consignacaoDAO->insertConsignacaoProduto($idProduto, $idConsignacao, $percentualLoja);
+                        
+                        //aplicando percental de ganho ao valor do produto
+                        $consignacaoDAO->applyPorcentagem($percentualLoja, $idConsignacao);
                     }
                 }
             }

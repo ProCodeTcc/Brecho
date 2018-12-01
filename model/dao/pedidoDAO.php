@@ -34,11 +34,12 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query que insere os dados
-            $stm = $PDO_conexao->prepare('INSERT INTO pedidovenda(dataPedidoVenda, valorPedidoVenda) VALUES(?,?)');
+            $stm = $PDO_conexao->prepare('INSERT INTO pedidovenda(dataPedidoVenda, valorPedidoVenda, qtdParcelas) VALUES(?,?,?)');
 
             //parâmetros enviados
             $stm->bindParam(1, $pedido->getDtPedido());
             $stm->bindParam(2, $pedido->getValor());
+            $stm->bindParam(3, $pedido->getQtdParcela());
 
             //execução do statement
             $stm->execute();
@@ -72,8 +73,18 @@
             $stm->bindParam(1, $idPedido);
             $stm->bindParam(2, $idProduto);
 
+
             //execução do statement
             $stm->execute();
+            
+            //verificando o retorno das linhas
+            if($stm->rowCount() != 0){
+                //setando o status pra sucesso
+                $status = 'sucesso';
+            }
+            
+            //retornando o status
+            return $status;
 
             //fechando a conexão
             $conexao->fecharConexao();

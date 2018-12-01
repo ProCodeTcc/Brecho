@@ -9,6 +9,7 @@
         private $dtPedido;
         private $valor;
         private $status;
+        private $qtdParcela;
 
         public function setIdPedido($idPedido){
             $this->idPedido = $idPedido;
@@ -36,6 +37,14 @@
 
         public function setStatus($status){
             $this->status = $status;
+        }
+        
+        public function setQtdParcela($qtdParcela){
+            $this->qtdParcela = $qtdParcela;
+        }
+        
+        public function getQtdParcela(){
+            return $this->qtdParcela;
         }
 
         public function getStatus(){

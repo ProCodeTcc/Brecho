@@ -20,6 +20,7 @@
 	
 				//colocando os valores nas caixas de texto
 				$('#percentualloja').val(json.percentual);
+                $('#valor').val(json.valorConsignacao);
 				$('#dtinicio').val(json.dataInicial);
 				$('#dttermino').val(json.dataFinal);
 			}
@@ -90,7 +91,7 @@
 				Valor:
 			</label>
 			
-			<input type="text" name="txtvalor" class="cadastro_input" id="valor" value="<?php echo($preco) ?>" readonly>
+			<input type="text" name="txtvalor" class="cadastro_input" id="valor">
 		</div>
 		
 		<div class="form_linha">

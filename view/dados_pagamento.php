@@ -6,9 +6,6 @@
             header('location: login.php');
         }
         
-        
-        $idCliente = $_SESSION['idCliente'];
-        $tipoCliente = $_SESSION['tipoCliente'];
     }else{
         header('location: login.php');
     }
@@ -23,87 +20,18 @@
         <script src="js/funcoes.js"></script>
         
         <script>
-            //função para finalizar o pedido
-            function finalizarPedido(id, tipo){
-                $.ajax({
-                    type: 'POST', //tipo de requisição
-                    url: '../router.php?controller=cartao&modo=verificar', //parâmetros enviados
-                    data: {id:id, tipo:tipo},
-                    success: function(dados){
-                        //conversão dos dados para JSON
-                        json = JSON.parse(dados);
-                        
-                        //verificando se o cliente possui um cartão ativo
-                        if(json.status == 'desativado'){
-                            //mensagem de erro
-                            mostrarErro('Você não possui nenhum cartão ativo!!');
-                            
-                            //redirecionando o usuário
-                            redirecionarUsuario('cartao.php?status=desativado');
-                        }else{
-                            //verificando o status do pagamento
-                            var status = $('#dados').attr('data-pagamento');
-                            
-                            //verificando se é pra finalizar
-                            if(status == 'finalizar'){
-                                //mensagem de confirmação
-                                mostrarDialogo('Deseja finalizar o pagamento?')
-                            }
-                        }
-                    }
-                });
-            }
-            
-            //função para selecionar o cartão do cliente
-            function selecionarCartao(id, tipo){
-                $.ajax({
-                   type: 'POST', //tipo de requisição
-                    url: '../router.php?controller=cartao&modo=selecionar', //parâmetros enviados
-                    data: {id:id, tipo:tipo},
-                    success: function(dados){
-                        //conversão dos dados para JSON
-                        json = JSON.parse(dados);
-                        
-                        //limpando os dados
-                        $('.dados_esquedo').children('.linha_pagamento').empty();
-                        
-                        //preenchendo os dados do cartão
-                        $('#txtnome').html('Titular: ' + json.nomeTitular);
-                        $('#txtnumero').html('Número: ' + json.numeroCartao);
-                        $('#txtvencimento').html('Vencimento: ' + json.vencimento);
-                        $('#txtcodigo').html('Código: ' + json.codseguranca);
-                        
-                        //atualizando o status do pagamento
-                        $('#dados').attr('data-pagamento', 'finalizar');
-                        
-                    }
-                });
-            }
-            
-            //função para verificar a opção escolhida pelo cliente
-            function verificarOpcao(opcao){
-                //se for sim
-                if(opcao == 'sim'){
-                    //chamada da função que gera o pedido
-                    gerarPedido();
-                }else{
-                    //fecha a mensagem
-                    $('.mensagens').fadeOut(400);
-                }
-            }
-            
             //função para gerar o pedido
             function gerarPedido(){
+                var qtdParcela = $('#qtdparcela').val();
                 $.ajax({
                     type: 'POST', //tipo de requisição
                     url: '../router.php?controller=pedido&modo=gerar', //url onde será enviada a requisição
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    async: true,
+                    data: {qtdParcela:qtdParcela},
                     success: function(dados){
-                        if(dados == 'sucesso'){
-                            window.location.href="pedido_finalizado.php";
+                        json = JSON.parse(dados);
+                        
+                        if(json.dados.status == 'sucesso'){
+                            gerarDuplicata(json.dados.pedido, json.dados.parcelas, json.dados.dtPagamento, json.dados.valor);
                         }else if(dados == 'erro'){
                             alert('Ocorreu um erro ao gerar o pedido!!');
 
@@ -113,13 +41,24 @@
                 });
             }
             
+            function gerarDuplicata(idPedido, qtdParcela, dtPagamento, valor){
+                alert($('#txttitular').val());
+                $.ajax({
+                    type: 'POST',
+                    url: '../router.php?controller=pedido&modo=gerarDuplicata',
+                    data: {pedido:idPedido, parcela:qtdParcela, pagamento:dtPagamento, valor:valor},
+                    success: function(dados){
+                        alert(dados);
+                        json = JSON.parse(dados);
+                        
+                        if(json.status == 'sucesso'){
+                            window.location.href='pedido_finalizado.php?idPedido='+idPedido;
+                        }
+                    }
+                });
+            }
+            
             $(document).ready(function(){
-                var id = $('#dados').attr('data-id');
-                var tipo = $('#dados').attr('data-tipo');
-                
-                //selecionando o cartão
-                selecionarCartao(id, tipo);
-                
                 if(verificarMobile == true){
                     submenuResponsivo();
                 }
@@ -195,60 +134,62 @@
                     <div class="titulo_pagamento">
                         Cartão de Crédito 
                     </div>
-                    <div class="linha_pagamento" id="txtnumero">
-                        Numero do Cartão: 0000 0000 0000 0000
-                    </div>
-                    <div class="linha_pagamento" id="txtnome">
-                        Nome do Titular: Fulano da Silva
-                    </div>
-                    <div class="linha_pagamento" id="txtcodigo">
-                        Código de Segurança: 000
-                    </div>
-                    <div class="linha_pagamento" id="txtvencimento">
-                        Vencimento: 08/20
-                    </div>
+                    
                     <div class="linha_pagamento">
-                        Bandeira: Visa
+                        Numero do Cartão:
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        <input class="campo_cadastro_usuario_meio" type="text">
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        Nome do Titular:
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        <input class="campo_cadastro_usuario_meio" type="text" id="txttitular">
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        Código de Segurança:
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        <input class="campo_cadastro_usuario_meio" type="text">
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        Vencimento:
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        <input class="campo_cadastro_usuario_meio" type="text">
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        Parcelas:
+                    </div>
+                    
+                    <div class="linha_pagamento">
+                        <select class="campo_cadastro_usuario_meio" id="qtdparcela">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
                     </div>
                 </div>
                
                 <div class="dados_direito">
-<!--
-                    <div class="titulo_pagamento_direito">
-                        RESUMO DO PEDIDO 
-                    </div>
-                    <div class="endereco_retirada">
-                        <div class="linha_pagamento_titulo">
-                            Endereço de Retirada
-                        </div>
-                        <div class="linha_pagamento">
-                            Rua: Elton Silva
-                        </div>
-                        <div class="linha_pagamento">
-                            Bairro: Centro
-                        </div>
-                        <div class="linha_pagamento">
-                            Cidade:Jandira - SP
-                        </div>
-                        <div class="linha_pagamento">
-                            CEP: 06600-025
-                        </div>
-                        <div class="linha_pagamento">
-                            Telefone: (11)4002-8922
-                        </div>
-                    </div>
--->
-                        
-<!--
-                        <div class="tabela_produto">
-                            <div class="coluna_tabela_produto_maior">
-                                Itens do Pedido
-                            </div>
-                            <div class="coluna_tabela_produto_menor">
-                                Valor
-                            </div>
-                        </div>
--->
                     <div class="tabela_produto">
                         <div class="linha_titulo_produtos">
                             <div class="coluna_tabela_produto_maior">
@@ -278,7 +219,7 @@
                     ?>
                     </div>
                     <div class="linha_botao_dados">
-                        <input class="botao_login" type="submit" value="Comprar" onclick="finalizarPedido(<?php echo($idCliente) ?>, '<?php echo($tipoCliente) ?>')">
+                        <input class="botao_login" type="submit" value="Comprar" onclick="gerarPedido()">
                     </div>
                 </div>
             </div>

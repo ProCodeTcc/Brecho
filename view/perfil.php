@@ -101,19 +101,9 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="cartao.php">
-                            <div class="botao_dados item3">
-                                <div class="icone_dados">
-                                    <img alt="#" src="icones/cartao.png">
-                                </div>
-                                <div class="texto_dados">
-                                    <h1> Cartões de Crédito </h1>
-                                </div>
-                            </div>
-                        </a>
                     </div>
                      <div class="perfil_direito">
-                         <h1 class="titulo_perfil"> Meus Pedidos </h1>
+                         <h1 class="titulo_perfil"> Retiradas Marcadas </h1>
                          <div class="perfil_tabela">
                              <div class="titulo_perfil_pedidos">
                                  <div class="titulo_perfil_campos">
