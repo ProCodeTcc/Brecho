@@ -620,6 +620,9 @@ Florianópolis, SC, Brasil
                 </div>
                 <div class="rodape_final">
                     BERNADET Brechó Online. Todos os Direitos Reservados.
+                    <p class="app">
+                        <img src="view/icones/playstore.png">
+                    </p>
                 </div>
             </div>
         </footer>

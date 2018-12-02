@@ -490,80 +490,15 @@
 				break;
                     
                 case 'gerarDuplicata':
+                    //instância da controller
                     $controllerPedido = new controllerPedido();
                     
+                    //gerando uma duplicata
                     $status = $controllerPedido->gerarDuplicata();
                     
                     echo($status);
                 break;
 			}
 		break;
-        
-        case 'cartao':
-            require_once('controller/controllerCartao.php');
-            $modo = $_GET['modo'];
-            switch($modo){
-                case 'inserir':
-                    $tipo = $_GET['tipo'];
-                    $id = $_GET['id'];
-                    
-                    $controllerCartao = new controllerCartao();
-                    
-                    $status = $controllerCartao->inserirCartao($tipo, $id);
-                    
-                    echo($status);
-                break;
-                    
-                case 'buscarCartao':
-                    $id = $_POST['id'];
-                    $controllerCartao = new controllerCartao();
-                    $listCartao = $controllerCartao->buscarCartao($id);
-                    
-                    echo($listCartao);
-                break;
-                    
-                case 'editar':
-                    $controllerCartao = new controllerCartao();
-                    
-                    $status = $controllerCartao->atualizarCartao();
-                    
-                    echo $status;
-                break;
-                    
-                case 'excluir':
-                    $id = $_POST['id'];
-                    $controllerCartao = new controllerCartao();
-                    
-                    $status = $controllerCartao->excluirCartao($id);
-                    echo $status;
-                break;
-                    
-                case 'status':
-                    $id = $_POST['id'];
-                    $status = $_POST['status'];
-                    $controllerCartao = new controllerCartao();
-                    $controllerCartao->atualizarStatus($id, $status);
-                break;
-                    
-                case 'verificar':
-                    $id = $_POST['id'];
-                    $tipo = $_POST['tipo'];
-                    
-                    $controllerCartao = new controllerCartao();
-                    $status = $controllerCartao->verificarCartao($id, $tipo);
-                    echo($status);
-                break;
-                    
-                case 'selecionar':
-                    $id = $_POST['id'];
-                    $tipo = $_POST['tipo'];
-                    
-                    $controllerCartao = new controllerCartao();
-                    $listCartao = $controllerCartao->selecionarAtivo($id, $tipo);
-                    echo($listCartao);
-                break;
-            }
-        break;
-        
     }
 ?>

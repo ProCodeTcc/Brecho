@@ -43,7 +43,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 			
             //query que insere os dados no banco
-           	$stm = $PDO_conexao->prepare("INSERT INTO nivelUsuario(nomeNivel) VALUES(?)");
+           	$stm = $PDO_conexao->prepare("INSERT INTO nivelusuario(nomeNivel) VALUES(?)");
 			
 			//parâmetros que serão inseridos
 			$stm->bindParam(1, $nivel->getNome());
@@ -76,7 +76,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 			
             //query que realiza a consulta
-            $sql = "SELECT * FROM nivelUsuario";
+            $sql = "SELECT * FROM nivelusuario";
 
             //armazenando o retorno dos dados em uma variável
             $resultado = $PDO_conexao->query($sql);
@@ -136,7 +136,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 			
             //query para deletar o nível do banco
-            $stm = $PDO_conexao->prepare("DELETE FROM nivelUsuario WHERE idNivel = ?");
+            $stm = $PDO_conexao->prepare("DELETE FROM nivelusuario WHERE idNivel = ?");
 			
 			$stm->bindParam(1, $id);
 			
@@ -160,7 +160,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 			
             //query para fazer consulta no banco através do ID
-            $stm = $PDO_conexao->prepare("SELECT * FROM nivelUsuario WHERE idNivel = ?");
+            $stm = $PDO_conexao->prepare("SELECT * FROM nivelusuario WHERE idNivel = ?");
 			
 			//parâmetro que será enviado
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
@@ -191,7 +191,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 			
             //query para atualizar os dados do banco
-            $stm = $PDO_conexao->prepare("UPDATE nivelUsuario set nomeNivel = ? WHERE idNivel = ?");
+            $stm = $PDO_conexao->prepare("UPDATE nivelusuario set nomeNivel = ? WHERE idNivel = ?");
 			
 			//parâmetros que serão enviados
 			$stm->bindParam(1, $nivel->getNome());
@@ -224,10 +224,10 @@
 			//verificando qual é o status atual
             if($status == 1){
                 //se for 1, atualiza o status para 0
-                $stm = $PDO_conexao->prepare("UPDATE nivelUsuario SET status = 0 WHERE idNivel = ?");
+                $stm = $PDO_conexao->prepare("UPDATE nivelusuario SET status = 0 WHERE idNivel = ?");
             }else{
                 //se for 0, atualiza o status para 1
-                $stm = $PDO_conexao->prepare("UPDATE nivelUsuario SET status = 1 WHERE idNivel = ?");
+                $stm = $PDO_conexao->prepare("UPDATE nivelusuario SET status = 1 WHERE idNivel = ?");
             }
 			
 			//parâmetro que será enviado para o banco

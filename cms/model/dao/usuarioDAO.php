@@ -79,7 +79,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query para atualizar no banco de dados
-            $stm = $PDO_conexao->prepare("UPDATE usuarioCms set imagem = ?, nomeUsuario = ?, login = ?, idNivel = ?, senha = ? WHERE idUsuario = ?");
+            $stm = $PDO_conexao->prepare("UPDATE usuariocms set imagem = ?, nomeUsuario = ?, login = ?, idNivel = ?, senha = ? WHERE idUsuario = ?");
 
 			//parâmetros que serão enviados
 			$stm->bindParam(1, $usuario->getImagem());
@@ -113,7 +113,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query para pegar dados do banco
-            $sql = "SELECT usuariocms.*, n.nomeNivel FROM usuariocms LEFT JOIN nivelUsuario as n on usuariocms.idNivel = n.idNivel ORDER BY idUsuario";
+            $sql = "SELECT usuariocms.*, n.nomeNivel FROM usuariocms LEFT JOIN nivelusuario as n on usuariocms.idNivel = n.idNivel ORDER BY idUsuario";
 
 
 			//armazenando o retorno da query em uma variável
@@ -152,7 +152,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query para pegar os dados
-            $sql = "SELECT * FROM nivelUsuario";
+            $sql = "SELECT * FROM nivelusuario";
 
             //armazenando o retorno da query em uma variável
             $resultado = $PDO_conexao->query($sql);
@@ -184,7 +184,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query para exclusão de dados do banco
-            $stm = $PDO_conexao->prepare("DELETE FROM usuarioCms WHERE idUsuario = ?");
+            $stm = $PDO_conexao->prepare("DELETE FROM usuariocms WHERE idUsuario = ?");
 
 			//parâmetros que serão enviados
 			$stm->bindParam(1, $id);
@@ -205,7 +205,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query para pegar os dados do banco
-            $stm = $PDO_conexao->prepare("SELECT * FROM usuarioCms WHERE idUsuario = ?");
+            $stm = $PDO_conexao->prepare("SELECT * FROM usuariocms WHERE idUsuario = ?");
 
 			//parâmetros que serão enviados
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
@@ -235,7 +235,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //faz uma busca no banco de acordo com os parâmetros passados
-            $stm = $PDO_conexao->prepare("SELECT login, imagem, idNivel FROM usuarioCms WHERE login = ? and senha = ?");
+            $stm = $PDO_conexao->prepare("SELECT login, imagem, idNivel FROM usuariocms WHERE login = ? and senha = ?");
 
 			//parâmetros que serão enviados
 			$stm->bindValue(1, $usuario, PDO::PARAM_STR);
@@ -270,10 +270,10 @@
 			//verifica qual o status atual
             if($status == 1){
                 //se for 1, atualiza o status no banco para 0
-                $stm = $PDO_conexao->prepare("UPDATE usuarioCms set status = 0 WHERE idUsuario = ?");
+                $stm = $PDO_conexao->prepare("UPDATE usuariocms set status = 0 WHERE idUsuario = ?");
             }else{
                 //se for 0, atualiza o status no banco para 1
-                $stm = $PDO_conexao->prepare("UPDATE usuarioCms set status = 1 WHERE idUsuario = ?");
+                $stm = $PDO_conexao->prepare("UPDATE usuariocms set status = 1 WHERE idUsuario = ?");
             }
 
 			//parâmetro que será enviado
@@ -295,7 +295,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 
 			//query que faz a consulta
-			$sql = 'SELECT idUsuario from usuarioCms';
+			$sql = 'SELECT idUsuario from usuariocms';
 
 			//armazenando os dados em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -319,7 +319,7 @@
             $PDO_conexao = $conexao->conectarBanco();
 
             //query que faz a consulta
-            $stm = $PDO_conexao->prepare("SELECT usuariocms.*, n.nomeNivel FROM usuariocms LEFT JOIN nivelUsuario as n on usuariocms.idNivel = n.idNivel WHERE concat_ws(',', nomeUsuario, login) like ? ORDER BY idUsuario");
+            $stm = $PDO_conexao->prepare("SELECT usuariocms.*, n.nomeNivel FROM usuariocms LEFT JOIN nivelusuario as n on usuariocms.idNivel = n.idNivel WHERE concat_ws(',', nomeUsuario, login) like ? ORDER BY idUsuario");
 
             //parâmetros enviados
             $stm->bindParam(1, $pesquisa);

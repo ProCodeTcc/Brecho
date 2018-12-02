@@ -215,7 +215,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que realiza a consulta
-			$sql = 'SELECT * FROM pedidovenda';
+			$sql = 'SELECT * FROM pedidovenda WHERE status = 1';
 			
 			//armazenando os dados em uma variavel
 			$resultado = $PDO_conexao->query($sql);

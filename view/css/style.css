@@ -2652,7 +2652,7 @@ body{
     footer{
 
         width: 100%;
-        height: 300px;
+        height: 340px;
         background-color: #2a2a2a;
 
     }
@@ -2664,6 +2664,11 @@ body{
             margin-right: auto;
     }
 
+    .app{
+        margin-top: 5px;
+        cursor: pointer;
+    }
+    
     .caixa_rodape{
         width: 250px;
         height: 250px;

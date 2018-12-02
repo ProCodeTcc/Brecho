@@ -279,8 +279,8 @@
             </div>
         </div>
 
-            <footer>
-                brechó bernadete©
-            </footer>
+        <footer>
+            brechó bernadete©
+        </footer>
     </body>
 </html>

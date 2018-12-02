@@ -52,12 +52,12 @@
         <div id="roupas_col1">
             <div class="form_linha">
                 <label class="lbl_cadastro">Nome: </label>
-                <input type="text" class="cadastro_input txtnome" name="txtnome" id="txtnome">
+                <input type="text" class="cadastro_input txtnome" name="txtnome" id="txtnome" required>
             </div>
 
             <div class="form_linha">
                 <label class="lbl_cadastro">Descrição: </label>
-                <textarea name="txtdescricao" class="cadastro_text txtdesc" id="txtdesc"></textarea>
+                <textarea name="txtdescricao" class="cadastro_text txtdesc" id="txtdesc" required></textarea>
             </div>
 
             <div class="form_linha" id="radio_linha">
@@ -65,22 +65,22 @@
 
                 <div class="radio">
                     <label for="txtmedida">Medida</label>
-                    <input type="radio" id="txtmedida" name="txttipo" value="medida" onClick="buscarMedida">
+                    <input type="radio" id="txtmedida" name="txttipo" value="medida" onClick="buscarMedida" required>
 
                     <label for="txtnumero">Número</label>
-                    <input type="radio" id="txtnumero" name="txttipo" value="numero" onClick="buscarNumero">
+                    <input type="radio" id="txtnumero" name="txttipo" value="numero" onClick="buscarNumero" required>
                 </div>
             </div>
 
             <div class="form_linha">
-                <select name="txttamanho" class="cadastro_select" id="txttamanho">
+                <select name="txttamanho" class="cadastro_select" id="txttamanho" required>
                     <option></option>
                 </select>
             </div>
 
             <div class="form_linha">
                 <label class="lbl_cadastro">Categoria: </label>
-                <select name="txtcategoria" class="cadastro_select" id="txtcategoria" onchange="selecionarSubcategoria()">
+                <select name="txtcategoria" class="cadastro_select" id="txtcategoria" onchange="selecionarSubcategoria()" required>
 
                 </select>
             </div>
@@ -89,20 +89,20 @@
         <div id="roupas_col2">
             <div class="form_linha">
                 <label class="lbl_cadastro">Marca: </label>
-                <select name="txtmarca" class="cadastro_select" id="txtmarca">
+                <select name="txtmarca" class="cadastro_select" id="txtmarca" required>
                 </select>
             </div>
 
             <div class="form_linha">
                 <label class="lbl_cadastro">Cor: </label>
-                <select name="txtcor" class="cadastro_select" id="txtcor">
+                <select name="txtcor" class="cadastro_select" id="txtcor" required>
             
                 </select>
             </div>
 
             <div class="form_linha">
                 <label class="lbl_cadastro">Classificação: </label>
-                <select name="txtclassificacao" class="cadastro_select" id="txtclassificacao">
+                <select name="txtclassificacao" class="cadastro_select" id="txtclassificacao" required>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="B">C</option>
@@ -111,12 +111,12 @@
 
             <div class="form_linha">
                 <label class="lbl_cadastro">Valor: </label>
-                <input type="number" class="cadastro_input" name="txtpreco" id="txtpreco">
+                <input type="number" class="cadastro_input" name="txtpreco" id="txtpreco" required>
             </div>
 
             <div class="form_linha" id="subcategoria">
                 <label class="lbl_cadastro">Subcategoria: </label>
-                <select name="txtsubcategoria" class="cadastro_select" id="txtsubcategoria">
+                <select name="txtsubcategoria" class="cadastro_select" id="txtsubcategoria" required>
                     <option>teste</option>
                 </select>
             </div>

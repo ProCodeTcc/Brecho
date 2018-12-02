@@ -42,13 +42,11 @@
             }
             
             function gerarDuplicata(idPedido, qtdParcela, dtPagamento, valor){
-                alert($('#txttitular').val());
                 $.ajax({
                     type: 'POST',
                     url: '../router.php?controller=pedido&modo=gerarDuplicata',
                     data: {pedido:idPedido, parcela:qtdParcela, pagamento:dtPagamento, valor:valor},
                     success: function(dados){
-                        alert(dados);
                         json = JSON.parse(dados);
                         
                         if(json.status == 'sucesso'){
@@ -148,7 +146,7 @@
                     </div>
                     
                     <div class="linha_pagamento">
-                        <input class="campo_cadastro_usuario_meio" type="text" id="txttitular">
+                        <input class="campo_cadastro_usuario_meio" type="text">
                     </div>
                     
                     <div class="linha_pagamento">

@@ -127,10 +127,14 @@
                     $duplicataClass->setDtVencimento($dtVencimento);
                     
                     //inserindo uma duplicata a receber
-                    $status = $duplicataDAO->insertDuplicataReceber($duplicataClass);
+                    $idDuplicataReceber = $duplicataDAO->insertDuplicataReceber($duplicataClass);
                 }
             }else{
-                $status = $duplicataDAO->insertDuplicataReceber($duplicataClass);
+                $idDuplicataReceber = $duplicataDAO->insertDuplicataReceber($duplicataClass);
+            }
+            
+            if(isset($idDuplicataReceber)){
+                $status = $duplicataDAO->PedidoDuplicataReceber($pedido, $idDuplicataReceber);
             }
             
             //instância da classe consignacaoDAO
@@ -156,10 +160,14 @@
                     $duplicataClass->setValor($valor);
                     
                     //inserindo a duplicata
-                    $status = $duplicataDAO->insertDuplicataPagar($duplicataClass);
+                    $idDuplicataPagar = $duplicataDAO->insertDuplicataPagar($duplicataClass);
                     
                     //atualizando o status da consignação
                     $consignacaoDAO->updateStatus($idConsignacao);
+                }
+                
+                if(isset($idDuplicataPagar)){
+                    $status = $duplicataDAO->PedidoDuplicataPagar($pedido, $idDuplicataPagar);
                 }
             }
             
