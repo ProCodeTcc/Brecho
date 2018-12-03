@@ -53,7 +53,7 @@
 		}
 		
 		//selecionando um produto a partir do id
-		public function SelectByID($id){
+		public function SelectTranslate($id){
 			//instância da classe que conecta com o banco de dados
 			$conexao = new ConexaoMySQL();
 			
@@ -61,7 +61,10 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que realiza a consulta
-			$stm = $PDO_conexao->prepare('SELECT * FROM Visualizar_Promocao_ID WHERE idProduto = ?');
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto AS idProduto, pt.nomeProduto AS nomeProduto, pt.descricao AS descricao, p.preco AS preco, pr.percentualDesconto AS percentual, c.nome AS cor,
+            m.nomeMarca AS marca,ct.nomeCategoria AS categoria, t.tamanho AS tamanho, (p.preco - ((pr.percentualDesconto / 100) * p.preco)) AS total FROM produto p JOIN promocao pr ON p.idProduto = pr.idProduto
+            JOIN corroupa c ON c.idCor = p.idCor JOIN marca m ON m.idMarca = p.idMarca JOIN categoria ct ON ct.idCategoria = p.idCategoria JOIN tamanho t ON t.idTamanho = p.idTamanho
+            JOIN produto_traducao pt ON pt.idProduto = p.idProduto WHERE idProduto = ?');
 			
 			//parâmetro enviado
 			$stm->bindValue(1, $id, PDO::PARAM_INT);

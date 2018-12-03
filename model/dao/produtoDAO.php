@@ -152,7 +152,7 @@
             $PDO_conexao = $conexao->conectarBanco();
             
             //query que faz a consulta
-            $stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, p.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND pt.idProduto = ? GROUP BY p.idProduto');
+            $stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, pt.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND pt.idProduto = ? GROUP BY p.idProduto');
             
             //parâmetros enviados
             $stm->bindParam(1, $id);
@@ -270,7 +270,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
             
             //query que realiza a consulta
-			$stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, p.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND p.idCategoria = ? GROUP BY p.idProduto');
+			$stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, pt.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND p.idCategoria = ? GROUP BY p.idProduto');
             
             //parâmetros enviados
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
@@ -362,7 +362,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 
 			//query que busca os dados
-			$stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, p.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND p.idSubcategoria = ? GROUP BY p.idProduto');
+			$stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, pt.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND p.idSubcategoria = ? GROUP BY p.idProduto');
 
 			//parâmetros enviados
 			$stm->bindParam(1, $id);
@@ -457,7 +457,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que busca o produto
-			$stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, p.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND p.classificacao = ? AND p.nomeProduto LIKE ? GROUP BY p.idProduto');
+			$stm = $PDO_conexao->prepare('SELECT pt.nomeProduto as nome, t.tamanho, c.nome as cor, m.nomeMarca as marca, p.preco, pt.descricao, p.idProduto, f.caminhoImagem as imagem FROM produto_traducao as pt INNER JOIN produto as p ON pt.idProduto = p.idProduto INNER JOIN tamanho AS t ON t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto as pf ON p.idProduto = pf.idProduto INNER JOIN fotoproduto AS f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN marca as m ON m.idMarca = p.idMarca WHERE p.status = 1 AND p.classificacao = ? AND p.nomeProduto LIKE ? GROUP BY p.idProduto');
 			
 			//parâmetro enviado
 			$stm->bindValue(1, $classificacao, PDO::PARAM_STR);
@@ -661,7 +661,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 
 			//query que busca os dados
-			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto, p.preco, p.descricao, t.tamanho, p.preco, f.caminhoImagem as imagem FROM produto AS p INNER JOIN tamanho AS t ON 
+			$stm = $PDO_conexao->prepare('SELECT p.idProduto, p.nomeProduto, p.preco, pt.descricao, t.tamanho, p.preco, f.caminhoImagem as imagem FROM produto AS p INNER JOIN tamanho AS t ON 
 			t.idTamanho = p.idTamanho INNER JOIN produto_fotoproduto AS pi ON pi.idProduto = p.idProduto INNER JOIN fotoproduto as f ON f.idImagemProduto = pi.idImagemProduto 
 			WHERE p.status = 1 AND p.idCor = ? AND p.nomeProduto LIKE ? GROUP BY p.idProduto');
 
