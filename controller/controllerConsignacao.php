@@ -21,7 +21,7 @@
                 $clienteJuridicoDAO = new ClienteJuridicoDAO();
                 
                 //armazenando os dados em uma variável
-                $listConsignacao = $clienteJuridicoDAO->selectConsignacao();
+                $listConsignacao = $clienteJuridicoDAO->selectConsignacao($idCliente);
             }
             
             //contador
