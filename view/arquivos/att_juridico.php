@@ -161,7 +161,7 @@
 			<div class="linha_cadastro_usuario">
 				<label>
 					<input id="txtcnpj" class="campo_cadastro_usuario" type="text" name="txtcnpj" required onkeypress="return validar(event,'caracter')">
-					<script type="text/javascript">$("#txtcnpj").mask("00.000.000/0000-00");</script>
+					<script>$("#txtcnpj").mask("00.000.000/0000-00");</script>
 				</label>      
 			</div>
 
@@ -181,7 +181,7 @@
 
 			<div class="linha_cadastro_usuario_meio">
 				<input id="txt_cep" class="campo_cadastro_usuario_meio" type="text" onkeypress="return validar(event,'caracter')" name="txtcep">
-				<script type="text/javascript">$("#txt_cep").mask("00000-000");</script>
+				<script>$("#txt_cep").mask("00000-000");</script>
 
 			</div>
 

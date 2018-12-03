@@ -1,5 +1,5 @@
 <div class="menu_responsivo">
-    <img id="menu" src="view/icones/menu_responsivo.png">
+    <img id="menu" src="icones/menu_responsivo.png" alt="icone do menu">
     <div class="submenu_responsivo" id="submenu">
         <div class="submenu_responsivo_itens">
             <div id="categorias">
@@ -17,7 +17,7 @@
                 <div class="categorias_responsivo_itens categoria_item">
                     <?php echo($rsCategoria[$cont]->getNome()) ?>
 
-                    <div class="subcategorias_responsivo" id="subcategorias">
+                    <div class="subcategorias_responsivo subcategorias">
                     
                     <?php
                         require_once('../controller/controllerCategoria.php');

@@ -70,7 +70,7 @@
 </script>
 
 <div class="container_imagens">
-	<img class="fechar" src="../imagens/fechar.png">
+	<img class="fechar" src="../imagens/fechar.png" alt="ícone para fechar a modal">
 	<div class="dados_imagens">
 		<?php
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
@@ -84,15 +84,15 @@
 		?>
 		
 		<div class="dados_imagens_container">
-			<img id="imagens" src="../arquivos/<?php echo($rsImagem[$cont]->getImagem()) ?>">
+			<img id="imagens" src="../arquivos/<?php echo($rsImagem[$cont]->getImagem()) ?>" alt="imagem do produto">
 			
 			<div class="acoes">
 				<span class="editar_imagem" onClick="alterarImagem(<?php echo($rsImagem[$cont]->getId()) ?>, '<?php echo($rsImagem[$cont]->getImagem()) ?>')">
-					<img src="../imagens/edit-image.png">
+					<img src="../imagens/edit-image.png" alt="ícone para editar a imagem">
 				</span>
 				
 				<span onClick="excluirImagem(<?php echo($rsImagem[$cont]->getId()) ?>)">
-					<img src="../imagens/delete16.png">
+					<img src="../imagens/delete16.png" alt="ícone para exclusão">
 				</span>
 			</div>
 		</div>

@@ -28,11 +28,11 @@
 	<div class="users_view_itens"><?php echo($rsFaleConosco[$cont]->getAssunto()) ?></div>
 	<div class="users_view_itens">
 		<span class="visualizar" onClick="visualizar(<?php echo($rsFaleConosco[$cont]->getId()) ?>)">
-			<img src="../imagens/visualizar.png">
+			<img src="../imagens/visualizar.png" alt="ícone para visualização">
 		</span>
 
 		<span onclick="excluir(<?php echo($rsFaleConosco[$cont]->getId()) ?>)">
-			<img src="../imagens/delete16.png">
+			<img src="../imagens/delete16.png" alt="ícone para exclusão">
 		</span>
 	</div>
 </div>

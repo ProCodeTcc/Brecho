@@ -6,7 +6,7 @@
 ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="pt-br">
 
     <head>
         <link rel="stylesheet" type="text/css" href="view/css/style.css">
@@ -15,9 +15,7 @@
         <script src="view/js/jquery.js"></script>
         <script src="view/js/jquery.min.js"></script>
         <script src="view/js/jquery.form.js"></script>
-    </head>
-
-    <script>
+        <script>
         $(document).ready(function(){
             $('#login').submit(function(event){
                 event.preventDefault();
@@ -51,9 +49,8 @@
                 });
             });
         });
-
-        
     </script>
+    </head>
 
     <body>
         <div class="main">

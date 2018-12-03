@@ -232,8 +232,8 @@ function submenuMobile(){
     //ação no click de uma categoria
     $('.categoria_item').click(function(){
         //mostrando as subcategorias
-       $(this).find('#subcategorias').toggle(); 
-        $('.categoria_item').not($(this)).find('#subcategorias').hide('fast');
+       $(this).find('.subcategorias').toggle(); 
+        $('.categoria_item').not($(this)).find('.subcategorias').hide('fast');
     });
 }
 

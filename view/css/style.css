@@ -761,10 +761,15 @@ body{
     }
 
     .logo_centro{
-        width: 140px;
-        height: 100px;
+        width: 180px;
+        height: 120px;
         margin-left: auto;
         margin-right: auto;
+    }
+    
+    .logo_centro img{
+	   width: 180px;
+        height: 120px;
     }
 
     .fundo_login{
@@ -2960,7 +2965,7 @@ body{
        border-bottom: 3px solid darkorange;
     }
     
-    #ptbr, #en{
+    #ptbr_responsivo, #en_responsivo{
         display: none;
     }
     

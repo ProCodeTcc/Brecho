@@ -22,11 +22,11 @@
 	<div class="users_view_itens"><?php echo($rsMarca[$cont]->getNome()) ?></div>
 	<div class="users_view_itens">
         <span data-id="<?php ?>" onclick="buscar(<?php echo($rsMarca[$cont]->getId()) ?>);">
-		   <img class="editar" data-modo="editar" src="../imagens/pencil.png">
+		   <img class="editar" data-modo="editar" src="../imagens/pencil.png" alt="ícone para edição">
 		</span>
 		
 		<span onclick="excluir(<?php echo($rsMarca[$cont]->getId()) ?>)">
-			<img src="../imagens/delete16.png">
+			<img src="../imagens/delete16.png" alt="ícone para exclusão">
 		</span>
 	</div>
 </div>

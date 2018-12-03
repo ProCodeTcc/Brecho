@@ -209,7 +209,7 @@
 
 			<div class="linha_cadastro_usuario_meio">
 				<input id="txt_cep" class="campo_cadastro_usuario_meio" type="text" onkeypress="return validar(event,'caracter')" name="txtcep">
-				<script type="text/javascript">$("#txt_cep").mask("00000-000");</script>
+				<script>$("#txt_cep").mask("00000-000");</script>
 
 			</div>
 

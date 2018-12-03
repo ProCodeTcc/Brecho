@@ -19,7 +19,7 @@
 
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="pt-br">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -28,120 +28,120 @@
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jquery.form.js"></script>
         <script src="../js/funcoes.js"></script>
-    </head>
-
-    <script>
-        var url = '../../';
-        $(document).ready(function(){
-            listar();
-			
-			//evento no click de um item do menu
-			$('.menu .menu_itens').click(function(e){
-				//mostrando o submenu somente do item clicado
-				$(this).find('.submenu').toggle(400);
-
-				//escondendo os submenus dos itens que não forem clicados
-				$('.menu_itens').not(this).find('.submenu').hide('fast');
-			});
-			
-            $('#adicionar').click(function(){
-                $('.container_modal').fadeIn(400);
-            });
-			
-			$('#logout').click(function(){
-				$.ajax({
-					type: 'POST',
-					url: url+'/router.php',
-					data: {controller: 'usuario', modo: 'deslogar'},
-					success: function(dados){
-						window.location.href=url+'index.php';
-					}
-				});
-			});
-        })
-		
-		function adicionar(){
-			$.ajax({
-                type: 'POST',
-                url: 'frm_nivel.php',
-                success: function(dados){
-                    $('.modal').html(dados);
-                }
-            });
-		}
         
-        //função que envia o id para a página do formulário, onde será realizado a busca
-        function buscar(idItem){
-            $.ajax({
-               type: 'POST', //tipo de requisição
-               url:'frm_nivel.php', //url para onde será enviada a requisição
-               data: {id:idItem}, //dados enviados
-               success: function(dados){
-                    $('.modal').html(dados);
-               } 
-            });
-        }
-        
-        //função para verificar qual o status
-        function status(idItem, status){
-            $.ajax({
-                type: 'POST', //tipo de requisição
-                url: url+'/router.php', //url para onde será enviada a requisição
-                data: {modo: 'status', controller: 'nivel', id:idItem, status:status}, //dados enviados
-                success: function(dados){
-                    listar(); //caso tudo ocorra com sucesso, listar os dados
-                }
-            });
-        }
+        <script>
+            var url = '../../';
+            $(document).ready(function(){
+                listar();
 
-        //função para listar os dados da tabela
-        function listar(){
-            $.ajax({
-                type: 'POST', //tipo de requisição
-                url: 'dados.php', //url para onde será enviada a requisição
-                success: function(dados){
-                    //em caso de sucesso, insere os dados na div de consulta
-                    $('#consulta').html(dados);
-                    verificarDados('#consulta');
-                }
-            });
-        }
-		
-		//função que mostra a tela de permissão
-		function listarPermissao(){
-			//oculta página de dados
-			$('#consulta').hide();
-			
-			$.ajax({
-				type: 'POST', //tipo de requisição
-				url: 'permissao.php', //página que será enviada a requisição
-				success: function(dados){
-					$('#permissao').html(dados); //mostrando todas as páginas na tela
-				}
-			});
-		}
-		
-		function permissao(idItem){
-			listarPermissao();
-			sessionStorage.setItem('idItem', idItem);
-		}
-        
-        //função que realiza a requisição de exclusão
-        function excluir(idItem){
-            $.ajax({
-                type: 'POST', //tipo de requisição
-                url: url+'/router.php', //url para onde será enviada a requisição
-                data: {id:idItem, modo: 'excluir', controller: 'nivel'}, //dados que serão enviados
-                success: function(dados){
-                    if(dados != 1){
-                        alert("Não foi possível realizar a exclusão! Há usuários cadastrados nesse nível.")
+                //evento no click de um item do menu
+                $('.menu .menu_itens').click(function(e){
+                    //mostrando o submenu somente do item clicado
+                    $(this).find('.submenu').toggle(400);
+
+                    //escondendo os submenus dos itens que não forem clicados
+                    $('.menu_itens').not(this).find('.submenu').hide('fast');
+                });
+
+                $('#adicionar').click(function(){
+                    $('.container_modal').fadeIn(400);
+                });
+
+                $('#logout').click(function(){
+                    $.ajax({
+                        type: 'POST',
+                        url: url+'/router.php',
+                        data: {controller: 'usuario', modo: 'deslogar'},
+                        success: function(dados){
+                            window.location.href=url+'index.php';
+                        }
+                    });
+                });
+            })
+
+            function adicionar(){
+                $.ajax({
+                    type: 'POST',
+                    url: 'frm_nivel.php',
+                    success: function(dados){
+                        $('.modal').html(dados);
                     }
-                    listar();
-                }
-            });
-        }
-    </script>
+                });
+            }
 
+            //função que envia o id para a página do formulário, onde será realizado a busca
+            function buscar(idItem){
+                $.ajax({
+                   type: 'POST', //tipo de requisição
+                   url:'frm_nivel.php', //url para onde será enviada a requisição
+                   data: {id:idItem}, //dados enviados
+                   success: function(dados){
+                        $('.modal').html(dados);
+                   } 
+                });
+            }
+
+            //função para verificar qual o status
+            function status(idItem, status){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: url+'/router.php', //url para onde será enviada a requisição
+                    data: {modo: 'status', controller: 'nivel', id:idItem, status:status}, //dados enviados
+                    success: function(dados){
+                        listar(); //caso tudo ocorra com sucesso, listar os dados
+                    }
+                });
+            }
+
+            //função para listar os dados da tabela
+            function listar(){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: 'dados.php', //url para onde será enviada a requisição
+                    success: function(dados){
+                        //em caso de sucesso, insere os dados na div de consulta
+                        $('#consulta').html(dados);
+                        verificarDados('#consulta');
+                    }
+                });
+            }
+
+            //função que mostra a tela de permissão
+            function listarPermissao(){
+                //oculta página de dados
+                $('#consulta').hide();
+
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: 'permissao.php', //página que será enviada a requisição
+                    success: function(dados){
+                        $('#permissao').html(dados); //mostrando todas as páginas na tela
+                    }
+                });
+            }
+
+            function permissao(idItem){
+                listarPermissao();
+                sessionStorage.setItem('idItem', idItem);
+            }
+
+            //função que realiza a requisição de exclusão
+            function excluir(idItem){
+                $.ajax({
+                    type: 'POST', //tipo de requisição
+                    url: url+'/router.php', //url para onde será enviada a requisição
+                    data: {id:idItem, modo: 'excluir', controller: 'nivel'}, //dados que serão enviados
+                    success: function(dados){
+                        if(dados != 1){
+                            alert("Não foi possível realizar a exclusão! Há usuários cadastrados nesse nível.")
+                        }
+                        listar();
+                    }
+                });
+            }
+    </script>
+    </head>
+    
     <body>
         <div class="container_modal">
             <div class="modal" id="modal_nivel">
@@ -184,16 +184,16 @@
         <header>
             <div class="logo">
                 <a href="../home.php">
-                    <img src="../imagens/logoBrecho3.png">
+                    <img src="../imagens/logoBrecho3.png" alt="logo do brechó">
                 </a>
             </div>
 
             <div class="painel_usuario">
 				<?php
 					if($imagem == null){
-						echo('<img src="../imagens/user.png">');
+						echo('<img src="../imagens/user.png" alt="imagem padrão do usuário">');
 					}else{
-						echo("<img src='../arquivos/$imagem'>");
+						echo("<img src='../arquivos/$imagem' alt='imagem do usuário'>");
 					}
 				?>
                 <span class="dados_usuario"><?php echo($usuario) ?></span>
@@ -207,7 +207,7 @@
             <div class="page_search_container">
                 <input type="search" class="page_search" id="pesquisar" onkeydown="pesquisar(event)">
                 <div class="img_pesquisa">
-                    <img src="../imagens/search.png" onmousedown="pesquisar(event)">
+                    <img src="../imagens/search.png" onmousedown="pesquisar(event)" alt="ícone pra pesquisar">
                 </div>
             </div>
 

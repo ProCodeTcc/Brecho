@@ -25,7 +25,7 @@
 	?>
 	<div class="produtos">
 		<div class="produtos_imagem">
-			<img src="../arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
+			<img src="../arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="imagem do produto">
 		</div>
 
 		<article>
@@ -35,15 +35,15 @@
 
 		<div class="acoes">
 			<span class="editar" onClick="buscar(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/pencil.png">
+				<img src="../imagens/pencil.png" alt="ícone para edição">
 			</span>
 			
 			<span class="visualizar_imagens" onClick="listarImagens(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/viewimagem.png">
+				<img src="../imagens/viewimagem.png" alt="ícone para visualizar as imagens">
 			</span>
 			
 			<span onClick="excluir(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/delete16.png">
+				<img src="../imagens/delete16.png" alt="ícone para exclusão">
 			</span>
 			
 			<span onClick="status(<?php echo($rsProdutos[$cont]->getStatus()) ?>, <?php echo($rsProdutos[$cont]->getId()) ?>)">
@@ -59,7 +59,7 @@
 			</span>
 			
 			<span onClick="inserirPromocao(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/remoprmo.png">
+				<img src="../imagens/remoprmo.png" alt="ícone da promoção">
 			</span>
 		</div>
 	</div>

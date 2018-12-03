@@ -21,7 +21,7 @@
 		<script src="js/funcoes.js"></script>
         <script src="js/jquery.mask.js"></script>
         
-        <script type="text/javascript">
+        <script>
             
             function validar (caracter,blockType){
                 if(window.event){
@@ -174,11 +174,11 @@
 					<div class="escolha_cliente">
 						<div class="linha_cadastro_usuario">
 							<label>
-								<input type="radio" name="txtcliente" value="F" id="txtcliente" onClick="mostrarFormulario('F')" checked> Físico
+								<input type="radio" name="txtcliente" value="F" onClick="mostrarFormulario('F')" checked> Físico
 							</label>
 
 							<label>
-								<input type="radio" name="txtcliente" value="J" id="txtcliente" onClick="mostrarFormulario('J')"> Jurídico
+								<input type="radio" name="txtcliente" value="J" onClick="mostrarFormulario('J')"> Jurídico
 							</label>
 						</div>
 					</div>
@@ -234,7 +234,7 @@
 							</div>
 							<div class="linha_cadastro_usuario_meio">
 								<input id="txt_cpf" class="campo_cadastro_usuario_meio" type="text" onBlur="checkDados('ClienteFisico', 'Cpf', this)" name="txtCpf" onkeypress="return validar(event,'caracter')" required>
-								<script type="text/javascript">$("#txt_cpf").mask("000.000.000-00");</script>
+								<script>$("#txt_cpf").mask("000.000.000-00");</script>
 							</div>
 
 
@@ -247,12 +247,12 @@
 
 							<div class="linha_cadastro_usuario_meio">
 								<input id="txt_telefone" class="campo_cadastro_usuario_meio" type="text" name="txtTelefone" onkeypress="return validar(event,'caracter')" required>
-								<script type="text/javascript">$("#txt_telefone").mask("(00) 0000-0000");</script>
+								<script>$("#txt_telefone").mask("(00) 0000-0000");</script>
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">
-								<input id="txt_celular" class="campo_cadastro_usuario_meio" type="text" name="txtCelular"onkeypress="return validar(event,'caracter')">
-								<script type="text/javascript">$("#txt_celular").mask("(00) 00000-0000");</script>
+								<input id="txt_celular" class="campo_cadastro_usuario_meio" type="text" name="txtCelular" onkeypress="return validar(event,'caracter')">
+								<script>$("#txt_celular").mask("(00) 00000-0000");</script>
 							</div>
 
 							<div class="titulo_cadastro_usuario_meio">
@@ -282,7 +282,7 @@
 
 							<div class="linha_cadastro_usuario_meio">
 								<input class="campo_cadastro_usuario_meio txt_cep" type="text" onkeypress="return validar(event,'caracter')" name="txtCep" required>
-								<script type="text/javascript">$(".txt_cep").mask("00000-000");</script>
+								<script>$(".txt_cep").mask("00000-000");</script>
 							</div>
 
 							<div class="linha_cadastro_usuario_meio">

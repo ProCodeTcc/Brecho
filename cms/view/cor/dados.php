@@ -23,11 +23,11 @@
 	
 	<div class="users_view_itens">
 		<span data-id="<?php echo($rsCor[$cont]->getId()) ?>" onclick="buscar(<?php echo($rsCor[$cont]->getId()) ?>);">
-		   <img class="editar" data-modo="editar" src="../imagens/pencil.png">
+		   <img class="editar" data-modo="editar" src="../imagens/pencil.png" alt="ícone para edição">
 		</span>
 		
 		<span onclick="excluir(<?php echo($rsCor[$cont]->getId()) ?>)">
-			<img src="../imagens/delete16.png">
+			<img src="../imagens/delete16.png" alt="ícone para exclusão">
 		</span>
 	</div>
 </div>

@@ -21,11 +21,11 @@
 	<div class="users_view_itens"><?php echo($rsUnidades[$cont]->getCidade()) ?></div>
 	<div class="users_view_itens">
 		<span onclick="buscar(<?php echo($rsUnidades[$cont]->getId()) ?>);">
-		   <img class="editar" data-modo="editar" src="../imagens/pencil.png">
+		   <img class="editar" data-modo="editar" src="../imagens/pencil.png" alt="ícone para edição">
 		</span>
 		
 		<span onclick="excluir(<?php echo($rsUnidades[$cont]->getId()) ?>, <?php echo($rsUnidades[$cont]->getIdEndereco()) ?>)">
-			<img src="../imagens/delete16.png">
+			<img src="../imagens/delete16.png" alt="ícone para exclusão">
 		</span>
 	</div>
 </div>

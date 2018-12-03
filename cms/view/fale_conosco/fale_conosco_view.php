@@ -18,7 +18,7 @@
 ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="pt-br">
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,9 +27,8 @@
         <script src="../js/jquery.min.js"></script>
 		<script src="../js/funcoes.js"></script>
         <script src="../js/jquery.form.js"></script>
-    </head>
-	
-	<script>
+        
+        	<script>
 		var url = '../../';
 		
 		function listar(){
@@ -98,7 +97,8 @@
 			});
 		});
 	</script>
-
+    </head>
+	
     <body>
         <div class="container_modal">
             <div class="modal">
@@ -141,16 +141,16 @@
         <header>
             <div class="logo">
                 <a href="../home.php">
-                    <img src="../imagens/logoBrecho3.png">
+                    <img src="../imagens/logoBrecho3.png" alt="logo do brechó">
                 </a>
             </div>
 
             <div class="painel_usuario">
 				<?php
 					if($imagem == null){
-						echo('<img src="../imagens/user.png">');
+						echo('<img src="../imagens/user.png" alt="imagem padrão do usuário">');
 					}else{
-						echo("<img src='../arquivos/$imagem'>");
+						echo("<img src='../arquivos/$imagem' alt='imagem do usuário'>");
 					}
 				?>
                 <span class="dados_usuario"><?php echo($usuario) ?></span>
@@ -164,7 +164,7 @@
             <div class="page_search_container">
 				<input type="search" class="page_search" id="pesquisar" onkeydown="pesquisar(event)">
                 <div class="img_pesquisa">
-                    <img src="../imagens/search.png" onmousedown="pesquisar(event)">
+                    <img src="../imagens/search.png" onmousedown="pesquisar(event)" alt="ícone para pesquisa">
                 </div>
             </div>
         </div>

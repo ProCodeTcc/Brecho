@@ -21,7 +21,7 @@
 	?>
 	<div class="produtos">
 		<div class="produtos_imagem">
-			<img src="../arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
+			<img src="../arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="imagem do produto">
 		</div>
 
 		<article>
@@ -30,11 +30,11 @@
 
 		<div class="acoes">
 			<span onClick="cadastrarPromocao(<?php echo($rsProdutos[$cont]->getId()) ?>)" class="cadastrarPromocao">
-				<img src="../imagens/flyers.png">
+				<img src="../imagens/flyers.png" alt="ícone para editar a promoção">
 			</span>
 			
 			<span onClick="excluir(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/delete16.png">
+				<img src="../imagens/delete16.png" alt="ícone para exclusão">
 			</span>
 			
 			<span onClick="status(<?php echo($rsProdutos[$cont]->getStatus()) ?>, <?php echo($rsProdutos[$cont]->getId()) ?>)">

@@ -36,10 +36,10 @@
 
 <div class="layouts_container">
 	<div id="layout_1">
-		<img src="../imagens/layout1.jpg" onClick="adicionarLayout1();">
+		<img src="../imagens/layout1.jpg" onClick="adicionarLayout1();" alt="imagem do layout 1">
 	</div>
 	
 	<div id="layout_2">
-		<img src="../imagens/layout2.jpg" onClick="adicionarLayout2();">
+		<img src="../imagens/layout2.jpg" onClick="adicionarLayout2();" alt="imagem do layout 2">
 	</div>
 </div>

@@ -63,11 +63,11 @@
         <div class="users_view_itens"><?php echo($rsPaginas[$cont]->getPagina()) ?></div>
         <div class="users_view_itens">
             <span id="permitir" onClick="permitirPagina(idNivel, <?php echo($rsPaginas[$cont]->getId()) ?>)">
-				<img src="../imagens/permitir.png">
+				<img src="../imagens/permitir.png" alt="ícone para permitir o acesso">
 			</span>
 			
 			<span id="naoPermitir" onClick="retirarPermissao(idNivel, <?php echo($rsPaginas[$cont]->getId()) ?>)">
-				<img src="../imagens/npermitir.png">
+				<img src="../imagens/npermitir.png" alt="ícone para negar o acesso">
 			</span>
         </div>
     </div>

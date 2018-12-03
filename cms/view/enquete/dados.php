@@ -37,15 +37,15 @@
         <div class="users_view_itens"><?php echo($rsEnquetes[$cont]->getDtTermino()) ?></div>
         <div class="users_view_itens">
             <span onclick="excluir(<?php echo($rsEnquetes[$cont]->getId()) ?>)">
-                <img src="../imagens/delete16.png">
+                <img src="../imagens/delete16.png" alt="ícone para exclusão">
             </span>
 
             <span data-id="<?php echo($rsEnquetes[$cont]->getId()) ?>" onclick="buscar(<?php echo($rsEnquetes[$cont]->getId()) ?>)">
-               <img class="editar" data-modo="editar" src="../imagens/pencil.png">
+               <img class="editar" data-modo="editar" src="../imagens/pencil.png" alt="ícone para edição">
             </span>
 			
 			<span class="visualizar" onClick="visualizar(<?php echo($rsEnquetes[$cont]->getId()) ?>)">
-				<img src="../imagens/visualizar.png">
+				<img src="../imagens/visualizar.png" alt="ícone para visualização">
 			</span>
 
             <span onclick="status(<?php echo($rsEnquetes[$cont]->getId())?>, <?php echo($rsEnquetes[$cont]->getStatus())?>)">
@@ -59,7 +59,7 @@
                     }
                 ?>
 
-                <img src="../imagens/<?php echo($img) ?>">
+                <img src="../imagens/<?php echo($img) ?>" alt="ícone para alterar o status">
             </span>
         </div>
     </div>

@@ -89,7 +89,7 @@
                                 <div class="categorias_responsivo_itens categoria_item">
                                     <?php echo($rsCategoria[$cont]->getNome()) ?>
 
-                                    <div class="subcategorias_responsivo" id="subcategorias">
+                                    <div class="subcategorias_responsivo subcategorias">
 
                                     <?php
                                         require_once('../controller/controllerCategoria.php');
@@ -171,11 +171,11 @@
 								
 								<div class="campos">
                                 	<label>
-										<input type="radio" name="txtcliente" value="F" id="txtcliente" onClick="mostrarFormulario('F')" checked> Físico
+										<input type="radio" name="txtcliente" value="F" onClick="mostrarFormulario('F')" checked> Físico
 									</label>
 
 									<label>
-										<input type="radio" name="txtcliente" value="J" id="txtcliente" onClick="mostrarFormulario('J')"> Jurídico
+										<input type="radio" name="txtcliente" value="J" onClick="mostrarFormulario('J')"> Jurídico
 									</label>
                                 </div>
 								

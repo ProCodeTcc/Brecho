@@ -22,45 +22,45 @@
         <script src="js/jquery.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.form.js"></script>
-    </head>
-	
-	<script>
-		$(document).ready(function(){
-			
-			//evento no click de um item do menu
-			$('.menu .menu_itens').click(function(e){
-				//mostrando o submenu somente do item clicado
-				$(this).find('.submenu').toggle(400);
-				
-				//escondendo os submenus dos itens que não forem clicados
-				$('.menu_itens').not(this).find('.submenu').hide('fast');
-			});
-			
-			$('#logout').click(function(){
-				$.ajax({
-					type: 'POST',
-					url: '../router.php',
-					data: {controller: 'usuario', modo: 'deslogar'},
-					success: function(dados){
-						window.location.href='../index.php';
-					}
-				});
-			});
-		});
-	</script>
+        
+        <script>
+            $(document).ready(function(){
 
+                //evento no click de um item do menu
+                $('.menu .menu_itens').click(function(e){
+                    //mostrando o submenu somente do item clicado
+                    $(this).find('.submenu').toggle(400);
+
+                    //escondendo os submenus dos itens que não forem clicados
+                    $('.menu_itens').not(this).find('.submenu').hide('fast');
+                });
+
+                $('#logout').click(function(){
+                    $.ajax({
+                        type: 'POST',
+                        url: '../router.php',
+                        data: {controller: 'usuario', modo: 'deslogar'},
+                        success: function(dados){
+                            window.location.href='../index.php';
+                        }
+                    });
+                });
+            });
+	</script>
+    </head>
+    
     <body>
         <header>
             <div class="logo">
-                <img src="imagens/logoBrecho3.png">
+                <img src="imagens/logoBrecho3.png" alt="logo do brecho">
             </div>
 
             <div class="painel_usuario">
 				<?php
 					if($imagem == null){
-						echo('<img src="imagens/user.png">');
+						echo('<img src="imagens/user.png" alt="imagem padrão do usuário">');
 					}else{
-						echo("<img src='arquivos/$imagem'>");
+						echo('<img src="arquivos/'.$imagem.'" alt="imagem do usuário">');
 					}
 				?>
                 <span class="dados_usuario"><?php echo($usuario) ?></span>
@@ -79,7 +79,7 @@
 						<ul class="menu">
 							<li class="menu_itens">
 								<div class="menu_item_container">
-									<img src="imagens/admin.png">
+									<img src="imagens/admin.png" alt="ícone de administração">
 									
 									<p class="item_titulo">Administração</p>
 								</div>
@@ -107,7 +107,7 @@
 							
 							<li class="menu_itens">
 								<div class="menu_item_container">
-									<img src="imagens/content.png">
+									<img src="imagens/content.png" alt="ícone do conteúdo">
 									
 									<p class="item_titulo">Conteúdo</p>
 								</div>
@@ -147,7 +147,7 @@
 							
 							<li class="menu_itens">
 								<div class="menu_item_container">
-									<img src="imagens/cart.png">
+									<img src="imagens/cart.png" alt="ícone do carrinho">
 									
 									<p class="item_titulo">Produtos</p>
 								</div>
@@ -199,7 +199,7 @@
 							
 							<li class="menu_itens">
 								<div class="menu_item_container">
-									<img src="imagens/visual.png">
+									<img src="imagens/visual.png" alt="ícone de visual">
 									
 									<p class="item_titulo">Visual</p>
 								</div>
@@ -226,7 +226,7 @@
                     <div class="home_pages_row">
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/admin128.png">
+                                <img src="imagens/admin128.png" alt="imagem do card de administração">
                             </div>
 
                             <p class="pages_card_title">Administração</p>
@@ -238,7 +238,7 @@
 
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/content128.png">
+                                <img src="imagens/content128.png" alt="imagem do card de conteúdo">
                             </div>
 
                             <p class="pages_card_title">Conteúdo</p>
@@ -250,7 +250,7 @@
 
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/cart128.png">
+                                <img src="imagens/cart128.png" alt="imagem do card do produto">
                             </div>
 
                             <p class="pages_card_title">Produtos</p>
@@ -264,7 +264,7 @@
 					<div class="home_pages_row" style="margin-top: 20px;">
                         <div class="pages_card">
                             <div class="pages_card_image">
-                                <img src="imagens/color-picker128.png">
+                                <img src="imagens/color-picker128.png" alt="imagem do card de design">
                             </div>
 
                             <p class="pages_card_title">Visual</p>

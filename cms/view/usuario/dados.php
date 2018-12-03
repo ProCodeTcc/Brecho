@@ -25,11 +25,11 @@
         <div class="users_view_itens"><?php echo($rsUsuarios[$cont]->getNomeNivel()) ?></div>
         <div class="users_view_itens">
             <span onclick="excluir(<?php echo($rsUsuarios[$cont]->getId()) ?>)">
-                <img src="../imagens/delete16.png">
+                <img src="../imagens/delete16.png" alt="ícone pra excluir">
             </span>
 
             <span data-id="<?php echo($rsUsuarios[$cont]->getId()) ?>" onclick="buscar(<?php echo($rsUsuarios[$cont]->getId()) ?>)">
-               <img class="editar" data-modo="editar" src="../imagens/pencil.png">
+               <img class="editar" data-modo="editar" src="../imagens/pencil.png" alt="ícone pra editar">
             </span>
 
             <span onclick="status(<?php echo($rsUsuarios[$cont]->getId())?>, <?php echo($rsUsuarios[$cont]->getStatus())?>)">
@@ -42,7 +42,7 @@
                         $img ='desativar.png';
                     }
                 ?>
-                <img src="../imagens/<?php echo($img) ?>">
+                <img src="../imagens/<?php echo($img) ?>" alt="ícone pra alterar o status">
             </span>
         </div>
     </div>

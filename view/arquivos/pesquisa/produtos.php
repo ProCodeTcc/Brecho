@@ -29,7 +29,6 @@
     });
 </script>
 <div class="caixa_categoria">
-    <?php echo($mobile) ?>
 	<div class="categoria_pesquisa">
         <div class="categoria_pesquisa_centro">
            <div class="categoria_pesquisa_centro">

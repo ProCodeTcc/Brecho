@@ -25,7 +25,7 @@
 		
 		<div class="sobre_col1_item">
 			<div class="sobre_imagem">
-				<img src="../arquivos/<?php echo($rsLayout[$cont]->getImagem()) ?>">
+				<img src="../arquivos/<?php echo($rsLayout[$cont]->getImagem()) ?>" alt="imagem do layout 1">
 			</div>
 
 			<article>
@@ -35,11 +35,11 @@
 
 			<div class="acoes">
 				<span class="editar" onClick="buscar(<?php echo($rsLayout[$cont]->getId()) ?>)">
-					<img src="../imagens/pencil.png">
+					<img src="../imagens/pencil.png" alt="ícone para edição">
 				</span>
 
 				<span class="visualizar" onClick="visualizarLayout1(<?php echo($rsLayout[$cont]->getId()) ?>)">
-					<img src="../imagens/visualizar.png">
+					<img src="../imagens/visualizar.png" alt="ícone para visualização">
 				</span>
 
 				<span onClick="status(<?php echo($rsLayout[$cont]->getStatus()) ?>, <?php echo($rsLayout[$cont]->getId()) ?>, <?php echo($rsLayout[$cont]->getLayout()) ?>)">
@@ -52,11 +52,11 @@
 						}
 					?>
 
-					<img src="../imagens/<?php echo($img) ?>">
+					<img src="../imagens/<?php echo($img) ?>" alt="ícone para alterar o status">
 				</span>
 
 				<span onClick="excluir(<?php echo($rsLayout[$cont]->getId()) ?>, 1)">
-					<img src="../imagens/delete16.png">
+					<img src="../imagens/delete16.png" alt="ícone para exclusão">
 				</span>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 		
 		<div class="sobre_col2_item">
 			<div class="sobre_imagem">
-				<img src="../arquivos/<?php echo($rsLayout2[$cont]->getImagem()) ?>">
+				<img src="../arquivos/<?php echo($rsLayout2[$cont]->getImagem()) ?>" alt="imagem do layout 2">
 			</div>
 
 			<article>
@@ -88,11 +88,11 @@
 
 			<div class="acoes">
 				<span class="editar" onClick="buscarLayout2(<?php echo($rsLayout2[$cont]->getId()) ?>)">
-					<img src="../imagens/pencil.png">
+					<img src="../imagens/pencil.png" alt="ícone para exclusão">
 				</span>
 
 				<span class="visualizar" onClick="visualizarLayout2(<?php echo($rsLayout2[$cont]->getId()) ?>)">
-					<img src="../imagens/visualizar.png">
+					<img src="../imagens/visualizar.png" alt="ícone para visualização">
 				</span>
 
 				<span onClick="status(<?php echo($rsLayout2[$cont]->getStatus()) ?>, <?php echo($rsLayout2[$cont]->getId()) ?>, <?php echo($rsLayout2[$cont]->getLayout()) ?>)">
@@ -106,11 +106,11 @@
 						}
 					?>
 
-					<img src="../imagens/<?php echo($img) ?>">
+					<img src="../imagens/<?php echo($img) ?>" alt="ícone para alterar o status">
 				</span>
 
 				<span onClick="excluir(<?php echo($rsLayout2[$cont]->getId()) ?>, 2)">
-					<img src="../imagens/delete16.png">
+					<img src="../imagens/delete16.png" alt="ícone para exclusão">
 				</span>
 			</div>
 		</div>

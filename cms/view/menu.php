@@ -16,7 +16,7 @@
 <ul class="menu">
 	<li class="menu_itens">
 		<div class="menu_item_container">
-			<img src="../imagens/admin.png">
+			<img src="../imagens/admin.png" alt="ícone da administração">
 
 			<p class="item_titulo">Administração</p>
 		</div>
@@ -45,7 +45,7 @@
 
 	<li class="menu_itens">
 		<div class="menu_item_container">
-			<img src="../imagens/content.png">
+			<img src="../imagens/content.png" alt="ícone do conteúdo">
 
 			<p class="item_titulo">Conteúdo</p>
 		</div>
@@ -85,7 +85,7 @@
 
 	<li class="menu_itens">
 		<div class="menu_item_container">
-			<img src="../imagens/cart.png">
+			<img src="../imagens/cart.png" alt="ícone do carrinho">
 
 			<p class="item_titulo">Produtos</p>
 		</div>
@@ -137,7 +137,7 @@
 
 	<li class="menu_itens">
 		<div class="menu_item_container">
-			<img src="../imagens/visual.png">
+			<img src="../imagens/visual.png" alt="ícone de design">
 
 			<p class="item_titulo">Visual</p>
 		</div>

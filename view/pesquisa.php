@@ -311,7 +311,7 @@
                             <a href="visualizar_produto.php?id=<?php echo($rsProduto[$cont]->getId())?>" onclick="atualizarClique(this, event, <?php echo($rsProduto[$cont]->getId()) ?>)">
                                 <div class="produto">
                                     <div class="imagem_produto">
-                                        <img  alt="#" src="../cms/view/arquivos/<?php echo($rsProduto[$cont]->getImagem())?>" alt="#">
+                                        <img src="../cms/view/arquivos/<?php echo($rsProduto[$cont]->getImagem())?>" alt="imagem do produto">
                                     </div>
                                     <div class="descritivo_produto">
                                         <div class="titulo_produto">
@@ -336,12 +336,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                </a>
                                 <?php
                                     $cont++;
                                     }
                                 ?>
-                            </a>
                      </div>
 					
 					<div class="nenhum_produto">

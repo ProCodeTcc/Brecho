@@ -23,11 +23,11 @@
 	<div class="users_view_itens"><?php echo($rsTema[$cont]->getGenero())?></div>
 	<div class="users_view_itens">
 		<span data-id="<?php ?>" onclick="buscar(<?php echo($rsTema[$cont]->getId()) ?>);">
-		   <img class="editar" data-modo="editar" src="../imagens/pencil.png">
+		   <img class="editar" data-modo="editar" src="../imagens/pencil.png" alt="ícone para edição">
 		</span>
 		
 		<span onclick="excluir(<?php echo($rsTema[$cont]->getId()) ?>)">
-			<img src="../imagens/delete16.png">
+			<img src="../imagens/delete16.png" alt="ícone para exclusão">
 		</span>
 		
 		<span onClick="status(<?php echo($rsTema[$cont]->getStatus())?>, <?php echo($rsTema[$cont]->getId()) ?>, '<?php echo($rsTema[$cont]->getGenero()) ?>')">

@@ -194,7 +194,7 @@
                 <div class="menu_principal_site">
                     <div class="menu_lado_esquerdo">
                         <div class="menu_responsivo">
-                            <img id="menu" src="view/icones/menu_responsivo.png">
+                            <img id="menu" src="view/icones/menu_responsivo.png" alt="icone do menu">
                             <div class="submenu_responsivo" id="submenu">
                                 <div class="submenu_responsivo_itens">
                                     <div id="categorias">
@@ -212,7 +212,7 @@
                                         <div class="categorias_responsivo_itens categoria_item">
                                             <?php echo($rsCategoria[$cont]->getNome()) ?>
 
-                                            <div class="subcategorias_responsivo" id="subcategorias">
+                                            <div class="subcategorias_responsivo subcategorias">
 
                                             <?php
                                                 require_once('controller/controllerCategoria.php');
@@ -309,19 +309,19 @@
                         <div class="menu_usuario_responsivo" id="painel_usuario">
                             <div class="idiomas">
                                 <form method="POST" action="index.php?lang=ptbr">
-                                    <label for="ptbr">
+                                    <label for="ptbr_responsivo">
                                         <img src="view/icones/ptbr.png" alt="idioma em português">
                                     </label>
 
-                                    <input type="submit" id="ptbr">
+                                    <input type="submit" id="ptbr_responsivo">
                                 </form>
 
                                 <form method="POST" action="index.php?lang=en">
-                                    <label for="en">
+                                    <label for="en_responsivo">
                                         <img src="view/icones/usa.png" alt="idioma em inglês">
                                     </label>
 
-                                    <input type="submit" id="en">
+                                    <input type="submit" id="en_responsivo">
                                 </form>
                             </div>
                             

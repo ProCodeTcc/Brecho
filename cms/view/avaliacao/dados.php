@@ -22,7 +22,7 @@
 	?>
 	<div class="produtos">
 		<div class="produtos_imagem">
-			<img src="../arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>">
+			<img src="../arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="imagem do produto">
 		</div>
 
 		<article>
@@ -32,15 +32,15 @@
 
 		<div class="acoes">
 			<span class="aprovar" onClick="aprovar(<?php echo($rsProdutos[$cont]->getId()) ?>, <?php echo($rsProdutos[$cont]->getIdCliente()) ?>, <?php echo($rsProdutos[$cont]->getPreco()) ?>, 'F')">
-				<img src="../imagens/ativar.png">
+				<img src="../imagens/ativar.png" alt="ícone para aprovação">
 			</span>
 			
 			<span class="visualizar" onClick="visualizar(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/visualizar.png">	
+				<img src="../imagens/visualizar.png" alt="ícone para visualização">
 			</span>
 			
 			<span onClick="excluir(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/delete16.png">
+				<img src="../imagens/delete16.png" alt="ícone para exclusão">
 			</span>
 		</div>
 	</div>
@@ -70,15 +70,15 @@
 
 		<div class="acoes">
 			<span class="aprovar" onClick="aprovar(<?php echo($rsProdutos[$cont]->getId()) ?>, <?php echo($rsProdutos[$cont]->getIdCliente()) ?>, <?php echo($rsProdutos[$cont]->getPreco()) ?>, 'J')">
-				<img src="../imagens/ativar.png">
+				<img src="../imagens/ativar.png" alt="ícone para aprovação">
 			</span>
 			
 			<span class="visualizar" onClick="visualizar(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/visualizar.png">	
+				<img src="../imagens/visualizar.png" alt="ícone para visualização">
 			</span>
 			
 			<span onClick="excluir(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-				<img src="../imagens/delete16.png">
+				<img src="../imagens/delete16.png" alt="ícone para exclusão">
 			</span>
 		</div>
 	</div>

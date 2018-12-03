@@ -41,15 +41,15 @@
 
 		<div class="acoes">
             <span class="editar_consignacao" onClick="buscarConsignacao(<?php echo($rsProdutos[$cont]->getId()) ?>, <?php echo($rsProdutos[$cont]->getPreco()) ?>)">
-				<img src="../imagens/buy.png">
+				<img src="../imagens/buy.png" alt="ícone para editar a consignação">
 			</span>
 
 			<span class="editar" onClick="buscar(<?php echo($rsProdutos[$cont]->getIdProduto()) ?>)">
-				<img src="../imagens/pencil.png">
+				<img src="../imagens/pencil.png" alt="ícone para edição">
 			</span>
 			
 			<span class="visualizar_imagens" onClick="listarImagens(<?php echo($rsProdutos[$cont]->getIdProduto()) ?>)">
-				<img src="../imagens/viewimagem.png">
+				<img src="../imagens/viewimagem.png" alt="ícone para listar as imagens">
 			</span>
 			
 			<span onClick="status(<?php echo($rsProdutos[$cont]->getStatus()) ?>, <?php echo($rsProdutos[$cont]->getId()) ?>)">
