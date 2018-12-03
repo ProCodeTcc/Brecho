@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
+        <meta charset="utf-8">
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery-3.2.1.min.js"></script>

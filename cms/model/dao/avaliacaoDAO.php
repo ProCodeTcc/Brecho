@@ -29,8 +29,8 @@
 			
 			//query que realiza a consulta
 			$sql = 'SELECT cp.idClienteFisico, p.*, f.caminhoImagem as imagem FROM clientefisico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
-			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
-			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientefisico as cf on cp.idClienteFisico = cf.idCliente GROUP BY p.idProdutoAvaliacao';
+			ON p.idprodutoavaliacao = cp.idprodutoavaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idprodutoavaliacao = pf.idprodutoavaliacao 
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientefisico as cf on cp.idClienteFisico = cf.idCliente GROUP BY p.idprodutoavaliacao';
 			
 			//armazenando o resultado em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -45,7 +45,7 @@
 
 				//setando os atributos
 				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteFisico);
-				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setId($rsProdutos->idprodutoavaliacao);
 				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
 				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
 				$listProdutos[$cont]->setPreco($rsProdutos->preco);
@@ -75,8 +75,8 @@
 			
 			//query que realiza a consulta
 			$sql = 'SELECT cp.idClienteJuridico, p.*, f.caminhoImagem as imagem FROM clientejuridico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
-			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
-			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientejuridico as cj on cp.idClienteJuridico = cj.idCliente GROUP BY p.idProdutoAvaliacao';
+			ON p.idprodutoavaliacao = cp.idprodutoavaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idprodutoavaliacao = pf.idprodutoavaliacao 
+			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientejuridico as cj on cp.idClienteJuridico = cj.idCliente GROUP BY p.idprodutoavaliacao';
 			
 			//armazenando o resultado em uma variável
 			$resultado = $PDO_conexao->query($sql);
@@ -91,7 +91,7 @@
 
 				//setando os atributos
 				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteJuridico);
-				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setId($rsProdutos->idprodutoavaliacao);
 				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
 				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
 				$listProdutos[$cont]->setPreco($rsProdutos->preco);
@@ -120,7 +120,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que busca um produto e seus detalhes que envolvem outras tabelas
-			$stm = $PDO_conexao->prepare('SELECT p.idProdutoAvaliacao, p.nomeProduto, p.descricao, p.preco, p.classificacao, m.nomeMarca as marca, ct.nomeCategoria as categoria, c.nome, t.tamanho FROM produtoAvaliacao as p INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho WHERE idProdutoAvaliacao = ?');
+			$stm = $PDO_conexao->prepare('SELECT p.idprodutoavaliacao, p.nomeProduto, p.descricao, p.preco, p.classificacao, m.nomeMarca as marca, ct.nomeCategoria as categoria, c.nome, t.tamanho FROM produtoavaliacao as p INNER JOIN marca as m ON m.idMarca = p.idMarca INNER JOIN categoria as ct ON ct.idCategoria = p.idCategoria INNER JOIN corroupa as c ON c.idCor = p.idCor INNER JOIN tamanho as t ON t.idTamanho = p.idTamanho WHERE idprodutoavaliacao = ?');
 			
 			//parâmetro enviado
 			$stm->bindParam(1, $id);
@@ -148,7 +148,7 @@
 			
 			//query que insere os dados
 			$stm = $PDO_conexao->prepare('INSERT INTO produto(nomeProduto, descricao, preco, classificacao, idMarca, idCategoria, idSubcategoria, idCor, idTamanho, naturezaProduto) 
-			SELECT pa.nomeProduto, pa.descricao, pa.preco, pa.classificacao, pa.idMarca, pa.idCategoria, pa.idSubcategoria, pa.idCor, pa.idTamanho, pa.naturezaProduto FROM produtoAvaliacao as pa WHERE pa.idProdutoAvaliacao = ?');
+			SELECT pa.nomeProduto, pa.descricao, pa.preco, pa.classificacao, pa.idMarca, pa.idCategoria, pa.idSubcategoria, pa.idCor, pa.idTamanho, pa.naturezaProduto FROM produtoavaliacao as pa WHERE pa.idprodutoavaliacao = ?');
 			
 			//parâmetro enviado
 			$stm->bindParam(1, $id);
@@ -175,7 +175,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que realiza a consulta
-			$stm = $PDO_conexao->prepare('SELECT f.* FROM fotoproduto as f INNER JOIN produtoavaliacao_fotoproduto as pa ON f.idImagemProduto = pa.idImagemProduto and pa.idProdutoAvaliacao = ?');
+			$stm = $PDO_conexao->prepare('SELECT f.* FROM fotoproduto as f INNER JOIN produtoavaliacao_fotoproduto as pa ON f.idImagemProduto = pa.idImagemProduto and pa.idprodutoavaliacao = ?');
 			
 			//parâmetro enviado
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
@@ -279,7 +279,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que deleta o produto da tabela, assim como suas imagens
-			$stm = $PDO_conexao->prepare('DELETE pa.*, pf.*, f.* FROM produtoAvaliacao as pa INNER JOIN produtoavaliacao_fotoproduto as pf ON pf.idProdutoAvaliacao = pa.idProdutoAvaliacao INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto WHERE pa.idProdutoAvaliacao = ?');
+			$stm = $PDO_conexao->prepare('DELETE pa.*, pf.*, f.* FROM produtoavaliacao as pa INNER JOIN produtoavaliacao_fotoproduto as pf ON pf.idprodutoavaliacao = pa.idprodutoavaliacao INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto WHERE pa.idprodutoavaliacao = ?');
 			
 			//parâmetros enviados
 			$stm->bindParam(1, $id);
@@ -301,7 +301,7 @@
 
 			//query que busca o produto
 			$stm = $PDO_conexao->prepare("SELECT cp.idClienteFisico, p.*, f.caminhoImagem as imagem FROM clientefisico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
-			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
+			ON p.idprodutoavaliacao = cp.idprodutoavaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idprodutoavaliacao = pf.idprodutoavaliacao 
 			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientefisico as cf on cp.idClienteFisico = cf.idCliente 
 			WHERE p.nomeProduto LIKE ?");
 
@@ -321,7 +321,7 @@
 
 				//setando os atributos
 				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteFisico);
-				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setId($rsProdutos->idprodutoavaliacao);
 				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
 				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
 				$listProdutos[$cont]->setPreco($rsProdutos->preco);
@@ -352,7 +352,7 @@
 
 			//query que busca os dados
 			$stm = $PDO_conexao->prepare("SELECT cp.idClienteJuridico, p.*, f.caminhoImagem as imagem FROM clientejuridico_produtoavaliacao AS cp INNER JOIN produtoavaliacao as p 
-			ON p.idProdutoAvaliacao = cp.idProdutoAvaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idProdutoAvaliacao = pf.idProdutoAvaliacao 
+			ON p.idprodutoavaliacao = cp.idprodutoavaliacao INNER JOIN produtoavaliacao_fotoproduto as pf ON p.idprodutoavaliacao = pf.idprodutoavaliacao 
 			INNER JOIN fotoproduto as f ON f.idImagemProduto = pf.idImagemProduto INNER JOIN clientejuridico as cj on cp.idClienteJuridico = cj.idCliente 
 			WHERE p.nomeProduto LIKE ?");
 
@@ -372,7 +372,7 @@
 
 				//setando os atributos
 				$listProdutos[$cont]->setIdCliente($rsProdutos->idClienteJuridico);
-				$listProdutos[$cont]->setId($rsProdutos->idProdutoAvaliacao);
+				$listProdutos[$cont]->setId($rsProdutos->idprodutoavaliacao);
 				$listProdutos[$cont]->setNome($rsProdutos->nomeProduto);
 				$listProdutos[$cont]->setDescricao($rsProdutos->descricao);
 				$listProdutos[$cont]->setPreco($rsProdutos->preco);

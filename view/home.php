@@ -163,7 +163,7 @@
                     <div class="idioma_container">
                        <form method="POST" action="index.php?lang=ptbr">
                             <label for="ptbr">
-                                <img src="view/icones/brazil24.png">
+                                <img src="view/icones/brazil24.png" alt="idioma português">
                             </label>
                            
                             <input type="submit" id="ptbr">
@@ -171,7 +171,7 @@
                         
                         <form method="POST" action="index.php?lang=en">
                             <label for="en">
-                                <img src="view/icones/usa24.png">
+                                <img src="view/icones/usa24.png" alt="idioma inglês">
                             </label>
 
                             <input type="submit" id="en">
@@ -184,7 +184,7 @@
                         </form>
                         
                         <div class="pesquisa_cabecalho_icone">
-                            <img src="view/icones/pesquisa.png" alt="#">
+                            <img src="view/icones/pesquisa.png" alt="ícone para pesquisar">
                         </div>
                     </div>
                 </div>
@@ -264,7 +264,7 @@
                         </div>
                         <a href="index.php">
                             <div class="logo">
-                                <img src="view/imagens/logoBrecho3.png" alt="#">
+                                <img src="view/imagens/logoBrecho3.png" alt="logo do brechó">
                             </div>
                         </a>
                     </div>
@@ -297,7 +297,7 @@
                                 <div class="login">
                                     <div class="bolinha" id="carrinho"><?php echo($qtdItems) ?></div>
                                     <div class="icone_login">
-                                        <img src="view/icones/carrinho.png" alt="#">
+                                        <img src="view/icones/carrinho.png" alt="carrinho de compras">
                                     </div>
                                     <div class="texto_login">
                                         Carrinho   
@@ -310,7 +310,7 @@
                             <div class="idiomas">
                                 <form method="POST" action="index.php?lang=ptbr">
                                     <label for="ptbr">
-                                        <img src="view/icones/ptbr.png">
+                                        <img src="view/icones/ptbr.png" alt="idioma em português">
                                     </label>
 
                                     <input type="submit" id="ptbr">
@@ -318,7 +318,7 @@
 
                                 <form method="POST" action="index.php?lang=en">
                                     <label for="en">
-                                        <img src="view/icones/usa.png">
+                                        <img src="view/icones/usa.png" alt="idioma em inglês">
                                     </label>
 
                                     <input type="submit" id="en">
@@ -440,7 +440,7 @@
                             <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
 
                             <div class="imagem_produto">
-                                <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
+                                <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="imagem do produto">
                             </div>
                             <div class="descritivo_produto">
                                 <div class="titulo_produto">
@@ -460,7 +460,7 @@
                                             Conferir
                                         </div>
                                     <div class="carrinho_produto carrinho" onClick="adicionarCarrinho(<?php echo($rsProdutos[$cont]->getId()) ?>)">
-                                        <img alt="#" src="view/icones/carrinho.png">
+                                        <img alt="carrinho de compras" src="view/icones/carrinho.png">
                                     </div>
                                 </div>
                             </div>
@@ -496,7 +496,7 @@
                             <a href="view/visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>" onclick="atualizarClique(this, event, <?php echo($rsProdutos[$cont]->getId()) ?>)">
 
                             <div class="imagem_produto">
-                                <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="#">
+                                <img src="cms/view/arquivos/<?php echo($rsProdutos[$cont]->getImagem()) ?>" alt="imagem do produto">
                             </div>
                             <div class="descritivo_produto">
                                 <div class="titulo_produto">
@@ -571,7 +571,7 @@
                         </div>
                     </form>
                     <div class="enquete_foto">
-                        <img src="view/imagens/enquete2.png" alt="#">
+                        <img src="view/imagens/enquete2.png" alt="imagem da enquete">
                     </div>
                 </div>
             </div>
@@ -621,7 +621,7 @@ Florianópolis, SC, Brasil
                 <div class="rodape_final">
                     BERNADET Brechó Online. Todos os Direitos Reservados.
                     <p class="app">
-                        <img src="view/icones/playstore.png">
+                        <img src="view/icones/playstore.png" alt="imagem da playstore">
                     </p>
                 </div>
             </div>

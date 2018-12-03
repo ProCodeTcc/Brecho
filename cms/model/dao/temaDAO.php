@@ -28,7 +28,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que insere os dados no banco
-			$stm = $PDO_conexao->prepare('INSERT INTO temaSite(nomeTema, corTema, genero) VALUES(?, ?, ?)');
+			$stm = $PDO_conexao->prepare('INSERT INTO temasite(nomeTema, corTema, genero) VALUES(?, ?, ?)');
 			
 			//parâmetros enviados
 			$stm->bindParam(1, $tema->getNome());
@@ -62,7 +62,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que realiza a consulta
-			$sql = 'SELECT * FROM temaSite';
+			$sql = 'SELECT * FROM temasite';
 			
 			$resultado = $PDO_conexao->query($sql);
 			
@@ -96,7 +96,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que realiza a consulta
-			$stm = $PDO_conexao->prepare('SELECT * FROM temaSite where idTema = ?');
+			$stm = $PDO_conexao->prepare('SELECT * FROM temasite where idTema = ?');
 			
 			//parâmetros enviados
 			$stm->bindValue(1, $id, PDO::PARAM_INT);
@@ -122,7 +122,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que atualiza os dados
-			$stm = $PDO_conexao->prepare('UPDATE temaSite SET nomeTema = ?, corTema = ?, genero = ? WHERE idTema = ?');
+			$stm = $PDO_conexao->prepare('UPDATE temasite SET nomeTema = ?, corTema = ?, genero = ? WHERE idTema = ?');
 			
 			//parâmetros enviados
 			$stm->bindParam(1, $tema->getNome());
@@ -154,7 +154,7 @@
 			$PDO_conexao = $conexao->conectarBanco();
 			
 			//query que exclui os dados
-			$stm = $PDO_conexao->prepare('DELETE FROM temaSite WHERE idTema = ?');
+			$stm = $PDO_conexao->prepare('DELETE FROM temasite WHERE idTema = ?');
 			
 			//parâmetros enviados
 			$stm->bindParam(1, $id);

@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
+        <meta charset="utf-8">
         <title> Brechó </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         

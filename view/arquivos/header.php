@@ -43,7 +43,7 @@
         <div class="idioma_container">
            <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?<?php echo($parametro_pt) ?>">
                 <label for="ptbr">
-                    <img src="icones/brazil24.png">
+                    <img src="icones/brazil24.png" id="idioma em português">
                 </label>
 
                 <input type="submit" id="ptbr">
@@ -51,7 +51,7 @@
 
             <form method="POST" action="<?php $_SERVER['REQUEST_URI'] ?>?<?php echo($parametro_en) ?>">
                 <label for="en">
-                    <img src="icones/usa24.png">
+                    <img src="icones/usa24.png" id="idioma em inglês">
                 </label>
 
                 <input type="submit" id="en">
@@ -146,7 +146,7 @@
         </div>
             <a href="../index.php">
                 <div class="logo">
-                    <img src="imagens/logoBrecho3.png" alt="#">
+                    <img src="imagens/logoBrecho3.png" alt="logo do brechó">
                 </div>
             </a>
 		</div>
@@ -155,7 +155,7 @@
 					<div class="login">
 						<a  href="../view/login.php">
 						<div class="icone_login">
-							<img id="login" src="../view/icones/login.png" alt="#">
+							<img id="login" src="../view/icones/login.png" alt="login">
 						</div>
 						<div class="texto_login">
 							<?php echo($usuario) ?>   
@@ -177,7 +177,7 @@
 					<div class="login carrinho">
 						<div class="bolinha" id="carrinho"><?php echo($qtdItems) ?></div>
 						<div class="icone_login">
-							<img src="../view/icones/carrinho.png" alt="#">
+							<img src="../view/icones/carrinho.png" alt="ícone do carrinho">
 						</div>
 						<div class="texto_login">
 							Carrinho   
@@ -190,7 +190,7 @@
                 <div class="idiomas">
                     <form method="POST" action="../index.php?lang=ptbr">
                         <label for="ptbr">
-                            <img src="icones/ptbr.png">
+                            <img src="icones/ptbr.png" id="idioma em português">
                         </label>
 
                         <input type="submit" id="ptbr">
@@ -198,7 +198,7 @@
 
                     <form method="POST" action="../index.php?lang=en">
                         <label for="en">
-                            <img src="icones/usa.png">
+                            <img src="icones/usa.png" id="idioma em inglês">
                         </label>
 
                         <input type="submit" id="en">

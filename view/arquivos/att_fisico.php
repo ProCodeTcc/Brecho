@@ -214,7 +214,7 @@
 			</div>
 
 			<div class="linha_cadastro_usuario_meio">
-				<input type="text" class="campo_cadastro_usuario" id="txtbairro" name="txtbairro"onkeypress="return validar(event,'number')">
+				<input type="text" class="campo_cadastro_usuario" id="txtbairro" name="txtbairro" onkeypress="return validar(event,'number')">
 			</div>
 
 
@@ -235,7 +235,7 @@
 			</div>
 
 			<div class="linha_cadastro_usuario_meio">
-				<input  class="campo_cadastro_usuario_meio" type="text" name="txtestado" id="txtestado"onkeypress="return validar(event,'number')">
+				<input  class="campo_cadastro_usuario_meio" type="text" name="txtestado" id="txtestado" onkeypress="return validar(event,'number')">
 			</div>
 
 			<div class="linha_cadastro_usuario_meio">

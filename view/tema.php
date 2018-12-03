@@ -1,14 +1,16 @@
 <?php
 	if(isset($_SESSION['sexo'])){
 		
-	$genero = $_SESSION['sexo'];
+        $genero = $_SESSION['sexo'];
 
-	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
-	require_once($diretorio.'controller/controllerTema.php');
-	$listTema = new controllerTema();
-	$rsTema = $listTema->listarTemas($genero);
+        $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+        require_once($diretorio.'controller/controllerTema.php');
+        $listTema = new controllerTema();
+        $rsTema = $listTema->listarTemas($genero);
+        
+        if(count($rsTema) > 1){
 ?>
-
+  
 <style>
 	
 	/**************************** BOTÕES *******************************/
@@ -138,7 +140,7 @@
 		border-color: <?php echo($rsTema->getCor()) ?>;
 	}
 </style>
-
-
 <?php
+        }
 	}
+?>
