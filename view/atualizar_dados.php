@@ -1,14 +1,22 @@
 <?php
-		require_once('arquivos/check_login.php');
+    //inclusão do arquivo de login
+    require_once('arquivos/check_login.php');
 	
+    //verificando se existe o ID do cliente
 	if(isset($_SESSION['idCliente'])){
+        //armazenando o ID do cliente em uma variável
 		$id = $_SESSION['idCliente'];
+        
+        //armazenando o tipo do ciente em uma variável
 		$tipoCliente = $_SESSION['tipoCliente'];
 	}else{
 		$id = null;
 	}
 
+    //armazenando o diretório em uma variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+
+    //inclusão da controller do cliente físico
 	require_once($diretorio.'controller/controllerClienteFisico.php');
 ?>
 
@@ -99,9 +107,12 @@
                 </div>
                 
 				<?php
+                    //verificando o tipo do cliente
 					if($tipoCliente == 'F'){
+                        //incluindo o formulário do cliente físico
 						require_once('arquivos/att_fisico.php');
 					}else{
+                        //incluindo o formulário do cliente jurídico
 						require_once('arquivos/att_juridico.php');
 					}
 				?>

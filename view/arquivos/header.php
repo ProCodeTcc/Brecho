@@ -5,20 +5,29 @@
 		$usuario = 'Entrar';
 	}
 
+    //armazenando o parâmetro em pt-br
     $parametro_pt = 'lang=ptbr';
+
+    //armazenando o parâmetro em inglês
     $parametro_en = 'lang=en';
 
+    //verificando se existe o ID do produto
     if(isset($_GET['id'])){
+        //inserindo o ID do produto na url
         $parametro_pt = 'lang=ptbr&id='.$_GET['id'];
         $parametro_en = 'lang=en&id='.$_GET['id'];
     }
 
+    //verificando se existe o ID da subcategoria
     if(isset($_GET['idSubcategoria'])){
+        //inserindo o ID da subcategoria na url
         $parametro_pt = 'lang=ptbr&idSubcategoria='.$_GET['idSubcategoria'];
         $parametro_en = 'lang=en&idSubcategoria='.$_GET['idSubcategoria'];
     }
 
+    //verificando se existe o ID da categoria
     if(isset($_GET['idCategoria'])){
+        //inserindo o ID da categori na url
         $parametro_pt = 'lang=ptbr&idCategoria='.$_GET['idCategoria'];
         $parametro_en = 'lang=en&idCategoria='.$_GET['idCategoria'];
     }
@@ -126,13 +135,19 @@
 <div class="menu_categoria">
     <div class="menu">
         <?php
+            //instância da controller
             require_once('../controller/controllerCategoria.php');
-
+                    
+            //instância da controller
             $listCategoria = new controllerCategoria();
+                 
+            //armazenando os dados numa variável
             $rsCategoria = $listCategoria->listarCategoria();
-
+            
+            //contador
             $cont = 0;
-
+            
+            //percorrendo os dados
             while($cont < count($rsCategoria)){
         ?>
 
@@ -143,9 +158,16 @@
 
             <div class="subcategoria_container">
                 <?php
+                    //instância da controller
                     $listSubcategoria = new controllerCategoria();
+                
+                    //armazenando os dados numa variável
                     $rsSubcategoria = $listSubcategoria->listarSubcategoria($rsCategoria[$cont]->getId());
+                
+                    //contador
                     $index = 0;
+                
+                    //percorrendo os dados
                     while($index < count($rsSubcategoria)){
                 ?>
                 <div class="subcategoria_item">
@@ -155,6 +177,7 @@
                 </div>
 
                 <?php
+                    //incrementando o contador
                     $index++;
                 }
                 ?>
@@ -162,6 +185,7 @@
         </div>
 
         <?php
+            //incrementando o contador
             $cont++;
             }
         ?>

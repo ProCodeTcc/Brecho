@@ -36,12 +36,22 @@
                 
                 <div class="caixa_promocao">
                     <?php
+                        //armazenando o diretório numa variável
 						$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                    
+                        //inclusão da controller
 						require_once($diretorio.'controller/controllerPromocao.php');
+                    
+                        //instância da controller
 						$listPromocao = new controllerPromocao();
+                    
+                        //armazenando os dados da promoção
 						$rsPromocao = $listPromocao->listarPromocao();
 					
+                        //contador
 						$cont = 0;
+                    
+                        //percorrendo os dados
 						while($cont < count($rsPromocao)){
 					?>
 					
@@ -77,6 +87,7 @@
                         </div>
                     </a>
                     <?php
+                    //incrementando o contador
 					$cont++;
 						}
 					?>

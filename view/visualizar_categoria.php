@@ -1,7 +1,14 @@
 <?php
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerProduto.php');
+
+    //inclusão do arquivo que verifica o login
     require_once('arquivos/check_login.php');
+
+    //resgatando o ID da categoria
     $id = $_GET['idCategoria'];
 ?>
 
@@ -163,17 +170,26 @@
                             </div>
                             <div class="categoria_tamanhos container_tamanho">
 								<?php
+                                    //instância da controller
 									$listMedidas = new controllerProduto();
+                                 
+                                    //armazenando as medidas numa variável
 									$rsMedidas = $listMedidas->listarMedidas();
+                                 
+                                    //contador
 									$cont = 0;
+                                 
+                                    //percorrendo os dados
 									while($cont < count($rsMedidas)){
 								?>
 								
                                 <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>, <?php echo($id) ?>)">
 									<?php echo($rsMedidas[$cont]->getTamanho()) ?>
 								</div>
-							<?php $cont++;
-								} ?>
+							<?php
+                                //incrementando o contador
+                                $cont++;
+				            } ?>
                             </div>
 							
 							<div class="titulo_categoria">
@@ -181,26 +197,42 @@
                             </div>
                             <div class="categoria_tamanhos container_tamanho">
 								<?php
+                                    //instância da controller
 									$listNumeros = new controllerProduto();
+                                
+                                    //armazenando os números numa variável
 									$rsNumeros = $listNumeros->listarNumeros();
+                                
+                                    //contador
 									$cont = 0;
+                                
+                                    //percorrendo os dados
 									while($cont < count($rsNumeros)){
 								?>
 								
                                 <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>, <?php echo($id) ?>)">
 									<?php echo($rsNumeros[$cont]->getTamanho()) ?>
 								</div>
-							<?php $cont++;
-								} ?>
+							<?php
+                                //incrementando o contador
+                                $cont++;
+				            } ?>
                             </div>
                             <div class="titulo_categoria">
                                 Cores
                             </div>
                             <div class="container_cor">
                             <?php
+                                //instância da controller
                                 $listCor =  new controllerProduto();
+                                
+                                //armazenando as cores numa variável
                                 $rsCor = $listCor->listarCores();
+                                
+                                //contador
                                 $cont = 0;
+                                
+                                //percorrendo os dados
                                 while($cont < count($rsCor)){
                             ?>
                                 <div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>, <?php echo($id) ?>)">
@@ -210,6 +242,7 @@
                                 </div>                       
 
                             <?php
+                            //contador
                             $cont++;
                                 }
                             ?>         
@@ -220,9 +253,16 @@
                             </div>
 
                         <?php
+                            //instância da controller
                             $listMarca = new controllerProduto();
+                            
+                            //armazenando os dados numa variável
                             $rsMarca = $listMarca->listarMarca();
+                            
+                            //contador
                             $cont = 0;
+                            
+                            //percorrendo os dados
                             while($cont < count($rsMarca)){
                         ?>
                             <div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>, <?php echo($id) ?>)">
@@ -231,19 +271,24 @@
                                 ?>
                             </div>
                         <?php
-                        $cont++;
+                            //incrementando o contador
+                            $cont++;
                             }
                         ?>
                         </div>
                                             
                         <div class="filtro_categoria">
                             <?php
+                                //instância da controller
                                 $listProduto = new controllerProduto();
 
+                                //armazenando os produtos numa variável
                                 $rsProduto = $listProduto->listarProdutoCategoria($id, $_SESSION['idioma']);
                                 
+                                //contador
                                 $cont = 0;
 
+                                //percorrendo os dados
                                 while($cont < count($rsProduto)){
                             ?>
                             <a href="visualizar_produto.php?id=<?php echo($rsProduto[$cont]->getId())?>" onclick="atualizarClique(this, event, <?php echo($rsProduto[$cont]->getId()) ?>)">
@@ -276,6 +321,7 @@
                                 </div>
                                 </a>
                                 <?php
+                                    //incrementando o contador
                                     $cont++;
                                     }
                                 

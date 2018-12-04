@@ -1,11 +1,13 @@
 <?php
+    //inclusão do arquivo que verifica o login
     require_once('arquivos/check_login.php');
 
     if(isset($_SESSION['login'])){
+        //verificando se existe algum total
         if(!$_SESSION['total'] > 0){
+            //se não, redireciona para a tela de login
             header('location: login.php');
         }
-        
     }else{
         header('location: login.php');
     }
@@ -27,11 +29,14 @@
                 $.ajax({
                     type: 'POST', //tipo de requisição
                     url: '../router.php?controller=pedido&modo=gerar', //url onde será enviada a requisição
-                    data: {qtdParcela:qtdParcela},
+                    data: {qtdParcela:qtdParcela}, //parâmetros enviados
                     success: function(dados){
+                        //conversão dos dados para JSON
                         json = JSON.parse(dados);
                         
+                        //verificando o status
                         if(json.dados.status == 'sucesso'){
+                            //gerando uma duplicata e passando os parâmetros necessários
                             gerarDuplicata(json.dados.pedido, json.dados.parcelas, json.dados.dtPagamento, json.dados.valor);
                         }else if(dados == 'erro'){
                             alert('Ocorreu um erro ao gerar o pedido!!');
@@ -42,15 +47,19 @@
                 });
             }
             
+            //função para gerar a duplicata
             function gerarDuplicata(idPedido, qtdParcela, dtPagamento, valor){
                 $.ajax({
-                    type: 'POST',
-                    url: '../router.php?controller=pedido&modo=gerarDuplicata',
-                    data: {pedido:idPedido, parcela:qtdParcela, pagamento:dtPagamento, valor:valor},
+                    type: 'POST', //tipo de requisição
+                    url: '../router.php?controller=pedido&modo=gerarDuplicata', //url onde será enviada a requisição
+                    data: {pedido:idPedido, parcela:qtdParcela, pagamento:dtPagamento, valor:valor}, //parâmetros enviados
                     success: function(dados){
+                        //conversão dos dados para JSON
                         json = JSON.parse(dados);
                         
+                        //verificando o status
                         if(json.status == 'sucesso'){
+                            //redireciona para a tela de pedido finalizado
                             window.location.href='pedido_finalizado.php?idPedido='+idPedido;
                         }
                     }
@@ -128,7 +137,7 @@
             <div class="linha">
                 Dados Do Pagamento
             </div>
-            <div class="caixa_dados_pagamento" id="dados" data-id="<?php echo($idCliente) ?>" data-tipo="<?php echo($tipoCliente) ?>">
+            <div class="caixa_dados_pagamento" id="dados">
                 <div class="dados_esquedo">
                     <div class="titulo_pagamento">
                         Cartão de Crédito 
@@ -200,6 +209,7 @@
                         </div>
 
                         <?php
+                            //percorrendo os produtos do carrinho
                             foreach($_SESSION['carrinho'] as $produtos){                  
                         ?>
                         <div class="linha_item_produtos">

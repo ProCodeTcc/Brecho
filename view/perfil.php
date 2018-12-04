@@ -1,4 +1,5 @@
 <?php
+    //inclusão do arquivo que verifica o login
 	require_once('arquivos/check_login.php');
 
 	if($_SESSION['login'] != 1){

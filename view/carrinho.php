@@ -59,7 +59,10 @@
                         <div class="itens_carrinho">
 
                             <?php
+                                //contador
                                 $cont = 0;
+                            
+                                //percorrendo os produtos do carrinho
                                 foreach($_SESSION['carrinho'] as $produtos){
                             ?>
 

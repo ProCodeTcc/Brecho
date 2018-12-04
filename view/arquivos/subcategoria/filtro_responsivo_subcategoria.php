@@ -44,15 +44,23 @@
                 <div class="opcao_item">
                     <div class="tamanho_container">
                         <?php
+                            //instâcia da controller
                             $listMedidas = new controllerProduto();
+                            
+                            //armazenando as medidas numa variável
                             $rsMedidas = $listMedidas->listarMedidas();
+                     
+                            //contador
                             $cont = 0;
+                     
+                            //percorrendo os dados
                             while($cont < count($rsMedidas)){
                         ?>
                         <div class="tamanho_item" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>, <?php echo($id) ?>)">
                             <?php echo($rsMedidas[$cont]->getTamanho()) ?>
                         </div>
                         <?php
+                            //contador
                             $cont++;
                             }
                         ?>
@@ -67,15 +75,23 @@
                 <div class="opcao_item">
                     <div class="tamanho_container">
                         <?php
+                            //instância da controller
                             $listMedidas = new controllerProduto();
+                        
+                            //armazenando os números numa variável
                             $rsMedidas = $listMedidas->listarNumeros();
+                        
+                            //contador
                             $cont = 0;
+                        
+                            //percorrendo os dados
                             while($cont < count($rsMedidas)){
                         ?>
                         <div class="tamanho_item numeros" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>, <?php echo($id) ?>)">
                             <?php echo($rsMedidas[$cont]->getTamanho()) ?>
                         </div>
                         <?php
+                            //contador
                             $cont++;
                             }
                         ?>
@@ -91,13 +107,21 @@
                 <div class="opcao_item">
                     <div class="cor_container">
                         <?php
+                            //instância da controller
                             $listCor =  new controllerProduto();
+                        
+                            //armazenando as cores numa variável
                             $rsCor = $listCor->listarCores();
+                        
+                            //contador
                             $cont = 0;
+                        
+                            //percorrendo os dados
                             while($cont < count($rsCor)){
                         ?>
                         <div class="cor_item" style="background-color:<?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>, <?php echo($id) ?>)"></div>
                         <?php
+                            //incrementando o contador
                             $cont++;
                             }
                         ?>
@@ -113,15 +137,23 @@
                 <div class="marca_container">
                     <div class="opcao_item">
                         <?php
+                            //instância da controller
                             $listMarca = new controllerProduto();
+                        
+                            //armazenando as marcas numa variável
                             $rsMarca = $listMarca->listarMarca();
+                        
+                            //contador
                             $cont = 0;
+                        
+                            //percorrendo os dados
                             while($cont < count($rsMarca)){
                         ?>
                         <div class="marca_item" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>, <?php echo($id) ?>)">
                             <?php echo($rsMarca[$cont]->getMarca()) ?>
                         </div>
                         <?php
+                        //incrementando o contador
                         $cont++;
                             }
                         ?>

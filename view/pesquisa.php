@@ -1,13 +1,22 @@
 <?php
+    //armazenando o diretório em uma variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerProduto.php');
+
+    //inclusão do arquivo que verifica o login
     require_once('arquivos/check_login.php');
     
+    //verificando se existe algum parâmetro de pesquisa
     if(isset($_POST['txtpesquisa'])){
+        //armazena numa variável
         $pesquisa = $_POST['txtpesquisa'];
     }
     
+    //verificando se o acesso é mobile
     if(isset($_GET['mobile']) && $_GET['mobile'] == 'true'){
+        //armazena o parâmetro numa variável
         $mobile = $_GET['mobile'];
     }else{
         $mobile = 'false';
@@ -151,16 +160,24 @@
             }
 			
 			$(document).ready(function(){
+                //ação no click do de um filtro
 				$('.filtrar').click(function(){
+                    //limpa a categoria
 					$('#categoria').children().empty();
                 });
+                
                 $('#pesquisa').hide();
                 
+                //verificando se o acesso é mobile
                 if(verificarMobile() == true){
+                    //exibe o painel do usuário
                     painelUsuario();
+                    
+                    //exibe o filtro
                     filtroResponsivo();
                 }
                 
+                //verifica o resultado da pesquisa
                 verificarProdutos();
 			});
 		</script>
@@ -192,8 +209,10 @@
                     <?php
                         if(isset($_GET['mobile'])){
                             $mobile = $_GET['mobile'];
-
+                            
+                            //verificando se o acesso é mobile
                             if($mobile == 'true'){
+                                //inclui o filtro responsivo
                                 require_once('arquivos/pesquisa/filtro_responsivo_pesquisa.php');
                             }
                         }
@@ -226,17 +245,26 @@
                             </div>
                             <div class="categoria_tamanhos container_tamanho">
 								<?php
+                                    //instância da controller
 									$listMedidas = new controllerProduto();
+                                
+                                    //armazenando as medidas numa variável
 									$rsMedidas = $listMedidas->listarMedidas();
+                                
+                                    //contador
 									$cont = 0;
+                                
+                                    //percorrendo os dados
 									while($cont < count($rsMedidas)){
 								?>
 								
                                 <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>)">
 									<?php echo($rsMedidas[$cont]->getTamanho()) ?>
 								</div>
-							<?php $cont++;
-								} ?>
+							<?php
+                                //incrementando o contador
+                                $cont++;
+				            } ?>
                             </div>
 							
 							<div class="titulo_categoria">
@@ -244,26 +272,42 @@
                             </div>
                             <div class="categoria_tamanhos container_tamanho">
 								<?php
+                                    //instância da controller
 									$listNumeros = new controllerProduto();
+                                
+                                    //armazenando os números numa variável
 									$rsNumeros = $listNumeros->listarNumeros();
+                                
+                                    //contador
 									$cont = 0;
+                                
+                                    //percorrendo os dados
 									while($cont < count($rsNumeros)){
 								?>
 								
                                 <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>)">
 									<?php echo($rsNumeros[$cont]->getTamanho()) ?>
 								</div>
-							<?php $cont++;
-								} ?>
+							<?php
+                                //incrementando o contador
+                                $cont++;
+				            } ?>
                             </div>
                             <div class="titulo_categoria">
                                 Cores
                             </div>
                             <div class="container_cor">
                             <?php
+                                //instância da controller
                                 $listCor =  new controllerProduto();
+                                
+                                //armazenando as cores numa variável
                                 $rsCor = $listCor->listarCores();
+                                
+                                //contador
                                 $cont = 0;
+                                
+                                //percorrendo os dados
                                 while($cont < count($rsCor)){
                             ?>
                                 <div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>)">
@@ -273,6 +317,7 @@
                                 </div>                       
 
                             <?php
+                            //incrementando o contador
                             $cont++;
                                 }
                             ?>         
@@ -283,9 +328,16 @@
                             </div>
 
                         <?php
+                            //instância da controller
                             $listMarca = new controllerProduto();
+                            
+                            //armazenando as marcas numa variável
                             $rsMarca = $listMarca->listarMarca();
+                            
+                            //incrementando o contador
                             $cont = 0;
+                            
+                            //percorrendo os dados
                             while($cont < count($rsMarca)){
                         ?>
                             <div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>)">
@@ -294,18 +346,24 @@
                                 ?>
                             </div>
                         <?php
-                        $cont++;
+                            //incrementando o contador
+                            $cont++;
                             }
                         ?>
                         </div>
                                             
                         <div class="filtro_categoria">
                             <?php
+                                //instância da controller
                                 $listProduto = new controllerProduto();
+                            
+                                //armazenando os dados numa variável
                                 $rsProduto = $listProduto->pesquisarProduto($pesquisa, $_SESSION['idioma']);
                                 
+                                //incrementando o contador
                                 $cont = 0;
 
+                                //percorrendo os dados
                                 while($cont < count($rsProduto)){
                             ?>
                             <a href="visualizar_produto.php?id=<?php echo($rsProduto[$cont]->getId())?>" onclick="atualizarClique(this, event, <?php echo($rsProduto[$cont]->getId()) ?>)">
@@ -338,6 +396,7 @@
                                 </div>
                                 </a>
                                 <?php
+                                    //incrementando o contador
                                     $cont++;
                                     }
                                 ?>

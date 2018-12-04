@@ -87,6 +87,7 @@
 				});
 			}
 			
+            //função para mostrar o mapa
 			function mostrarMapa(longitude, latitude){
 				$('#mapa').empty();
 				map = new OpenLayers.Map("mapa");

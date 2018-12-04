@@ -100,11 +100,15 @@
 						url: 'router.php', //url onde será enviada a requisição
 						data: {controller: 'enquete', modo: qtd}, //parâmetros enviados
 						success: function(dados){
+                            //conversão dos dados para JSON
 							json = JSON.parse(dados);
                             
+                            //verificando o status
                             if(json.status == 'sucesso'){
+                                //mensagem de sucesso
                                 mostrarSucesso('Obrigado pela sua opinião!!');
                             }else{
+                                //mensagem de erro
                                 mostrarErro('Ocorreu um erro ao enviar a resposta');
                             }
 						}
@@ -203,10 +207,19 @@
 
                                     <div class="menu_responsivo_categorias" id="menu_categoria">
                                         <?php
+                                            //inclusão do arquivo da controller
                                             require_once('controller/controllerCategoria.php');
+                                        
+                                            //instância da controller
                                             $listCategoria = new controllerCategoria();
+                                        
+                                            //armazenando as categorias numa variável
                                             $rsCategoria = $listCategoria->listarCategoria();
+                                        
+                                            //contador
                                             $cont = 0;
+                                        
+                                            //percorrendo os dados
                                             while($cont < count($rsCategoria)){
                                         ?>
                                         <div class="categorias_responsivo_itens categoria_item">
@@ -215,10 +228,19 @@
                                             <div class="subcategorias_responsivo subcategorias">
 
                                             <?php
+                                                //inclusão da controller
                                                 require_once('controller/controllerCategoria.php');
+                                                
+                                                //instância da controller
                                                 $listSubcategoria = new controllerCategoria();
+                                                
+                                                //armazenando as subcategorias em uma variável
                                                 $rsSubcategoria = $listSubcategoria->listarSubcategoria($rsCategoria[$cont]->getId());
+                                                
+                                                //contador
                                                 $index = 0;
+                                                
+                                                //percorrendo os dados
                                                 while($index < count($rsSubcategoria)){    
                                             ?>
                                                 <div class="subcategorias_responsivo_itens">
@@ -229,6 +251,7 @@
                                                     </a>
                                                 </div>
                                             <?php
+                                                //incrementando o contador
                                                 $index++;
                                                 }
                                             ?>
@@ -236,6 +259,7 @@
                                         </div>
 
                                     <?php
+                                        //incrementando o contador
                                         $cont++;
                                         }
                                     ?>
@@ -406,14 +430,24 @@
         <main>
             <div id="slider" class="slider">
             <?php
+                //inclusão do arquivo da controller
                 require_once('controller/controllerSlider.php');
+                
+                //instância da controller
                 $listSlider = new controllerSlider();
+                
+                //armazenando as imagens numa variável
                 $rsSlider = $listSlider->listarSlider();
+                
+                //contador
                 $cont = 0;
+                
+                //percorrendo os dados
                 while($cont < count($rsSlider)){
             ?>
                  <div class="slide" style="background-image: url('cms/view/arquivos/<?php echo($rsSlider[$cont]->getImagem()) ?>')"></div>
                 <?php
+                //incrementando o contador
                 $cont++;
                     }
                 ?>
@@ -425,14 +459,22 @@
 
             <div class="produto_full" id="film_row">
                 <?php
+                    //armazenando o diretório numa variável
                     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                
+                    //inclusão do arquivo da controller
                     require_once($diretorio.'controller/controllerProduto.php');
                 
+                    //instância da controller
                     $listProduto = new controllerProduto();
+                
+                    //armazenando os produtos numa variável
                     $rsProdutos = $listProduto->listarProdutos($_SESSION['idioma']);
                     
+                    //contador
                     $cont = 0;
                 
+                    //percorrendo os dados
                     while($cont < count($rsProdutos)){
                 ?>
                 <div class="caixa_produto">
@@ -470,6 +512,7 @@
                 </div>
                 
                 <?php
+                //incrementando o contador
                 $cont++;
                     }
                 ?>
@@ -538,14 +581,20 @@
             <div class="enquete_full">
                 <div class="caixa_enquete">
                     <?php
-                            $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
                         
-                            require_once($diretorio.'/controller/controllerEnquete.php');
-                        
-                            $listar = new controllerEnquete();
-                            $rsLista = $listar->selecionarEnquete($_SESSION['idioma']);
+                        //armazenando o diretório numa variável
+                        $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+
+                        //inclusão do arquivo da controller
+                        require_once($diretorio.'/controller/controllerEnquete.php');
+
+                        //instância da controller
+                        $listar = new controllerEnquete();
+                    
+                        //armazenando os dados da enquete
+                        $rsLista = $listar->selecionarEnquete($_SESSION['idioma']);
                             
-                        ?>
+                    ?>
                     <form method="POST" class="enquete_pesquisa" name="frmEnquete" id="frmEnquete">
                         <div class="pergunta_enquete">
                             <h1 id="txt_pergunta"> <?php echo($rsLista->pergunta)?> </h1>

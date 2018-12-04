@@ -1,14 +1,14 @@
 <?php
-	session_start();
-	if(isset($_SESSION['login'])){
-		$login = 1;
-	}else{
-		$login = 0;
-	}
+    require_once('arquivos/check_login.php');
 
+    //verificando se existe o ID
 	if(isset($_GET['id'])){
+        //resgatando o ID
 		$id = $_GET['id'];
+        
+        //verificando se existe o parâmetro página
 		if(isset($_GET['pagina'])){
+            //armazenando a página
 			$pagina = $_GET['pagina'];
 		}else{
             $pagina = '';
@@ -17,7 +17,10 @@
 		header('location: erro.php');
 	}
 
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+    
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerProduto.php');
 	require_once($diretorio.'controller/controllerPromocao.php');
 ?>
@@ -82,7 +85,10 @@
         <main>
             <div class="visualizar_produto">
 				<?php
+                    //instÂncia da controller
 					$listImagens = new controllerProduto();
+                
+                    //listando as imagens
 					$rsImagens = $listImagens->listarImagens($id);
 				
 				?>
@@ -101,11 +107,18 @@
                 </div>
 				
 				<?php        
+                    //verificando as páginas
                     if($pagina == 'promoção'){
+                        //instãncia da controller
                         $listProduto = new controllerPromocao();
+                        
+                        //armazenando os dados numa variável
 						$rsProduto = $listProduto->buscarProduto($id);
                     }else{
+                        //instância da controller
                         $listProduto = new controllerProduto();
+                        
+                        //armazenando os dados numa variável
 						$rsProduto = $listProduto->buscarProduto($id, $_SESSION['idioma']);
                     }
 				?>
@@ -147,9 +160,16 @@
             </div>
             <div class="veja_tambem">
 				<?php
+                    //instância da controller
 					$listProduto = new controllerProduto();
+                           
+                    //armazenando os dados numa variável
 					$rsProdutos = $listProduto->listarAleatorio($_SESSION['idioma']);
+                           
+                    //contador
 					$cont = 0;
+                           
+                    //percorrendo os dados
 					while($cont < count($rsProdutos)){
 				?>
                <a href="visualizar_produto.php?id=<?php echo($rsProdutos[$cont]->getId()) ?>">
@@ -177,7 +197,8 @@
                 </a>
 				
 				<?php
-				$cont++;
+                    //incrementando o contador
+                    $cont++;
 					}
 				?>
             </div>

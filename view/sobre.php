@@ -39,10 +39,19 @@
                 
                 <div class="primeiro_padrao">
 					<?php
+                        //armazenando o diretório numa variável
 						$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                    
+                        //inclusão da controller
 						require_once($diretorio.'controller/controllerSobre.php');
+                    
+                        //instância da controller
 						$listSobre = new controllerSobre();
+                    
+                        //armazenando os dados numa variável
 						$rsLayout = $listSobre->listarLayout($_SESSION['idioma']);
+                    
+                        //armazenando os dados numa variável
 						$rsLayout2 = $listSobre->listarLayout2($_SESSION['idioma']);
 					?>
                     <div class="texto_sobre">

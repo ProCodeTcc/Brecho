@@ -22,20 +22,34 @@
 				checarLogin(<?php echo($login) ?>);
             });
             
+            //função para trocar o filtro do pedido
             function filtrarPedidos(){
+                //armazenando o tipo do filtro
                 var tipoFiltro = $('#txtfiltro').val();
 
                 if(tipoFiltro == 1){
+                    //esconde tudo que não for produtos em avaliação
                     $('#produtos').find('.itens_vendas').not('.avaliacao').hide();
+                    
+                    //mostra os produtos em avaliação
                     $('.avaliacao').show();
                 }else if(tipoFiltro == 2){
+                    //esconde tudo que não for pedido de compra
                     $('#produtos').find('.itens_vendas').not('.compra').hide();
+                    
+                    //mostra os pedidos de compra
                     $('.compra').show();
                 }else if(tipoFiltro == 3){
+                    //esconde tudo que não for pedido de venda
                     $('#produtos').find('.itens_vendas').not('.venda').hide();
+                    
+                    //mostra os pedidos de venda
                     $('.venda').show();
                 }else{
+                    //esconde tudo que não for pedido de consignação
                     $('#produtos').find('.itens_vendas').not('.consignacao').hide();
+                    
+                    //mostra os pedidos em consignação
                     $('.consignacao').show();
                 }
             }
@@ -94,11 +108,19 @@
                     </div>
 
                     <?php
+                        //inclusão do arquivo da controller
                         require_once($diretorio.'/controller/controllerAvaliacao.php');
+                    
+                        //instância da controller
                         $listProduto = new controllerAvaliacao();
+                    
+                        //contador
                         $cont = 0;
+                    
+                        //armazenando os produtos
                         $rsProduto = $listProduto->filtrarPedido($_SESSION['tipoCliente'], $_SESSION['idCliente']);
-
+                        
+                        //percorrendo os dados
                         while($cont < count($rsProduto)){
                     ?>
                     
@@ -118,16 +140,25 @@
                     </div>
 
                 <?php
+                    //incrementando o contador
                     $cont ++;
                         }
                 ?>
 
                 <?php
+                        //inclusão da controller
                         require_once($diretorio.'/controller/controllerPedido.php');
+                    
+                        //instância da controller
                         $listPedido = new controllerPedido();
+                    
+                        //contador
                         $cont = 0;
+                    
+                        //armazenando os pedidos
                         $rsPedido = $listPedido->filtrarCompra($_SESSION['tipoCliente'], $_SESSION['idCliente']);
 
+                        //percorrendo os dados
                         while($cont < count($rsPedido)){
                     ?>
                     
@@ -147,16 +178,25 @@
                     </div>
 
                 <?php
+                    //incrementando o contador
                     $cont ++;
                         }
                 ?>
 
                 <?php
+                        //inclusão do arquivo da controller
                         require_once($diretorio.'/controller/controllerPedido.php');
+                    
+                        //instância da controller
                         $listProduto = new controllerPedido();
+                    
+                        //contador
                         $cont = 0;
+                    
+                        //armazenando os pedidos
                         $rsProduto = $listProduto->filtrarVenda($_SESSION['tipoCliente'], $_SESSION['idCliente']);
 
+                        //percorrendo os dados
                         while($cont < count($rsProduto)){
                     ?>
                     
@@ -176,16 +216,25 @@
                     </div>
 
                 <?php
+                    //incrementando o contador
                     $cont ++;
                         }
                 ?>
                     
                 <?php
+                        //inclusão do arquivo da controller
                         require_once($diretorio.'/controller/controllerConsignacao.php');
+                    
+                        //instância da controller
                         $listConsignacao = new controllerConsignacao();
+                    
+                        //contador
                         $cont = 0;
+                    
+                        //armazenando os pedidos
                         $rsConsignacao = $listConsignacao->filtrarConsignacao($_SESSION['tipoCliente'], $_SESSION['idCliente']);
-
+                    
+                        //percorrendo os dados
                         while($cont < count($rsConsignacao)){
                     ?>
                     
@@ -205,6 +254,7 @@
                     </div>
 
                 <?php
+                    //incrementando o contador
                     $cont ++;
                         }
                 ?>

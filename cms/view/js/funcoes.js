@@ -57,6 +57,7 @@ function verificarSubmit(){
 	}
 }
 
+
 function mostrarErro(mensagem){
 	$('.mensagens').fadeIn(400);
 	$('#erro .msg').html(mensagem);
@@ -153,9 +154,14 @@ function exibirSubmenu(){
     });
 }
 
+//função para gerar o gráfico das enquetes
 function graficoPizza(qtdA, qtdB, qtdC, qtdD){
     var ctx = document.getElementById('grafico').getContext('2d');
     
+    /*
+        criando uma variável data e configurando a aparência do gráfico, como cores
+        dados a serem exibidos e título.
+    */
     var data = {
         labels: ['Alternativa A', 'Alternativa B', 'Alternativa C', 'Alternativa D'],
         datasets: [{
@@ -164,12 +170,20 @@ function graficoPizza(qtdA, qtdB, qtdC, qtdD){
             backgroundColor: ['#F7464A', '#E2EAE9', '#D4CCC5', '#949FB1']
         }]
     };
+    /*
+        Definindo opções de exibição do gráfico, como efeito de exibição
+        e duração do efeito
+    */
     var options = {
         animation: {
             easing: 'easeInOutQuart',
             duration: 1000
         }
     }
+    /*
+        Criando um novo gráfico do tipo pizza e setando as opções
+        definidas acima
+    */
     var pieChart = new Chart(ctx, {
         type: 'pie',
         data: data,

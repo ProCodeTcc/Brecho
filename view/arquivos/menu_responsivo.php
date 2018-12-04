@@ -8,10 +8,19 @@
 
             <div class="menu_responsivo_categorias" id="menu_categoria">
                 <?php
+                    //inclusão do arquivo da controller
                     require_once('../controller/controllerCategoria.php');
+                
+                    //instância da controller
                     $listCategoria = new controllerCategoria();
+                
+                    //armazenando os dados numa variável
                     $rsCategoria = $listCategoria->listarCategoria();
+                
+                    //contador
                     $cont = 0;
+                
+                    //percorrendo os dados
                     while($cont < count($rsCategoria)){
                 ?>
                 <div class="categorias_responsivo_itens categoria_item">
@@ -20,10 +29,19 @@
                     <div class="subcategorias_responsivo subcategorias">
                     
                     <?php
+                        //inclusão da controller
                         require_once('../controller/controllerCategoria.php');
+                        
+                        //instância da controller
                         $listSubcategoria = new controllerCategoria();
+                        
+                        //armazenando os dados numa variável
                         $rsSubcategoria = $listSubcategoria->listarSubcategoria($rsCategoria[$cont]->getId());
+                        
+                        //contador
                         $index = 0;
+                        
+                        //percorrendo os dados
                         while($index < count($rsSubcategoria)){    
                     ?>
                         <div class="subcategorias_responsivo_itens">
@@ -34,6 +52,7 @@
                             </a>
                         </div>
                     <?php
+                        //incrementando o contador
                         $index++;
                         }
                     ?>
@@ -41,6 +60,7 @@
                 </div>
                 
             <?php
+                //incrementando o contador
                 $cont++;
                 }
             ?>

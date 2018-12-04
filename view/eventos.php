@@ -1,4 +1,5 @@
 <?php
+    //inclusão do arquivo que verifica o login
 	require_once('arquivos/check_login.php');
 ?>
 
@@ -36,11 +37,22 @@
             <div class="eventos">
                 
 				<?php
+                    //armazenandoo diretório numa variável
 					$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/';
+                
+                    //inclusão da controller
 					require_once($diretorio.'controller/controllerEvento.php');
+                    
+                    //instânciando a controller
 					$listEvento = new controllerEvento();
+                
+                    //armaenando o evento numa variável
 					$rsEvento = $listEvento->listarEvento();
+                
+                    //contador
 					$cont = 0;
+                
+                    //percorrendo os dados
 					while($cont < count($rsEvento)){
 				?>
 				<div class="linha_evento">
@@ -64,6 +76,7 @@
                     </div>
                 </div>
 				<?php
+                //incrementando o contador
 				$cont++;
 					}
 				?>				

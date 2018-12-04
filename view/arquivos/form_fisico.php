@@ -9,20 +9,26 @@
 ?>
 
 <script>
+    //função ao sair do campo de cep
 	$('.txt_cep').blur(function(){
-			var cep = $('.txt_cep').val();
-			$('.txtlogradouro').val('...');
-			$('.txtbairro').val('...');
-			$('.txtestado').val('...');
-			$('.txtcidade').val('...');
-
-			$.getJSON("https://viacep.com.br/ws/"+cep+"/json/", function(dados){
-				$('.txtlogradouro').val(dados.logradouro);
-				$('.txtbairro').val(dados.bairro);
-				$('.txtestado').val(dados.uf);
-				$('.txtcidade').val(dados.localidade);
-			});
-		});
+        //resgatando o valor do CEP
+        var cep = $('.txt_cep').val();
+        
+        //aguardando os valores serem preenchidos
+        $('.txtlogradouro').val('...');
+        $('.txtbairro').val('...');
+        $('.txtestado').val('...');
+        $('.txtcidade').val('...');
+        
+        //acessando a API do viacep
+        $.getJSON("https://viacep.com.br/ws/"+cep+"/json/", function(dados){
+            //colocando os valores nas caixas de texto
+            $('.txtlogradouro').val(dados.logradouro);
+            $('.txtbairro').val(dados.bairro);
+            $('.txtestado').val(dados.uf);
+            $('.txtcidade').val(dados.localidade);
+        });
+    });
 </script>
 
 <div id="erro_campo"></div>

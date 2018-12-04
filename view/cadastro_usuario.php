@@ -1,8 +1,13 @@
 <?php
+    //verificando o arquivo que checa o login
 	require_once('arquivos/check_login.php');
     
+    //verificando se existe o e-mail
     if(isset($_POST['txtemail'])){
+        //armazenando o e-mail numa variável
         $email = $_POST['txtemail'];
+        
+        //guardando o e-mail numa variável de sessão
         $_SESSION['email'] = $email;
     }else{
         $email == '';

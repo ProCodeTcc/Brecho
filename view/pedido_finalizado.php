@@ -1,11 +1,15 @@
 <?php
     if(isset($_GET['idPedido'])){
+        //resgatando o ID do pedido
         $idPedido = $_GET['idPedido'];
         
+        //verificando se já existe uma sessão
         if(session_id() == ''){
+            //inicia a sessão
             session_start();
         }
         
+        //limpa o carrinho
         unset($_SESSION['carrinho']);
         unset($_SESSION['total']);
     }

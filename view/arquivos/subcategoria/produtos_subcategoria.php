@@ -1,18 +1,30 @@
 <?php
+    //iniciando a sessão
     session_start();
 
+    //verificando se existe o tipo do filtro
 	if(isset($_POST['tipoFiltro'])){
+        //armazenando o tipo do filtro
 		$tipoFiltro = $_POST['tipoFiltro'];
-		@$filtro = $_POST['filtro'];
+		
+        //verificando o filtro
+        if(isset($_POST{'filtro'})){
+            //armazenando o filtro numa variável
+            $filtro = $_POST['filtro'];
+        }
+        
+        //resgatando o ID
         $id = $_POST['id'];
 
+        //verificando se existe o termo
         if(!empty($_POST['termo'])){
+            //armazena o termo numa variável
             $pesquisa = $_POST['termo'];
         }else{
             $pesquisa = '';
         }
 	}
-
+    
     if(isset($_GET['mobile'])){
         $mobile = $_GET['mobile'];
     }else{
@@ -51,7 +63,9 @@
         if(isset($_GET['mobile'])){
             $mobile = $_GET['mobile'];
 
+            //verificando se o acesso é mobile
             if($mobile == 'true'){
+                //inclusão do filtro responsivo
                 require_once('filtro_responsivo_subcategoria.php');
             }
         }
@@ -87,17 +101,26 @@
 
         <div class="categoria_tamanhos container_tamanho">
             <?php
+                //instância da controller
                 $listMedidas = new controllerProduto();
+             
+                //armazenando as medidas numa variável
                 $rsMedidas = $listMedidas->listarMedidas();
+             
+                //contador
                 $cont = 0;
+             
+                //percorrendo os dados
                 while($cont < count($rsMedidas)){
             ?>
 
             <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsMedidas[$cont]->getId()) ?>, <?php echo($id) ?>)">
                 <?php echo($rsMedidas[$cont]->getTamanho()) ?>
             </div>
-        <?php $cont++;
-            } ?>
+        <?php 
+            //incrementando o contador
+            $cont++;
+        } ?>
         </div>
 
         <div class="titulo_categoria">
@@ -105,16 +128,25 @@
         </div>
         <div class="categoria_tamanhos container_tamanho">
             <?php
+                //instância da controller
                 $listNumeros = new controllerProduto();
+            
+                //armazenando os números numa variável
                 $rsNumeros = $listNumeros->listarNumeros();
+            
+                //contador
                 $cont = 0;
+            
+                //pecorrendo os dados
                 while($cont < count($rsNumeros)){
             ?>
 
             <div class="tamanhos" onClick="filtrarTamanho(<?php echo($rsNumeros[$cont]->getId()) ?>, <?php echo($id) ?>)">
                 <?php echo($rsNumeros[$cont]->getTamanho()) ?>
             </div>
-        <?php $cont++;
+        <?php 
+                //incrementando o contador
+                $cont++;
             } ?>
         </div>
 
@@ -123,9 +155,16 @@
         </div>
         <div class="container_cor">
         <?php
+            //instância da controller
             $listCor =  new controllerProduto();
+            
+            //armazenando as cores numa variável
             $rsCor = $listCor->listarCores();
+            
+            //contador
             $cont = 0;
+            
+            //percorrendo o contador
             while($cont < count($rsCor)){
         ?>
             <div class="cores" style="background-color: <?php echo($rsCor[$cont]->getCor()) ?>;" onclick="filtrarCor(<?php echo($rsCor[$cont]->getId()) ?>, <?php echo($id) ?>)">
@@ -135,6 +174,7 @@
             </div>                       
 
         <?php
+        //incrementando o contador
         $cont++;
             }
         ?>         
@@ -145,9 +185,16 @@
         </div>
 
     <?php
+        //instância da controller
         $listMarca = new controllerProduto();
+        
+        //armazenando as marcas numa variável
         $rsMarca = $listMarca->listarMarca();
+        
+        //contador
         $cont = 0;
+        
+        //percorrendo o contador
         while($cont < count($rsMarca)){
     ?>
         <div class="categoria_linha filtrar" onClick="filtrarMarca(<?php echo($rsMarca[$cont]->getId()) ?>, <?php echo($id) ?>)">
@@ -156,35 +203,38 @@
             ?>
         </div>
     <?php
-    $cont++;
-        }
-    ?>
+        //incrementando o contador
+        $cont++;
+    }?>
     </div>
 
     <div class="filtro_categoria">
         <?php
-            $listCategoria = new controllerCategoria();
-
+            //instância da controller
+            $listSubcategoria = new controllerCategoria();
+        
+            //verificando o tipo do filtro
             if($tipoFiltro == 'classificacao'){
-                $rsFiltro = $listCategoria->listarSubcategoriaClassificacao($id, $filtro, $pesquisa, $_SESSION['idioma']);
+                $rsFiltro = $listSubcategoria->listarSubcategoriaClassificacao($id, $filtro, $pesquisa, $_SESSION['idioma']);
             }else if($tipoFiltro == 'tamanho'){
-                $rsFiltro = $listCategoria->listarSubcategoriaTamanho($id, $filtro, $pesquisa, $_SESSION['idioma']);
+                $rsFiltro = $listSubcategoria->listarSubcategoriaTamanho($id, $filtro, $pesquisa, $_SESSION['idioma']);
             }else if($tipoFiltro == 'cor'){
-                $rsFiltro = $listCategoria->listarSubcategoriaCor($id, $filtro, $pesquisa, $_SESSION['idioma']);
+                $rsFiltro = $listSubcategoria->listarSubcategoriaCor($id, $filtro, $pesquisa, $_SESSION['idioma']);
             }else if($tipoFiltro == 'marca'){
-                $rsFiltro = $listCategoria->listarSubcategoriaMarca($id, $filtro, $pesquisa, $_SESSION['idioma']);
+                $rsFiltro = $listSubcategoria->listarSubcategoriaMarca($id, $filtro, $pesquisa, $_SESSION['idioma']);
             }else if($tipoFiltro == 'preco'){
                 $min = $_POST['min'];
                 $max = $_POST['max'];
-
-                $rsFiltro = $listCategoria->listarSubcategoriaPreco($pesquisa, $min, $max, $id, $_SESSION['idioma']);
+                
+                $rsFiltro = $listSubcategoria->listarSubcategoriaPreco($pesquisa, $min, $max, $id, $_SESSION['idioma']);
             }
 
-
+            //contador
             $cont = 0;
 
+            //percorrendo os dados
             while($cont < count($rsFiltro)){
-            ?>
+        ?>
 
         <a href="visualizar_produto.php?id=<?php echo($rsFiltro[$cont]->getId())?>&pagina=categoria">
             <div class="produto">
@@ -216,6 +266,7 @@
             </div>
 
             <?php
+                //incrementando o contador
                 $cont++;
                 }
 
