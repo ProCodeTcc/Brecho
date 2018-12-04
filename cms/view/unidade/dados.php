@@ -7,11 +7,22 @@
 </script>
 
 <?php
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require($diretorio.'controller/controllerUnidade.php');
+
+    //instância da controller
 	$listUnidades = new controllerUnidade();
+
+    //armazenando os dados
 	$rsUnidades = $listUnidades->listarUnidades();
+
+    //contador
 	$cont = 0;
+
+    //percorrendo os dados
 	while($cont < count($rsUnidades)){
 ?>
 
@@ -31,6 +42,7 @@
 </div>
 
 <?php
+    //incrementando o contador
 	$cont++;
 	}
 ?>

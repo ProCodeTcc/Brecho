@@ -24,6 +24,7 @@
     }
 
     $(function(){
+        //ajustando a modal
         mudarModal('300', '800');
     });
 </script>
@@ -31,14 +32,22 @@
 
 <div class="subcategoria_container">
     <?php
+        //armazenando o diretório numa variável
         $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+    
+        //inclusão da controller
         require_once($diretorio.'/controller/controllerCategoria.php');
+    
+        //instância da controller
         $listSubcategoria = new controllerCategoria();
-
+    
+        //armazenando as subcategorias
         $rsSubcategoria = $listSubcategoria->listarSubcategoria($idCategoria);
 
+        //contador
         $cont = 0;
 
+        //percorrendo os dados
         while($cont < count($rsSubcategoria)){
     ?>
     
@@ -55,6 +64,7 @@
     </div>
 
     <?php
+        //incrementando o contador
         $cont++;
             }
     ?>

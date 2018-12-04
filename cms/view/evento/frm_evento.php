@@ -1,7 +1,10 @@
 <?php
+    //verificando se existe o ID
 	if(isset($_POST['id'])){
+        //resgatando o ID
 		$id = $_POST['id'];
 	}else{
+        //setando pra nulo
 		$id = null;
 	}
 ?>

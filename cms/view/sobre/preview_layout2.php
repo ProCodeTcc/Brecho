@@ -25,7 +25,10 @@
 		});
 	}
 	
+    //resgatando o ID
 	var id = $('#preview_layout2').data('id');
+    
+    //exibindo os dados
 	exibirDados(id, 'pt');
 </script>
 

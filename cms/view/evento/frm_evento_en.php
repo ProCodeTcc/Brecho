@@ -1,8 +1,13 @@
 <script>
+    //armazenando o ID numa variável
     var id = $('#frmEvento').data('id');
-            
+    
+    //verificando se existe o ID
     if(id != ""){
+        //muda o modo para atualização
         $('#frmEvento').attr('data-modo', 'atualizarTraducao');
+        
+        //exibe os dados no form
         exibirDados(id, 'en');
     }
 </script>

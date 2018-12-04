@@ -7,16 +7,28 @@
 </script>
 
 <?php
+    //verificando se existe a pesquisa
     if(isset($_POST['pesquisa'])){
+        //armazenando o termo da pesquisa
         $pesquisa = $_POST['pesquisa'];
     }
 
+    //armazenando o diretório
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require($diretorio.'controller/controllerCor.php');
+
+    //instância da controller
 	$listCor = new controllerCor();
+    
+    //armazenando os dados da cor
 	$rsCor = $listCor->pesquisarCor($pesquisa);
+
+    //contador
 	$cont = 0;
 
+    //percorrendo os dados
 	while($cont < count($rsCor)){
 ?>
 
@@ -37,6 +49,7 @@
 </div>
 
 <?php
+    //incrementando o contador
 	$cont++;
 	}
 ?>

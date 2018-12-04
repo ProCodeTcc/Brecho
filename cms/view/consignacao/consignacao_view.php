@@ -1,19 +1,39 @@
 <?php 
+    //iniciando a sessão
     session_start();
+
+    //resgatando o usuário
     $usuario = $_SESSION['usuario_cms'];
+
+    //resgatando o nível
 	$idNivel = $_SESSION['nivel'];
+
+    //identificando a página
 	$idPagina = 15;
+
+    //verificando se existe a imagem
 	if(isset($_SESSION['imagem'])){
+        //resgatando a imagem
 		$imagem = $_SESSION['imagem'];
 	}
 
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerNivel.php');
 	require_once($diretorio.'controller/controllerUsuario.php');
+
+    //instância da controller
 	$controllerNivel = new controllerNivel();
+
+    //verificando a permissão
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
 	
+    //instância da controller
 	$controllerUsuario = new controllerUsuario();
+
+    //verificando o login
 	$controllerUsuario->checarLogin();
 ?>
 
@@ -105,12 +125,14 @@
 					$('.menu_itens').not(this).find('.submenu').hide('fast');
 				});
 				
+                //função no click do logout
 				$('#logout').click(function(){
 					$.ajax({
-						type: 'POST',
-						url: url+'/router.php',
-						data: {controller: 'usuario', modo: 'deslogar'},
+						type: 'POST', //tipo de requisição
+						url: url+'/router.php', //url onde será enviada a requisição
+						data: {controller: 'usuario', modo: 'deslogar'}, //dados enviados
 						success: function(dados){
+                            //redirecionando o usuário
 							window.location.href=url+'index.php';
 						}
 					});

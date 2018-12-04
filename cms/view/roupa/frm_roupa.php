@@ -174,11 +174,15 @@
 		});
 	}
 	
+    //função para mostrar a prévia
 	function mostrarPrevia(input, localPrevia){
 		if(input.files && input.files[0]){
+            //criando um novo leitor
 			var leitor = new FileReader();
 			
+            //função no evento de carregamento
 			leitor.onload = function(event){
+                //exibindo os dados
 				$(localPrevia).attr('src', event.target.result);
 			}
 			

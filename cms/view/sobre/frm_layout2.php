@@ -35,11 +35,15 @@
 		});
 	}
 	
+    //função para exibir a prévia da imagem
 	function mostrarPrevia(input){
 		if(input.files && input.files[0]){
+            //criando um novo leitor
 			var leitor = new FileReader();
 			
+            //função no evento do carregamento
 			leitor.onload = function(event){
+                //exibição da imagem
 				$('#imgSobre').attr('src', event.target.result);
 			}
 			

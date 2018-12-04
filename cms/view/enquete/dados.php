@@ -22,12 +22,22 @@
     
 </script>
     <?php
+        //armazenando o diretório
         $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
-        require_once($diretorio.'/controller/controllerEnquete.php');
-        $listEnquetes = new controllerEnquete();
-        $rsEnquetes = $listEnquetes->listarEnquetes();
 
+        //inclusão da controller
+        require_once($diretorio.'/controller/controllerEnquete.php');
+
+        //instância da controller
+        $listEnquetes = new controllerEnquete();
+
+        //armazenando os dados na variável
+        $rsEnquetes = $listEnquetes->listarEnquetes();
+    
+        //contador
         $cont = 0;
+
+        //percorrendo os dados
         while($cont < count($rsEnquetes)){
     ?>
 
@@ -64,5 +74,6 @@
         </div>
     </div>
     <?php 
+    //incrementando o contador
     $cont++;
     } ?>

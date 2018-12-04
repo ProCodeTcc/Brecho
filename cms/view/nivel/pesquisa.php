@@ -10,16 +10,28 @@
 </script>
 
 <?php
+    //verificando se existe algo para pesquisar
     if(isset($_POST['pesquisa'])){
+        //armazenando o termo a ser pesquisado
         $pesquisa = $_POST['pesquisa'];
     }
-
+    
+    //armazenando os dados numa variável
     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+
+    //inclusão da controller
     require_once($diretorio.'/controller/controllerNivel.php');
+
+    //instância da controller
     $listNiveis = new controllerNivel();
+
+    //armazenando os dados numa variável
     $rsNiveis = $listNiveis->pesquisarNivel($pesquisa);
+
+    //contador
     $cont = 0;
 
+    //percorrendo os dados
     while($cont < count($rsNiveis)){
 ?>
 
@@ -55,7 +67,8 @@
         </div>
     </div>
     <?php 
-    $cont++;
+        //incrementando o contador
+        $cont++;
     } ?>
 
     <div class="voltar" onclick="voltar()">

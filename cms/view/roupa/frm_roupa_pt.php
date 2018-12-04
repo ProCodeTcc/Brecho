@@ -1,23 +1,39 @@
 <script>
     $(function(){
+        //ajustando a modal
         mudarModal('820', '600');
+        
+        //armazenando o ID
         var id = $('#frmRoupa').data('id');
         
+        //verificando se existe o ID
 		if(id != ""){
+            //exibindo os dados
             buscarProduto(id, 'pt');
+            
+            //alterando o modo para atualizar
             $('#frmRoupa').attr('data-modo', 'editar');
+            
+            //ajustando a modal
 			mudarModal('700','600');
 		}
 
+        //listando a ctegoria
         listarCategoria();
+        
+        //listando a marca
 		listarMarca();
+        
+        //listando as cores
         listarCor();
 
+        //função na escolha de um número
         $('#txtnumero').click(function(){
 			//exibindo os tamanhos
 			buscarNumero(2);
 		});
 		
+        //função na escolha de um tamanho
 		$('#txtmedida').click(function(){
 			//exibindo os tamanhos
 			buscarMedida(1);

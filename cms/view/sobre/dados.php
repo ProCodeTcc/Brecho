@@ -15,11 +15,22 @@
 	
 	<div class="sobre_col1">
 	<?php
+        //armazenando o diretório numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+        
+        //inclusão da controller
 		require_once($diretorio.'controller/controllerSobre.php');
+        
+        //instância da controller
 		$listLayout = new controllerSobre();
+        
+        //armazenando os dados numa variável
 		$rsLayout = $listLayout->listarLayout1();
+        
+        //contador
 		$cont = 0;
+        
+        //percorrendo os dados
 		while($cont < count($rsLayout)){
 	?>
 		
@@ -44,7 +55,10 @@
 
 				<span onClick="status(<?php echo($rsLayout[$cont]->getStatus()) ?>, <?php echo($rsLayout[$cont]->getId()) ?>, <?php echo($rsLayout[$cont]->getLayout()) ?>)">
 					<?php
+                        //armazenando o status numa variável
 						$status = $rsLayout[$cont]->getStatus();
+            
+                        //verificando o status
 						if($status == 1){
 							$img = 'ativar.png';
 						}else{
@@ -61,6 +75,7 @@
 			</div>
 		</div>
 	<?php 
+        //incrementando o contador
 		$cont ++;
 		} 
 	?>
@@ -68,11 +83,22 @@
 	
 	<div class="sobre_col2">
 	<?php
+        //armazenando o diretório numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+        
+        //inclusão da controller
 		require_once($diretorio.'controller/controllerSobre.php');
+        
+        //instância da controller
 		$listLayout2 = new controllerSobre();
+        
+        //armazenando os dados numa variável
 		$rsLayout2 = $listLayout2->listarLayout2();
+        
+        //contador
 		$cont = 0;
+        
+        //percorrendo os dados
 		while($cont < count($rsLayout2)){
 	?>
 		
@@ -97,8 +123,10 @@
 
 				<span onClick="status(<?php echo($rsLayout2[$cont]->getStatus()) ?>, <?php echo($rsLayout2[$cont]->getId()) ?>, <?php echo($rsLayout2[$cont]->getLayout()) ?>)">
 					<?php
+                        //armazenando o status
 						$status = $rsLayout2[$cont]->getStatus();
 
+                        //verificando o status
 						if($status == 1){
 							$img = 'ativar.png';
 						}else{
@@ -116,6 +144,7 @@
 		</div>
 		
 	<?php 
+        //incrementando o contador
 		$cont ++;
 		} 
 	?>

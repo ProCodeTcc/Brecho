@@ -13,13 +13,22 @@
 </script>
 
 <?php
+    //armazenando os dados numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerFaleConosco.php');
 
+    //instância da controller
 	$listFeedback = new controllerFaleConosco();
+
+    //armazenando os dados numa variável
 	$rsFaleConosco = $listFeedback->listarFeedback();
 
+    //contador
 	$cont = 0;
+
+    //percorrendo os dados
 	while($cont < count($rsFaleConosco)){
 ?>
 <div class="users_view_list">
@@ -36,5 +45,7 @@
 		</span>
 	</div>
 </div>
-<?php $cont ++;
+<?php
+    //incrementando o contador
+    $cont ++;
 } ?>

@@ -1,13 +1,19 @@
 <?php
+    //verificando se existe o ID da categoria
 	if(isset($_POST['idCategoria'])){
+        //resgatando o ID da cateogria
 		$id = $_POST['idCategoria'];
 	}else{
+        //seta a variável como nula
 		$id = null;
     }
     
+    //verificando se existe o ID da subcategoria
     if(isset($_POST['idSubcategoria'])){
+        //resgatando o ID da subcategoria
         $idSubcategoria = $_POST['idSubcategoria'];
     }else{
+        //seta como nulo
         $idSubcategoria = null;
     }
 ?>

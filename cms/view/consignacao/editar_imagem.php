@@ -6,16 +6,6 @@
 
 <script>
 	var url = '../../'
-//	function listarImagens(){
-//		$.ajax({
-//			type: 'POST',
-//			url: 'dados_imagens.php',
-//			success: function(dados){
-//				$('.modal').html(dados);
-//			}
-//		});
-//	}
-	
 	function alterarImagem(id, caminho){
 		$.ajax({
 			type: 'POST', //tipo de requisição
@@ -51,17 +41,15 @@
 	}
 	
 	$(document).ready(function(){
+        //ajustando a model
 		mudarModal('400', '800');
 		
-//		$('.editar_imagem').click(function(){
-//			$('.container_imagens').hide('fast');
-//			$('.modal').show();
-//		});
-		
+        //função no click do ícone para fechar a model
 		$('.fechar').click(function(){
 			$.ajax({
-				type: 'POST',
+				type: 'POST', //tipo de requisição
 				success: function(dados){
+                    //fechando a modal
 					$('.container_modal').fadeOut(400);
 				}
 			});
@@ -73,13 +61,22 @@
 	<img class="fechar" src="../imagens/fechar.png" alt="ícone para fechar a modal">
 	<div class="dados_imagens">
 		<?php
+            //armazenando o diretório
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+        
+            //inclusão da controller
 			require_once($diretorio.'controller/controllerProduto.php');
+        
+            //armazenando as imagens
 			$listImagens = new controllerProduto();
+        
+            //armazenando as imagens
 			$rsImagem = $listImagens->listarImagens($id);
 			
+            //contador
 			$cont = 0;
-		
+		  
+            //percorrendo as imagens
 			while($cont < count($rsImagem)){
 		?>
 		
@@ -97,6 +94,7 @@
 			</div>
 		</div>
 		<?php
+            //incrementando o contador
 			$cont++;
 			}
 		?>

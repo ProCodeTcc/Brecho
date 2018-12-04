@@ -12,12 +12,22 @@
 
 <div class="produtos_linha">
 	<?php
+        //armazenando o diretório numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+    
+        //inclusão da controller
 		require_once($diretorio.'/controller/controllerAvaliacao.php');
+    
+        //instância da controller
 		$listProdutos = new controllerAvaliacao();
+    
+        //armazenando os produtos
 		$rsProdutos = $listProdutos->listarProdutosCF();
+    
+        //contador
 		$cont = 0;
 	
+        //percorrendo os dados
 		while($cont < count($rsProdutos)){
 	?>
 	<div class="produtos">
@@ -45,17 +55,28 @@
 		</div>
 	</div>
 	<?php
+        //incrementando o contador
 		$cont++;
 		}
 	?>
 
 	<?php
+        //armazenando o diretório
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+    
+        //inclusão da controller
 		require_once($diretorio.'/controller/controllerAvaliacao.php');
+    
+        //instância da controller
 		$listProdutos = new controllerAvaliacao();
+    
+        //armazenando os produtos
 		$rsProdutos = $listProdutos->listarProdutosCJ();
+    
+        //contador
 		$cont = 0;
-	
+	   
+        //percorrendo os dados
 		while($cont < count($rsProdutos)){
 	?>
 	<div class="produtos">
@@ -83,6 +104,7 @@
 		</div>
 	</div>
 	<?php
+        //incrementando o contador
 		$cont++;
 		}
 	?>

@@ -45,12 +45,22 @@
 	<img class="fechar" src="../imagens/fechar.png">
 	<div class="imagens_container">
 		<?php
+            //armazenando o diretório numa variável
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+     
+            //inclusão da controller
 	 		require_once($diretorio.'controller/controllerAvaliacao.php');
+     
+            //instância da controller
 	 		$listImagens = new controllerAvaliacao();
+     
+            //armazenando as imagens
 	 		$rsImagens = $listImagens->listarImagens($id);
 	 
+            //contador
 	 		$cont = 0;
+     
+            //percorrendo os dados
 	 		while($cont < count($rsImagens)){
 		?>
 		<img src="../arquivos/<?php echo($rsImagens[$cont]->getImagem()) ?>">

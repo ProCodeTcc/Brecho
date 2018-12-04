@@ -7,16 +7,29 @@
 </script>
 
 <?php
+    //verificando se existe a pesquisa
     if(isset($_POST['pesquisa'])){
+        //armazenando o termo
         $pesquisa = $_POST['pesquisa'];
     }
 
+    //armazenando o diretório
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require($diretorio.'controller/controllerUnidade.php');
+
+    //instância da controller
 	$listUnidades = new controllerUnidade();
+
+    //armazenando os dados numa variável
 	$rsUnidades = $listUnidades->pesquisarUnidade($pesquisa);
+
+    //contador
 	$cont = 0;
-	while($cont < count($rsUnidades)){
+
+    //percorrendo os dados
+    while($cont < count($rsUnidades)){
 ?>
 
 <div class="users_view_list">
@@ -35,6 +48,7 @@
 </div>
 
 <?php
+    //incrementando o contador
 	$cont++;
 	}
 ?>

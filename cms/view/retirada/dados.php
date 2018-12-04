@@ -7,12 +7,22 @@
 </script>
 
 <?php
+    //armazenando os dados numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require($diretorio.'controller/controllerRetirada.php');
+
+    //instância da controller
 	$listRetirada = new controllerRetirada();
+
+    //armazenando os dadaos numa variável
 	$rsRetirada = $listRetirada->listarRetiradas();
+
+    //contador
 	$cont = 0;
 
+    //percorrendo os dados
 	while($cont < count($rsRetirada)){
 ?>
 
@@ -32,6 +42,7 @@
 </div>
 
 <?php
+    //incrementando o contador
 	$cont++;
 	}
 ?>

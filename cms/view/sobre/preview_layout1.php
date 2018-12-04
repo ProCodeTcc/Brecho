@@ -27,7 +27,10 @@
 	}
 	
 	$(document).ready(function(){
+        //resgatando o ID
 		var id = $('#preview_layout1').data('id');
+        
+        //exibindo os dados do layout
 		exibirDados(id, 'pt');
 	});
 </script>
@@ -42,7 +45,7 @@
 
 	<div class="preview_layout1_col2">
 		<div id="prev_imagem">
-			<img src="#">
+			<img src="#" alt="imagem do layout">
 		</div>
 	</div>
 </div>

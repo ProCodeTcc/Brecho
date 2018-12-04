@@ -9,11 +9,22 @@
     
 </script>
     <?php
+        //armazenando o diretório numa variável
         $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+        //inclusão da controller
 		require_once($diretorio.'controller/controllerEvento.php');
+
+        //instância da controller
 		$listEvento = new controllerEvento();
+
+        //armazenando os dados numa variável
 		$rsEvento = $listEvento->listarEvento();
+
+        //contador
 		$cont = 0;
+
+        //percorrendo os dados
 		while($cont < count($rsEvento)){
     ?>
 
@@ -45,7 +56,8 @@
             </span>
         </div>
     </div>
-    <?php 
-    $cont++;
+    <?php
+        //incrementando o contador
+        $cont++;
 		}
      ?>

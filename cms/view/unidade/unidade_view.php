@@ -1,19 +1,39 @@
-<?php 
+<?php
+    //iniciando a sessão
     session_start();
+
+    //resgatando o usuário
     $usuario = $_SESSION['usuario_cms'];
+
+    //resgatando o nível
 	$idNivel = $_SESSION['nivel'];
+
+    //identificando a página
 	$idPagina = 3;
+
+    //verificando se existe a imagem
 	if(isset($_SESSION['imagem'])){
+        //resgatando a imagem
 		$imagem = $_SESSION['imagem'];
 	}
 
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controler
 	require_once($diretorio.'controller/controllerNivel.php');
 	require_once($diretorio.'controller/controllerUsuario.php');
+
+    //instância da controller
 	$controllerNivel = new controllerNivel();
+
+    //verificando o acesso do usuário á página
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
 	
+    //instância da controller
 	$controllerUsuario = new controllerUsuario();
+
+    //verificando se o usuário está logado
 	$controllerUsuario->checarLogin();
 ?>
 

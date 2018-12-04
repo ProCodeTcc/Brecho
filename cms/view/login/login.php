@@ -30,9 +30,9 @@
                 formulario.append('controller', 'usuario');
 
                 $.ajax({
-                    type: 'POST',
-                    url: 'router.php',
-                    data: formulario,
+                    type: 'POST', //tipo de requisição
+                    url: 'router.php', //url onde será enviada a requisição
+                    data: formulario, //dados enviados
                     cache: false,
                     contentType: false,
                     processData: false,

@@ -10,11 +10,22 @@
 
 <div class="slider_linha">
 	<?php
+        //armazenando o diretório numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+    
+        //inclusão da controller
 		require($diretorio.'controller/controllerSlider.php');
+    
+        //instância da controller
 		$listSlider = new controllerSlider();
+    
+        //armazenando os dados
 		$rsSlider = $listSlider->listarSlider();
+    
+        //contador
 		$cont = 0;
+    
+        //percorrendo os dados
 		while($cont < count($rsSlider)){
 	?>
 	
@@ -34,8 +45,10 @@
 			
 			<span onClick="status(<?php echo($rsSlider[$cont]->getStatus()) ?>, <?php echo($rsSlider[$cont]->getId()) ?>)">
 				<?php
-					$status = $rsSlider[$cont]->getStatus();
-									
+                    //armazenando o status
+					$status = $rsSlider[$cont]->getStatus(); 
+                    
+                    //verificando o status
 					if($status == 1){
 						$img = 'ativar.png';
 					}else{
@@ -49,6 +62,7 @@
 	</div>
 	
 	<?php
+        //incrementando o contador
 		$cont++;
 		}
 	?>

@@ -1,9 +1,16 @@
 <script>
+    //resgatando o ID
     var id = $('#frm_sobreLayout2').data('id');
+    
+    //ajustando a modal
     mudarModal('700', '400');
-		
+
+    //verificando o ID
     if(id != ""){
+        //alterando o modo
         $('.form').attr('data-modo', 'atualizarLayout');
+        
+        //exibindo os dados no form
         exibirDados(id, 'pt');
     }
 </script>

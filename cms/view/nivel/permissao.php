@@ -1,10 +1,20 @@
 <?php
+    //armazenando o diretório
     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+
+    //inclusão da controller
     require_once($diretorio.'/controller/controllerNivel.php');
+
+    //instância da controller
     $listPaginas = new controllerNivel();
+
+    //armazenando as páginas numa variável
     $rsPaginas = $listPaginas->listarPaginas();
+
+    //contador
     $cont = 0;
 
+    //perorrendo os dados
     while($cont < count($rsPaginas)){
 ?>
 
@@ -72,5 +82,6 @@
         </div>
     </div>
     <?php 
+    //incremetnando o contador
     $cont++;
     } ?>

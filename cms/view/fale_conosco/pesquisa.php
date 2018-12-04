@@ -13,17 +13,28 @@
 </script>
 
 <?php
+    //verificando se existe algo pra pesquisar
     if(isset($_POST['pesquisa'])){
+        //armazenando o termo
         $pesquisa = $_POST['pesquisa'];
     }
 
+    //armazenado o diretório
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerFaleConosco.php');
 
+    //instância da controller
 	$listFeedback = new controllerFaleConosco();
+
+    //armazenando os dados numa variável
 	$rsFaleConosco = $listFeedback->pesquisarFeedback($pesquisa);
 
+    //contador
 	$cont = 0;
+
+    //percorrendo os dados
 	while($cont < count($rsFaleConosco)){
 ?>
 <div class="users_view_list">
@@ -40,7 +51,9 @@
 		</span>
 	</div>
 </div>
-<?php $cont ++;
+<?php
+    //incrementando o contador
+    $cont ++;
 } ?>
 
 <div class="voltar" onclick="voltar()">

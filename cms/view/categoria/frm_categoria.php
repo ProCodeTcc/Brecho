@@ -25,14 +25,19 @@
             });
 	    }
 	$(document).ready(function(){
+        //resgatando o ID
         var id = $('#tabs').data('id');
-
+        
+        //escondendo a aba
         $('#tabs ul').hide();
 
         mudarModal('300', '400');
 
 		if(id != ""){
+            //exibindo os dados
             exibirDados(id);
+            
+            //mostrando a aba
             $('#tabs ul').show();
             $('#fechar').hide();
         }

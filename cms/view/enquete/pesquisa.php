@@ -21,16 +21,28 @@
 
 </script>
     <?php
+        //verificando se existe algo para pesquisar
         if(isset($_POST['pesquisa'])){
+            //armazenando o termo numa variável
             $pesquisa = $_POST['pesquisa'];
         }
-
+    
+        //armazenando o diretório numa variável
         $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
-        require_once($diretorio.'/controller/controllerEnquete.php');
-        $listEnquetes = new controllerEnquete();
-        $rsEnquetes = $listEnquetes->pesquisarEnquete($pesquisa);
 
+        //inclusão da controller
+        require_once($diretorio.'/controller/controllerEnquete.php');
+
+        //instância da controller
+        $listEnquetes = new controllerEnquete();
+
+        //armazenando os dados numa variável
+        $rsEnquetes = $listEnquetes->pesquisarEnquete($pesquisa);
+    
+        //contador
         $cont = 0;
+
+        //percorrendo os dados
         while($cont < count($rsEnquetes)){
     ?>
 
@@ -67,7 +79,8 @@
         </div>
     </div>
     <?php
-    $cont++;
+        //incrementando o contador
+        $cont++;
     } ?>
 
     <div class="voltar" onclick="voltar()">

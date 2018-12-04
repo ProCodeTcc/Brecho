@@ -8,15 +8,22 @@
 
 <div class="produtos_linha">
 	<?php
+        //armazenando os dados numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+    
+        //inclusão da controller
 		require_once($diretorio.'controller/controllerPromocao.php');
 
+        //instância da controller
 		$listProdutos = new controllerPromocao();
 
+        //contador
 		$cont = 0;
 
+        //armazenando os dados numa variável
 		$rsProdutos = $listProdutos->listarProduto();
 
+        //percorrendo os dados
 		while($cont < count($rsProdutos)){
 	?>
 	<div class="produtos">
@@ -50,6 +57,7 @@
 		</div>
 	</div>
 	<?php
+        //incrementando o contador
 		$cont++;
 		}
 	?>

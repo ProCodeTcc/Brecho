@@ -10,12 +10,22 @@
 </script>
 
 <?php
+    //armazenando o diretório numa variável
     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+
+    //inclusão da controller
     require_once($diretorio.'/controller/controllerNivel.php');
+
+    //instância da controller
     $listNiveis = new controllerNivel();
+
+    //armazenando os níveis
     $rsNiveis = $listNiveis->listarNiveis();
+
+    //contador
     $cont = 0;
 
+    //percorrendo os dados
     while($cont < count($rsNiveis)){
 ?>
 
@@ -51,5 +61,6 @@
         </div>
     </div>
     <?php 
-    $cont++;
+        //incrementando o contador
+        $cont++;
     } ?>

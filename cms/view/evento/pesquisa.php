@@ -9,15 +9,28 @@
     
 </script>
     <?php
+        //verificando se existe algo para pesquisar
         if(isset($_POST['pesquisa'])){
+            //resgatando termo da pesquisa
             $pesquisa = $_POST['pesquisa'];
         }
-
+    
+        //armazenando o diretório numa variável
         $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+        //inclusão da controller
 		require_once($diretorio.'controller/controllerEvento.php');
+
+        //instância da controller
 		$listEvento = new controllerEvento();
+
+        //armazenando os dados numa variável
 		$rsEvento = $listEvento->pesquisarEvento($pesquisa);
+
+        //contador
 		$cont = 0;
+
+        //percorrendo os dados
 		while($cont < count($rsEvento)){
     ?>
 
@@ -50,6 +63,7 @@
         </div>
     </div>
     <?php 
+    //incrementando o contador
     $cont++;
 		}
      ?>

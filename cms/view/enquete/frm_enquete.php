@@ -35,17 +35,6 @@
 		});
 	}
 	
-    function validarTermino(){
-		var dtInicio = $('#dtinicio').val();
-		var dtTermino = $('#dttermino').val();
-
-		if(dtInicio > dtTermino){
-			alert("A DATA DE INÍCIO NÃO PODE SER MAIOR QUE A DE TÉRMINO!!");
-			$('#dttermino').css('border', '1px solid red');
-			return false;
-		}
-    } 
-	
     $(document).ready(function(){
         mudarModal('650', '400');
         $('#tabs').tabs();

@@ -1,19 +1,39 @@
 <?php 
+    //iniciando a sessão
     session_start();
+
+    //resgatando o usuário
     $usuario = $_SESSION['usuario_cms'];
+
+    //resgatando o ID do nível
 	$idNivel = $_SESSION['nivel'];
+
+    //identificando a página
 	$idPagina = 5;
+
+    //verificando se existe a imagem
 	if(isset($_SESSION['imagem'])){
+        //resgatando a imagem
 		$imagem = $_SESSION['imagem'];
 	}
 
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerNivel.php');
 	require_once($diretorio.'controller/controllerUsuario.php');
+
+    //instância da controller
 	$controllerNivel = new controllerNivel();
+
+    //verificando a permissão
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
 	
+    //instância da controller
 	$controllerUsuario = new controllerUsuario();
+
+    //verificando o login
 	$controllerUsuario->checarLogin();
 ?>
 
@@ -110,23 +130,27 @@
 			});
 		}
 		
+        //função para visualizar o layout 1
 		function visualizarLayout1(idItem){
 			$.ajax({
-				type: 'POST',
-				url: 'preview_layout1.php',
-				data: {id:idItem},
+				type: 'POST', //tipo de requisição
+				url: 'preview_layout1.php', //url onde será enviada a requisição
+				data: {id:idItem}, //dados enviados
 				success: function(dados){
+                    //exibindo a pévia
 					$('#previa').html(dados);
 				}
 			});
 		}
 		
+        //função para visualizar o layout 2
 		function visualizarLayout2(idItem){
 			$.ajax({
-				type: 'POST',
-				url: 'preview_layout2.php',
-				data: {id:idItem},
+				type: 'POST', //tipo de requisiçã
+				url: 'preview_layout2.php', //url onde será enviada a requisição
+				data: {id:idItem}, //dados enviados
 				success: function(dados){
+                    //exibindo a prévia
 					$('#previa').html(dados);
 				}
 			});

@@ -1,8 +1,13 @@
 <script>
+    //armazenando o ID da enquete
     var id = $('#frm_enquete').data('id');
-		
+    
+    //verificando o ID da enquete
     if(id != ""){
+        //alterando o modo para edição
         $('#frm_enquete').attr('data-modo', 'editar');
+        
+        //exibindo os dados no form
         exibirDados(id, 'pt');
     }
 		
@@ -25,11 +30,22 @@
             <select class='cadastro_select txttema' name="txttema">
 
                 <?php
+                    //armazenando o diretório numa variável
                     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+                
+                    //inclusão da controller
                     require_once($diretorio.'/controller/controllerEnquete.php');
+                
+                    //instância da controller
                     $listTemas = new controllerEnquete();
+                
+                    //armazenando os temas numa variável
                     $rsTemas = $listTemas->listarTemas();
+                    
+                    //contador
                     $cont = 0;
+                
+                    //percorrendo os temas
                     while($cont < count($rsTemas)){
                 ?>
             
@@ -38,6 +54,7 @@
                 </option>
 
                 <?php
+                    //incrementando o contador
                     $cont++;
                     }
                 ?>

@@ -7,17 +7,28 @@
 </script>
 
 <?php
+    //verificando se existe algo para pesquisar
     if(isset($_POST['pesquisa'])){
+        //resgatando o termo
         $pesquisa = $_POST['pesquisa'];
     }
 
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerMarca.php');
+
+    //instância da controller
 	$listMarca = new controllerMarca();
+
+    //armazenando os dados numa variável
 	$rsMarca = $listMarca->pesquisarMarca($pesquisa);
 
+    //contador
 	$cont = 0;
 	
+    //percorrendo os dados
 	while($cont < count($rsMarca)){
 ?>
 
@@ -36,6 +47,7 @@
 </div>
 
 <?php
+    //incrementando os dados
 	$cont++;
 	}
 ?>

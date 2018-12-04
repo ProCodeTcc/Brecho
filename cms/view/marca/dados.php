@@ -7,13 +7,22 @@
 </script>
 
 <?php
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require($diretorio.'controller/controllerMarca.php');
+
+    //instância da controller
 	$listMarca = new controllerMarca();
+
+    //armazenando os dados numa variável
 	$rsMarca = $listMarca->listarMarca();
 
+    //contador
 	$cont = 0;
 	
+    //percorrendo os dados
 	while($cont < count($rsMarca)){
 ?>
 
@@ -32,6 +41,7 @@
 </div>
 
 <?php
+    //incrementando o contador
 	$cont++;
 	}
 ?>

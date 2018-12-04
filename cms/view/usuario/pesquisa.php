@@ -10,16 +10,28 @@
 </script>
 
 <?php
+    //verificando se existe algo para pesquisar
     if(isset($_POST['pesquisa'])){
+        //resgatando o termo
         $pesquisa = $_POST['pesquisa'];
     }
-
+    
+    //armazenando o diretório numa variável
     $diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+
+    //inclusão da controller
     require_once($diretorio.'/controller/controllerUsuario.php');
+
+    //instância da controller
     $listUsuarios = new controllerUsuario();
+
+    //armazenando os dados
     $rsUsuarios = $listUsuarios->pesquisarUsuario($pesquisa);
+
+    //contador
     $cont = 0;
 
+    //percorrendo os dados
     while($cont < count($rsUsuarios)){
 ?>
 
@@ -51,6 +63,7 @@
         </div>
     </div>
     <?php 
+    //incrementando o contador
     $cont++;
     } ?>
 

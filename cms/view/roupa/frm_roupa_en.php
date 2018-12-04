@@ -1,10 +1,17 @@
 <script>
     $(function(){
+        //resgatando o ID
         var id = $('#frmRoupa').data('id');
+        
+        //ajustando a modal
         mudarModal('420','600');
         
+        //verificando se existe o ID
 		if(id != ""){
+            //altera o modo para atualização
             $('#frmRoupa').attr('data-modo', 'atualizarTraducao');
+            
+            //exibe os dados
 			buscarProduto(id, 'en');
 		}
     });

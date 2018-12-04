@@ -34,9 +34,12 @@
 	
 	function mostrarPrevia(input){
 		if(input.files && input.files[0]){
+            //criando um novo leitor
 			var leitor = new FileReader();
 			
+            //função no evento de carregamento
 			leitor.onload = function(event){
+                //exibindo a imagem
 				$('#img').attr('src', event.target.result);
 			}
 			
@@ -45,10 +48,15 @@
 	}
 	
 	$(document).ready(function(){
+        //ajustando a modal
 		mudarModal('400', '400');
+        
+        //armazenando o ID
 		var id = $('#frmSlider').data('id');
 		
+        //verificando se exite o ID
 		if(id != ""){
+            //exibindo os dados no form
 			exibirDados(id);
 		}
 		

@@ -28,29 +28,44 @@
 	}
 	
 	$(document).ready(function(){
+        //ajustando a modal
 		mudarModal('400','400');
+        
+        //armazenando o ID
 		var id = $('#frmCor').data('id');
 		
 		if(id != ""){
+            //exibindo os dados
 			exibirDados(id);
 		}
 		
+        //função no submit do form
 		$('#frmCor').submit(function(e){
+            //previnindo o submit
 			e.preventDefault();
+            
+            //armazenando o formulário numa variável
 			var formulario = new FormData($('#frmCor')[0]);
+            
+            //atribuindo a controller ao form
 			formulario.append('controller', 'cor');
 			
+            //verificando se existe o ID
 			if(id == ""){
+                //atribuindo o modo de inserir
 				formulario.append('modo', 'inserir');
 			}else{
+                //atribuindo o modo de edição
 				formulario.append('modo', 'editar');
+                
+                //acrescentando o ID
 				formulario.append('id', id);
 			}
 			
 			$.ajax({
-				type: 'POST',
-				url: url+'/router.php',
-				data: formulario,
+				type: 'POST', //tipo de requisição
+				url: url+'/router.php', //url onde será enviada a requisição
+				data: formulario, //dados enviados
 				cache: false,
                 contentType: false,
                 processData: false,

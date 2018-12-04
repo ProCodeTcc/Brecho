@@ -7,13 +7,22 @@
 </script>
 
 <?php
+    //armazenando os dados numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require($diretorio.'controller/controllerTema.php');
+
+    //instância da controller
 	$listTema = new controllerTema();
+
+    //armazenando os dados numa variável
 	$rsTema = $listTema->listarTema();
 
+    //contador
 	$cont = 0;
 	
+    //percorrendo os dados
 	while($cont < count($rsTema)){
 ?>
 
@@ -32,8 +41,10 @@
 		
 		<span onClick="status(<?php echo($rsTema[$cont]->getStatus())?>, <?php echo($rsTema[$cont]->getId()) ?>, '<?php echo($rsTema[$cont]->getGenero()) ?>')">
 			<?php
+                //armazenando o status numa variável
 				$status = $rsTema[$cont]->getStatus();
 				
+                //verificando o status
 				if($status == 1){
 					echo('<img src="../imagens/ativar.png">');
 				}else{
@@ -45,6 +56,7 @@
 </div>
 
 <?php
+    //incrementando o contador
 	$cont++;
 	}
 ?>

@@ -1,19 +1,39 @@
 <?php 
+    //iniciando a sessão
     session_start();
+
+    //resgatando o usuário
     $usuario = $_SESSION['usuario_cms'];
+
+    //resgatando o nível
 	$idNivel = $_SESSION['nivel'];
+
+    //identificando a página
 	$idPagina = 10;
+
+    //verificando se existe a imagem
 	if(isset($_SESSION['imagem'])){
+        //resgatando a imagem
 		$imagem = $_SESSION['imagem'];
 	}
 
+    //armazenando o diretório
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerNivel.php');
 	require_once($diretorio.'controller/controllerUsuario.php');
+
+    //instância da controller
 	$controllerNivel = new controllerNivel();
+
+    //checando a permissão
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
 	
+    //instância da controller
 	$controllerUsuario = new controllerUsuario();
+
+    //checando o login
 	$controllerUsuario->checarLogin();
 ?>
 
@@ -139,25 +159,32 @@
 					$('.menu_itens').not(this).find('.submenu').hide('fast');
 				});
 				
+                //função no click do botão de adicionar
 				$('#adicionar').click(function(){
+                    //exibindo a modal
 					$('.container_modal').fadeIn(400);
 					
 					$.ajax({
-						type: 'POST',
-						url: 'frm_roupa.php',
+						type: 'POST', //tipo de requisição
+						url: 'frm_roupa.php', //url onde será enviada a requisiçãp
 						success: function(dados){
+                            //exibindo os dados na modal
 							$('.modal').html(dados);
+                            
+                            //alterando o modo
 							$('#frmRoupa').attr('data-modo', 'inserir');
 						}
 					});
 				});
 				
+                //função no logout
 				$('#logout').click(function(){
 					$.ajax({
-						type: 'POST',
-						url: url+'/router.php',
-						data: {controller: 'usuario', modo: 'deslogar'},
+						type: 'POST', //tipo de requisição
+						url: url+'/router.php', //url onde será enviada a requsição
+						data: {controller: 'usuario', modo: 'deslogar'}, //dados enviados
 						success: function(dados){
+                            //redirecionando o usuário
 							window.location.href=url+'index.php';
 						}
 					});

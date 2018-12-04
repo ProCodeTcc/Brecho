@@ -1,19 +1,39 @@
 <?php 
+    //iniciando a sessão
     session_start();
+    
+    //resgatando o usuário
     $usuario = $_SESSION['usuario_cms'];
+
+    //resgatando o nível
 	$idNivel = $_SESSION['nivel'];
+
+    //identificando a página
 	$idPagina = 8;
+
+    //verificando se existe alguma imagem
 	if(isset($_SESSION['imagem'])){
+        //armazenando a imagem
 		$imagem = $_SESSION['imagem'];
 	}
 
+    //armazenando os dados numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerNivel.php');
 	require_once($diretorio.'controller/controllerUsuario.php');
+
+    //instância da controller
 	$controllerNivel = new controllerNivel();
+
+    //verificando o acesso do usuário
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
 	
+    //instância da controller
 	$controllerUsuario = new controllerUsuario();
+
+    //verificando o login
 	$controllerUsuario->checarLogin();
 ?>
 
@@ -31,22 +51,26 @@
         	<script>
 		var url = '../../';
 		
+        //função para listar os dados
 		function listar(){
 			$.ajax({
-				type: 'POST',
-				url: 'dados.php',
+				type: 'POST', //tipo de requisiçao
+				url: 'dados.php', //url onde será enviada a requisição
 				success: function(dados){
+                    //exibindo os dados na div
 					$('#consulta').html(dados);
 				}
 			});
 		}
 		
+        //função para visualizar um item
 		function visualizar(idItem){
 			$.ajax({
-				type: 'POST',
-				url: 'modal.php',
-				data: {id:idItem},
+				type: 'POST', //tipo de requisição
+				url: 'modal.php', //url onde será enviada a requisição
+				data: {id:idItem}, //parâmetros enviados
 				success: function(dados){
+                    //exibindo os dados na modal
 					$('.modal').html(dados);
 				}
 			});
@@ -85,12 +109,14 @@
 				$('.menu_itens').not(this).find('.submenu').hide('fast');
 			});
 			
+            //função no click do logout
 			$('#logout').click(function(){
 				$.ajax({
-					type: 'POST',
-					url: url+'/router.php',
-					data: {controller: 'usuario', modo: 'deslogar'},
+					type: 'POST', //tipo de requisição
+					url: url+'/router.php', //url onde será enviada a requisição
+					data: {controller: 'usuario', modo: 'deslogar'}, //parâmetros enviados
 					success: function(dados){
+                        //redirecionando o usuário
 						window.location.href=url+'index.php';
 					}
 				});

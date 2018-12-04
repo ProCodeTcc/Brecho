@@ -12,16 +12,28 @@
 
 <div class="produtos_linha">
 	<?php
+        //verificando se existe algo pra pesquisar
         if(isset($_POST['pesquisa'])){
+            //resgatando o termo
             $pesquisa = $_POST['pesquisa'];
         }
 
+        //armazenando o diretório numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+    
+        //inclusão do arquivo da controller
 		require_once($diretorio.'/controller/controllerAvaliacao.php');
+    
+        //instância da controller
 		$listProdutos = new controllerAvaliacao();
+    
+        //armazenando os dados numa variável
 		$rsProdutos = $listProdutos->pesquisarProdutoCF($pesquisa);
+    
+        //contador
 		$cont = 0;
 	
+        //percorrendo os dados
 		while($cont < count($rsProdutos)){
 	?>
 	<div class="produtos">
@@ -49,21 +61,34 @@
 		</div>
 	</div>
 	<?php
+        //incrementando o contador
 		$cont++;
 		}
 	?>
 
 	<?php
+        //verificando se existe algo para pesquisar
         if(isset($_POST['pesquisa'])){
+            //resgatando o termo
             $pesquisa = $_POST['pesquisa'];
         }
 
+        //armazenando o diretório numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms';
+    
+        //inclusão do arquivo da controller
 		require_once($diretorio.'/controller/controllerAvaliacao.php');
+    
+        //instância da controller
 		$listProdutos = new controllerAvaliacao();
+    
+        //armazenando os produtos numa variável
 		$rsProdutos = $listProdutos->pesquisarProdutoCJ($pesquisa);
+    
+        //contador
 		$cont = 0;
 	
+        //percorrendo os dados
 		while($cont < count($rsProdutos)){
 	?>
 	<div class="produtos">
@@ -91,6 +116,7 @@
 		</div>
 	</div>
 	<?php
+        //incrementando o contador
 		$cont++;
 		}
 	?>

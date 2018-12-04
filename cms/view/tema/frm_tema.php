@@ -9,14 +9,20 @@
 <script>
 	var url = '../../';
 	
+    //função para exibir os dados
 	function exibirDados(id){
 		$.ajax({
-			type: 'POST',
-			url: url+'router.php',
-			data: {id:id, controller: 'tema', modo: 'buscar'},
+			type: 'POST', //tipo de requisição
+			url: url+'router.php', //url onde será enviada a requisição
+			data: {id:id, controller: 'tema', modo: 'buscar'}, //dados enviados
 			success: function(dados){
+                //conversão dos dados para JSNON
 				json = JSON.parse(dados);
+                
+                //alterando o botão
 			     $('.sub_btn').val('ATUALIZAR');	
+                
+                //exibindo os dados para edição
 				$('#txtnome').val(json.nomeTema);
 				$('#txtcor').val(json.corTema);
 			}

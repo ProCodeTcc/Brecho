@@ -1,16 +1,24 @@
 <?php
+    //verificando se existe o ID
 	if(isset($_POST['id'])){
+        //armazenando o ID
 		$idImagem = $_POST['id'];
+        
+        //armazenando o caminho
 		$caminho = $_POST['caminho'];
 	}
 ?>
 
 <script>
+    //função para exibir a prévia da imagem
 	function mostrarPrevia(input){
 		if(input.files && input.files[0]){
+            //criando um novo leitor
 			var leitor = new FileReader();
 			
+            //função no evento de carregamento
 			leitor.onload = function(event){
+                //exibindo a imagem
 				$('#prev_imagem').attr('src', event.target.result);
 			}
 			

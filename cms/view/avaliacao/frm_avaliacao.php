@@ -1,8 +1,15 @@
 <?php
 	if(isset($_POST['id'])){
+        //resgatando o ID do produto
 		$idProduto = $_POST['id'];
+        
+        //resgatando o ID do cliente
 		$idCliente = $_POST['idCliente'];
+        
+        //resgatando o preço
 		$preco = $_POST['preco'];
+        
+        //resgatando o tipo do cliente
 		$tipoCliente = $_POST['tipoCliente'];
 	}
 ?>
@@ -10,50 +17,65 @@
 <script>
 	var url = '../../';
 
-	function calcularPercentual(){
-		var percentualLoja = $('#percentualloja').val();
-		var percentualCliente = 100 - percentualLoja;
-
-		$('#percentualcliente').val(percentualCliente);
-	}
-
 	$(document).ready(function(){
+        //mudando o tamanho da modal
         mudarModal('350', '500');
+        
+        //função na troca de opção do radio
 		$('.txttipo').change(function(){
+            //resgatando o tipo de negócio
 			var tipo = $('input[name=txttipo]:checked').val();
 
+            //verificando o tipo de negócio
 			if(tipo == 'consignado'){
+                //ajustando o tamanho da janela
                 mudarModal('460', '500');
+                
+                //mostra as opções de consignação
 				$('#consignacao').show();
 			}else{
+                //esconde as opções
 				$('#consignacao').hide();
 			}
 		});
 
+        //ação no submit do formulário
 		$('#frmAvaliacao').submit(function(e){
+            //previnindo o submit do form
 			e.preventDefault();
 
+            //resgatando os dados
 			var tipoCliente = $('#frmAvaliacao').data('tipocliente');
 			var idProduto = $('#frmAvaliacao').data('idproduto');
 			var idCliente = $('#frmAvaliacao').data('idcliente');
 			var negocio = $('input[name=txttipo]:checked').val()
 			var formulario = new FormData($('#frmAvaliacao')[0]);
 
+            //acrescentando o parâmetro controller ao form
 			formulario.append('controller', 'avaliação');
+            
+            //acrescentando o tipo do cliente
 			formulario.append('tipoCliente', tipoCliente);
+            
+            //acrescentando o id do produto
 			formulario.append('idProduto', idProduto);
+            
+            //acrescentando o ID do cliente
 			formulario.append('idCliente', idCliente);
 			
+            //verificando o tipo do negócio
 			if(negocio == 'consignado'){
+                //atribuindo o modo como consignado
 				formulario.append('modo', 'consignado');
 			}else{
+                //atribuindo o modo como compra
 				formulario.append('modo', 'compra');
 			}
 
 			$.ajax({
-				type: 'POST',
-				url: url+'router.php',
-				data: formulario,
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: formulario, //dados enviados
 				cache: false,
                 contentType: false,
                 processData: false,

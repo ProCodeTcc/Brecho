@@ -11,13 +11,22 @@
 </script>
 
 <?php
+    //armazenando o diretório numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require($diretorio.'controller/controllerCategoria.php');
+
+    //instância da controller
 	$listCategoria = new controllerCategoria();
+
+    //armazenando os dados
 	$rsCategoria = $listCategoria->listarCategoria();
 
+    //contador
 	$cont = 0;
 	
+    //percorrendo os dados
 	while($cont < count($rsCategoria)){
 ?>
 
@@ -39,8 +48,10 @@
 		
 		<span onClick="status(<?php echo($rsCategoria[$cont]->getStatus())?>, <?php echo($rsCategoria[$cont]->getId()) ?>)">
 			<?php
+                //armazenando o status
 				$status = $rsCategoria[$cont]->getStatus();
 				
+                //verificando o status
 				if($status == 1){
 					echo('<img src="../imagens/ativar.png">');
 				}else{
@@ -52,6 +63,7 @@
 </div>
 
 <?php
+    //incrementando o contador
 	$cont++;
 	}
 ?>

@@ -16,19 +16,28 @@
 
 <div class="produtos_linha">
 	<?php
+        //verificando se exise algo para pesquisar
         if(isset($_POST['pesquisa'])){
+            //resgatando o termo
             $pesquisa = $_POST['pesquisa'];
         }
-
+    
+        //armazenando os dados numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+    
+        //inclusão da controller
 		require_once($diretorio.'controller/controllerConsignacao.php');
 
+        //instância da controller
 		$listProdutos = new controllerConsignacao();
 
+        //contador
 		$cont = 0;
 
+        //armazenando os produtos
 		$rsProdutos = $listProdutos->pesquisarProduto($pesquisa);
-
+    
+        //percorrendo os dados
 		while($cont < count($rsProdutos)){
 	?>
 	<div class="produtos">
@@ -56,8 +65,10 @@
 			
 			<span onClick="status(<?php echo($rsProdutos[$cont]->getStatus()) ?>, <?php echo($rsProdutos[$cont]->getId()) ?>)">
 				<?php
+                    //resgatando o status
 					$status = $rsProdutos[$cont]->getStatus();
 					
+                    //verificando o status
 					if($status == 1){
 						echo('<img src="../imagens/ativar.png">');
 					}else{
@@ -68,6 +79,7 @@
 		</div>
 	</div>
 	<?php
+        //incrementnado o contador
 		$cont++;
 		}
 	?>

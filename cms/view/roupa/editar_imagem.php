@@ -6,15 +6,6 @@
 
 <script>
 	var url = '../../'
-//	function listarImagens(){
-//		$.ajax({
-//			type: 'POST',
-//			url: 'dados_imagens.php',
-//			success: function(dados){
-//				$('.modal').html(dados);
-//			}
-//		});
-//	}
 	
 	function alterarImagem(id, caminho){
 		$.ajax({
@@ -62,13 +53,22 @@
 	<img class="fechar" src="../imagens/fechar.png" onclick="fecharModal()">
 	<div class="dados_imagens">
 		<?php
+            //armazenando o diretório
 			$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+        
+            //inclusão da controller
 			require_once($diretorio.'controller/controllerProduto.php');
+        
+            //instância da controller
 			$listImagens = new controllerProduto();
+        
+            //armazenando os dados numa variável
 			$rsImagem = $listImagens->listarImagens($id);
 			
+            //contador
 			$cont = 0;
-		
+		  
+            //percorrendo os dados
 			while($cont < count($rsImagem)){
 		?>
 		
@@ -86,6 +86,7 @@
 			</div>
 		</div>
 		<?php
+            //incrementando o contador
 			$cont++;
 			}
 		?>

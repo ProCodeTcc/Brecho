@@ -16,17 +16,28 @@
 
 <div class="produtos_linha">
 	<?php
+        //armazenando o diretório numa variável
 		$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+    
+        //inclusão da controller
 		require_once($diretorio.'controller/controllerConsignacao.php');
 
+        //instãncia da controller
 		$listProdutos = new controllerConsignacao();
 
+        //contador
 		$cont = 0;
-
+        
+        //armazenando os produtos
 		$rsProdutos = $listProdutos->listarProdutos();
+    
+        //armazenando as datas
         $rsConsignacao = $listProdutos->listarData();
-
+        
+        //percorrendo os dados
 		while($cont < count($rsProdutos)){
+            
+        //verificando a data
         $listProdutos->verificarData($rsConsignacao[$cont]->getDtTermino(), $rsConsignacao[$cont]->getId());
 	?>
 	<div class="produtos">
@@ -54,8 +65,10 @@
 			
 			<span onClick="status(<?php echo($rsProdutos[$cont]->getStatus()) ?>, <?php echo($rsProdutos[$cont]->getId()) ?>)">
 				<?php
+                    //resgatando o status
 					$status = $rsProdutos[$cont]->getStatus();
 					
+                    //verificando o status
 					if($status == 1){
 						echo('<img src="../imagens/ativar.png">');
 					}else{
@@ -66,6 +79,7 @@
 		</div>
 	</div>
 	<?php
+        //incrementando o contador
 		$cont++;
 		}
 	?>

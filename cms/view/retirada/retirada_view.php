@@ -1,19 +1,39 @@
 <?php 
+    //iniciando a sessão
     session_start();
+    
+    //resgatando o usuário
     $usuario = $_SESSION['usuario_cms'];
+
+    //resgatando o nível
 	$idNivel = $_SESSION['nivel'];
+
+    //identificando a página
 	$idPagina = 12;
+
+    //verificando se existe alguma imagem
 	if(isset($_SESSION['imagem'])){
+        //resgatando a imagem
 		$imagem = $_SESSION['imagem'];
 	}
 
+    //armazenando o ID numa variável
 	$diretorio = $_SERVER['DOCUMENT_ROOT'].'/brecho/cms/';
+
+    //inclusão da controller
 	require_once($diretorio.'controller/controllerNivel.php');
 	require_once($diretorio.'controller/controllerUsuario.php');
+
+    //instância da controller
 	$controllerNivel = new controllerNivel();
+
+    //checando a permissão
 	$controllerNivel->checarPermissao($idNivel, $idPagina);
 	
+    //instância da controller
 	$controllerUsuario = new controllerUsuario();
+
+    //verificando se o usuário está logado
 	$controllerUsuario->checarLogin();
 ?>
 
@@ -30,43 +50,51 @@
         	<script>
 		var url = '../../';
 		
+        //função para exibir o formulário de cadastro
 		function adicionar(){
 			$.ajax({
-				type: 'POST',
-				url: 'frm_retirada.php',
+				type: 'POST', //tipo de requisição
+				url: 'frm_retirada.php', //url onde será enviada a requisição
 				success: function(dados){
+                    //exibindo os dados na modal
 					$('.modal').html(dados);
 				}
 			});
 		}
 		
+        //função para listar os dados
 		function listar(){
 			$.ajax({
-				type: 'POST',
-				url: 'dados.php',
+				type: 'POST', //tipo de requisição
+				url: 'dados.php', //url onde será enviada a requisição
 				success: function(dados){
+                    
+                    //exibindo os dados na div
 					$('#consulta').html(dados);
                     verificarDados('#consulta');
 				}
 			});
 		}
 		
+        //função para buscar uma retirada
 		function buscar(id){
 			$.ajax({
-				type: 'POST',
-				url: 'frm_retirada.php',
-				data: {id:id},
+				type: 'POST', //tipo de requisição
+				url: 'frm_retirada.php', //url onde será enviada a requisição
+				data: {id:id}, //dados enviados
 				success: function(dados){
+                    //exibindo a modal
 					$('.modal').html(dados);
 				}
 			});
 		}
 		
+        //função para excluir uma retirada
 		function excluir(id){
 			$.ajax({
-				type: 'POST',
-				url: url+'router.php',
-				data: {id:id, controller: 'retirada', modo: 'excluir'},
+				type: 'POST', //tipo de requisição
+				url: url+'router.php', //url onde será enviada a requisição
+				data: {id:id, controller: 'retirada', modo: 'excluir'}, //dados enviados
 				success: function(dados){
 					//listagem dos dados
                     listar();
@@ -95,13 +123,15 @@
 			$('#adicionar').click(function(){
 				$('.container_modal').fadeIn(400);
 			});
-			
+            
+            //função no click do logout
 			$('#logout').click(function(){
 				$.ajax({
-					type: 'POST',
-					url: url+'/router.php',
-					data: {controller: 'usuario', modo: 'deslogar'},
+					type: 'POST', //tipo de requisição
+					url: url+'/router.php', //url onde será enviada a requisição
+					data: {controller: 'usuario', modo: 'deslogar'}, //dados enviados
 					success: function(dados){
+                        //redirecionando o usuário
 						window.location.href=url+'index.php';
 					}
 				});

@@ -1,8 +1,13 @@
 <script>
+    //armazenando o ID numa variável
     var id = $('#frmEvento').data('id');
 		
+    //verificando se existe o ID
     if(id != ""){
+        //atualizando o modo para editar
         $('#frmEvento').attr('data-modo', 'editar');
+        
+        //exibindo os dados
         exibirDados(id, 'pt');
     }
 </script>
