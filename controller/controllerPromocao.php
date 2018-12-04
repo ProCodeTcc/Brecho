@@ -26,10 +26,14 @@
 			return $listProduto;
 		}
 		
-		public function buscarProduto($id){
+		public function buscarProduto($id, $idioma){
 			$promocaoDAO = new PromocaoDAO();
 			
-			$listPromocao = $promocaoDAO->SelectByID($id);
+			if($idioma == 'ptbr'){
+                $listPromocao = $promocaoDAO->SelectByID($id);
+            }else{
+                $listPromocao = $promocaoDAO->SelectTranslate($id);
+            }
 			
 			return $listPromocao;
 		}

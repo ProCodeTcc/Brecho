@@ -670,7 +670,9 @@ Florianópolis, SC, Brasil
                 <div class="rodape_final">
                     BERNADET Brechó Online. Todos os Direitos Reservados.
                     <p class="app">
-                        <img src="view/icones/playstore.png" alt="imagem da playstore">
+                        <a href="view/arquivos/aplicativo.apk" filename="aplicativo" download>    
+                            <img src="view/icones/playstore.png" alt="imagem da playstore">
+                        </a>
                     </p>
                 </div>
             </div>

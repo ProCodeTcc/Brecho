@@ -719,7 +719,7 @@ footer{
 }
 
 .produtos_linha{
-	width: 1200px;
+	width: 100%;
 	height: auto;
 	display: flex;
 	flex-direction: row;
@@ -732,8 +732,8 @@ footer{
 .produtos{
 	width: 200px;
 	height: 220px;
-	margin: 20px;
-	padding: 20px;
+    padding: 10px;
+    margin: 10px;
 	text-align: center;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	display: flex;
