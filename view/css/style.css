@@ -3213,7 +3213,7 @@ body{
 
     footer{
         width: 100%;
-        min-height: 120px;
+        min-height: 180px;
         background-color: #2a2a2a;
         padding-bottom: 50px;
     }
@@ -3224,6 +3224,12 @@ body{
         margin-left: auto;
         margin-right: auto;
        padding-top: 50px;
+    }
+    
+    .app img{
+        width: 64px;
+        height: 64px;
+        margin-top: 5px;
     }
 
     .caixa_rodape{
@@ -3854,6 +3860,19 @@ body{
         margin-left: 5px;
     }
     
+    #txtfiltro{
+        height: 80px;
+        width: 250px;
+        font-size: 35px;
+        padding-left: 10px;
+        margin-top: 20px;
+    }
+    
+    .filtro_pedidos{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 /**************************************************/
 
 /****************** Nossas Lojas *****************/
@@ -4936,110 +4955,40 @@ body{
         outline: none;
 
     }
-
-/**************************************************/
-
-/*************** CARTÃO **************************/
     
-    .cartao_full{
+    .linha_atualizar_dados_botao{
         width: 100%;
-        max-width: 1920px;
-        min-height: 200px;
         height: auto;
-        display: flex;
-        z-index: -1;
-        box-sizing: border-box;
-        overflow: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+        clear: both;
+        padding-top: 20px;
+        text-align: center;
+        margin-bottom: 40px;
     }
+    
+      .botao_voltar{
 
-    .modal_cartao{
-        width: 900px;
-        min-height: 600px;
-        height: auto;
-        overflow: auto;
-        box-sizing: border-box;
-    }
-    
-    .modal_cartao img{
-        width: 64px;
-        height: 64px;
-        margin: 10px;
-        cursor: pointer;
-    }
-    
-    .cartao_container{
-        width: 700px;
-        height: 420px;
-        margin: auto;
-        display: flex;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
-        margin-bottom: 50px;
-        margin-top: 50px;
-    }
-    
-    .cartao_container:hover{
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        cursor: pointer;
-    }
-    
-    .cartao_itens{
-        width: 450px;
-        height: 310px;
-        margin: auto;
+        width: 250px;
+        height: 80px;
+        background-color: #ffaa4e;
+        border: solid 1px #ffae00;
+        color: white;
+        border-radius: 3px;
+        font-size: 14px;
+        line-height: 35px;
+        padding-left: 5px;
         font-size: 40px;
     }
-    
-    #prev, #next{
-        width: 64px;
-        height: 64px;
+
+    .botao_voltar:hover{
+        background-color: #ff992a;
+        border: solid 1px darkorange;
         cursor: pointer;
-        padding-top: 160px;
+
     }
-    
-    .acoes{
-        margin: auto;
-        width: 300px;
-        text-align: center;
-        margin-top: 10px;
-    }
-    
-    .acoes img{
-        width: 64px;
-        height: 64px;
-    }
-    
-    .card_cartao{
-        width: 450px;
-        height: 450px;
-    }
-    
-    .card_cartao p{
-        margin-bottom: 5px;
-    }
-    
-    .addCartao{
-        width: 1200px;
-        height: 200px;
-        margin: auto;
-        text-align: center;
-        display: none;
-    }
-    
-    .addCartao h3{
-        margin: 0;
-        padding: 0;
-    }
-    
-    #prosseguir{
-        width: 200px;
-        height: 100px;
-        margin: auto;
-        box-sizing: border-box;
-        padding-top: 30px;
-        text-align: center;
-        display: none;
-    }    
+   
 /**************** Dados de Pagamento **************/
 
 
